@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Cannon
   projectile: {fileID: 5613302429073532030, guid: f7525bf758702604aa82732dc4dd791c, type: 3}
+  position: {x: 0, y: 0.05, z: 0.25}
   damage: 10
-  forceImpact: 25
+  force: 50
+  speed: 2.5
   range: 1000
   fireRate: 1
   fireNext: 0
   ammunitionCapacity: 10
-  ammunition: 1000000
+  ammunition: 10
+  index: 6

@@ -6,6 +6,15 @@ public class Cannon : Weapon
 
     protected override void OnDisable() => base.OnDisable();
 
+    private void Start()
+    {
+        CannonBall cannonBall = WeaponData.projectile.GetComponent<CannonBall>();
+
+        cannonBall.Damage = WeaponData.damage;
+        cannonBall.Force = WeaponData.force;
+        cannonBall.Speed = WeaponData.speed;
+    }
+
     protected override void Shoot() => ShootCannon();
 
     private void ShootCannon()

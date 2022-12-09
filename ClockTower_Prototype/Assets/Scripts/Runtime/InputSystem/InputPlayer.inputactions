@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Walk",
+                    "type": "Button",
+                    "id": "5635ba52-e43c-4d54-899c-9598e8d270e4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "d511427b-1a94-4757-bb45-08e3319aadf4",
@@ -36,15 +45,6 @@
                     "name": "SwimOut",
                     "type": "Button",
                     "id": "21cf9ae8-0a77-4b91-b1aa-ef4e35c4a954",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Walk",
-                    "type": "Button",
-                    "id": "5635ba52-e43c-4d54-899c-9598e8d270e4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -163,17 +163,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c2b87054-87db-4d48-8be7-c297d44fb275",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c21063b2-b6af-4717-92f1-16f2efb29176",
                     "path": "<Mouse>/delta/x",
                     "interactions": "",
@@ -268,6 +257,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwimOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2b87054-87db-4d48-8be7-c297d44fb275",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

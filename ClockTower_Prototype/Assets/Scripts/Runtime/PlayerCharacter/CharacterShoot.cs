@@ -87,6 +87,8 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator Shoot()
     {
+        if (loadOut.WeaponCurrent == null) yield break;
+
         if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
         {
             while (leftButton == true || rightButton == true)

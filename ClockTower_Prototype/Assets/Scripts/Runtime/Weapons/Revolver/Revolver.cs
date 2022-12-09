@@ -24,7 +24,7 @@ public class Revolver : Weapon
 
                     direction.Normalize();
 
-                    hit.rigidbody.AddForce(direction * WeaponData.forceImpact, ForceMode.Impulse);
+                    hit.rigidbody.AddForce(direction * WeaponData.force, ForceMode.Impulse);
                 }
 
                 if (hit.transform.GetComponent<Interactable>() != null)

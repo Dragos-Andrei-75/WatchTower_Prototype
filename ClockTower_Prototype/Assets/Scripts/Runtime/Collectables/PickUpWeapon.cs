@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class WeaponPickUp : MonoBehaviour
+public class PickUpWeapon : MonoBehaviour
 {
     [Header("PickUp Object and Component References")]
     [SerializeField] private GameObject pickUp;
@@ -9,12 +9,21 @@ public class WeaponPickUp : MonoBehaviour
     [SerializeField] private SphereCollider pickUpCollider;
     [SerializeField] private MeshRenderer pickUpMesh;
 
+    [Header("Player Object and Component References")]
+    [SerializeField] private LoadOut loadOut;
+
     [Header("PickUp Attributes")]
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private Vector3 holdPosition;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Quaternion startRotation;
     [SerializeField] private float speedRotation = 25.0f;
     [SerializeField] private float timeRespawn = 2.5f;
     [SerializeField] private bool canRespawn = false;
+
+    public delegate void WeaponEquip();
+    public static event WeaponEquip OnWeaponEquip;
 
     private void Start()
     {
@@ -33,22 +42,16 @@ public class WeaponPickUp : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            LoadOut loadout = other.gameObject.GetComponentInChildren<LoadOut>();
+            loadOut = other.gameObject.GetComponentInChildren<LoadOut>();
 
             pickUpCollider.enabled = false;
             pickUpMesh.enabled = false;
 
-            StartCoroutine(Equip(loadout));
             StopCoroutine(Move());
+            StartCoroutine(Equip());
 
-            if (canRespawn == true)
-            {
-                StartCoroutine(Respawn());
-            }
-            else
-            {
-                Destroy(pickUp);
-            }
+            if (canRespawn == true) StartCoroutine(Respawn());
+            else Destroy(pickUp);
         }
     }
 
@@ -63,9 +66,26 @@ public class WeaponPickUp : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator Equip(LoadOut loadOut)
+    private IEnumerator Equip()
     {
-        //Instantiate(weapon, loadOut.transform);
+        weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
+
+        if (loadOut.Weapons[weaponData.index] == null)
+        {
+            Instantiate(weapon, loadOut.transform);
+
+            weapon.transform.localPosition = weaponData.position;
+            loadOut.Weapons[weaponData.index] = weapon.transform;
+
+            if (OnWeaponEquip != null) OnWeaponEquip();
+        }
+        else
+        {
+            weaponData.ammunition = weaponData.ammunitionCapacity;
+        }
+
+        weaponData = null;
+
         yield break;
     }
 

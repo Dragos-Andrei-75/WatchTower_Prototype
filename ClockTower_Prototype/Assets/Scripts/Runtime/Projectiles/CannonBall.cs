@@ -11,11 +11,33 @@ public class CannonBall : MonoBehaviour
     [Header("CannonBall Attributes")]
     [SerializeField] private Vector3 hitPosition;
     [SerializeField] private float speed = 2.5f;
+    [SerializeField] private float force = 100.0f;
     [SerializeField] private float radius = 10.0f;
-    [SerializeField] private float force = 25.0f;
     [SerializeField] private float damageMax = 10.0f;
     [SerializeField] private float damageMin = 1.0f;
     [SerializeField] private bool hit = false;
+
+    public float Damage
+    {
+        get { return damageMax; }
+        set
+        {
+            damageMax = value;
+            damageMin = (10 / 100) * value;
+        }
+    }
+
+    public float Force
+    {
+        get { return force; }
+        set { force = value; }
+    }
+
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
 
     private void Start()
     {

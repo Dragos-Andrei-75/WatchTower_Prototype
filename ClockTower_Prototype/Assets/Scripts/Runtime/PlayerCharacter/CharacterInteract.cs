@@ -18,9 +18,6 @@ public class CharacterInteract : MonoBehaviour
     [Header("Check State")]
     [SerializeField] private bool checkThrow = false;
 
-    [Header("Character Attributes")]
-    [SerializeField] private float forceThrow = 25.0f;
-
     [Header("Input Player")]
     [SerializeField] private InputPlayer inputPlayer;
     [SerializeField] private InputAction inputUse;
@@ -49,7 +46,7 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Enable();
         inputUse.Enable();
 
-        GrappleGun.OnGrappleInteractable += Interact;
+        GrappleGun.OnGrappleInteractable += HoldObject;
 
         Pause.onPauseResume -= OnEnable;
         Pause.onPauseResume += OnDisable;
@@ -60,7 +57,7 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Disable();
         inputUse.Disable();
 
-        GrappleGun.OnGrappleInteractable -= Interact;
+        GrappleGun.OnGrappleInteractable -= HoldObject;
 
         Pause.onPauseResume += OnEnable;
         Pause.onPauseResume -= OnDisable;
@@ -92,21 +89,7 @@ public class CharacterInteract : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
-                    objectCarriedTransform = hit.transform;
-                    objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
-                    objectCarriedRenderer = objectCarriedTransform.GetComponent<Renderer>();
-
-                    objectCarriedRigidBody.freezeRotation = true;
-                    objectCarriedRigidBody.useGravity = false;
-
-                    objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
-                                                                     objectCarriedRenderer.material.color.g,
-                                                                     objectCarriedRenderer.material.color.b,
-                                                                     0.5f);
-
-                    use = true;
-
-                    StartCoroutine(CarryObject());
+                    StartCoroutine(HoldObject(hit.transform));
                 }
                 else if (hit.transform.GetComponent<Interactive>() != null)
                 {
@@ -130,34 +113,44 @@ public class CharacterInteract : MonoBehaviour
         }
     }
 
-    private IEnumerator CarryObject()
+    private IEnumerator HoldObject(Transform objectToHold)
     {
-        while (use == true)
-        {
-            float distance = 2.5f;
-            float moveSpeed = 75.0f;
-            Vector3 carryPosition = cameraTransform.position + cameraTransform.forward * distance;
-            Vector3 direction = carryPosition - objectCarriedTransform.position;
+        float holdDistance = 2.5f;
+        float forceThrow = 25;
+        float speed = 75;
 
+        use = true;
+
+        objectCarriedTransform = objectToHold.transform;
+        objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
+        objectCarriedRenderer = objectCarriedTransform.GetComponent<Renderer>();
+
+        objectCarriedRigidBody.freezeRotation = true;
+        objectCarriedRigidBody.useGravity = false;
+
+        objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
+                                                         objectCarriedRenderer.material.color.g,
+                                                         objectCarriedRenderer.material.color.b,
+                                                         0.5f);
+
+        while (use == true && checkThrow == false)
+        {
             if (characterShoot.LeftButton == false)
             {
+                Vector3 carryPosition = cameraTransform.position + cameraTransform.forward * holdDistance;
+                Vector3 direction = carryPosition - objectCarriedTransform.position;
                 Quaternion rotation = characterBodyTransform.rotation;
 
                 objectCarriedRigidBody.MoveRotation(rotation);
 
-                if (objectCarriedTransform.position != carryPosition) objectCarriedRigidBody.velocity = direction * moveSpeed;
+                if (objectCarriedTransform.position != carryPosition) objectCarriedRigidBody.velocity = direction * speed;
 
-                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * distance)
-                {
-                    objectCarriedRigidBody.velocity = Vector3.zero;
-                    use = false;
-                }
+                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * holdDistance) objectCarriedRigidBody.velocity = Vector3.zero;
             }
             else
             {
                 objectCarriedRigidBody.AddForce(cameraTransform.forward * forceThrow, ForceMode.Impulse);
                 checkThrow = true;
-                use = false;
             }
 
             yield return null;
@@ -178,7 +171,6 @@ public class CharacterInteract : MonoBehaviour
         while (checkThrow == true)
         {
             checkThrow = characterShoot.LeftButton == true ? true : false;
-
             yield return null;
         }
 

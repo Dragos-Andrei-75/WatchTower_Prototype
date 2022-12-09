@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6309000813474408024}
   - component: {fileID: 2761394485343932813}
   - component: {fileID: 861737659438262384}
-  - component: {fileID: 5082529300738904015}
+  - component: {fileID: 5558728981404000830}
   m_Layer: 0
   m_Name: PickUpLeverActionShotGun
   m_TagString: Untagged
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4310
+  m_VersionIndex: 4337
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -709,7 +709,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5082529300738904015
+--- !u!114 &5558728981404000830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,13 +725,11 @@ MonoBehaviour:
   pickUpTransform: {fileID: 0}
   pickUpCollider: {fileID: 0}
   pickUpMesh: {fileID: 0}
+  loadOut: {fileID: 0}
+  weapon: {fileID: 8797631409972636595, guid: f8d50c8d1a89aa242868a5f7b80ef4dc, type: 3}
+  holdPosition: {x: 0, y: 0, z: 0}
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   speedRotation: 25
   timeRespawn: 2.5
-  collected: 0
-  canRespawn: 1
-  positionA: {x: 0, y: 0, z: 0}
-  positionB: {x: 0, y: 0, z: 0}
-  moveToA: 0
-  moveToB: 0
+  canRespawn: 0

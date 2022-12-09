@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Revolver
   projectile: {fileID: 0}
+  position: {x: 0, y: 0.05, z: 0.25}
   damage: 1
-  forceImpact: 10
+  force: 10
+  speed: 0
   range: 1000
   fireRate: 0.5
   fireNext: 0
   ammunitionCapacity: 100
-  ammunition: 1000000
+  ammunition: 100
+  index: 0
