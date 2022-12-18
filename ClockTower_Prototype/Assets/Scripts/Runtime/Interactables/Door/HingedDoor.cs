@@ -32,11 +32,13 @@ public class HingedDoor : Door
 
     private IEnumerator HingedDoorOpenClose()
     {
-        if (doorTransform.rotation.eulerAngles == rotationClose.eulerAngles)
+        if (doorTransform.eulerAngles == rotationClose.eulerAngles)
         {
             Transform characterTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            Vector3 doorToCharacter = characterTransform.position - doorTransform.position;
-            float dot = Vector3.Dot(doorTransform.forward, doorToCharacter);
+            Vector3 characterPositionHorizontal = new Vector3(characterTransform.position.x, 0, characterTransform.position.z);
+            Vector3 doorPositionHorizontal = new Vector3(doorTransform.position.x, 0, doorTransform.position.z);
+            Vector3 doorToCharacterHorizontal = characterPositionHorizontal - doorPositionHorizontal;
+            float dot = Vector3.Dot(doorTransform.forward, doorToCharacterHorizontal);
 
             if (dot < 0) rotationOpen = Quaternion.Euler(doorTransform.eulerAngles.x, doorTransform.eulerAngles.y + openRotation, doorTransform.eulerAngles.z);
             else rotationOpen = Quaternion.Euler(doorTransform.eulerAngles.x, doorTransform.eulerAngles.y - openRotation, doorTransform.eulerAngles.z);
@@ -45,13 +47,15 @@ public class HingedDoor : Door
         rotationBegin = rotationBegin == rotationClose ? rotationOpen : rotationClose;
         rotationEnd = rotationBegin == rotationClose ? rotationOpen : rotationClose;
 
-        while (doorTransform.eulerAngles != rotationEnd.eulerAngles)
+        while (doorTransform.eulerAngles != rotationEnd.eulerAngles && timePassed < timeToMove)
         {
             doorRigidBody.MoveRotation(Quaternion.Lerp(rotationBegin, rotationEnd, timePassed / timeToMove));
             timePassed += Time.deltaTime;
 
             yield return null;
         }
+
+        doorTransform.eulerAngles = rotationEnd.eulerAngles;
 
         yield break;
     }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 
 public class LoadOut : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class LoadOut : MonoBehaviour
 
     [Header("Input Player")]
     [SerializeField] private InputPlayer inputPlayer;
-    [SerializeField] private InputAction inputWheel;
+    [SerializeField] private InputAction inputHolster;
     [SerializeField] private InputAction inputWeapon1;
     [SerializeField] private InputAction inputWeapon2;
     [SerializeField] private InputAction inputWeapon3;
@@ -24,6 +23,7 @@ public class LoadOut : MonoBehaviour
     [SerializeField] private InputAction inputWeapon9;
     [SerializeField] private InputAction inputWeapon10;
     [SerializeField] private InputAction inputWeapon11;
+    [SerializeField] private InputAction inputWheel;
     [SerializeField] private float wheelScroll = 0;
     [SerializeField] private int weaponIndex = -1;
 
@@ -42,6 +42,9 @@ public class LoadOut : MonoBehaviour
     private void Awake()
     {
         inputPlayer = new InputPlayer();
+
+        inputHolster = inputPlayer.LoadOut.Holster;
+        inputHolster.started += _ => Holster();
 
         inputWeapon1 = inputPlayer.LoadOut.Weapon1;
         inputWeapon1.started += _ => weaponIndex = 0;
@@ -115,27 +118,35 @@ public class LoadOut : MonoBehaviour
         Pause.onPauseResume -= OnDisable;
     }
 
-    private void Start() => LoadOutSetUp();
-
-    private void LoadOutSetUp()
+    private void Start()
     {
-        Array.Resize(ref weapons, loadOutSize);
+        weapons = new Transform[loadOutSize];
+        LoadOutSetUp(0);
+    }
 
+    private void LoadOutSetUp(int weaponIndexNew)
+    {
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
-            WeaponData weaponData = gameObject.transform.GetChild(i).GetComponent<Weapon>().WeaponData;
+            int index = gameObject.transform.GetChild(i).GetComponent<Weapon>().WeaponData.index;
 
-            weapons[weaponData.index] = gameObject.transform.GetChild(i);
-            weapons[weaponData.index].gameObject.SetActive(false);
+            weapons[index] = gameObject.transform.GetChild(i);
+            weapons[index].gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < weapons.Length; i++)
+        if (weapons[weaponIndexNew] != null)
         {
-            if (weapons[i] != null)
-            {
-                WeaponSelect();
-                break;
-            }
+            weaponSelected = weaponIndexNew;
+            WeaponSelect();
+        }
+    }
+
+    private void Holster()
+    {
+        if (weapons[weaponSelected] != null)
+        {
+            if (weapons[weaponSelected].gameObject.activeSelf == true) weapons[weaponSelected].gameObject.SetActive(false);
+            else weapons[weaponSelected].gameObject.SetActive(true);
         }
     }
 
@@ -167,22 +178,19 @@ public class LoadOut : MonoBehaviour
 
     private void WeaponSelectWheel()
     {
-        if (weapons.Length != 1)
+        if (wheelScroll > 0)
         {
-            if (wheelScroll > 0)
+            do
             {
-                do
-                {
-                    weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
-                } while (weapons[weaponSelected] == null);
-            }
-            else if (wheelScroll < 0)
+                weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
+            } while (weapons[weaponSelected] == null);
+        }
+        else if (wheelScroll < 0)
+        {
+            do
             {
-                do
-                {
-                    weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
-                } while (weapons[weaponSelected] == null);
-            }
+                weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
+            } while (weapons[weaponSelected] == null);
         }
     }
 }

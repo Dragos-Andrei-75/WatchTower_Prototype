@@ -406,6 +406,15 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Holster"",
+                    ""type"": ""Button"",
+                    ""id"": ""d822bf13-d989-43db-a672-2386d7627ad2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -540,6 +549,17 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""Weapon11"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c38bb28-93af-4e25-be9d-360d2499a122"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Holster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -573,6 +593,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         m_LoadOut_Weapon9 = m_LoadOut.FindAction("Weapon9", throwIfNotFound: true);
         m_LoadOut_Weapon10 = m_LoadOut.FindAction("Weapon10", throwIfNotFound: true);
         m_LoadOut_Weapon11 = m_LoadOut.FindAction("Weapon11", throwIfNotFound: true);
+        m_LoadOut_Holster = m_LoadOut.FindAction("Holster", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -757,6 +778,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_LoadOut_Weapon9;
     private readonly InputAction m_LoadOut_Weapon10;
     private readonly InputAction m_LoadOut_Weapon11;
+    private readonly InputAction m_LoadOut_Holster;
     public struct LoadOutActions
     {
         private @InputPlayer m_Wrapper;
@@ -773,6 +795,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         public InputAction @Weapon9 => m_Wrapper.m_LoadOut_Weapon9;
         public InputAction @Weapon10 => m_Wrapper.m_LoadOut_Weapon10;
         public InputAction @Weapon11 => m_Wrapper.m_LoadOut_Weapon11;
+        public InputAction @Holster => m_Wrapper.m_LoadOut_Holster;
         public InputActionMap Get() { return m_Wrapper.m_LoadOut; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -818,6 +841,9 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                 @Weapon11.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
                 @Weapon11.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
                 @Weapon11.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
+                @Holster.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
+                @Holster.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
+                @Holster.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
             }
             m_Wrapper.m_LoadOutActionsCallbackInterface = instance;
             if (instance != null)
@@ -858,6 +884,9 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                 @Weapon11.started += instance.OnWeapon11;
                 @Weapon11.performed += instance.OnWeapon11;
                 @Weapon11.canceled += instance.OnWeapon11;
+                @Holster.started += instance.OnHolster;
+                @Holster.performed += instance.OnHolster;
+                @Holster.canceled += instance.OnHolster;
             }
         }
     }
@@ -890,5 +919,6 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         void OnWeapon9(InputAction.CallbackContext context);
         void OnWeapon10(InputAction.CallbackContext context);
         void OnWeapon11(InputAction.CallbackContext context);
+        void OnHolster(InputAction.CallbackContext context);
     }
 }

@@ -703,7 +703,10 @@ public class CharacterMovement : MonoBehaviour
                 slideDirection.Normalize();
             }
 
-            if (Physics.Raycast(characterBodyTransform.position, slideDirection, 1) == true) break;
+            if (Physics.Raycast(characterBodyTransform.position, slideDirection, out RaycastHit hit, 1) == true)
+            {
+                if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Default") && hit.transform.gameObject.layer != LayerMask.NameToLayer("Interactable")) break;
+            }
 
             if (Mathf.Round(Vector3.Angle(slideDirection, Vector3.up)) > 90) slideSpeed = Mathf.Lerp(slideSpeed, speedSlide, Time.deltaTime);
             else slideSpeed = Mathf.Lerp(slideSpeed, 0, Time.deltaTime);

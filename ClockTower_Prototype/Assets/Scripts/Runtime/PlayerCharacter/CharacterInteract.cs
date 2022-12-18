@@ -135,7 +135,7 @@ public class CharacterInteract : MonoBehaviour
 
         while (use == true && checkThrow == false)
         {
-            if (characterShoot.LeftButton == false)
+            if (characterShoot.LeftButton == false && characterShoot.RightButton == false)
             {
                 Vector3 carryPosition = cameraTransform.position + cameraTransform.forward * holdDistance;
                 Vector3 direction = carryPosition - objectCarriedTransform.position;
@@ -170,7 +170,9 @@ public class CharacterInteract : MonoBehaviour
 
         while (checkThrow == true)
         {
-            checkThrow = characterShoot.LeftButton == true ? true : false;
+            if (characterShoot.LeftButton == true || characterShoot.RightButton == true) checkThrow = true;
+            else checkThrow = false;
+
             yield return null;
         }
 

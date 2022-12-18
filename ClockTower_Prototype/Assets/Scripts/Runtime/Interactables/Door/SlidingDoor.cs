@@ -49,13 +49,15 @@ public class SlidingDoor : Door
         positionBegin = positionBegin == positionClose ? positionOpen : positionClose;
         positionEnd = positionBegin == positionClose ? positionOpen : positionClose;
 
-        while (doorTransform.position != positionEnd)
+        while (doorTransform.position != positionEnd && timePassed < timeToMove)
         {
             doorRigidBody.MovePosition(Vector3.Lerp(positionBegin, positionEnd, timePassed / timeToMove));
             timePassed += Time.deltaTime;
 
             yield return null;
         }
+
+        doorTransform.position = positionEnd;
 
         yield break;
     }

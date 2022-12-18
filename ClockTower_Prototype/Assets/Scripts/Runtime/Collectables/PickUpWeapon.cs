@@ -14,7 +14,6 @@ public class PickUpWeapon : MonoBehaviour
 
     [Header("PickUp Attributes")]
     [SerializeField] private GameObject weapon;
-    [SerializeField] private WeaponData weaponData;
     [SerializeField] private Vector3 holdPosition;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Quaternion startRotation;
@@ -22,7 +21,7 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField] private float timeRespawn = 2.5f;
     [SerializeField] private bool canRespawn = false;
 
-    public delegate void WeaponEquip();
+    public delegate void WeaponEquip(int weaponIndex);
     public static event WeaponEquip OnWeaponEquip;
 
     private void Start()
@@ -68,7 +67,7 @@ public class PickUpWeapon : MonoBehaviour
 
     private IEnumerator Equip()
     {
-        weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
+        WeaponData weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
 
         if (loadOut.Weapons[weaponData.index] == null)
         {
@@ -77,14 +76,12 @@ public class PickUpWeapon : MonoBehaviour
             weapon.transform.localPosition = weaponData.position;
             loadOut.Weapons[weaponData.index] = weapon.transform;
 
-            if (OnWeaponEquip != null) OnWeaponEquip();
+            if (OnWeaponEquip != null) OnWeaponEquip(weaponData.index);
         }
         else
         {
             weaponData.ammunition = weaponData.ammunitionCapacity;
         }
-
-        weaponData = null;
 
         yield break;
     }

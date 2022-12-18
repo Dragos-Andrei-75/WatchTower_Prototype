@@ -25,6 +25,11 @@ public class CharacterShoot : MonoBehaviour
         get { return leftButton; }
     }
 
+    public bool RightButton
+    {
+        get { return rightButton; }
+    }
+
     private void Awake()
     {
         inputPlayer = new InputPlayer();

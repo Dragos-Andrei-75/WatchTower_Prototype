@@ -36,6 +36,7 @@ Transform:
   - {fileID: 1219736646683383400}
   - {fileID: 3725194442913060322}
   - {fileID: 892195467771992312}
+  - {fileID: 7935697435583889424}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549016081924760752, guid: 8813fe48cec43ff44bb15b4806b51198, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2549016081924760752, guid: 8813fe48cec43ff44bb15b4806b51198, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -198,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813155190834576302, guid: 44ce1fa54252e624eabf2dbca7291752, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2813155190834576302, guid: 44ce1fa54252e624eabf2dbca7291752, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -224,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549016081924760752, guid: 8813fe48cec43ff44bb15b4806b51198, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2549016081924760752, guid: 8813fe48cec43ff44bb15b4806b51198, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -296,6 +297,92 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2549016081924760756, guid: 8813fe48cec43ff44bb15b4806b51198, type: 3}
   m_PrefabInstance: {fileID: 3725194441300177628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3725194441923781776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3725194441868212807}
+    m_Modifications:
+    - target: {fileID: 697158212896447870, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_Name
+      value: ClockTowerPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 697158212896447870, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398325575555129786, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6484787907573549901, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000002533197
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171447897344813779, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171447897344813779, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_VersionIndex
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171447897344813779, guid: 4187a554718805145a927ced1d801c35, type: 3}
+      propertyPath: m_MeshFormatVersion
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4187a554718805145a927ced1d801c35, type: 3}
+--- !u!4 &7935697435583889424 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6742959971884115072, guid: 4187a554718805145a927ced1d801c35, type: 3}
+  m_PrefabInstance: {fileID: 3725194441923781776}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3725194442930508152
 PrefabInstance:
@@ -370,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813155190834576302, guid: 44ce1fa54252e624eabf2dbca7291752, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2813155190834576302, guid: 44ce1fa54252e624eabf2dbca7291752, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -404,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8161046416670885072, guid: 0822e970938daa043977c3198a3bfc37, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8161046416670885072, guid: 0822e970938daa043977c3198a3bfc37, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -546,7 +633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7171447897344813779, guid: 4187a554718805145a927ced1d801c35, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7171447897344813779, guid: 4187a554718805145a927ced1d801c35, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -572,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217486143324746019, guid: eb97b7dfbf60f37418506403eff4c892, type: 3}
       propertyPath: m_VersionIndex
-      value: 16
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 6217486143324746019, guid: eb97b7dfbf60f37418506403eff4c892, type: 3}
       propertyPath: m_MeshFormatVersion
@@ -589,6 +676,10 @@ PrefabInstance:
     - target: {fileID: 6217486143324746046, guid: eb97b7dfbf60f37418506403eff4c892, type: 3}
       propertyPath: m_Name
       value: ClockTowerRoof
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217486143324746046, guid: eb97b7dfbf60f37418506403eff4c892, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6217486143324746046, guid: eb97b7dfbf60f37418506403eff4c892, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -662,7 +753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4464802637340350808, guid: 70de1bf0edd70c846b20602cb09f6c29, type: 3}
       propertyPath: m_VersionIndex
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4464802637340350808, guid: 70de1bf0edd70c846b20602cb09f6c29, type: 3}
       propertyPath: m_MeshFormatVersion
