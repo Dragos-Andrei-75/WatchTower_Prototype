@@ -300,10 +300,10 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
             ""id"": ""1de1da3c-68a0-4b88-964b-dceb1a9b9e72"",
             ""actions"": [
                 {
-                    ""name"": ""Wheel"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""c54e5f44-59ca-43a7-ba58-04b6a703ffa5"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""Holster"",
+                    ""type"": ""Button"",
+                    ""id"": ""d822bf13-d989-43db-a672-2386d7627ad2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -408,27 +408,16 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Holster"",
-                    ""type"": ""Button"",
-                    ""id"": ""d822bf13-d989-43db-a672-2386d7627ad2"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Wheel"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c54e5f44-59ca-43a7-ba58-04b6a703ffa5"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""97f8d504-d803-4b3e-bf16-38c9cc9c588f"",
-                    ""path"": ""<Mouse>/scroll/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Wheel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""9ad18c9b-a8cb-4d4b-bcb4-787c20d28f8f"",
@@ -560,6 +549,17 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""Holster"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97f8d504-d803-4b3e-bf16-38c9cc9c588f"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -581,7 +581,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         m_Character_RightButton = m_Character.FindAction("RightButton", throwIfNotFound: true);
         // LoadOut
         m_LoadOut = asset.FindActionMap("LoadOut", throwIfNotFound: true);
-        m_LoadOut_Wheel = m_LoadOut.FindAction("Wheel", throwIfNotFound: true);
+        m_LoadOut_Holster = m_LoadOut.FindAction("Holster", throwIfNotFound: true);
         m_LoadOut_Weapon1 = m_LoadOut.FindAction("Weapon1", throwIfNotFound: true);
         m_LoadOut_Weapon2 = m_LoadOut.FindAction("Weapon2", throwIfNotFound: true);
         m_LoadOut_Weapon3 = m_LoadOut.FindAction("Weapon3", throwIfNotFound: true);
@@ -593,7 +593,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         m_LoadOut_Weapon9 = m_LoadOut.FindAction("Weapon9", throwIfNotFound: true);
         m_LoadOut_Weapon10 = m_LoadOut.FindAction("Weapon10", throwIfNotFound: true);
         m_LoadOut_Weapon11 = m_LoadOut.FindAction("Weapon11", throwIfNotFound: true);
-        m_LoadOut_Holster = m_LoadOut.FindAction("Holster", throwIfNotFound: true);
+        m_LoadOut_Wheel = m_LoadOut.FindAction("Wheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -766,7 +766,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
     // LoadOut
     private readonly InputActionMap m_LoadOut;
     private ILoadOutActions m_LoadOutActionsCallbackInterface;
-    private readonly InputAction m_LoadOut_Wheel;
+    private readonly InputAction m_LoadOut_Holster;
     private readonly InputAction m_LoadOut_Weapon1;
     private readonly InputAction m_LoadOut_Weapon2;
     private readonly InputAction m_LoadOut_Weapon3;
@@ -778,12 +778,12 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_LoadOut_Weapon9;
     private readonly InputAction m_LoadOut_Weapon10;
     private readonly InputAction m_LoadOut_Weapon11;
-    private readonly InputAction m_LoadOut_Holster;
+    private readonly InputAction m_LoadOut_Wheel;
     public struct LoadOutActions
     {
         private @InputPlayer m_Wrapper;
         public LoadOutActions(@InputPlayer wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Wheel => m_Wrapper.m_LoadOut_Wheel;
+        public InputAction @Holster => m_Wrapper.m_LoadOut_Holster;
         public InputAction @Weapon1 => m_Wrapper.m_LoadOut_Weapon1;
         public InputAction @Weapon2 => m_Wrapper.m_LoadOut_Weapon2;
         public InputAction @Weapon3 => m_Wrapper.m_LoadOut_Weapon3;
@@ -795,7 +795,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         public InputAction @Weapon9 => m_Wrapper.m_LoadOut_Weapon9;
         public InputAction @Weapon10 => m_Wrapper.m_LoadOut_Weapon10;
         public InputAction @Weapon11 => m_Wrapper.m_LoadOut_Weapon11;
-        public InputAction @Holster => m_Wrapper.m_LoadOut_Holster;
+        public InputAction @Wheel => m_Wrapper.m_LoadOut_Wheel;
         public InputActionMap Get() { return m_Wrapper.m_LoadOut; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -805,9 +805,9 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_LoadOutActionsCallbackInterface != null)
             {
-                @Wheel.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
-                @Wheel.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
-                @Wheel.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
+                @Holster.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
+                @Holster.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
+                @Holster.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
                 @Weapon1.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon1;
                 @Weapon1.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon1;
                 @Weapon1.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon1;
@@ -841,16 +841,16 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                 @Weapon11.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
                 @Weapon11.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
                 @Weapon11.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWeapon11;
-                @Holster.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
-                @Holster.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
-                @Holster.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnHolster;
+                @Wheel.started -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
+                @Wheel.performed -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
+                @Wheel.canceled -= m_Wrapper.m_LoadOutActionsCallbackInterface.OnWheel;
             }
             m_Wrapper.m_LoadOutActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Wheel.started += instance.OnWheel;
-                @Wheel.performed += instance.OnWheel;
-                @Wheel.canceled += instance.OnWheel;
+                @Holster.started += instance.OnHolster;
+                @Holster.performed += instance.OnHolster;
+                @Holster.canceled += instance.OnHolster;
                 @Weapon1.started += instance.OnWeapon1;
                 @Weapon1.performed += instance.OnWeapon1;
                 @Weapon1.canceled += instance.OnWeapon1;
@@ -884,9 +884,9 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
                 @Weapon11.started += instance.OnWeapon11;
                 @Weapon11.performed += instance.OnWeapon11;
                 @Weapon11.canceled += instance.OnWeapon11;
-                @Holster.started += instance.OnHolster;
-                @Holster.performed += instance.OnHolster;
-                @Holster.canceled += instance.OnHolster;
+                @Wheel.started += instance.OnWheel;
+                @Wheel.performed += instance.OnWheel;
+                @Wheel.canceled += instance.OnWheel;
             }
         }
     }
@@ -907,7 +907,7 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
     }
     public interface ILoadOutActions
     {
-        void OnWheel(InputAction.CallbackContext context);
+        void OnHolster(InputAction.CallbackContext context);
         void OnWeapon1(InputAction.CallbackContext context);
         void OnWeapon2(InputAction.CallbackContext context);
         void OnWeapon3(InputAction.CallbackContext context);
@@ -919,6 +919,6 @@ public partial class @InputPlayer : IInputActionCollection2, IDisposable
         void OnWeapon9(InputAction.CallbackContext context);
         void OnWeapon10(InputAction.CallbackContext context);
         void OnWeapon11(InputAction.CallbackContext context);
-        void OnHolster(InputAction.CallbackContext context);
+        void OnWheel(InputAction.CallbackContext context);
     }
 }

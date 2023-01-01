@@ -42,6 +42,7 @@ public class PickUpWeapon : MonoBehaviour
         if (other.tag == "Player")
         {
             loadOut = other.gameObject.GetComponentInChildren<LoadOut>();
+            loadOut.enabled = true;
 
             pickUpCollider.enabled = false;
             pickUpMesh.enabled = false;

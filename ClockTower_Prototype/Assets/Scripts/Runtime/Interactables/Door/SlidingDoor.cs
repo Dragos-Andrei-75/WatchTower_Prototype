@@ -25,6 +25,10 @@ public class SlidingDoor : Door
         set { openDirection = value; }
     }
 
+    private void OnCollisionEnter(Collision collision) => DoorNonKinematic();
+
+    private void OnCollisionExit(Collision collision) => DoorNonKinematic();
+
     public override void DoorSetUp()
     {
         base.DoorSetUp();

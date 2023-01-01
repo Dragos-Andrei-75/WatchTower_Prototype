@@ -97,8 +97,10 @@ public class CharacterInteract : MonoBehaviour
 
                     if (interactable.GetComponent<Door>() != null)
                     {
-                        if (interactable.GetComponent<Door>().Pair == true) interactable.GetComponentInParent<DoorController>().EngageDoors();
                         if (interactable.GetComponent<Door>().Automatic == true) return;
+
+                        if (interactable.GetComponent<Door>().Pair == true) interactable.GetComponentInParent<DoorController>().EngageDoors();
+                        else interactable.Interact();
                     }
                     else
                     {
@@ -137,13 +139,13 @@ public class CharacterInteract : MonoBehaviour
         {
             if (characterShoot.LeftButton == false && characterShoot.RightButton == false)
             {
-                Vector3 carryPosition = cameraTransform.position + cameraTransform.forward * holdDistance;
-                Vector3 direction = carryPosition - objectCarriedTransform.position;
+                Vector3 holdPosition = cameraTransform.position + cameraTransform.forward * holdDistance;
+                Vector3 direction = holdPosition - objectCarriedTransform.position;
                 Quaternion rotation = characterBodyTransform.rotation;
 
                 objectCarriedRigidBody.MoveRotation(rotation);
 
-                if (objectCarriedTransform.position != carryPosition) objectCarriedRigidBody.velocity = direction * speed;
+                if (objectCarriedTransform.position != holdPosition) objectCarriedRigidBody.velocity = direction * speed;
 
                 if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * holdDistance) objectCarriedRigidBody.velocity = Vector3.zero;
             }

@@ -20,9 +20,9 @@ public class Elevator : MonoBehaviour
     [Header("Entities on the Elevator")]
     [SerializeField] private CharacterController characterController;
 
-    private enum ElevatorType { Vertical, Horizontal };
-
     private Coroutine coroutineElevatorMove;
+
+    private enum ElevatorType { Vertical, Horizontal };
 
     private void Start()
     {

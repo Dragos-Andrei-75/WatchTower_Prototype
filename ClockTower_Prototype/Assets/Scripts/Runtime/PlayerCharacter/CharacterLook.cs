@@ -81,7 +81,7 @@ public class CharacterLook : MonoBehaviour
         characterMovement = characterCameraTransform.root.GetComponent<CharacterMovement>();
     }
 
-    private void Update() => Look();
+    private void LateUpdate() => Look();
 
     private void Look()
     {

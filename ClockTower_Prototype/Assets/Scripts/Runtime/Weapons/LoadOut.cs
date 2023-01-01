@@ -41,6 +41,8 @@ public class LoadOut : MonoBehaviour
 
     private void Awake()
     {
+        weapons = new Transform[loadOutSize];
+
         inputPlayer = new InputPlayer();
 
         inputHolster = inputPlayer.LoadOut.Holster;
@@ -116,12 +118,6 @@ public class LoadOut : MonoBehaviour
 
         Pause.onPauseResume += OnEnable;
         Pause.onPauseResume -= OnDisable;
-    }
-
-    private void Start()
-    {
-        weapons = new Transform[loadOutSize];
-        LoadOutSetUp(0);
     }
 
     private void LoadOutSetUp(int weaponIndexNew)

@@ -64,4 +64,14 @@ public abstract class Door : Interactive
             timePassed = timeToMove - timePassed;
         }
     }
+
+    protected void DoorKinematic()
+    {
+        if (coroutineActive != null && doorRigidBody.isKinematic == false) doorRigidBody.isKinematic = true;
+    }
+
+    protected void DoorNonKinematic()
+    {
+        if (coroutineActive != null && doorRigidBody.isKinematic == true) doorRigidBody.isKinematic = false;
+    }
 }
