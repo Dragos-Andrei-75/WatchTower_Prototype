@@ -6,12 +6,12 @@ public class CannonBall : MonoBehaviour
     [Header("CannonBall Object and Components References")]
     [SerializeField] private GameObject cannonBall;
     [SerializeField] private Transform cannonBallTransform;
-    [SerializeField] private Rigidbody cannonBallRigidbody;
 
     [Header("CannonBall Attributes")]
     [SerializeField] private Vector3 hitPosition;
-    [SerializeField] private float speed = 2.5f;
-    [SerializeField] private float force = 100.0f;
+    [SerializeField] private float lifeSpan = 10.0f;
+    [SerializeField] private float speed = 100f;
+    [SerializeField] private float force = 50.0f;
     [SerializeField] private float radius = 10.0f;
     [SerializeField] private float damageMax = 10.0f;
     [SerializeField] private float damageMin = 1.0f;
@@ -43,7 +43,6 @@ public class CannonBall : MonoBehaviour
     {
         cannonBall = gameObject;
         cannonBallTransform = cannonBall.transform;
-        cannonBallRigidbody = cannonBall.GetComponent<Rigidbody>();
 
         StartCoroutine(CannonBallBehaviour());
     }
@@ -56,26 +55,41 @@ public class CannonBall : MonoBehaviour
 
     private IEnumerator CannonBallBehaviour()
     {
-        while (hit == false)
+        LayerMask layerInteractable;
+        Collider[] interactableColliders;
+        Rigidbody[] interactableRigidBodies;
+        Interactable[] interactableScripts;
+        float distance;
+        float damage;
+
+        while (hit == false && lifeSpan > 0)
         {
-            cannonBallRigidbody.AddForce(cannonBallTransform.forward * speed, ForceMode.Impulse);
+            cannonBallTransform.position += cannonBallTransform.forward * speed * Time.deltaTime;
+            lifeSpan -= Time.deltaTime;
+
             yield return null;
         }
 
-        LayerMask layerInteractable = LayerMask.GetMask("Interactable");
-        Collider[] collidersInteractable = Physics.OverlapSphere(hitPosition, radius, layerInteractable);
+        layerInteractable = LayerMask.GetMask("Interactable");
+        interactableColliders = Physics.OverlapSphere(hitPosition, radius, layerInteractable);
 
-        for (int i = 0; i < collidersInteractable.Length; i++)
+        interactableRigidBodies = new Rigidbody[interactableColliders.Length];
+        interactableScripts = new Interactable[interactableColliders.Length];
+
+        for (int i = 0; i < interactableColliders.Length; i++)
         {
-            Rigidbody interactableRigidBody = collidersInteractable[i].GetComponent<Rigidbody>();
-            Interactable interactableScript = collidersInteractable[i].GetComponent<Interactable>();
+            interactableRigidBodies[i] = interactableColliders[i].GetComponent<Rigidbody>();
+            interactableScripts[i] = interactableColliders[i].GetComponent<Interactable>();
+        }
 
-            interactableRigidBody.AddExplosionForce(force, hitPosition, radius, 1.0f, ForceMode.Impulse);
+        for (int i = 0; i < interactableColliders.Length; i++)
+        {
+            interactableRigidBodies[i].AddExplosionForce(force, hitPosition, radius, 1, ForceMode.Impulse);
 
-            float distance = Vector3.Distance(collidersInteractable[i].transform.position, hitPosition);
-            float damage = Mathf.Lerp(damageMax, damageMin, distance / radius);
+            distance = Vector3.Distance(interactableColliders[i].transform.position, hitPosition);
+            damage = Mathf.Lerp(damageMax, damageMin, distance / radius);
 
-            interactableScript.TakeDamage(damage);
+            interactableScripts[i].TakeDamage(damage);
         }
 
         Destroy(cannonBall);

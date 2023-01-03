@@ -19,8 +19,8 @@ public class Cannon : Weapon
 
     private void ShootCannon()
     {
-        Vector3 cannonBallPosition = gameObject.transform.position;
-        Quaternion cannonBallRotation = gameObject.transform.rotation;
+        Vector3 cannonBallPosition = WeaponTransform.position + WeaponTransform.forward * 0.55f;
+        Quaternion cannonBallRotation = WeaponTransform.rotation;
 
         Instantiate(WeaponData.projectile, cannonBallPosition, cannonBallRotation);
     }

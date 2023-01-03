@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    [Header("Weapon Object and Component References")]
+    [SerializeField] private Transform weaponTransform;
+
     [Header("Character Object and Component References")]
     [SerializeField] private Transform characterCameraTransform;
     [SerializeField] private Camera characterCamera;
@@ -25,6 +28,11 @@ public abstract class Weapon : MonoBehaviour
         get { return characterShoot; }
     }
 
+    protected Transform WeaponTransform
+    {
+        get { return weaponTransform; }
+    }
+
     public WeaponData WeaponData
     {
         get { return weaponData; }
@@ -33,7 +41,9 @@ public abstract class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        characterCameraTransform = gameObject.transform.root.GetChild(0).GetComponent<Transform>();
+        weaponTransform = gameObject.transform;
+
+        characterCameraTransform = WeaponTransform.root.GetChild(0).GetComponent<Transform>();
         characterCamera = characterCameraTransform.GetComponent<Camera>();
         characterShoot = characterCameraTransform.GetComponent<CharacterShoot>();
     }

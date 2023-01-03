@@ -147,7 +147,11 @@ public class CharacterInteract : MonoBehaviour
 
                 if (objectCarriedTransform.position != holdPosition) objectCarriedRigidBody.velocity = direction * speed;
 
-                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * holdDistance) objectCarriedRigidBody.velocity = Vector3.zero;
+                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * holdDistance)
+                {
+                    objectCarriedRigidBody.velocity = Vector3.zero;
+                    use = false;
+                }
             }
             else
             {

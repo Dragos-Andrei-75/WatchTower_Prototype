@@ -49186,7 +49186,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 3eae65cb-e5ef-4cbb-a4aa-953c4f862cce
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -49195,7 +49195,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 730eb5ab-517c-4d47-af8c-57c4033ea3a7
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -49204,7 +49204,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: f6369dd3-590b-46b6-a452-73be433674ed
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -49213,7 +49213,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 2be15e07-9896-44ec-b798-774c28c63e7a
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -49222,7 +49222,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 85363064-978c-4782-a966-d4d46129772e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -49231,7 +49231,7 @@ MonoBehaviour:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 6426fb60-f6f3-4e44-8381-96200ee146e5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -51876,7 +51876,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -1.5, y: 2.5, z: -37.5}
   m_UseSpring: 0
   m_Spring:
     spring: 0
