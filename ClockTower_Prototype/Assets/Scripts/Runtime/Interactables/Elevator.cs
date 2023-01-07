@@ -1,11 +1,11 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class Elevator : MonoBehaviour
 {
     [Header("Elevator Object and Component References")]
     [SerializeField] private Transform elevatorTransform;
-    [SerializeField] private Rigidbody elevatorRigidbody;
 
     [Header("Elevator Attributes")]
     [SerializeField] private ElevatorType elevatorType = ElevatorType.Vertical;
@@ -17,8 +17,9 @@ public class Elevator : MonoBehaviour
     [SerializeField] private float floorDistance = 5;
     [SerializeField] private int floors = 2;
 
-    [Header("Entities on the Elevator")]
-    [SerializeField] private CharacterController characterController;
+    [Header("Objects on the Elevator")]
+    [SerializeField] private Transform[] objects;
+    [SerializeField] private int objectsNumber = 0;
 
     private Coroutine coroutineElevatorMove;
 
@@ -27,20 +28,42 @@ public class Elevator : MonoBehaviour
     private void Start()
     {
         elevatorTransform = gameObject.transform;
-        elevatorRigidbody = elevatorTransform.GetComponent<Rigidbody>();
-
         ElevatorSetup();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        characterController = other.transform.GetComponent<CharacterController>();
+        objectsNumber++;
+        Array.Resize(ref objects, objectsNumber);
+
+        objects[objects.Length - 1] = other.transform;
+        objects[objects.Length - 1].SetParent(elevatorTransform);
+
         if (coroutineElevatorMove == null) coroutineElevatorMove = StartCoroutine(ElevatorMove());
     }
 
-    private void OnTriggerStay(Collider other) => characterController.Move(elevatorRigidbody.velocity * Time.deltaTime);
+    private void OnTriggerExit(Collider other)
+    {
+        int objectRemovedPosition = objectsNumber;
 
-    private void OnTriggerExit(Collider other) => characterController = null;
+        for (int i = 0; i < objectsNumber; i++)
+        {
+            if (objects[i] == other.transform)
+            {
+                objects[i].SetParent(null);
+                objects[i] = null;
+
+                objectRemovedPosition = i;
+            }
+            else if (i > objectRemovedPosition)
+            {
+                objects[i - 1] = objects[i];
+            }
+        }
+
+        objectsNumber--;
+        Array.Resize(ref objects, objectsNumber);
+    }
 
     private void ElevatorSetup()
     {
@@ -65,10 +88,10 @@ public class Elevator : MonoBehaviour
 
         while (elevatorTransform.position != floorTarget)
         {
-            elevatorRigidbody.MovePosition(Vector3.Lerp(floorStart, floorTarget, timePassed / timeToMove));
-            timePassed += Time.fixedDeltaTime;
+            elevatorTransform.position = Vector3.Lerp(floorStart, floorTarget, timePassed / timeToMove);
+            timePassed += Time.deltaTime;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         timePassed = 0;
