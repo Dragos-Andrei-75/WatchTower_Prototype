@@ -53,7 +53,7 @@ public class HingedDoor : Door
 
         while (doorTransform.eulerAngles != rotationEnd.eulerAngles && timePassed < timeToMove)
         {
-            doorRigidBody.MoveRotation(Quaternion.Lerp(rotationBegin, rotationEnd, timePassed / timeToMove));
+            doorTransform.rotation = Quaternion.Lerp(rotationBegin, rotationEnd, timePassed / timeToMove);
             timePassed += Time.deltaTime;
 
             yield return null;

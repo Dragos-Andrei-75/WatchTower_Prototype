@@ -283,28 +283,29 @@ public class CharacterMovement : MonoBehaviour
 
             if (checkSurface == true)
             {
-                if (coroutineSlip == null && checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85)
-                {
-                    Physics.SphereCast(characterBodyTransform.position, sphereRadius, -characterBodyTransform.up, out hitSlope, characterController.height / 2);
-                    coroutineSlip = StartCoroutine(Slip());
-                }
+                if (coroutineSlip == null && checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85) coroutineSlip = StartCoroutine(Slip());
             }
             else
             {
-                if (wallHit != hit && characterVelocity.y >= -7.5f && characterController.height < hitMeshRenderer.bounds.size.y)
+                if (wallHit != hit)
                 {
                     if (characterController.radius < hitMeshRenderer.bounds.size.x || characterController.radius < hitMeshRenderer.bounds.size.z)
                     {
-                        bool checkWallLeft = Physics.Raycast(characterBodyTransform.position, -characterBodyTransform.right, out RaycastHit hitLeft, 1, ~layerInteractable);
-                        bool checkWallRight = Physics.Raycast(characterBodyTransform.position, characterBodyTransform.right, out RaycastHit hitRight, 1, ~layerInteractable);
+                        if (characterController.height < hitMeshRenderer.bounds.size.y)
+                        {
+                            bool checkWallLeft = Physics.Raycast(characterBodyTransform.position, -characterBodyTransform.right, out RaycastHit hitLeft,
+                                                                 characterController.radius * 2, ~layerInteractable);
+                            bool checkWallRight = Physics.Raycast(characterBodyTransform.position, characterBodyTransform.right, out RaycastHit hitRight,
+                                                                  characterController.radius * 2, ~layerInteractable);
 
-                        wallHit = hit;
+                            wallHit = hit;
 
-                        if (coroutineWallRun != null) StopCoroutine(coroutineWallRun);
+                            if (coroutineWallRun != null) StopCoroutine(coroutineWallRun);
 
-                        if (checkWallLeft == true && hitLeft.transform == hit.transform) coroutineWallRun = StartCoroutine(WallRun(-headTiltAngle));
-                        else if (checkWallRight == true && hitRight.transform == hit.transform) coroutineWallRun = StartCoroutine(WallRun(headTiltAngle));
-                        else StartCoroutine(WallRunExit());
+                            if (checkWallLeft == true && hitLeft.transform == wallHit.transform) coroutineWallRun = StartCoroutine(WallRun(1, -headTiltAngle));
+                            else if (checkWallRight == true && hitRight.transform == wallHit.transform) coroutineWallRun = StartCoroutine(WallRun(-1, headTiltAngle));
+                            else StartCoroutine(WallRunExit());
+                        }
                     }
                 }
             }
@@ -466,7 +467,7 @@ public class CharacterMovement : MonoBehaviour
             bool clear;
 
             distanceClear = heightStand - heightCrouch;
-            clear = Physics.Raycast(characterCameraTransform.position, Vector3.up, distanceClear) == false;
+            clear = !Physics.Raycast(characterCameraTransform.position, Vector3.up, distanceClear, ~layerInteractable, QueryTriggerInteraction.Ignore);
 
             if (clear == false)
             {
@@ -477,12 +478,11 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(Crouch());
                 if (checkSlide == false) yield break;
             }
-        }
-
-        if (checkSlide == true)
-        {
-            checkSlide = false;
-            StopCoroutine(coroutineSlide);
+            else if (checkSlide == true)
+            {
+                checkSlide = false;
+                StopCoroutine(coroutineSlide);
+            }
         }
 
         if (jump == true) StartCoroutine(Jump(reactionTimeJump));
@@ -495,6 +495,8 @@ public class CharacterMovement : MonoBehaviour
     {
         characterVelocity.x = 0;
         characterVelocity.z = 0;
+
+        Physics.SphereCast(characterBodyTransform.position, sphereRadius, -characterBodyTransform.up, out hitSlope, characterController.height / 2);
 
         checkSlip = true;
 
@@ -727,9 +729,9 @@ public class CharacterMovement : MonoBehaviour
                 slideVertical.y += gravity * Time.deltaTime;
             }
 
-            characterVelocity = (slideHorizontal * slideSpeed) + slideVertical;
-
             positionPrevious = characterBodyTransform.position;
+
+            characterVelocity = (slideHorizontal * slideSpeed) + slideVertical;
 
             yield return null;
         }
@@ -741,24 +743,24 @@ public class CharacterMovement : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator WallRun(float headTiltTarget)
+    private IEnumerator WallRun(int inputCancel, float headTiltTarget)
     {
         Vector3 wallRunDirection = Vector3.Cross(Vector3.up, wallHit.normal).normalized;
         float timePassed = 0;
-        bool checkWallFront = false;
-        bool checkWallSide = true;
+        bool checkWall = true;
+
+        if ((Mathf.Round(Vector3.Dot(characterBodyTransform.forward, characterVelocity)) < 0 || characterVelocity.y < -7.5f) && checkWallRun == false) yield break;
 
         if (Vector3.Dot(characterCameraTransform.forward, wallRunDirection) < 0) wallRunDirection = -wallRunDirection;
 
-        if (timeWallRun == 0) timeWallRun = Mathf.Lerp(1, 1.75f, characterVelocity.magnitude / speedDash);
+        if (timeWallRun == 0) timeWallRun = Mathf.Lerp(1.25f, 1.75f, characterVelocity.magnitude / speedDash);
 
         checkJump = false;
         checkWallRun = true;
 
-        while (checkSurface == false && jump == false && checkWallFront == false && checkWallSide == true && timeWallRun > 0)
+        while (inputX != inputCancel && checkSurface == false && jump == false && checkWall == true && timeWallRun > 0)
         {
-            checkWallFront = Physics.Raycast(characterBodyTransform.position, wallRunDirection, 0.5f, ~layerInteractable);
-            checkWallSide = Physics.Raycast(characterBodyTransform.position, -wallHit.normal, 0.75f, ~layerInteractable);
+            checkWall = Physics.Raycast(characterBodyTransform.position, -wallHit.normal, characterController.radius * 2, ~layerInteractable);
 
             if (timeWallRun > 1)
             {
