@@ -2,26 +2,22 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class Elevator : MonoBehaviour
+public class Elevator : Interactive
 {
     [Header("Elevator Object and Component References")]
     [SerializeField] private Transform elevatorTransform;
 
     [Header("Elevator Attributes")]
     [SerializeField] private ElevatorType elevatorType = ElevatorType.Vertical;
-    [SerializeField] private Vector3[] floorPositions;
-    [SerializeField] private Vector3 floorStart;
-    [SerializeField] private Vector3 floorTarget;
-    [SerializeField] private float timeToMove = 2.5f;
-    [SerializeField] private float timePassed = 0.0f;
-    [SerializeField] private float floorDistance = 5;
-    [SerializeField] private int floors = 2;
+    [SerializeField] private Vector3 position1;
+    [SerializeField] private Vector3 position2;
+    [SerializeField] private Vector3 positionStart;
+    [SerializeField] private Vector3 positionTarget;
+    [SerializeField] private float distance = 5;
 
     [Header("Objects on the Elevator")]
     [SerializeField] private Transform[] objects;
     [SerializeField] private int objectsNumber = 0;
-
-    private Coroutine coroutineElevatorMove;
 
     private enum ElevatorType { Vertical, Horizontal };
 
@@ -29,6 +25,18 @@ public class Elevator : MonoBehaviour
     {
         elevatorTransform = gameObject.transform;
         ElevatorSetup();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (coroutineActive != null)
+        {
+            if (elevatorTransform.position.y > collision.transform.position.y)
+            {
+                base.Interact();
+                coroutineActive = StartCoroutine(ElevatorMove());
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +47,7 @@ public class Elevator : MonoBehaviour
         objects[objects.Length - 1] = other.transform;
         objects[objects.Length - 1].SetParent(elevatorTransform);
 
-        if (coroutineElevatorMove == null) coroutineElevatorMove = StartCoroutine(ElevatorMove());
+        if (automatic == true && coroutineActive == null) coroutineActive = StartCoroutine(ElevatorMove());
     }
 
     private void OnTriggerExit(Collider other)
@@ -69,26 +77,44 @@ public class Elevator : MonoBehaviour
     {
         Vector3 levelIncrement;
 
-        if (elevatorType == ElevatorType.Vertical) levelIncrement = new Vector3(0, floorDistance, 0);
-        else levelIncrement = elevatorTransform.TransformDirection(new Vector3(floorDistance, 0, 0));
+        if (elevatorType == ElevatorType.Vertical) levelIncrement = new Vector3(0, distance, 0);
+        else levelIncrement = elevatorTransform.TransformDirection(new Vector3(distance, 0, 0));
 
-        floorPositions = new Vector3[floors];
+        position1 = elevatorTransform.position;
 
-        floorPositions[0] = elevatorTransform.position;
+        position1 = elevatorTransform.position;
+        position2 = position1 + levelIncrement;
+    }
 
-        for (int i = 1; i < floors; i++) floorPositions[i] = floorPositions[i - 1] + levelIncrement;
+    public override void Interact()
+    {
+        if (coroutineActive == null) coroutineActive = StartCoroutine(ElevatorMove());
     }
 
     private IEnumerator ElevatorMove()
     {
-        floorStart = elevatorTransform.position;
-
-        if (elevatorTransform.position == floorPositions[0]) floorTarget = floorPositions[1];
-        else floorTarget = floorPositions[0];
-
-        while (elevatorTransform.position != floorTarget)
+        if (elevatorTransform.position == position1)
         {
-            elevatorTransform.position = Vector3.Lerp(floorStart, floorTarget, timePassed / timeToMove);
+            positionStart = position1;
+            positionTarget = position2;
+        }
+        else if (elevatorTransform.position == position2)
+        {
+            positionStart = position2;
+            positionTarget = position1;
+        }
+        else
+        {
+            Vector3 positionSwitch;
+
+            positionSwitch = positionStart;
+            positionStart = positionTarget;
+            positionTarget = positionSwitch;
+        }
+
+        while (elevatorTransform.position != positionTarget)
+        {
+            elevatorTransform.position = Vector3.Lerp(positionStart, positionTarget, timePassed / timeToMove);
             timePassed += Time.deltaTime;
 
             yield return null;
@@ -96,7 +122,7 @@ public class Elevator : MonoBehaviour
 
         timePassed = 0;
 
-        coroutineElevatorMove = null;
+        coroutineActive = null;
 
         yield break;
     }

@@ -92,23 +92,21 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        if (loadOut.WeaponCurrent == null) yield break;
-
-        if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
+        if (OnShoot != null)
         {
-            while (leftButton == true || rightButton == true)
+            if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
             {
-                if (loadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > loadOut.WeaponCurrent.WeaponData.fireNext)
+                while (leftButton == true || rightButton == true)
                 {
-                    if (OnShoot != null)
+                    if (loadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > loadOut.WeaponCurrent.WeaponData.fireNext)
                     {
                         OnShoot();
                         loadOut.WeaponCurrent.WeaponData.fireNext = Time.time + loadOut.WeaponCurrent.WeaponData.fireRate;
                         loadOut.WeaponCurrent.WeaponData.ammunition--;
                     }
-                }
 
-                yield return null;
+                    yield return null;
+                }
             }
         }
 

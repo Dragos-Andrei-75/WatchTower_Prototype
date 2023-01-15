@@ -61,6 +61,8 @@ public class HingedDoor : Door
 
         doorTransform.eulerAngles = rotationEnd.eulerAngles;
 
+        coroutineActive = null;
+
         yield break;
     }
 }

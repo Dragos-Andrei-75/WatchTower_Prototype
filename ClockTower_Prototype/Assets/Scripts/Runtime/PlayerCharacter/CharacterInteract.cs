@@ -85,7 +85,7 @@ public class CharacterInteract : MonoBehaviour
             int length = 5;
             LayerMask mask = LayerMask.GetMask("Default");
 
-            if (Physics.Raycast(ray, out hit, length, ~mask) == true)
+            if (Physics.Raycast(ray, out hit, length, ~mask, QueryTriggerInteraction.Ignore) == true)
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
@@ -93,19 +93,12 @@ public class CharacterInteract : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<Interactive>() != null)
                 {
-                    Interactive interactable = hit.transform.GetComponent<Interactive>();
+                    Interactive interactive = hit.transform.GetComponent<Interactive>();
 
-                    if (interactable.GetComponent<Door>() != null)
-                    {
-                        if (interactable.GetComponent<Door>().Automatic == true) return;
+                    if (interactive.Automatic == true || interactive.SwitchEngaged == true) return;
 
-                        if (interactable.GetComponent<Door>().Pair == true) interactable.GetComponentInParent<DoorController>().EngageDoors();
-                        else interactable.Interact();
-                    }
-                    else
-                    {
-                        interactable.Interact();
-                    }
+                    if (interactive.GetComponent<Door>() != null && interactive.GetComponent<Door>().Pair == true) interactive.GetComponentInParent<DoorController>().EngageDoors();
+                    else interactive.Interact();
                 }
             }
         }

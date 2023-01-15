@@ -324,7 +324,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void Gravity()
     {
-        bool contact = Physics.CheckSphere(sphereTransform.position, sphereRadius, layerSurface) || Physics.CheckSphere(sphereTransform.position, sphereRadius, layerInteractable);
+        bool contact = Physics.CheckSphere(sphereTransform.position, sphereRadius, layerSurface, QueryTriggerInteraction.Ignore) || 
+                       Physics.CheckSphere(sphereTransform.position, sphereRadius, layerInteractable, QueryTriggerInteraction.Ignore);
 
         if (checkSurface != contact)
         {

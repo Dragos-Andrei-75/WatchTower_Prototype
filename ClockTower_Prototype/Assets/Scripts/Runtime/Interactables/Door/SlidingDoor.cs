@@ -63,6 +63,8 @@ public class SlidingDoor : Door
 
         doorTransform.position = positionEnd;
 
+        coroutineActive = null;
+
         yield break;
     }
 }

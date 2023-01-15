@@ -176,17 +176,13 @@ public class LoadOut : MonoBehaviour
     {
         if (wheelScroll > 0)
         {
-            do
-            {
-                weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
-            } while (weapons[weaponSelected] == null);
+            do weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
+            while (weapons[weaponSelected] == null);
         }
         else if (wheelScroll < 0)
         {
-            do
-            {
-                weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
-            } while (weapons[weaponSelected] == null);
+            do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
+            while (weapons[weaponSelected] == null);
         }
     }
 }

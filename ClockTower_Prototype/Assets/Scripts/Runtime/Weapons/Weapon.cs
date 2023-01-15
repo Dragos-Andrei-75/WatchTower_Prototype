@@ -59,5 +59,41 @@ public abstract class Weapon : MonoBehaviour
         weaponData.fireNext = 0;
     }
 
-    protected abstract void Shoot();
+    protected virtual void Shoot()
+    {
+        ShotInteractable();
+        ShotEnemy();
+    }
+
+    protected void ShotInteractable()
+    {
+        RaycastHit hit;
+        LayerMask layerDefault = LayerMask.GetMask("Default");
+        bool shot = Physics.Raycast(CharacterCameraTransform.position, CharacterCameraTransform.forward, out hit, WeaponData.range, ~layerDefault, QueryTriggerInteraction.Ignore);
+
+        if (shot == true)
+        {
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+            {
+                if (hit.rigidbody != null)
+                {
+                    Vector3 direction = hit.point - CharacterCameraTransform.position;
+
+                    direction.Normalize();
+
+                    hit.rigidbody.AddForce(direction * WeaponData.force, ForceMode.Impulse);
+                }
+
+                if (hit.transform.GetComponent<Interactable>() != null)
+                {
+                    Interactable objectInteractive = hit.transform.GetComponent<Interactable>();
+                    objectInteractive.TakeDamage(WeaponData.damage);
+                }
+            }
+        }
+    }
+
+    private void ShotEnemy()
+    {
+    }
 }

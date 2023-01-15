@@ -35,6 +35,10 @@ public class Switch : Interactive
     {
         for (int i = 0; i < interactablesControlled.Length; i++) interactablesControlled[i].Interact();
 
-        if (singleUse == true) Array.Resize(ref interactablesControlled, 0);
+        if (singleUse == true)
+        {
+            Array.Resize(ref interactablesControlled, 0);
+            enabled = false;
+        }
     }
 }
