@@ -29,7 +29,7 @@ public abstract class Interactive : MonoBehaviour
 
     public virtual void Interact()
     {
-        if (coroutineActive == null)
+        if (coroutineActive == null || timePassed >= timeToMove)
         {
             timePassed = 0;
         }
@@ -38,5 +38,7 @@ public abstract class Interactive : MonoBehaviour
             StopCoroutine(coroutineActive);
             timePassed = timeToMove - timePassed;
         }
+
+        coroutineActive = null;
     }
 }

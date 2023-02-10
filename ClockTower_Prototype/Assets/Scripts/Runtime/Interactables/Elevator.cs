@@ -15,7 +15,7 @@ public class Elevator : Interactive
     [SerializeField] private Vector3 positionTarget;
     [SerializeField] private float distance = 5;
 
-    [Header("Objects on the Elevator")]
+    [Header("Objects in Relation to the Elevator")]
     [SerializeField] private Transform[] objects;
     [SerializeField] private int objectsNumber = 0;
 
@@ -31,7 +31,10 @@ public class Elevator : Interactive
     {
         if (coroutineActive != null)
         {
-            if (elevatorTransform.position.y > collision.transform.position.y)
+            Vector3 elevatorDirection = positionTarget - elevatorTransform.position;
+            Vector3 elevatorToObject = collision.transform.position - elevatorTransform.position;
+
+            if (Vector3.Dot(elevatorDirection, elevatorToObject) > 0)
             {
                 base.Interact();
                 coroutineActive = StartCoroutine(ElevatorMove());
@@ -115,14 +118,14 @@ public class Elevator : Interactive
         while (elevatorTransform.position != positionTarget)
         {
             elevatorTransform.position = Vector3.Lerp(positionStart, positionTarget, timePassed / timeToMove);
+
             timePassed += Time.deltaTime;
+            timePassed = Mathf.Clamp(timePassed, 0, timeToMove);
 
             yield return null;
         }
 
-        timePassed = 0;
-
-        coroutineActive = null;
+        base.Interact();
 
         yield break;
     }

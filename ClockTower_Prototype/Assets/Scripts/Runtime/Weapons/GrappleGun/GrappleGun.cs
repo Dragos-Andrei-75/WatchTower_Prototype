@@ -123,6 +123,8 @@ public class GrappleGun : Weapon
             }
             else
             {
+                characterMovement.CheckGrapple = true;
+
                 grappleDirection = (hookHit.point - characterBodyTransform.position).normalized;
 
                 while (Vector3.Distance(hookOriginTransform.position, hookHit.point) > 5)
@@ -218,6 +220,8 @@ public class GrappleGun : Weapon
         hookTransform.SetParent(grappleGunTransform);
         grappleDirection = Vector3.zero;
         grappled = false;
+
+        characterMovement.CheckGrapple = false;
 
         yield break;
     }

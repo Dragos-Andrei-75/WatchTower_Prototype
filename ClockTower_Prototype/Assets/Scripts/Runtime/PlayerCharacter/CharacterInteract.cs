@@ -8,12 +8,14 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform characterBodyTransform;
     [SerializeField] private Camera characterCamera;
+    [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private CharacterShoot characterShoot;
 
     [Header("Object and Component References")]
     [SerializeField] private Transform objectCarriedTransform;
     [SerializeField] private Rigidbody objectCarriedRigidBody;
     [SerializeField] private Renderer objectCarriedRenderer;
+    [SerializeField] private Interactable objectCarriedInteractable;
 
     [Header("Check State")]
     [SerializeField] private bool checkThrow = false;
@@ -68,6 +70,7 @@ public class CharacterInteract : MonoBehaviour
         cameraTransform = gameObject.transform.GetChild(0).transform;
         characterBodyTransform = gameObject.transform.GetChild(1).transform;
         characterCamera = gameObject.transform.GetChild(0).GetComponent<Camera>();
+        characterMovement = gameObject.transform.GetComponent<CharacterMovement>();
         characterShoot = cameraTransform.GetComponent<CharacterShoot>();
     }
 
@@ -87,7 +90,7 @@ public class CharacterInteract : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, length, ~mask, QueryTriggerInteraction.Ignore) == true)
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
                     StartCoroutine(HoldObject(hit.transform));
                 }
@@ -116,9 +119,10 @@ public class CharacterInteract : MonoBehaviour
 
         use = true;
 
-        objectCarriedTransform = objectToHold.transform;
+        objectCarriedTransform = objectToHold;
         objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
         objectCarriedRenderer = objectCarriedTransform.GetComponent<Renderer>();
+        objectCarriedInteractable = objectCarriedTransform.GetComponent<Interactable>();
 
         objectCarriedRigidBody.freezeRotation = true;
         objectCarriedRigidBody.useGravity = false;
@@ -128,6 +132,8 @@ public class CharacterInteract : MonoBehaviour
                                                          objectCarriedRenderer.material.color.b,
                                                          0.5f);
 
+        characterMovement.CheckCarry = true;
+
         while (use == true && checkThrow == false)
         {
             if (characterShoot.LeftButton == false && characterShoot.RightButton == false)
@@ -136,11 +142,13 @@ public class CharacterInteract : MonoBehaviour
                 Vector3 direction = holdPosition - objectCarriedTransform.position;
                 Quaternion rotation = characterBodyTransform.rotation;
 
-                objectCarriedRigidBody.MoveRotation(rotation);
+                if (direction.magnitude > 1) direction = direction.normalized;
+
+                if (objectCarriedInteractable.Contact == false) objectCarriedRigidBody.MoveRotation(Quaternion.Lerp(objectCarriedTransform.rotation, rotation, Time.deltaTime * 25));
 
                 if (objectCarriedTransform.position != holdPosition) objectCarriedRigidBody.velocity = direction * speed;
 
-                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > 3 * holdDistance)
+                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > holdDistance * 3)
                 {
                     objectCarriedRigidBody.velocity = Vector3.zero;
                     use = false;
@@ -155,6 +163,8 @@ public class CharacterInteract : MonoBehaviour
             yield return null;
         }
 
+        characterMovement.CheckCarry = false;
+
         objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
                                                          objectCarriedRenderer.material.color.g,
                                                          objectCarriedRenderer.material.color.b,
@@ -163,6 +173,7 @@ public class CharacterInteract : MonoBehaviour
         objectCarriedRigidBody.useGravity = true;
         objectCarriedRigidBody.freezeRotation = false;
 
+        objectCarriedInteractable = null;
         objectCarriedRenderer = null;
         objectCarriedRigidBody = null;
         objectCarriedTransform = null;
