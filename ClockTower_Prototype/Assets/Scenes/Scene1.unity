@@ -1437,7 +1437,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1270
+  m_Name: pb_Mesh-1268
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1601,7 +1601,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1898
+  m_Name: pb_Mesh-1896
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2954,7 +2954,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8776660379015226116, guid: eadf626660865424fac4843cf92a5b34, type: 3}
       propertyPath: m_Name
-      value: Stairs (6)
+      value: Stairs
       objectReference: {fileID: 0}
     - target: {fileID: 8776660379015226118, guid: eadf626660865424fac4843cf92a5b34, type: 3}
       propertyPath: m_Mesh
@@ -4553,7 +4553,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1732
+  m_Name: pb_Mesh-1730
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5187,7 +5187,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1250
+  m_Name: pb_Mesh-1248
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5598,7 +5598,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1290
+  m_Name: pb_Mesh-1288
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13741,7 +13741,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1748
+  m_Name: pb_Mesh-1746
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20099,7 +20099,7 @@ MonoBehaviour:
     m_Name: Input Mouse X
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ec7201dd-8840-4da5-9973-66810074f8b1
+    m_Id: b36d0dce-07fa-494d-af46-0194258bea17
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -20108,7 +20108,7 @@ MonoBehaviour:
     m_Name: Input Mouse Y
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 18ab9ce0-b666-4e22-bce5-57c34ed02e58
+    m_Id: eab5620b-dd6e-4f2f-9072-028c540690b1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -20135,7 +20135,7 @@ MonoBehaviour:
     m_Name: Input Left Button
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 19cc96d4-f52e-455b-8ccb-ed7898267dd4
+    m_Id: 17da2e56-f048-4d6b-8cc8-9dcaca503b0b
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -20144,7 +20144,7 @@ MonoBehaviour:
     m_Name: Input Right Button
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ea0c5911-6d8c-4791-b6aa-a91e658dee05
+    m_Id: 9a894bff-5c93-48f2-8e86-6ae8336b0adf
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -21988,7 +21988,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8776660379015226116, guid: eadf626660865424fac4843cf92a5b34, type: 3}
       propertyPath: m_Name
-      value: Stairs (7)
+      value: Stairs (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8776660379015226118, guid: eadf626660865424fac4843cf92a5b34, type: 3}
       propertyPath: m_Mesh
@@ -22995,7 +22995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1588
+  m_Name: pb_Mesh-1586
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23159,7 +23159,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1314
+  m_Name: pb_Mesh-1312
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25448,7 +25448,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1764
+  m_Name: pb_Mesh-1762
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27061,7 +27061,7 @@ PrefabInstance:
       objectReference: {fileID: 287266044}
     - target: {fileID: 2837094619555523731, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
       propertyPath: m_VersionIndex
-      value: 1375
+      value: 1381
       objectReference: {fileID: 0}
     - target: {fileID: 3127483101413010917, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
       propertyPath: m_Mesh
@@ -27118,14 +27118,6 @@ PrefabInstance:
     - target: {fileID: 8246089248377314747, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
       propertyPath: m_Name
       value: Stairs2 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8246089248377314747, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8246089248377314747, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
@@ -28364,7 +28356,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1882
+  m_Name: pb_Mesh-1880
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30301,7 +30293,7 @@ MonoBehaviour:
     m_Name: Input Holster
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ec6230d0-fead-448f-915e-76e495794cf4
+    m_Id: a3cef065-deef-4915-874b-d47ea636d872
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30310,7 +30302,7 @@ MonoBehaviour:
     m_Name: Input Weapon 1
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f4912919-fc0c-4e5b-88e9-70f61cd2ca74
+    m_Id: 538d4530-2157-4a7f-aa80-0155acb3f697
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30319,7 +30311,7 @@ MonoBehaviour:
     m_Name: Input Weapon 2
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e165a248-8906-40e2-8e89-fcfd45cc9243
+    m_Id: 546ae76d-5000-46ff-afe5-4d997e7130f8
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30328,7 +30320,7 @@ MonoBehaviour:
     m_Name: Input Weapon 3
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 7b2366f2-de7b-4ccf-bab7-a53f30d80e02
+    m_Id: 336b3b9d-fd2f-49c2-8442-789578cd8c49
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30337,7 +30329,7 @@ MonoBehaviour:
     m_Name: Input Weapon 4
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 074634bf-0df8-4c8a-8055-97283d080bab
+    m_Id: 01b1d02e-5ad6-4934-ab87-73bf0bb905f5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30346,7 +30338,7 @@ MonoBehaviour:
     m_Name: Input Weapon 5
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: d8cc7106-6c9b-44a8-b928-ed255c630b6b
+    m_Id: f30569e7-d4cd-48ad-9b5c-b024030132ee
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30355,7 +30347,7 @@ MonoBehaviour:
     m_Name: Input Weapon 6
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 47eab34f-a93e-4b7f-b3c0-acfde1a6419a
+    m_Id: 65c5e4f0-9396-4d0d-94ac-e62bb724a112
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30364,7 +30356,7 @@ MonoBehaviour:
     m_Name: Input Weapon 7
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ea21cd1d-74e1-48da-a786-d9da773190fd
+    m_Id: cbbaa1c6-7b7a-4f39-aa38-1fcfc6412330
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30373,7 +30365,7 @@ MonoBehaviour:
     m_Name: Input Weapon 8
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 941f5427-4a97-45a7-834d-fcfe2989cce2
+    m_Id: 80bb61ab-94c6-47fd-8dc6-0cffa05e9dd1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30382,7 +30374,7 @@ MonoBehaviour:
     m_Name: Input Weapon 9
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 5ccd5eda-97a0-4209-9c61-f2e08292d9f1
+    m_Id: 9e35bcd1-1d8a-4d6c-84e3-4803a9b587f4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30391,7 +30383,7 @@ MonoBehaviour:
     m_Name: Input Weapon 10
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 9a9aa914-51ef-4561-8441-420711b739ff
+    m_Id: 2561481c-e473-4a95-8e49-003a083ec529
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30400,7 +30392,7 @@ MonoBehaviour:
     m_Name: Input Weapon 11
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 93c9e2ae-f63d-4aec-a0c2-13b532c3abc3
+    m_Id: 8a852864-844e-4f82-8690-5b11d9d632f5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30409,7 +30401,7 @@ MonoBehaviour:
     m_Name: Input Wheel
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: b83ada92-5f96-4d2d-9e79-5bf74d1a5614
+    m_Id: 17362744-3f73-479d-ad62-d68d3f5d14aa
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -36092,7 +36084,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1558
+  m_Name: pb_Mesh-1556
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -39870,7 +39862,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1492
+  m_Name: pb_Mesh-1490
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -41610,7 +41602,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1542
+  m_Name: pb_Mesh-1540
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -45323,7 +45315,7 @@ MonoBehaviour:
     m_Name: Input Use
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ee256d81-2537-48fe-9a5d-dd5b023aadf0
+    m_Id: ea779a4e-c27a-43e3-b3a8-57d87f8c6906
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45378,6 +45370,7 @@ MonoBehaviour:
   checkSwim: 0
   checkDash: 0
   checkCharge: 0
+  checkGrapple: 0
   checkCarry: 0
   move: {x: 0, y: 0, z: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
@@ -45393,8 +45386,8 @@ MonoBehaviour:
   speedSink: 5
   speedDash: 50
   acceleration: 12.5
-  rateGait: 2.5
-  airControl: 1
+  gaitRate: 2.5
+  airControl: 0.75
   jumpHeight: 1.25
   reactionTimeAir: 0.5
   reactionTimeJump: 0.25
@@ -45417,7 +45410,7 @@ MonoBehaviour:
     m_Name: Input Move
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 955c8d4e-9f06-4cb3-91c0-8d363d210207
+    m_Id: 7c03202b-82c2-418a-84cb-a8716f2032bd
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45426,7 +45419,7 @@ MonoBehaviour:
     m_Name: Input Walk
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 36e60fed-903e-47c6-8a30-9918b80ee1d1
+    m_Id: 0b640d65-1fd2-4969-b7eb-bc05bebf5c13
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45435,7 +45428,7 @@ MonoBehaviour:
     m_Name: Input Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: de4aab31-f13c-4e0d-abfa-c63aeae03253
+    m_Id: bd038b02-513c-4b77-9d47-95451d49b079
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45444,7 +45437,7 @@ MonoBehaviour:
     m_Name: Input Crouch
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 1d77c6d1-4f80-4138-8b89-016285f806a6
+    m_Id: a2b190f6-ba70-460a-a0fc-3612276347d3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45453,7 +45446,7 @@ MonoBehaviour:
     m_Name: Input Swim
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 650cd95b-8231-47fc-929b-1e97c7d635a4
+    m_Id: aa3bae3f-0dac-47c1-a3d8-6d9414befbe8
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45462,7 +45455,7 @@ MonoBehaviour:
     m_Name: Input Dash
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: c41ec9e0-6ece-4d09-9cee-20a57552de9c
+    m_Id: 824ff6de-59c9-4308-b217-bdbed67f8aec
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45888,11 +45881,19 @@ PrefabInstance:
       objectReference: {fileID: 1925472541}
     - target: {fileID: 3767413970849330482, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2775
+      value: 2901
       objectReference: {fileID: 0}
     - target: {fileID: 7927308258535646027, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_Name
       value: Box (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
@@ -46176,13 +46177,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1957829264}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_VersionIndex
-      value: 4279
+      value: 4405
       objectReference: {fileID: 0}
     - target: {fileID: 5295232437877151116, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
@@ -46261,7 +46270,7 @@ PrefabInstance:
       objectReference: {fileID: 1733720222}
     - target: {fileID: 3767413970849330482, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2772
+      value: 2898
       objectReference: {fileID: 0}
     - target: {fileID: 7927308258535646027, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_Name
@@ -46402,13 +46411,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1123036318}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_VersionIndex
-      value: 4279
+      value: 4405
       objectReference: {fileID: 0}
     - target: {fileID: 5295232437877151116, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
@@ -47393,11 +47410,19 @@ PrefabInstance:
       objectReference: {fileID: 199222052}
     - target: {fileID: 3767413970849330482, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2772
+      value: 2898
       objectReference: {fileID: 0}
     - target: {fileID: 7927308258535646027, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_Name
       value: Box (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
@@ -47467,7 +47492,7 @@ PrefabInstance:
       objectReference: {fileID: 681086910}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_VersionIndex
-      value: 4279
+      value: 4405
       objectReference: {fileID: 0}
     - target: {fileID: 5295232437877151116, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
@@ -47570,11 +47595,19 @@ PrefabInstance:
       objectReference: {fileID: 1276798631}
     - target: {fileID: 3767413970849330482, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2772
+      value: 2898
       objectReference: {fileID: 0}
     - target: {fileID: 7927308258535646027, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_Name
       value: Box (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166458302275450157, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
@@ -48370,13 +48403,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityLowerTreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997943634598936817, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
+      propertyPath: velocityUpperTreshold
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1414138776}
     - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_VersionIndex
-      value: 4279
+      value: 4405
       objectReference: {fileID: 0}
     - target: {fileID: 5295232437877151116, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
@@ -48402,7 +48443,7 @@ PrefabInstance:
       objectReference: {fileID: 74468696}
     - target: {fileID: 2837094619555523731, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
       propertyPath: m_VersionIndex
-      value: 1372
+      value: 1378
       objectReference: {fileID: 0}
     - target: {fileID: 3127483101413010917, guid: 5dc78ccfb50303b4380bc7cd293d1381, type: 3}
       propertyPath: m_Mesh

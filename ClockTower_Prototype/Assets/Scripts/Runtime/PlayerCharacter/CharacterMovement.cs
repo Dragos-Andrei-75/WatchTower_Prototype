@@ -58,8 +58,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float speedSink = 5.0f;
     [SerializeField] private float speedDash = 50.0f;
     [SerializeField] private float acceleration = 12.5f;
-    [SerializeField] private float rateGait = 2.5f;
-    [SerializeField] private float airControl = 1.0f;
+    [SerializeField] private float gaitRate = 2.5f;
+    [SerializeField] private float airControl = 0.75f;
     [SerializeField] private float jumpHeight = 1.25f;
     [SerializeField] private float reactionTimeAir = 0.5f;
     [SerializeField] private float reactionTimeJump = 0.25f;
@@ -362,7 +362,7 @@ public class CharacterMovement : MonoBehaviour
         float velocityHorizontalDrop;
         float velocityHorizontalNew;
 
-        velocityHorizontal = Mathf.Sqrt(characterVelocity.x * characterVelocity.x + characterVelocity.z * characterVelocity.z);
+        velocityHorizontal = Mathf.Sqrt(Mathf.Pow(characterVelocity.x, 2) + Mathf.Pow(characterVelocity.z, 2));
         velocityHorizontalDrop = velocityHorizontal > friction ? velocityHorizontal * friction * Time.deltaTime : Mathf.Pow(friction, 2) * Time.deltaTime;
         velocityHorizontalNew = velocityHorizontal - velocityHorizontalDrop > 0 ? (velocityHorizontal - velocityHorizontalDrop) / velocityHorizontal : 0;
 
@@ -395,7 +395,7 @@ public class CharacterMovement : MonoBehaviour
         float dot;
         float k;
 
-        velocityHorizontal = Mathf.Sqrt(characterVelocity.x * characterVelocity.x + characterVelocity.z * characterVelocity.z);
+        velocityHorizontal = Mathf.Sqrt(Mathf.Pow(characterVelocity.x, 2) + Mathf.Pow(characterVelocity.z, 2));
         velocityVertical = characterVelocity.y;
 
         characterVelocity.y = 0;
@@ -448,6 +448,8 @@ public class CharacterMovement : MonoBehaviour
             jumpCount = 0;
             checkFall = false;
             checkJump = false;
+
+            characterVelocity.y = -7.5f;
 
             if (checkClimb == true) StartCoroutine(ClimbExit());
         }
@@ -548,7 +550,7 @@ public class CharacterMovement : MonoBehaviour
 
         while (Mathf.Round(speedMove * 10) / 10 != speedTarget)
         {
-            speedMove = Mathf.Lerp(speedMove, speedTarget, rateGait * Time.deltaTime);
+            speedMove = Mathf.Lerp(speedMove, speedTarget, gaitRate * Time.deltaTime);
             yield return null;
         }
 
@@ -590,10 +592,11 @@ public class CharacterMovement : MonoBehaviour
             jumpCount++;
 
             checkJump = true;
+            checkFall = false;
             jump = false;
         }
 
-        if (coroutineVault != null) StopCoroutine(coroutineVault);
+        if (coroutineVault != null && checkVault == false) StopCoroutine(coroutineVault);
         coroutineVault = StartCoroutine(Vault());
 
         yield break;
@@ -713,6 +716,8 @@ public class CharacterMovement : MonoBehaviour
             yield return null;
         }
 
+        coroutineVault = null;
+
         yield break;
     }
 
@@ -760,8 +765,6 @@ public class CharacterMovement : MonoBehaviour
         }
 
         checkSlide = false;
-
-        characterVelocity.y = -7.5f;
 
         yield break;
     }

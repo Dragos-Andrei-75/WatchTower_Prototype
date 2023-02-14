@@ -132,6 +132,8 @@ public class CharacterInteract : MonoBehaviour
                                                          objectCarriedRenderer.material.color.b,
                                                          0.5f);
 
+        objectCarriedInteractable.Carried = true;
+
         characterMovement.CheckCarry = true;
 
         while (use == true && checkThrow == false)
@@ -164,6 +166,8 @@ public class CharacterInteract : MonoBehaviour
         }
 
         characterMovement.CheckCarry = false;
+
+        objectCarriedInteractable.Carried = false;
 
         objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
                                                          objectCarriedRenderer.material.color.g,

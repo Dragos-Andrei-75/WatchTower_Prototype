@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2766
+  m_VersionIndex: 2868
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -373,4 +373,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c108d20cf4ad544f9514d16a50522d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableTransform: {fileID: 0}
+  interactableCollider: {fileID: 0}
+  interactableRigidbody: {fileID: 0}
+  objectsHit: []
+  objectHitSwitch: {fileID: 0}
+  objectHitRigidbody: {fileID: 0}
+  objectsHitSize: 0
   health: 10
+  collisionDamageMax: 5
+  velocityLowerTreshold: 5
+  velocityUpperTreshold: 15
+  contact: 0
+  carried: 0
