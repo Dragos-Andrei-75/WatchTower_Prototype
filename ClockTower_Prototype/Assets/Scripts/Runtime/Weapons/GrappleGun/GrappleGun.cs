@@ -33,7 +33,7 @@ public class GrappleGun : Weapon
     [SerializeField] private float grappleSpeed;
     [SerializeField] private bool grappled = false;
 
-    public delegate IEnumerator GrappleInteractable(Transform transform);
+    public delegate void GrappleInteractable(Transform transform);
     public static event GrappleInteractable OnGrappleInteractable;
 
     private enum HookPosition : ushort { hookOrigin, hookTarget };
@@ -116,7 +116,7 @@ public class GrappleGun : Weapon
 
                 if(Vector3.Distance(CharacterCameraTransform.position, hookContact.transform.position) < 5)
                 {
-                    if (OnGrappleInteractable != null) StartCoroutine(OnGrappleInteractable(hookHit.transform));
+                    if (OnGrappleInteractable != null) OnGrappleInteractable(hookHit.transform);
                 }
 
                 Destroy(hookContact);

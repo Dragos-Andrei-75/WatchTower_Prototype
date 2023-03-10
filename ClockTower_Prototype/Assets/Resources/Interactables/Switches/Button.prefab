@@ -60,7 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e946f184b5e324397b1f5131ab1897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsControled: []
+  timeToMove: 1
+  timePassed: 0
+  pair: 0
+  switchEngaged: 0
+  automatic: 0
+  interactablesControlled: []
+  singleUse: 0
 --- !u!1 &2024587239309875740
 GameObject:
   m_ObjectHideFlags: 0

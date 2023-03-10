@@ -27,17 +27,22 @@ public class Elevator : Interactive
         ElevatorSetup();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (coroutineActive != null)
+        if (reactive == true)
         {
-            Vector3 elevatorDirection = positionTarget - elevatorTransform.position;
-            Vector3 elevatorToObject = collision.transform.position - elevatorTransform.position;
-
-            if (Vector3.Dot(elevatorDirection, elevatorToObject) > 0)
+            if (coroutineActive != null)
             {
-                base.Interact();
-                coroutineActive = StartCoroutine(ElevatorMove());
+                Vector3 elevatorDirection = positionTarget - elevatorTransform.position;
+                Vector3 elevatorToObject = collision.transform.position - elevatorTransform.position;
+                Vector3 objectSize = collision.transform.GetComponent<MeshRenderer>().bounds.size;
+                float objectSizeMax = Mathf.Max(Mathf.Max(objectSize.x, objectSize.y), objectSize.z);
+
+                if (Vector3.Dot(elevatorDirection, elevatorToObject) > 0 && Vector3.Distance(elevatorTransform.position, positionTarget) <= objectSizeMax)
+                {
+                    base.Interact();
+                    coroutineActive = StartCoroutine(ElevatorMove());
+                }
             }
         }
     }

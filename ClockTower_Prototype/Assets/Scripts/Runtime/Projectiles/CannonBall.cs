@@ -47,7 +47,7 @@ public class CannonBall : MonoBehaviour
         StartCoroutine(CannonBallBehaviour());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         hitPosition = cannonBallTransform.position;
         hit = true;

@@ -1,13 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LoadOut : MonoBehaviour
+public class CharacterLoadOut : MonoBehaviour
 {
+    [Header("Character Object and Component References")]
+    [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private CharacterInteract characterInteract;
+
     [Header("LoadOut Attributes")]
     [SerializeField] private Transform[] weapons;
     [SerializeField] private Weapon weaponCurrent;
     [SerializeField] private int weaponSelected = 0;
     [SerializeField] private int loadOutSize = 11;
+    [SerializeField] private bool holster = false;
 
     [Header("Input Player")]
     [SerializeField] private InputPlayer inputPlayer;
@@ -39,14 +44,22 @@ public class LoadOut : MonoBehaviour
         set { weaponCurrent = value; }
     }
 
+    public bool Holster
+    {
+        get { return holster; }
+    }
+
     private void Awake()
     {
+        characterMovement = gameObject.transform.root.GetComponent<CharacterMovement>();
+        characterInteract = gameObject.transform.root.GetComponent<CharacterInteract>();
+
         weapons = new Transform[loadOutSize];
 
         inputPlayer = new InputPlayer();
 
         inputHolster = inputPlayer.LoadOut.Holster;
-        inputHolster.started += _ => Holster();
+        inputHolster.started += _ => WeaponHolster();
 
         inputWeapon1 = inputPlayer.LoadOut.Weapon1;
         inputWeapon1.started += _ => weaponIndex = 0;
@@ -105,6 +118,8 @@ public class LoadOut : MonoBehaviour
 
         PickUpWeapon.OnWeaponEquip += LoadOutSetUp;
 
+        characterInteract.OnCarry += WeaponHolster;
+
         Pause.onPauseResume -= OnEnable;
         Pause.onPauseResume += OnDisable;
     }
@@ -115,6 +130,8 @@ public class LoadOut : MonoBehaviour
         inputWheel.Disable();
 
         PickUpWeapon.OnWeaponEquip -= LoadOutSetUp;
+
+        characterInteract.OnCarry -= WeaponHolster;
 
         Pause.onPauseResume += OnEnable;
         Pause.onPauseResume -= OnDisable;
@@ -137,12 +154,23 @@ public class LoadOut : MonoBehaviour
         }
     }
 
-    private void Holster()
+    private void WeaponHolster()
     {
-        if (weapons[weaponSelected] != null)
+        if (characterMovement.CheckCarry == false)
         {
-            if (weapons[weaponSelected].gameObject.activeSelf == true) weapons[weaponSelected].gameObject.SetActive(false);
-            else weapons[weaponSelected].gameObject.SetActive(true);
+            if (weapons[weaponSelected] != null)
+            {
+                if (weapons[weaponSelected].gameObject.activeSelf == true)
+                {
+                    weapons[weaponSelected].gameObject.SetActive(false);
+                    holster = true;
+                }
+                else
+                {
+                    weapons[weaponSelected].gameObject.SetActive(true);
+                    holster = false;
+                }
+            }
         }
     }
 

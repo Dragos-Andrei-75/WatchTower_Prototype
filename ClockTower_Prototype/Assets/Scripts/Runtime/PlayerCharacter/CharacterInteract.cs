@@ -9,12 +9,12 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private Transform characterBodyTransform;
     [SerializeField] private Camera characterCamera;
     [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private CharacterLoadOut characterLoadOut;
     [SerializeField] private CharacterShoot characterShoot;
 
     [Header("Object and Component References")]
     [SerializeField] private Transform objectCarriedTransform;
     [SerializeField] private Rigidbody objectCarriedRigidBody;
-    [SerializeField] private Renderer objectCarriedRenderer;
     [SerializeField] private Interactable objectCarriedInteractable;
 
     [Header("Check State")]
@@ -25,9 +25,26 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private InputAction inputUse;
     [SerializeField] private bool use = false;
 
+    private Coroutine coroutineHoldObject;
+
+    public delegate void Carry();
+    public event Carry OnCarry;
+
     public Transform ObjectCarriedTransform
     {
-        get { return objectCarriedTransform; }
+        get
+        {
+            return objectCarriedTransform;
+        }
+        set
+        {
+            objectCarriedTransform = value;
+
+            if ((objectCarriedTransform != null && characterLoadOut.Holster == false) || (objectCarriedTransform == null && characterLoadOut.Holster == true))
+            {
+                if (OnCarry != null) OnCarry();
+            }
+        }
     }
 
     public bool CheckThrow
@@ -48,7 +65,7 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Enable();
         inputUse.Enable();
 
-        GrappleGun.OnGrappleInteractable += HoldObject;
+        GrappleGun.OnGrappleInteractable += HoldObjectStart;
 
         Pause.onPauseResume -= OnEnable;
         Pause.onPauseResume += OnDisable;
@@ -59,7 +76,7 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Disable();
         inputUse.Disable();
 
-        GrappleGun.OnGrappleInteractable -= HoldObject;
+        GrappleGun.OnGrappleInteractable -= HoldObjectStart;
 
         Pause.onPauseResume += OnEnable;
         Pause.onPauseResume -= OnDisable;
@@ -71,6 +88,7 @@ public class CharacterInteract : MonoBehaviour
         characterBodyTransform = gameObject.transform.GetChild(1).transform;
         characterCamera = gameObject.transform.GetChild(0).GetComponent<Camera>();
         characterMovement = gameObject.transform.GetComponent<CharacterMovement>();
+        characterLoadOut = cameraTransform.GetChild(1).GetComponent<CharacterLoadOut>();
         characterShoot = cameraTransform.GetComponent<CharacterShoot>();
     }
 
@@ -86,13 +104,13 @@ public class CharacterInteract : MonoBehaviour
             Ray ray = characterCamera.ScreenPointToRay(rayPosition, Camera.MonoOrStereoscopicEye.Mono);
             RaycastHit hit;
             int length = 5;
-            LayerMask mask = LayerMask.GetMask("Default");
+            LayerMask layer = LayerMask.GetMask("Default");
 
-            if (Physics.Raycast(ray, out hit, length, ~mask, QueryTriggerInteraction.Ignore) == true)
+            if (Physics.Raycast(ray, out hit, length, ~layer, QueryTriggerInteraction.Ignore) == true)
             {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
-                    StartCoroutine(HoldObject(hit.transform));
+                    HoldObjectStart(hit.transform);
                 }
                 else if (hit.transform.GetComponent<Interactive>() != null)
                 {
@@ -111,30 +129,30 @@ public class CharacterInteract : MonoBehaviour
         }
     }
 
-    private IEnumerator HoldObject(Transform objectToHold)
+    private void HoldObjectStart(Transform objectToHold)
+    {
+        ObjectCarriedTransform = objectToHold;
+        objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
+        objectCarriedInteractable = objectCarriedTransform.GetComponent<Interactable>();
+
+        objectCarriedRigidBody.freezeRotation = true;
+        objectCarriedRigidBody.useGravity = false;
+
+        objectCarriedInteractable.Carried = true;
+        objectCarriedInteractable.OnInteractableCarriedDestroy += HoldObjectStop;
+
+        characterMovement.CheckCarry = true;
+
+        coroutineHoldObject = StartCoroutine(HoldObject());
+    }
+
+    private IEnumerator HoldObject()
     {
         float holdDistance = 2.5f;
         float forceThrow = 25;
         float speed = 75;
 
         use = true;
-
-        objectCarriedTransform = objectToHold;
-        objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
-        objectCarriedRenderer = objectCarriedTransform.GetComponent<Renderer>();
-        objectCarriedInteractable = objectCarriedTransform.GetComponent<Interactable>();
-
-        objectCarriedRigidBody.freezeRotation = true;
-        objectCarriedRigidBody.useGravity = false;
-
-        objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
-                                                         objectCarriedRenderer.material.color.g,
-                                                         objectCarriedRenderer.material.color.b,
-                                                         0.5f);
-
-        objectCarriedInteractable.Carried = true;
-
-        characterMovement.CheckCarry = true;
 
         while (use == true && checkThrow == false)
         {
@@ -146,7 +164,7 @@ public class CharacterInteract : MonoBehaviour
 
                 if (direction.magnitude > 1) direction = direction.normalized;
 
-                if (objectCarriedInteractable.Contact == false) objectCarriedRigidBody.MoveRotation(Quaternion.Lerp(objectCarriedTransform.rotation, rotation, Time.deltaTime * 25));
+                if (objectCarriedInteractable.Contact == false) objectCarriedRigidBody.MoveRotation(Quaternion.Lerp(objectCarriedTransform.rotation, rotation, Time.fixedDeltaTime * 25));
 
                 if (objectCarriedTransform.position != holdPosition) objectCarriedRigidBody.velocity = direction * speed;
 
@@ -162,25 +180,8 @@ public class CharacterInteract : MonoBehaviour
                 checkThrow = true;
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
-
-        characterMovement.CheckCarry = false;
-
-        objectCarriedInteractable.Carried = false;
-
-        objectCarriedRenderer.material.color = new Color(objectCarriedRenderer.material.color.r,
-                                                         objectCarriedRenderer.material.color.g,
-                                                         objectCarriedRenderer.material.color.b,
-                                                         1.0f);
-
-        objectCarriedRigidBody.useGravity = true;
-        objectCarriedRigidBody.freezeRotation = false;
-
-        objectCarriedInteractable = null;
-        objectCarriedRenderer = null;
-        objectCarriedRigidBody = null;
-        objectCarriedTransform = null;
 
         while (checkThrow == true)
         {
@@ -190,6 +191,26 @@ public class CharacterInteract : MonoBehaviour
             yield return null;
         }
 
+        HoldObjectStop();
+
         yield break;
+    }
+
+    private void HoldObjectStop()
+    {
+        StopCoroutine(coroutineHoldObject);
+        coroutineHoldObject = null;
+
+        characterMovement.CheckCarry = false;
+
+        objectCarriedInteractable.OnInteractableCarriedDestroy -= HoldObjectStop;
+        objectCarriedInteractable.Carried = false;
+
+        objectCarriedRigidBody.useGravity = true;
+        objectCarriedRigidBody.freezeRotation = false;
+
+        objectCarriedInteractable = null;
+        objectCarriedRigidBody = null;
+        ObjectCarriedTransform = null;
     }
 }

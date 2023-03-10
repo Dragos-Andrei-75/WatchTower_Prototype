@@ -16,10 +16,6 @@ public class HingedDoor : Door
         set { openRotation = value; }
     }
 
-    private void OnCollisionEnter(Collision collision) => DoorNonKinematic();
-
-    private void OnCollisionExit(Collision collision) => DoorNonKinematic();
-
     public override void DoorSetUp()
     {
         base.DoorSetUp();

@@ -105,7 +105,6 @@ public class CharacterMovement : MonoBehaviour
     private float smoothSwimHorizontal;
     private float smoothSwimVertical;
 
-    private Coroutine coroutineSlip;
     private Coroutine coroutineGaitRun;
     private Coroutine coroutineGaitWalk;
     private Coroutine coroutineVault;
@@ -243,6 +242,10 @@ public class CharacterMovement : MonoBehaviour
 
         if (checkClimb == true || checkSwim == true)
         {
+            if (checkFall == true)
+            {
+                checkFall = false;
+            }
             if (checkJump == true)
             {
                 checkJump = false;
@@ -300,7 +303,7 @@ public class CharacterMovement : MonoBehaviour
 
             if (checkSurface == true)
             {
-                if (checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85) coroutineSlip = StartCoroutine(Slip());
+                if (checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85) StartCoroutine(Slip());
             }
             else
             {
@@ -311,9 +314,9 @@ public class CharacterMovement : MonoBehaviour
                         if (characterController.height < hitMeshRenderer.bounds.size.y)
                         {
                             bool checkWallLeft = Physics.Raycast(characterBodyTransform.position, -characterBodyTransform.right, out RaycastHit hitLeft,
-                                                                 characterController.radius * 2, ~layerInteractable);
+                                                                 characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
                             bool checkWallRight = Physics.Raycast(characterBodyTransform.position, characterBodyTransform.right, out RaycastHit hitRight,
-                                                                  characterController.radius * 2, ~layerInteractable);
+                                                                  characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
 
                             wallHit = hit;
 
@@ -351,7 +354,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (checkSurface == false)
         {
-            if (checkVault == true || checkWallRun == true || checkClimb == true || checkSwim == true || checkDash == true) return;
+            if (checkVault == true || checkWallRun == true || checkClimb == true || checkSwim == true || checkDash == true || checkGrapple == true) return;
             characterVelocity.y += gravity * Time.deltaTime;
         }
     }
@@ -455,7 +458,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            if (checkClimb == true || checkSwim == true || checkDash == true) yield break;
+            if (checkClimb == true || checkSwim == true || checkDash == true || checkGrapple == true) yield break;
 
             float depth = 7.5f;
 
@@ -465,11 +468,8 @@ public class CharacterMovement : MonoBehaviour
             }
             else
             {
-                if (checkGrapple == false)
-                {
-                    checkFall = true;
-                    StartCoroutine(Jump(reactionTimeAir));
-                }
+                checkFall = true;
+                StartCoroutine(Jump(reactionTimeAir));
             }
 
             if (Physics.Raycast(sphereTransform.position, Vector3.down, depth) == false)
@@ -536,8 +536,6 @@ public class CharacterMovement : MonoBehaviour
 
         checkSlip = false;
 
-        coroutineSlip = null;
-
         yield break;
     }
 
@@ -589,10 +587,11 @@ public class CharacterMovement : MonoBehaviour
 
         if (reactionTime >= 0)
         {
+            if (checkJump == false) checkJump = true;
+            if (checkFall == false) checkFall = false;
+
             jumpCount++;
 
-            checkJump = true;
-            checkFall = false;
             jump = false;
         }
 

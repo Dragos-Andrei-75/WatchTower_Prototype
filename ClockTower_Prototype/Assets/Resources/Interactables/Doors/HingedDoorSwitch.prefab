@@ -405,12 +405,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b10fc218d8c8184095c45bbce3c89ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToMove: 1.25
+  timePassed: 0
+  pair: 0
+  switchEngaged: 0
+  automatic: 1
   doorTransform: {fileID: 2797448027928389612}
   doorRigidBody: {fileID: 4238167221386866909}
   doorType: 0
-  timeToMove: 1.25
-  timePassed: 0
-  automatic: 1
   rotationClose: {x: -0, y: 1, z: -0, w: 0}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}
@@ -592,7 +594,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e946f184b5e324397b1f5131ab1897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsControled: []
+  timeToMove: 1
+  timePassed: 0
+  pair: 0
+  switchEngaged: 0
+  automatic: 0
+  interactablesControlled: []
+  singleUse: 0
 --- !u!1 &9102725687843257608
 GameObject:
   m_ObjectHideFlags: 0

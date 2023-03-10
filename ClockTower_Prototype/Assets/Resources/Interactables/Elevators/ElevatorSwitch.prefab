@@ -750,7 +750,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9554
+  m_VersionIndex: 9578
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -873,7 +873,7 @@ MonoBehaviour:
   timeToMove: 2.5
   timePassed: 0
   pair: 0
-  switchEngaged: 1
+  switchEngaged: 0
   automatic: 0
   elevatorTransform: {fileID: 0}
   elevatorType: 0
@@ -882,5 +882,6 @@ MonoBehaviour:
   positionStart: {x: 0, y: 0, z: 0}
   positionTarget: {x: 0, y: 0, z: 0}
   distance: 5
+  reactive: 0
   objects: []
   objectsNumber: 0

@@ -10,7 +10,7 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField] private MeshRenderer pickUpMesh;
 
     [Header("Player Object and Component References")]
-    [SerializeField] private LoadOut loadOut;
+    [SerializeField] private CharacterLoadOut loadOut;
 
     [Header("PickUp Attributes")]
     [SerializeField] private GameObject weapon;
@@ -41,7 +41,7 @@ public class PickUpWeapon : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            loadOut = other.gameObject.GetComponentInChildren<LoadOut>();
+            loadOut = other.gameObject.GetComponentInChildren<CharacterLoadOut>();
             loadOut.enabled = true;
 
             pickUpCollider.enabled = false;

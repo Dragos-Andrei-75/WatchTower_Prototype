@@ -4,7 +4,6 @@ public abstract class Door : Interactive
 {
     [Header("Door Object and Component Referenes")]
     [SerializeField] protected Transform doorTransform;
-    [SerializeField] protected Rigidbody doorRigidBody;
 
     [Header("Door Attributes")]
     [SerializeField] protected DoorTypes doorType;
@@ -26,7 +25,6 @@ public abstract class Door : Interactive
     public virtual void DoorSetUp()
     {
         doorTransform = gameObject.transform;
-        doorRigidBody = gameObject.GetComponent<Rigidbody>();
 
         if (doorTransform.parent != null)
         {
@@ -36,14 +34,4 @@ public abstract class Door : Interactive
     }
 
     public override void Interact() => base.Interact();
-
-    protected void DoorKinematic()
-    {
-        if (coroutineActive != null && doorRigidBody.isKinematic == false) doorRigidBody.isKinematic = true;
-    }
-
-    protected void DoorNonKinematic()
-    {
-        if (coroutineActive != null && doorRigidBody.isKinematic == true) doorRigidBody.isKinematic = false;
-    }
 }

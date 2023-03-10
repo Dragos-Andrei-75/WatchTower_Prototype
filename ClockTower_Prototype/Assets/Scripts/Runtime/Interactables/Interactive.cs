@@ -8,6 +8,7 @@ public abstract class Interactive : MonoBehaviour
     [SerializeField] protected bool pair = false;
     [SerializeField] protected bool switchEngaged = false;
     [SerializeField] protected bool automatic = false;
+    [SerializeField] protected bool reactive = false;
 
     protected Coroutine coroutineActive;
 

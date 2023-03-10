@@ -8,7 +8,7 @@ public class CharacterShoot : MonoBehaviour
     [SerializeField] private Transform loadOutTransform;
     [SerializeField] private CharacterLook characterLook;
     [SerializeField] private CharacterInteract characterInteract;
-    [SerializeField] private LoadOut loadOut;
+    [SerializeField] private CharacterLoadOut characterLoadOut;
 
     [Header("Input Player")]
     [SerializeField] private InputPlayer inputPlayer;
@@ -70,7 +70,7 @@ public class CharacterShoot : MonoBehaviour
         loadOutTransform = gameObject.transform.GetChild(1).GetComponent<Transform>();
         characterLook = gameObject.transform.GetComponent<CharacterLook>();
         characterInteract = gameObject.transform.root.GetComponent<CharacterInteract>();
-        loadOut = loadOutTransform.GetComponent<LoadOut>();
+        characterLoadOut = loadOutTransform.GetComponent<CharacterLoadOut>();
     }
 
     private void Update() => Sway();
@@ -98,11 +98,11 @@ public class CharacterShoot : MonoBehaviour
             {
                 while (leftButton == true || rightButton == true)
                 {
-                    if (loadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > loadOut.WeaponCurrent.WeaponData.fireNext)
+                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext)
                     {
                         OnShoot();
-                        loadOut.WeaponCurrent.WeaponData.fireNext = Time.time + loadOut.WeaponCurrent.WeaponData.fireRate;
-                        loadOut.WeaponCurrent.WeaponData.ammunition--;
+                        characterLoadOut.WeaponCurrent.WeaponData.fireNext = Time.time + characterLoadOut.WeaponCurrent.WeaponData.fireRate;
+                        characterLoadOut.WeaponCurrent.WeaponData.ammunition--;
                     }
 
                     yield return null;

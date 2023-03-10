@@ -43,13 +43,13 @@ public class DoorSensor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Interactable>() != null) other.GetComponent<Interactable>().OnDestroyInteractable += RemoveCollider;
+        if (other.GetComponent<Interactable>() != null) other.GetComponent<Interactable>().OnInteractableDestroy += RemoveCollider;
         AddCollider(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Interactable>() != null) other.GetComponent<Interactable>().OnDestroyInteractable -= RemoveCollider;
+        if (other.GetComponent<Interactable>() != null) other.GetComponent<Interactable>().OnInteractableDestroy -= RemoveCollider;
         RemoveCollider(other);
     }
 
