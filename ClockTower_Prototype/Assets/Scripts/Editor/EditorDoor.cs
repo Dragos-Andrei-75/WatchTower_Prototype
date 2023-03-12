@@ -12,7 +12,7 @@ public class EditorDoor : Editor
 
         EditorGUILayout.LabelField("Door Options", EditorStyles.boldLabel);
 
-        if (GUILayout.Button("Door Setup") == true) door.DoorSetUp();
+        if (GUILayout.Button("Door Setup") == true) door.Setup();
 
         door.TimeToMove = EditorGUILayout.FloatField("Time to move: ", door.TimeToMove);
 
@@ -32,7 +32,7 @@ public class EditorDoor : Editor
 
         if (EditorGUI.EndChangeCheck() == true)
         {
-            door.DoorSetUp();
+            door.Setup();
             EditorUtility.SetDirty(door);
         }
 

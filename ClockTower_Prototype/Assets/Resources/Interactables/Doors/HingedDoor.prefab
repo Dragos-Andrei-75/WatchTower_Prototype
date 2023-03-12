@@ -407,12 +407,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 1.25
   timePassed: 0
-  pair: 0
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 8884181441578614786}
-  doorRigidBody: {fileID: 7442345141623805747}
+  doorController: {fileID: 0}
   doorType: 0
+  engaged: 0
   rotationClose: {x: 0, y: 1, z: 0, w: 0}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}

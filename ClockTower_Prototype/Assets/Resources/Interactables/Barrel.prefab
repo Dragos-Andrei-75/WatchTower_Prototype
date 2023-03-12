@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5026760614926630197}
   - component: {fileID: 6771285907867269614}
   - component: {fileID: 1997943634598936817}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4564
+  m_VersionIndex: 4609
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1692,6 +1692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c108d20cf4ad544f9514d16a50522d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableTransform: {fileID: 0}
+  interactableCollider: {fileID: 0}
   interactableRigidbody: {fileID: 0}
   interactableRenderer: {fileID: 0}
   materialOpaque: {fileID: 2100000, guid: a2b2e4b771aeff9438f9b1191ac499f9, type: 2}

@@ -14,8 +14,11 @@ public class DoorController : MonoBehaviour
         for (int i = 0; i < doors.Length; i++) if (gameObject.transform.GetChild(i).GetComponent<Door>() != null) doors[i] = gameObject.transform.GetChild(i).GetComponent<Door>();
     }
 
-    public void EngageDoors()
+    public void Interact()
     {
-        for (int i = 0; i < doors.Length; i++) doors[i].Interact();
+        for (int i = 0; i < doors.Length; i++)
+        {
+            if (doors[i].Engaged == false) doors[i].Interact();
+        }
     }
 }

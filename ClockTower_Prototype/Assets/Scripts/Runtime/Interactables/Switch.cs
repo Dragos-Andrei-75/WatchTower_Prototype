@@ -4,7 +4,7 @@ using System;
 public class Switch : Interactive
 {
     [Header("Object and Component References")]
-    [SerializeField] private Interactive[] interactablesControlled;
+    [SerializeField] private Interactive[] interactivesControlled;
 
     [Header("Switch Attributes")]
     [SerializeField] private bool singleUse = false;
@@ -23,9 +23,9 @@ public class Switch : Interactive
                 {
                     k++;
 
-                    Array.Resize(ref interactablesControlled, k);
+                    Array.Resize(ref interactivesControlled, k);
 
-                    interactablesControlled[k - 1] = gameObject.transform.parent.GetChild(i).GetComponent<Interactive>();
+                    interactivesControlled[k - 1] = gameObject.transform.parent.GetChild(i).GetComponent<Interactive>();
                 }
             }
         }
@@ -33,12 +33,8 @@ public class Switch : Interactive
 
     public override void Interact()
     {
-        for (int i = 0; i < interactablesControlled.Length; i++) interactablesControlled[i].Interact();
+        for (int i = 0; i < interactivesControlled.Length; i++) interactivesControlled[i].Interact();
 
-        if (singleUse == true)
-        {
-            Array.Resize(ref interactablesControlled, 0);
-            enabled = false;
-        }
+        if (singleUse == true) enabled = false;
     }
 }

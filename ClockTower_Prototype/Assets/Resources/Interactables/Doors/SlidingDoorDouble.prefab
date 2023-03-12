@@ -375,12 +375,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 2.5
   timePassed: 0
-  pair: 1
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 6622902054399825572}
-  doorRigidBody: {fileID: 6622902054399825627}
+  doorController: {fileID: 8575892202112545951}
   doorType: 1
+  pair: 1
   openDirection: 2
   positionClose: {x: 4, y: 5, z: -37.5}
   positionOpen: {x: 7.75, y: 5, z: -37.5}
@@ -762,12 +763,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 2.5
   timePassed: 0
-  pair: 1
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 8575892202094043306}
-  doorRigidBody: {fileID: 8575892202094043304}
+  doorController: {fileID: 8575892202112545951}
   doorType: 1
+  pair: 1
   openDirection: 3
   positionClose: {x: -4, y: 5, z: -37.5}
   positionOpen: {x: -7.75, y: 5, z: -37.5}
@@ -821,3 +823,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  engaged: 0

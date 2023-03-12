@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 2809084543955411979}
   - component: {fileID: 6795072065399905296}
   - component: {fileID: 1455737291710128410}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6886979014075317903
 Transform:
   m_ObjectHideFlags: 0
@@ -608,7 +608,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3261
+  m_VersionIndex: 3264
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -702,6 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cd595ceb0e270468feb1731e86a6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}

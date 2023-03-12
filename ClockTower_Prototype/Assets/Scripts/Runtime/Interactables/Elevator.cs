@@ -24,10 +24,10 @@ public class Elevator : Interactive
     private void Start()
     {
         elevatorTransform = gameObject.transform;
-        ElevatorSetup();
+        Setup();
     }
 
-    private void OnCollisionEnter(UnityEngine.Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (reactive == true)
         {
@@ -81,12 +81,16 @@ public class Elevator : Interactive
         Array.Resize(ref objects, objectsNumber);
     }
 
-    private void ElevatorSetup()
+    public override void Setup()
     {
+        base.Setup();
+
         Vector3 levelIncrement;
 
         if (elevatorType == ElevatorType.Vertical) levelIncrement = new Vector3(0, distance, 0);
         else levelIncrement = elevatorTransform.TransformDirection(new Vector3(distance, 0, 0));
+
+        if (elevatorTransform.GetComponent<Collider>().isTrigger == true) automatic = true;
 
         position1 = elevatorTransform.position;
 

@@ -407,12 +407,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 1.25
   timePassed: 0
-  pair: 1
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 7058382734690041953}
-  doorRigidBody: {fileID: 9076476431819429712}
+  doorController: {fileID: 6215450405581338332}
   doorType: 0
+  pair: 1
   rotationClose: {x: -0, y: 1, z: -0, w: 0}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}
@@ -496,12 +497,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 1.25
   timePassed: 0
-  pair: 1
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 7935779915263034749}
-  doorRigidBody: {fileID: 8224693611565994572}
+  doorController: {fileID: 6215450405581338332}
   doorType: 0
+  pair: 1
   rotationClose: {x: -0, y: -0, z: -0, w: 1}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}
@@ -845,7 +847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8701389778276255443}
-  - component: {fileID: 8701389778276255441}
+  - component: {fileID: 6215450405581338332}
   m_Layer: 0
   m_Name: HingedDoorDouble
   m_TagString: Untagged
@@ -870,7 +872,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &8701389778276255441
+--- !u!114 &6215450405581338332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -883,3 +885,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  engaged: 0

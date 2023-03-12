@@ -5,7 +5,6 @@ public abstract class Interactive : MonoBehaviour
     [Header("Interactive Object Attributes")]
     [SerializeField] protected float timeToMove = 1.0f;
     [SerializeField] protected float timePassed = 0.0f;
-    [SerializeField] protected bool pair = false;
     [SerializeField] protected bool switchEngaged = false;
     [SerializeField] protected bool automatic = false;
     [SerializeField] protected bool reactive = false;
@@ -26,6 +25,12 @@ public abstract class Interactive : MonoBehaviour
     {
         get { return timeToMove; }
         set { timeToMove = value; }
+    }
+
+    public virtual void Setup()
+    {
+        if (gameObject.transform.parent != null && gameObject.transform.parent.GetComponentInChildren<Switch>() != null) switchEngaged = true;
+        else switchEngaged = false;
     }
 
     public virtual void Interact()

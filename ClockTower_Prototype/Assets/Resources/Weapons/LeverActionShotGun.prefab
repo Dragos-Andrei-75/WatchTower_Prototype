@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 5381569410936783075}
   - component: {fileID: 4283855264296335158}
   - component: {fileID: 2920522579712880050}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: LeverActionShotGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8875273204714065887
 Transform:
   m_ObjectHideFlags: 0
@@ -613,7 +613,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4328
+  m_VersionIndex: 4334
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -707,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7ab1bea4a7ca6468d43051cccefb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}

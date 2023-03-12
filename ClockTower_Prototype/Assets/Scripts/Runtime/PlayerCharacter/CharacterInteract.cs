@@ -104,22 +104,19 @@ public class CharacterInteract : MonoBehaviour
             Ray ray = characterCamera.ScreenPointToRay(rayPosition, Camera.MonoOrStereoscopicEye.Mono);
             RaycastHit hit;
             int length = 5;
-            LayerMask layer = LayerMask.GetMask("Default");
+            LayerMask layer = LayerMask.GetMask("Player");
 
             if (Physics.Raycast(ray, out hit, length, ~layer, QueryTriggerInteraction.Ignore) == true)
             {
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
-                {
-                    HoldObjectStart(hit.transform);
-                }
-                else if (hit.transform.GetComponent<Interactive>() != null)
+                if (hit.transform.GetComponent<Interactive>() != null)
                 {
                     Interactive interactive = hit.transform.GetComponent<Interactive>();
 
-                    if (interactive.Automatic == true || interactive.SwitchEngaged == true) return;
-
-                    if (interactive.GetComponent<Door>() != null && interactive.GetComponent<Door>().Pair == true) interactive.GetComponentInParent<DoorController>().EngageDoors();
-                    else interactive.Interact();
+                    if (interactive.Automatic == false && interactive.SwitchEngaged == false) interactive.Interact();
+                }
+                else if (hit.transform.GetComponent<Interactable>() != null)
+                {
+                    HoldObjectStart(hit.transform);
                 }
             }
         }
@@ -180,7 +177,7 @@ public class CharacterInteract : MonoBehaviour
                 checkThrow = true;
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         while (checkThrow == true)

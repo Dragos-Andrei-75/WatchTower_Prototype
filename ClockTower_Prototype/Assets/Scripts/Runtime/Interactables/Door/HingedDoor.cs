@@ -16,9 +16,9 @@ public class HingedDoor : Door
         set { openRotation = value; }
     }
 
-    public override void DoorSetUp()
+    public override void Setup()
     {
-        base.DoorSetUp();
+        base.Setup();
 
         doorType = DoorTypes.HingedDoor;
         rotationClose = doorTransform.rotation;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7184782719132071837}
   - component: {fileID: 7184782719132071838}
   - component: {fileID: 6217423292923821300}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,6 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c38df697fc9be14a997e39b21174537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}

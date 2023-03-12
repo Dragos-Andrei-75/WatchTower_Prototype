@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3731
+  m_VersionIndex: 3742
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_PivotLocation: 0
   m_PivotPosition: {x: 0, y: 0, z: 0}
-  m_UnmodifiedMeshVersion: 3593
+  m_UnmodifiedMeshVersion: 3742
   m_ShapeBox:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 4, y: 5, z: 0.25}
@@ -375,12 +375,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 2.5
   timePassed: 0
-  pair: 0
   switchEngaged: 0
   automatic: 0
+  reactive: 0
   doorTransform: {fileID: 9141672057682412974}
-  doorRigidBody: {fileID: 9141672057682413009}
+  doorController: {fileID: 0}
   doorType: 1
+  pair: 0
   openDirection: 1
   positionClose: {x: 0, y: 5, z: -37.5}
   positionOpen: {x: 0, y: -4.75, z: -37.5}

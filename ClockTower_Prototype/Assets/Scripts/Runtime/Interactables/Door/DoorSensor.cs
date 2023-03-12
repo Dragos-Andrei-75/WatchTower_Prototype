@@ -53,6 +53,34 @@ public class DoorSensor : MonoBehaviour
         RemoveCollider(other);
     }
 
+    private void AddCollider(Collider collider)
+    {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Ground") || collider.gameObject.layer == LayerMask.NameToLayer("Water")) return;
+
+        Array.Resize(ref colliders, colliders.Length + 1);
+        colliders[colliders.Length - 1] = collider;
+
+        if (colliders.Length == 1) for (int i = 0; i < doors.Length; i++) doors[i].Interact();
+    }
+
+    private void RemoveCollider(Collider collider)
+    {
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i] == collider)
+            {
+                for (int j = i; j < colliders.Length - 1; j++)
+                {
+                    colliders[j] = colliders[j + 1];
+                }
+            }
+        }
+
+        Array.Resize(ref colliders, colliders.Length - 1);
+
+        if (colliders.Length == 0) for (int i = 0; i < doors.Length; i++) doors[i].Interact();
+    }
+
     public void SensorSetUp()
     {
         Vector3 position;
@@ -110,7 +138,7 @@ public class DoorSensor : MonoBehaviour
                 }
             }
 
-            doors[i].DoorSetUp();
+            doors[i].Setup();
         }
 
         colliderSensor.size = new Vector3(sensorSizeX, sensorSizeY, sensorArea);
@@ -119,32 +147,4 @@ public class DoorSensor : MonoBehaviour
     public void AddDoor() => Instantiate(doors[0].gameObject, gameObject.transform);
 
     public void RemoveDoor() => DestroyImmediate(doors[doors.Length - 1].gameObject);
-
-    private void AddCollider(Collider collider)
-    {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("Ground") || collider.gameObject.layer == LayerMask.NameToLayer("Water")) return;
-
-        Array.Resize(ref colliders, colliders.Length + 1);
-        colliders[colliders.Length - 1] = collider;
-
-        if (colliders.Length == 1) for (int i = 0; i < doors.Length; i++) doors[i].Interact();
-    }
-
-    private void RemoveCollider(Collider collider)
-    {
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i] == collider)
-            {
-                for (int j = i; j < colliders.Length - 1; j++)
-                {
-                    colliders[j] = colliders[j + 1];
-                }
-            }
-        }
-
-        Array.Resize(ref colliders, colliders.Length - 1);
-
-        if (colliders.Length == 0) for (int i = 0; i < doors.Length; i++) doors[i].Interact();
-    }
 }

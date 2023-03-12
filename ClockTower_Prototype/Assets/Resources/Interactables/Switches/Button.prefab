@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2024587239278709006}
   - component: {fileID: 1714816589555348400}
   - component: {fileID: 5988396697973892425}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,10 +62,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToMove: 1
   timePassed: 0
-  pair: 0
   switchEngaged: 0
   automatic: 0
-  interactablesControlled: []
+  reactive: 0
+  interactivesControlled: []
   singleUse: 0
 --- !u!1 &2024587239309875740
 GameObject:
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 2024587239309875743}
   - component: {fileID: 2024587239309875729}
   - component: {fileID: 2024587239309875742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwitchPiece1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 2024587240647908641}
   - component: {fileID: 2024587240647908643}
   - component: {fileID: 2024587240647908640}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwitchPiece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

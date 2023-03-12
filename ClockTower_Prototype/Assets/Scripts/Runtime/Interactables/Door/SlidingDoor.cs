@@ -25,9 +25,9 @@ public class SlidingDoor : Door
         set { openDirection = value; }
     }
 
-    public override void DoorSetUp()
+    public override void Setup()
     {
-        base.DoorSetUp();
+        base.Setup();
 
         doorType = DoorTypes.SlidingDoor;
         positionClose = doorTransform.position;

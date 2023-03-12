@@ -210,7 +210,7 @@ public class CharacterMovement : MonoBehaviour
         sphereTransform = characterTransform.GetChild(characterTransform.childCount - 1);
 
         layerCharacter = LayerMask.GetMask("Player");
-        layerSurface = LayerMask.GetMask("Ground");
+        layerSurface = LayerMask.GetMask("Surface");
         layerInteractable = LayerMask.GetMask("Interactable");
 
         cameraStand = new Vector3(0, heightStand / 2, 0);
@@ -284,7 +284,7 @@ public class CharacterMovement : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody hitRigidbody = hit.collider.attachedRigidbody;
-        MeshRenderer hitMeshRenderer = hit.transform.GetComponentInChildren<MeshRenderer>();
+        Bounds hitBounds = hit.transform.GetComponent<MeshRenderer>().bounds;
         float hitAngle = Vector3.Angle(Vector3.up, hit.normal);
 
         if (hitRigidbody != null && hitRigidbody.isKinematic == false)
@@ -309,24 +309,36 @@ public class CharacterMovement : MonoBehaviour
             {
                 if (wallHit != hit)
                 {
-                    if (characterController.radius < hitMeshRenderer.bounds.size.x || characterController.radius < hitMeshRenderer.bounds.size.z)
+                    bool ampleSize = false;
+                    bool wallHitLeft = false;
+                    bool wallHitRight = false;
+
+                    if (characterController.height * 2 < hitBounds.size.y && (characterController.radius * 2 < hitBounds.size.x || characterController.radius * 2 < hitBounds.size.z))
                     {
-                        if (characterController.height < hitMeshRenderer.bounds.size.y)
+                        bool checkWallLeft = Physics.Raycast(characterCameraTransform.position, -characterBodyTransform.right, out RaycastHit hitLeft,
+                                                             characterController.radius * 2, layerSurface, QueryTriggerInteraction.Ignore);
+                        bool checkWallRight = Physics.Raycast(characterCameraTransform.position, characterBodyTransform.right, out RaycastHit hitRight,
+                                                              characterController.radius * 2, layerSurface, QueryTriggerInteraction.Ignore);
+
+                        ampleSize = true;
+
+                        wallHit = hit;
+
+                        if (coroutineWallRun != null) StopCoroutine(coroutineWallRun);
+
+                        if (checkWallLeft == true && hitLeft.transform == wallHit.transform)
                         {
-                            bool checkWallLeft = Physics.Raycast(characterBodyTransform.position, -characterBodyTransform.right, out RaycastHit hitLeft,
-                                                                 characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
-                            bool checkWallRight = Physics.Raycast(characterBodyTransform.position, characterBodyTransform.right, out RaycastHit hitRight,
-                                                                  characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
-
-                            wallHit = hit;
-
-                            if (coroutineWallRun != null) StopCoroutine(coroutineWallRun);
-
-                            if (checkWallLeft == true && hitLeft.transform == wallHit.transform) coroutineWallRun = StartCoroutine(WallRun(1, -headTiltAngle));
-                            else if (checkWallRight == true && hitRight.transform == wallHit.transform) coroutineWallRun = StartCoroutine(WallRun(-1, headTiltAngle));
-                            else if (checkWallRun == true) StartCoroutine(WallRunExit());
+                            wallHitLeft = true;
+                            coroutineWallRun = StartCoroutine(WallRun(-headTiltAngle, 1));
+                        }
+                        else if (checkWallRight == true && hitRight.transform == wallHit.transform)
+                        {
+                            wallHitRight = true;
+                            coroutineWallRun = StartCoroutine(WallRun(headTiltAngle, -1));
                         }
                     }
+
+                    if (ampleSize == false || (wallHitLeft == false && wallHitRight == false)) StartCoroutine(WallRunExit());
                 }
             }
         }
@@ -344,7 +356,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void Gravity()
     {
-        bool contact = Physics.CheckSphere(sphereTransform.position, sphereRadius, ~layerCharacter, QueryTriggerInteraction.Ignore);
+        bool contact = Physics.CheckSphere(sphereTransform.position, sphereRadius, layerSurface, QueryTriggerInteraction.Ignore) ||
+                       Physics.CheckSphere(sphereTransform.position, sphereRadius, layerInteractable, QueryTriggerInteraction.Ignore);
 
         if (checkSurface != contact)
         {
@@ -472,7 +485,7 @@ public class CharacterMovement : MonoBehaviour
                 StartCoroutine(Jump(reactionTimeAir));
             }
 
-            if (Physics.Raycast(sphereTransform.position, Vector3.down, depth) == false)
+            if (Physics.Raycast(sphereTransform.position, Vector3.down, depth, ~layerCharacter, QueryTriggerInteraction.Ignore) == false)
             {
                 while (checkCrouch == true) yield return null;
                 StartCoroutine(CheckClearance());
@@ -680,8 +693,8 @@ public class CharacterMovement : MonoBehaviour
                         Vector3 checkSphereHorizontal;
 
                         climbPoint = new Vector3(ray2Hit.point.x, ray1Hit.point.y, ray2Hit.point.z);
-                        climbPointHorizontal = new Vector3(climbPoint.x, 0, climbPoint.z);
 
+                        climbPointHorizontal = new Vector3(climbPoint.x, 0, climbPoint.z);
                         checkSphereHorizontal = Vector3.zero;
 
                         characterVelocity = Vector3.zero;
@@ -768,7 +781,7 @@ public class CharacterMovement : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator WallRun(int inputCancel, float headTiltTarget)
+    private IEnumerator WallRun(float headTiltTarget, int inputCancel)
     {
         if (checkCarry == true) yield break;
 
@@ -776,18 +789,23 @@ public class CharacterMovement : MonoBehaviour
         float timePassed = 0;
         bool checkWall = true;
 
-        if ((Mathf.Round(Vector3.Dot(characterBodyTransform.forward, characterVelocity)) < 0 || characterVelocity.y < -7.5f) && checkWallRun == false) yield break;
+        if ((Mathf.Round(Vector3.Dot(characterBodyTransform.forward, characterVelocity.normalized)) < 0 || characterVelocity.y < -7.5f) && checkWallRun == false) yield break;
 
         if (Vector3.Dot(characterCameraTransform.forward, wallRunDirection) < 0) wallRunDirection = -wallRunDirection;
 
         if (timeWallRun == 0) timeWallRun = Mathf.Lerp(1.25f, 1.75f, characterVelocity.magnitude / speedDash);
 
-        checkJump = false;
+        if(checkJump == true)
+        {
+            checkJump = false;
+            jumpCount = 0;
+        }
+
         checkWallRun = true;
 
         while (inputX != inputCancel && checkSurface == false && jump == false && checkWall == true && timeWallRun > 0)
         {
-            checkWall = Physics.Raycast(characterBodyTransform.position, -wallHit.normal, characterController.radius * 2, ~layerInteractable);
+            checkWall = Physics.Raycast(characterBodyTransform.position, -wallHit.normal, characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
 
             if (timeWallRun > 1)
             {
@@ -811,11 +829,7 @@ public class CharacterMovement : MonoBehaviour
             yield return null;
         }
 
-        if (jump == true)
-        {
-            StartCoroutine(Jump(reactionTimeJump));
-            jumpCount = 1;
-        }
+        if (jump == true) StartCoroutine(Jump(reactionTimeJump));
 
         StartCoroutine(WallRunExit());
 

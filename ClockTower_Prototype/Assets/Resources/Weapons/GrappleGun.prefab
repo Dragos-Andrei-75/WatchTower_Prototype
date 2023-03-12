@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5890193748437753557}
   - component: {fileID: 5890193748437753552}
   - component: {fileID: 5890193748437753555}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,13 +97,13 @@ GameObject:
   - component: {fileID: 3982643679451618472}
   - component: {fileID: 5760698602691028147}
   - component: {fileID: 4312035297582319624}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: GrappleGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5633326099014141484
 Transform:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3908
+  m_VersionIndex: 3914
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc6032b0517fbd46add2ad75fff43d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
@@ -822,7 +823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678205017083408603}
   - component: {fileID: 4127988620545846973}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HookOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
