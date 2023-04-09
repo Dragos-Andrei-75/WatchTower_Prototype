@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class CharacterLoadOut : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class CharacterLoadOut : MonoBehaviour
         inputPlayer = new InputPlayer();
 
         inputHolster = inputPlayer.LoadOut.Holster;
-        inputHolster.started += _ => WeaponHolster();
+        inputHolster.started += _ => StartCoroutine(WeaponHolster());
 
         inputWeapon1 = inputPlayer.LoadOut.Weapon1;
         inputWeapon1.started += _ => weaponIndex = 0;
@@ -154,26 +155,6 @@ public class CharacterLoadOut : MonoBehaviour
         }
     }
 
-    private void WeaponHolster()
-    {
-        if (characterMovement.CheckCarry == false)
-        {
-            if (weapons[weaponSelected] != null)
-            {
-                if (weapons[weaponSelected].gameObject.activeSelf == true)
-                {
-                    weapons[weaponSelected].gameObject.SetActive(false);
-                    holster = true;
-                }
-                else
-                {
-                    weapons[weaponSelected].gameObject.SetActive(true);
-                    holster = false;
-                }
-            }
-        }
-    }
-
     private void WeaponSelect()
     {
         weapons[weaponSelected].gameObject.SetActive(false);
@@ -212,5 +193,27 @@ public class CharacterLoadOut : MonoBehaviour
             do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
             while (weapons[weaponSelected] == null);
         }
+    }
+
+    private IEnumerator WeaponHolster()
+    {
+        if (characterMovement.CheckCarry == false)
+        {
+            if (weapons[weaponSelected] != null && weaponSelected != 10)
+            {
+                if (weapons[weaponSelected].gameObject.activeSelf == true)
+                {
+                    weapons[weaponSelected].gameObject.SetActive(false);
+                    holster = true;
+                }
+                else
+                {
+                    weapons[weaponSelected].gameObject.SetActive(true);
+                    holster = false;
+                }
+            }
+        }
+
+        yield break;
     }
 }

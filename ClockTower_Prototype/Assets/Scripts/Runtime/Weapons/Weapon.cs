@@ -13,6 +13,11 @@ public abstract class Weapon : MonoBehaviour
     [Header("Weapon Attributes")]
     [SerializeField] private WeaponData weaponData;
 
+    protected Transform WeaponTransform
+    {
+        get { return weaponTransform; }
+    }
+
     protected Transform CharacterCameraTransform
     {
         get { return characterCameraTransform; }
@@ -26,11 +31,6 @@ public abstract class Weapon : MonoBehaviour
     protected CharacterShoot CharacterShoot
     {
         get { return characterShoot; }
-    }
-
-    protected Transform WeaponTransform
-    {
-        get { return weaponTransform; }
     }
 
     public WeaponData WeaponData
@@ -61,11 +61,11 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Shoot()
     {
-        ShotInteractable();
-        ShotEnemy();
+        ShootInteractable();
+        ShootEnemy();
     }
 
-    protected void ShotInteractable()
+    protected void ShootInteractable()
     {
         RaycastHit hit;
         LayerMask layerDefault = LayerMask.GetMask("Default");
@@ -93,7 +93,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    private void ShotEnemy()
+    private void ShootEnemy()
     {
     }
 }

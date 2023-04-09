@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public struct CollisionData
 {
@@ -49,6 +50,9 @@ public class Interactable : MonoBehaviour
 
     public delegate void interactableCarriedDestroy();
     public event interactableCarriedDestroy OnInteractableCarriedDestroy;
+
+    public delegate IEnumerator interactableGrappleDestroy();
+    public event interactableGrappleDestroy OnInteractableGrappleDestroy;
 
     public bool Contact
     {
@@ -236,5 +240,6 @@ public class Interactable : MonoBehaviour
 
         if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
         if (OnInteractableCarriedDestroy != null) OnInteractableCarriedDestroy();
+        if (OnInteractableGrappleDestroy != null) OnInteractableGrappleDestroy();
     }
 }

@@ -40,8 +40,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private bool checkSwim = false;
     [SerializeField] private bool checkDash = false;
     [SerializeField] private bool checkCharge = false;
-    [SerializeField] private bool checkGrapple = false;
     [SerializeField] private bool checkCarry = false;
+    [SerializeField] private bool checkGrapple = false;
 
     [Header("Character Attributes")]
     [SerializeField] private Vector3 move;
@@ -81,7 +81,6 @@ public class CharacterMovement : MonoBehaviour
     [Header("Object Information")]
     [SerializeField] private Transform ladderTransform;
     [SerializeField] private ControllerColliderHit wallHit;
-    [SerializeField] private RaycastHit hitSlope;
 
     [Header("Input")]
     [SerializeField] private InputPlayer inputPlayer;
@@ -128,16 +127,16 @@ public class CharacterMovement : MonoBehaviour
         get { return checkSwim; }
     }
 
-    public bool CheckGrapple
-    {
-        get { return checkGrapple; }
-        set { checkGrapple = value; }
-    }
-
     public bool CheckCarry
     {
         get { return checkCarry; }
         set { checkCarry = value; }
+    }
+
+    public bool CheckGrapple
+    {
+        get { return checkGrapple; }
+        set { checkGrapple = value; }
     }
 
     private void Awake()
@@ -276,7 +275,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
-            characterVelocity.y = Mathf.Sqrt(-8 * gravity * jumpHeight);
+            characterVelocity.y = Mathf.Sqrt(-10 * gravity * jumpHeight);
             checkSwim = false;
         }
     }
@@ -284,7 +283,7 @@ public class CharacterMovement : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody hitRigidbody = hit.collider.attachedRigidbody;
-        Bounds hitBounds = hit.transform.GetComponent<MeshRenderer>().bounds;
+        Bounds hitBounds = hit.collider.GetComponent<MeshRenderer>().bounds;
         float hitAngle = Vector3.Angle(Vector3.up, hit.normal);
 
         if (hitRigidbody != null && hitRigidbody.isKinematic == false)
@@ -303,7 +302,7 @@ public class CharacterMovement : MonoBehaviour
 
             if (checkSurface == true)
             {
-                if (checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85) StartCoroutine(Slip());
+                if (checkSlip == false && hit.point.y <= sphereTransform.position.y && hitAngle <= 85) StartCoroutine(Slip(hit.normal));
             }
             else
             {
@@ -501,11 +500,8 @@ public class CharacterMovement : MonoBehaviour
 
         if (characterController.height == heightCrouch)
         {
-            float distanceClear;
-            bool clear;
-
-            distanceClear = heightStand - heightCrouch;
-            clear = !Physics.Raycast(characterCameraTransform.position, Vector3.up, distanceClear, ~layerInteractable, QueryTriggerInteraction.Ignore);
+            float distanceClear = heightStand - heightCrouch;
+            bool clear = !Physics.Raycast(characterCameraTransform.position, Vector3.up, distanceClear, ~layerInteractable, QueryTriggerInteraction.Ignore);
 
             if (clear == false)
             {
@@ -530,19 +526,20 @@ public class CharacterMovement : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator Slip()
+    private IEnumerator Slip(Vector3 hitSlopeNormal)
     {
+        RaycastHit hitSlope;
+
         characterVelocity.x = 0;
         characterVelocity.z = 0;
 
-        Physics.SphereCast(characterBodyTransform.position, sphereRadius, -characterBodyTransform.up, out hitSlope, characterController.height / 2);
-
         checkSlip = true;
 
-        while (checkSurface == true && Vector3.Angle(Vector3.up, hitSlope.normal) > characterController.slopeLimit)
+        while (checkSurface == true && Vector3.Angle(Vector3.up, hitSlopeNormal) > characterController.slopeLimit)
         {
             Physics.SphereCast(characterBodyTransform.position, sphereRadius, -characterBodyTransform.up, out hitSlope, characterController.height / 2);
             characterVelocity += new Vector3(hitSlope.normal.x, 0, hitSlope.normal.z);
+            hitSlopeNormal = hitSlope.normal;
 
             yield return null;
         }
@@ -601,7 +598,7 @@ public class CharacterMovement : MonoBehaviour
         if (reactionTime >= 0)
         {
             if (checkJump == false) checkJump = true;
-            if (checkFall == false) checkFall = false;
+            if (checkFall == true) checkFall = false;
 
             jumpCount++;
 
@@ -665,8 +662,6 @@ public class CharacterMovement : MonoBehaviour
     {
         if (checkCarry == true) yield break;
 
-        Vector3 climbPoint;
-        Vector3 climbDirection;
         float offsetVertical = 0.5f;
         float offsetHorizontal = 1;
         float rayLength = 1;
@@ -689,12 +684,18 @@ public class CharacterMovement : MonoBehaviour
                 {
                     if (Vector3.Distance(ray2Hit.point, ray1Hit.point) < rayLength)
                     {
+                        Transform climbPointTransform = new GameObject("Climb Point").transform;
+                        Vector3 climbPoint = new Vector3(ray2Hit.point.x, ray1Hit.point.y, ray2Hit.point.z);
+                        Vector3 climbDirection;
                         Vector3 climbPointHorizontal;
                         Vector3 checkSphereHorizontal;
 
-                        climbPoint = new Vector3(ray2Hit.point.x, ray1Hit.point.y, ray2Hit.point.z);
+                        Instantiate(climbPointTransform);
 
-                        climbPointHorizontal = new Vector3(climbPoint.x, 0, climbPoint.z);
+                        climbPointTransform.transform.position = climbPoint;
+                        climbPointTransform.transform.SetParent(ray1Hit.transform);
+
+                        climbPointHorizontal = climbPointTransform.position;
                         checkSphereHorizontal = Vector3.zero;
 
                         characterVelocity = Vector3.zero;
@@ -703,24 +704,30 @@ public class CharacterMovement : MonoBehaviour
 
                         while (Vector3.Distance(climbPointHorizontal, checkSphereHorizontal) > 0.1f)
                         {
-                            if (sphereTransform.position.y < climbPoint.y)
+                            if (sphereTransform.position.y < climbPointTransform.position.y)
                             {
                                 characterVelocity.y = speedVault;
                             }
                             else
                             {
+                                climbPointHorizontal = new Vector3(climbPointTransform.position.x, 0, climbPointTransform.position.z);
                                 checkSphereHorizontal = new Vector3(sphereTransform.position.x, 0, sphereTransform.position.z);
 
                                 climbDirection = (climbPoint - sphereTransform.position);
                                 climbDirection.Normalize();
 
                                 characterVelocity = climbDirection * speedVault * 2.5f;
+
+                                if (climbPointTransform.position != climbPoint) characterVelocity += characterBodyTransform.up * speedVault * 3.75f;
+                                else break;
                             }
 
                             yield return null;
                         }
 
                         checkVault = false;
+
+                        Destroy(climbPointTransform.gameObject);
                     }
                 }
             }
@@ -795,12 +802,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (timeWallRun == 0) timeWallRun = Mathf.Lerp(1.25f, 1.75f, characterVelocity.magnitude / speedDash);
 
-        if(checkJump == true)
-        {
-            checkJump = false;
-            jumpCount = 0;
-        }
-
+        checkJump = false;
         checkWallRun = true;
 
         while (inputX != inputCancel && checkSurface == false && jump == false && checkWall == true && timeWallRun > 0)
@@ -841,6 +843,8 @@ public class CharacterMovement : MonoBehaviour
         float headTiltStart = characterCameraTransform.localEulerAngles.z;
         float timePassed = 0;
 
+        jumpCount = 1;
+
         checkWallRun = false;
         timeWallRun = 0;
         wallHit = null;
@@ -873,7 +877,7 @@ public class CharacterMovement : MonoBehaviour
             float angle = Vector3.Angle(ladderTransform.forward, characterBodyTransform.forward);
 
             Vector3 climbVertical = characterCameraTransform.localRotation.x < 0.125f ? directionUp * inputZ : -directionUp * inputZ;
-            Vector3 climbHorizontal = angle < 90 ? ladderTransform.right * (inputX / 3) : -ladderTransform.right * (inputX / 3);
+            Vector3 climbHorizontal = angle < 90 ? ladderTransform.right * (inputX / 2.5f) : -ladderTransform.right * (inputX / 2.5f);
 
             characterVelocity = (climbVertical + climbHorizontal) * speedClimb;
 

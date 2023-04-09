@@ -27,7 +27,7 @@ public class CharacterInteract : MonoBehaviour
 
     private Coroutine coroutineHoldObject;
 
-    public delegate void Carry();
+    public delegate IEnumerator Carry();
     public event Carry OnCarry;
 
     public Transform ObjectCarriedTransform
@@ -42,7 +42,7 @@ public class CharacterInteract : MonoBehaviour
 
             if ((objectCarriedTransform != null && characterLoadOut.Holster == false) || (objectCarriedTransform == null && characterLoadOut.Holster == true))
             {
-                if (OnCarry != null) OnCarry();
+                if (OnCarry != null) StartCoroutine(OnCarry());
             }
         }
     }
