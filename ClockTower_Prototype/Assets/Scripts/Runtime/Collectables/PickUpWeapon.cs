@@ -68,7 +68,11 @@ public class PickUpWeapon : MonoBehaviour
 
     private IEnumerator Equip()
     {
-        WeaponData weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
+        WeaponData weaponData;
+
+        if (weapon.transform.GetComponent<WeaponHitScan>() != null) weaponData = weapon.transform.GetComponent<WeaponHitScan>().WeaponData;
+        else if (weapon.transform.GetComponent<WeaponProjectile>() != null) weaponData = weapon.transform.GetComponent<WeaponProjectile>().WeaponData;
+        else weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
 
         if (loadOut.Weapons[weaponData.index] == null)
         {

@@ -706,4 +706,5 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: bfb6bfbf00cfb53488d40385d75c7bc0, type: 2}
+  weaponData: {fileID: 11400000, guid: 964c1e1100406aa4199c2a1ca14bd404, type: 2}
+  weaponDataHitScan: {fileID: 11400000, guid: 964c1e1100406aa4199c2a1ca14bd404, type: 2}

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
-  m_Name: Revolver
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
-  weaponName: Revolver
-  position: {x: 0, y: 0.05, z: 0.25}
-  damageMax: 1
-  damageMin: 0.25
+  weaponName: MachineGun
+  position: {x: 0, y: 0, z: 0}
+  damageMax: 2.5
+  damageMin: 1
   forceMax: 0
   forceMin: 0
   range: 1000
-  fireRate: 0.5
+  fireRate: 0.25
   fireNext: 0
-  ammunitionCapacity: 100
-  ammunition: 100
-  index: 0
+  ammunitionCapacity: 250
+  ammunition: 250
+  index: 2
   ammount: 1
-  accuracyMax: 0.125
-  accuracyMin: -0.125
+  accuracyMax: 0
+  accuracyMin: 0

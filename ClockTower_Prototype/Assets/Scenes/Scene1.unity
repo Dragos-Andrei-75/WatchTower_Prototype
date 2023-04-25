@@ -11711,7 +11711,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1846
+  m_Name: pb_Mesh-3770
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17193,7 +17193,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1572
+  m_Name: pb_Mesh-3428
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -22385,7 +22385,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1476
+  m_Name: pb_Mesh-3332
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27613,7 +27613,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1516
+  m_Name: pb_Mesh-3372
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -45482,7 +45482,7 @@ PrefabInstance:
       objectReference: {fileID: 1054593082}
     - target: {fileID: 4371401896821581932, guid: 47486d21159708f49836e498eee55c6c, type: 3}
       propertyPath: m_VersionIndex
-      value: 3950
+      value: 3962
       objectReference: {fileID: 0}
     - target: {fileID: 5596454851786175076, guid: 47486d21159708f49836e498eee55c6c, type: 3}
       propertyPath: m_Name
@@ -45705,10 +45705,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickUpRevolver
       objectReference: {fileID: 0}
-    - target: {fileID: 3544715064998466197, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
-      propertyPath: canRespawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4475638625714340324, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -45763,7 +45759,7 @@ PrefabInstance:
       objectReference: {fileID: 1397146479}
     - target: {fileID: 5914866293655735201, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
       propertyPath: m_VersionIndex
-      value: 3330
+      value: 3342
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
@@ -46006,16 +46002,12 @@ PrefabInstance:
       objectReference: {fileID: 838985675}
     - target: {fileID: 56183591568288108, guid: 166170aa04a20af4f833e3977a718379, type: 3}
       propertyPath: m_VersionIndex
-      value: 4361
+      value: 4373
       objectReference: {fileID: 0}
     - target: {fileID: 2761394485343932813, guid: 166170aa04a20af4f833e3977a718379, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 838985675}
-    - target: {fileID: 5558728981404000830, guid: 166170aa04a20af4f833e3977a718379, type: 3}
-      propertyPath: canRespawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7352816855954909540, guid: 166170aa04a20af4f833e3977a718379, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -47582,10 +47574,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 521784620}
     m_Modifications:
-    - target: {fileID: 7259403191189406813, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
-      propertyPath: canRespawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8559275513363161106, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
       propertyPath: m_Name
       value: PickUpCannon
@@ -47600,7 +47588,7 @@ PrefabInstance:
       objectReference: {fileID: 616047617}
     - target: {fileID: 8559275513363161110, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
       propertyPath: m_VersionIndex
-      value: 2747
+      value: 2759
       objectReference: {fileID: 0}
     - target: {fileID: 8559275513363161111, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
       propertyPath: m_RootOrder

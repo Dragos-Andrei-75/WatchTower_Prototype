@@ -1,5 +1,5 @@
 
-public class LeverActionShotGun : Weapon
+public class ShotGun : WeaponHitScan
 {
     protected override void OnEnable() => base.OnEnable();
 
@@ -9,5 +9,6 @@ public class LeverActionShotGun : Weapon
 
     private void ShootLeverActionShotGun()
     {
+        base.Shoot();
     }
 }

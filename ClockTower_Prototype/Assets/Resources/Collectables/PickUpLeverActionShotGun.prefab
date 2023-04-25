@@ -614,7 +614,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4337
+  m_VersionIndex: 4370
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -732,4 +732,4 @@ MonoBehaviour:
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   speedRotation: 25
   timeRespawn: 2.5
-  canRespawn: 0
+  canRespawn: 1

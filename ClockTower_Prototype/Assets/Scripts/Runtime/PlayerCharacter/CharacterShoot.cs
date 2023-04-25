@@ -98,12 +98,7 @@ public class CharacterShoot : MonoBehaviour
             {
                 while (leftButton == true || rightButton == true)
                 {
-                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext)
-                    {
-                        OnShoot();
-                        characterLoadOut.WeaponCurrent.WeaponData.fireNext = Time.time + characterLoadOut.WeaponCurrent.WeaponData.fireRate;
-                        characterLoadOut.WeaponCurrent.WeaponData.ammunition--;
-                    }
+                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext) OnShoot();
 
                     yield return null;
                 }

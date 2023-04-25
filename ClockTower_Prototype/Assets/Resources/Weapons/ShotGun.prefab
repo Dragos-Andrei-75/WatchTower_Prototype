@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4283855264296335158}
   - component: {fileID: 2920522579712880050}
   m_Layer: 11
-  m_Name: LeverActionShotGun
+  m_Name: ShotGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -711,4 +711,5 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: 7a5995770f0b8a043810ba903c70e595, type: 2}
+  weaponData: {fileID: 11400000, guid: d4ac3f81c9b4d3d47b3fa35997b5f0a0, type: 2}
+  weaponDataHitScan: {fileID: 11400000, guid: d4ac3f81c9b4d3d47b3fa35997b5f0a0, type: 2}
