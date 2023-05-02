@@ -16,14 +16,14 @@ MonoBehaviour:
   position: {x: 0, y: 0.05, z: 0.25}
   damageMax: 1
   damageMin: 0.25
-  forceMax: 0
-  forceMin: 0
+  forceMax: 7.5
+  forceMin: 2.5
   range: 1000
   fireRate: 0.5
   fireNext: 0
   ammunitionCapacity: 100
-  ammunition: 100
+  ammunition: 83
   index: 0
   ammount: 1
-  accuracyMax: 0.125
-  accuracyMin: -0.125
+  accuracyMax: 0.025
+  accuracyMin: -0.025

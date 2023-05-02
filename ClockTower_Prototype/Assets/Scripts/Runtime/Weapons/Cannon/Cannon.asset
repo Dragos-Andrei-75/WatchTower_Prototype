@@ -22,8 +22,8 @@ MonoBehaviour:
   fireRate: 1
   fireNext: 0
   ammunitionCapacity: 25
-  ammunition: 24
-  index: 6
+  ammunition: 25
+  index: 3
   projectile: {fileID: 5613302429073532030, guid: f7525bf758702604aa82732dc4dd791c, type: 3}
   speed: 100
   radius: 10

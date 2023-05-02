@@ -11,6 +11,16 @@ public class WeaponHitScan : Weapon
         set { weaponDataHitScan = value; }
     }
 
+    protected override void OnEnable() => base.OnEnable();
+
+    protected override void OnDisable() => base.OnDisable();
+
+    protected override void Shoot()
+    {
+        base.Shoot();
+        ShootHitScan();
+    }
+
     protected void ShootHitScan()
     {
         RaycastHit hit;
