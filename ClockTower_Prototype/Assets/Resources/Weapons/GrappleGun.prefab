@@ -791,7 +791,8 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: b30816237ddebda4a9d1a230d8dc4303, type: 2}
+  weaponData: {fileID: 11400000, guid: 97c3c7653d7fedc4eb1c7aec99a26f89, type: 2}
+  weaponDataHitScan: {fileID: 11400000, guid: 97c3c7653d7fedc4eb1c7aec99a26f89, type: 2}
   grappleGunTransform: {fileID: 0}
   hookOriginTransform: {fileID: 0}
   hookTransform: {fileID: 0}

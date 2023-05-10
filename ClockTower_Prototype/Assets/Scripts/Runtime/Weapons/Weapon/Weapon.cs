@@ -39,7 +39,7 @@ public abstract class Weapon : MonoBehaviour
         set { weaponData = value; }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         weaponTransform = gameObject.transform;
 
@@ -50,18 +50,28 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        CharacterShoot.OnShoot += Shoot;
+        CharacterShoot.OnShootPrimary += ShootPrimary;
+        CharacterShoot.OnShootSecondary -= ShootSecondary;
     }
 
     protected virtual void OnDisable()
     {
-        CharacterShoot.OnShoot -= Shoot;
-        weaponData.fireNext = 0;
+        CharacterShoot.OnShootPrimary -= ShootPrimary;
+        CharacterShoot.OnShootSecondary -= ShootSecondary;
+
+        weaponData.fireNext[0] = 0;
+        weaponData.fireNext[1] = 0;
     }
 
-    protected virtual void Shoot()
+    protected virtual void ShootPrimary()
     {
-        WeaponData.fireNext = Time.time + WeaponData.fireRate;
-        WeaponData.ammunition--;
+        weaponData.ammunition[0]--;
+        weaponData.fireNext[0] = Time.time + weaponData.fireRate[0];
+    }
+
+    protected virtual void ShootSecondary()
+    {
+        weaponData.ammunition[1]--;
+        weaponData.fireNext[1] = Time.time + weaponData.fireRate[1];
     }
 }

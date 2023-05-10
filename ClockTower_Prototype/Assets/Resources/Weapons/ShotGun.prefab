@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5761027834087858028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432093200188582732}
+  m_Layer: 11
+  m_Name: ProjectilePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1432093200188582732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5761027834087858028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.075, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8875273204714065887}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8797631409972636595
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ GameObject:
   - component: {fileID: 683617349064676887}
   - component: {fileID: 5381569410936783075}
   - component: {fileID: 4283855264296335158}
-  - component: {fileID: 3841296545660338050}
+  - component: {fileID: -8770799085032151390}
   m_Layer: 11
   m_Name: ShotGun
   m_TagString: Untagged
@@ -32,7 +63,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.05, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1432093200188582732}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -695,7 +727,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8797631409972636595}
   m_Mesh: {fileID: 0}
---- !u!114 &3841296545660338050
+--- !u!114 &-8770799085032151390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -704,12 +736,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8797631409972636595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a044f06e702d0041abec4dddd77eb89, type: 3}
+  m_Script: {fileID: 11500000, guid: ef1777b896bc42a4e90329cfcf6f946f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
   characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: d4ac3f81c9b4d3d47b3fa35997b5f0a0, type: 2}
-  weaponDataHitScan: {fileID: 11400000, guid: d4ac3f81c9b4d3d47b3fa35997b5f0a0, type: 2}
+  weaponData: {fileID: 11400000, guid: bca00890150ad8b4baf0dd38c205c064, type: 2}
+  weaponDataProjectile: {fileID: 11400000, guid: bca00890150ad8b4baf0dd38c205c064, type: 2}

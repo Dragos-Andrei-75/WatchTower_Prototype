@@ -11,17 +11,23 @@ public class WeaponHitScan : Weapon
         set { weaponDataHitScan = value; }
     }
 
-    protected override void OnEnable() => base.OnEnable();
-
-    protected override void OnDisable() => base.OnDisable();
-
-    protected override void Shoot()
+    protected override void ShootPrimary()
     {
-        base.Shoot();
-        ShootHitScan();
+        base.ShootPrimary();
+
+        ShootHitScan(weaponDataHitScan.damageMax[0], weaponDataHitScan.damageMin[0], weaponDataHitScan.forceMax[0], weaponDataHitScan.forceMin[0], weaponDataHitScan.accuracyMax[0],
+                     weaponDataHitScan.accuracyMin[0], weaponDataHitScan.range[0], weaponDataHitScan.ammount[0]);
     }
 
-    protected void ShootHitScan()
+    protected override void ShootSecondary()
+    {
+        base.ShootSecondary();
+
+        ShootHitScan(weaponDataHitScan.damageMax[1], weaponDataHitScan.damageMin[1], weaponDataHitScan.forceMax[1], weaponDataHitScan.forceMin[1], weaponDataHitScan.accuracyMax[1],
+                     weaponDataHitScan.accuracyMin[1], weaponDataHitScan.range[1], weaponDataHitScan.ammount[1]);
+    }
+
+    protected void ShootHitScan(float damageMax, float damageMin, float forceMax, float forceMin, float accuracyMax, float accuracyMin, float range, float ammount)
     {
         RaycastHit hit;
         LayerMask layerDefault;
@@ -30,33 +36,33 @@ public class WeaponHitScan : Weapon
 
         layerDefault = LayerMask.GetMask("Default");
 
-        for (int i = 0; i < weaponDataHitScan.ammount; i++)
+        for (int i = 0; i < ammount; i++)
         {
             directionShot = CharacterCameraTransform.forward;
-            directionShot.x += Random.Range(weaponDataHitScan.accuracyMin, weaponDataHitScan.accuracyMax);
-            directionShot.y += Random.Range(weaponDataHitScan.accuracyMin, weaponDataHitScan.accuracyMax);
-            directionShot.z += Random.Range(weaponDataHitScan.accuracyMin, weaponDataHitScan.accuracyMax);
+            directionShot.x += Random.Range(accuracyMin, accuracyMax);
+            directionShot.y += Random.Range(accuracyMin, accuracyMax);
+            directionShot.z += Random.Range(accuracyMin, accuracyMax);
 
-            shot = Physics.Raycast(CharacterCameraTransform.position, directionShot, out hit, WeaponData.range, ~layerDefault, QueryTriggerInteraction.Ignore);
+            shot = Physics.Raycast(CharacterCameraTransform.position, directionShot, out hit, range, ~layerDefault, QueryTriggerInteraction.Ignore);
 
             if (shot == true)
             {
                 float distance = Vector3.Distance(WeaponTransform.position, hit.point);
+                float damage = Mathf.Lerp(damageMax, damageMin, distance / range);
+                float force = Mathf.Lerp(forceMax, forceMin, distance / range);
 
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
-                    if (hit.rigidbody != null)
-                    {
-                        Vector3 directionPush = (hit.point - CharacterCameraTransform.position).normalized;
-                        float force = Mathf.Lerp(WeaponData.forceMax, WeaponData.forceMin, distance / WeaponData.range);
-
-                        hit.rigidbody.AddForce(directionPush * force, ForceMode.Impulse);
-                    }
-
                     if (hit.transform.GetComponent<Interactable>() != null)
                     {
                         Interactable objectInteractive = hit.transform.GetComponent<Interactable>();
-                        objectInteractive.TakeDamage(WeaponData.damageMax);
+                        objectInteractive.TakeDamage(damage);
+                    }
+
+                    if (hit.rigidbody != null)
+                    {
+                        Vector3 directionPush = (hit.point - CharacterCameraTransform.position).normalized;
+                        hit.rigidbody.AddForce(directionPush * force, ForceMode.Impulse);
                     }
                 }
             }

@@ -1,4 +1,29 @@
 using UnityEngine;
+using System.Collections;
+
+public struct DataProjectile
+{
+    public GameObject projectileObject;
+    public float damageMax;
+    public float damageMin;
+    public float forceMax;
+    public float forceMin;
+    public float speed;
+    public float spread;
+    public float lifeSpan;
+
+    public DataProjectile(GameObject projectileObject, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float spread, float lifeSpan)
+    {
+        this.projectileObject = projectileObject;
+        this.damageMax = damageMax;
+        this.damageMin = damageMin;
+        this.forceMax = forceMax;
+        this.forceMin = forceMin;
+        this.speed = speed;
+        this.spread = spread;
+        this.lifeSpan = lifeSpan;
+    }
+}
 
 public class Projectile : MonoBehaviour
 {
@@ -7,40 +32,117 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Transform projectileTransform;
 
     [Header("Projectile Attributes")]
-    [SerializeField] private WeaponDataProjectile dataProjectile;
-    [SerializeField] private Vector3 hitPosition;
+    [SerializeField] private DataProjectile projectileData;
+    [SerializeField] private LayerMask projectileLayer;
+    [SerializeField] private Vector3 direction;
+    [SerializeField] private float lifeSpan;
     [SerializeField] private bool hit;
 
-    private void Start()
+    [Header("Collision Attributes")]
+    [SerializeField] private Rigidbody hitRigidbody;
+    [SerializeField] private LayerMask layerInteractable;
+    [SerializeField] private Vector3 hitPosition;
+
+    private Coroutine coroutineOnContact;
+
+    protected delegate IEnumerator Contact();
+    protected event Contact OnContact;
+
+    protected Rigidbody HitRigidbody
     {
-        projectileObject = gameObject;
-        projectileTransform = projectileObject.transform;
+        get { return hitRigidbody; }
+        set { hitRigidbody = value; }
     }
 
-    protected GameObject ProjectileObject
+    protected Coroutine CoroutineActive
     {
-        get { return projectileObject; }
+        get { return coroutineOnContact; }
+        set { coroutineOnContact = value; }
     }
 
-    protected Transform ProjectileTransform
+    protected LayerMask LayerInteractable
     {
-        get { return projectileTransform; }
-    }
-
-    protected WeaponDataProjectile DataProjectile
-    {
-        get { return dataProjectile; }
+        get { return layerInteractable; }
     }
 
     protected Vector3 HitPosition
     {
         get { return hitPosition; }
-        set { hitPosition = value; }
+    }
+
+    protected Vector3 Direction
+    {
+        get { return direction; }
+    }
+
+    protected float LifeSpan
+    {
+        get { return lifeSpan; }
     }
 
     protected bool Hit
     {
         get { return hit; }
-        set { hit = value; }
+    }
+
+    public DataProjectile ProjectileData
+    {
+        get { return projectileData; }
+        set { projectileData = value; }
+    }
+
+    protected virtual void Start()
+    {
+        projectileObject = gameObject;
+        projectileTransform = projectileObject.transform;
+
+        projectileLayer = LayerMask.GetMask("Projectile");
+        layerInteractable = LayerMask.GetMask("Interactable");
+
+        StartCoroutine(ProjectileBehaviour());
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        hitPosition = projectileTransform.position;
+        hit = true;
+    }
+
+    private IEnumerator ProjectileBehaviour()
+    {
+        Vector3 positionPrevious;
+        float distancePosition;
+
+        lifeSpan = projectileData.lifeSpan;
+
+        while (hit == false && lifeSpan > 0)
+        {
+            positionPrevious = projectileTransform.position;
+
+            projectileTransform.position += projectileTransform.forward * projectileData.speed * Time.deltaTime;
+
+            direction = (projectileTransform.position - positionPrevious).normalized;
+            distancePosition = Vector3.Distance(positionPrevious, projectileTransform.position);
+
+            if (Physics.Raycast(positionPrevious, direction, out RaycastHit hit, distancePosition, ~projectileLayer, QueryTriggerInteraction.Ignore) == true)
+            {
+                hitPosition = hit.point;
+                hitRigidbody = hit.rigidbody;
+
+                break;
+            }
+
+            lifeSpan -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (OnContact != null) coroutineOnContact = StartCoroutine(OnContact());
+
+        while (coroutineOnContact != null) yield return null;
+
+        Destroy(projectileObject);
+
+        yield break;
     }
 }

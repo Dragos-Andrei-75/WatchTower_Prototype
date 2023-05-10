@@ -14,16 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: MachineGun
   position: {x: 0, y: 0.125, z: 0.5}
-  damageMax: 2.5
-  damageMin: 1
-  forceMax: 5
-  forceMin: 1.25
-  range: 1000
-  fireRate: 0.25
-  fireNext: 0
-  ammunitionCapacity: 250
-  ammunition: 250
   index: 2
-  ammount: 1
-  accuracyMax: 0.05
-  accuracyMin: -0.05
+  damageMax:
+  - 2.5
+  - 0
+  damageMin:
+  - 1
+  - 0
+  forceMax:
+  - 5
+  - 0
+  forceMin:
+  - 2.5
+  - 0
+  fireRate:
+  - 0.25
+  - 0
+  fireNext:
+  - 0
+  - 0
+  ammunitionCapacity: fa00000000000000
+  ammunition: fa00000000000000
+  ammount: 0100000000000000
+  accuracyMax:
+  - 0.025
+  - 0
+  accuracyMin:
+  - -0.025
+  - 0
+  range:
+  - 1000
+  - 0

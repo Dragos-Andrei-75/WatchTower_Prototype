@@ -18,7 +18,8 @@ public class CharacterShoot : MonoBehaviour
     [SerializeField] private bool rightButton = false;
 
     public delegate void ActionShoot();
-    public static event ActionShoot OnShoot;
+    public static event ActionShoot OnShootPrimary;
+    public static event ActionShoot OnShootSecondary;
 
     public bool LeftButton
     {
@@ -92,14 +93,19 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        if (OnShoot != null)
+        if (OnShootPrimary != null || OnShootSecondary != null)
         {
             if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
             {
-                while (leftButton == true || rightButton == true)
+                while (leftButton == true)
                 {
-                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext) OnShoot();
+                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext[0]) OnShootPrimary();
+                    yield return null;
+                }
 
+                while (rightButton == true)
+                {
+                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext[1]) OnShootSecondary();
                     yield return null;
                 }
             }

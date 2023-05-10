@@ -14,16 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Revolver
   position: {x: 0, y: 0.05, z: 0.25}
-  damageMax: 1
-  damageMin: 0.25
-  forceMax: 7.5
-  forceMin: 2.5
-  range: 1000
-  fireRate: 0.5
-  fireNext: 0
-  ammunitionCapacity: 100
-  ammunition: 83
   index: 0
-  ammount: 1
-  accuracyMax: 0.025
-  accuracyMin: -0.025
+  damageMax:
+  - 1
+  - 0
+  damageMin:
+  - 0.25
+  - 0
+  forceMax:
+  - 7.5
+  - 0
+  forceMin:
+  - 2.5
+  - 0
+  fireRate:
+  - 0.5
+  - 0
+  fireNext:
+  - 0
+  - 0
+  ammunitionCapacity: 7d00000000000000
+  ammunition: 7d00000000000000
+  ammount: 0100000000000000
+  accuracyMax:
+  - 0.0125
+  - 0
+  accuracyMin:
+  - -0.0125
+  - 0
+  range:
+  - 1000
+  - 0

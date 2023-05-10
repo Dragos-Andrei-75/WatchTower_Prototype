@@ -199,7 +199,7 @@ public class CharacterLoadOut : MonoBehaviour
     {
         if (characterMovement.CheckCarry == false)
         {
-            if (weapons[weaponSelected] != null && weaponSelected != 10)
+            if (weapons[weaponSelected] != null && weaponSelected != 5)
             {
                 if (weapons[weaponSelected].gameObject.activeSelf == true)
                 {
