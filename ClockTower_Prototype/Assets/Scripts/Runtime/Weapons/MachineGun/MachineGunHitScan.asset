@@ -9,35 +9,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f47e8ed2cb5324ab7ea10d10d35646, type: 3}
-  m_Name: CannonProjectile
+  m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
+  m_Name: MachineGunHitScan
   m_EditorClassIdentifier: 
+  weaponName: MachineGun
+  position: {x: 0, y: 0.125, z: 0.5}
+  index: 2
+  fireRate:
+  - 0.25
+  - 0
+  fireNext:
+  - 0
+  - 0
+  ammunitionCapacity: fa00000000000000
+  ammunition: fa00000000000000
   damageMax:
-  - 10
+  - 2.5
   - 0
   damageMin:
   - 1
   - 0
   forceMax:
-  - 50
+  - 5
   - 0
   forceMin:
-  - 10
+  - 2.5
   - 0
   ammount: 0100000000000000
-  projectileObject:
-  - {fileID: 5613302429073532030, guid: f7525bf758702604aa82732dc4dd791c, type: 3}
-  - {fileID: 0}
-  projectilePosition: {fileID: 0}
-  spreadMax:
+  accuracyMax:
+  - 0.025
   - 0
+  accuracyMin:
+  - -0.025
   - 0
-  spreadMin:
-  - 0
-  - 0
-  speed:
-  - 100
-  - 0
-  lifeSpan:
-  - 10
+  range:
+  - 1000
   - 0

@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53f47e8ed2cb5324ab7ea10d10d35646, type: 3}
-  m_Name: CannonProjectile
+  m_Name: ShotGunProjectile
   m_EditorClassIdentifier: 
   damageMax:
-  - 10
+  - 5
   - 0
   damageMin:
-  - 1
+  - 2.5
   - 0
   forceMax:
-  - 50
+  - 3.75
   - 0
   forceMin:
-  - 10
+  - 1.25
   - 0
-  ammount: 0100000000000000
+  ammount: 0500000000000000
   projectileObject:
-  - {fileID: 5613302429073532030, guid: f7525bf758702604aa82732dc4dd791c, type: 3}
+  - {fileID: 6884002406987904228, guid: 141db6f70ae3f394f942a4e2d49147bf, type: 3}
   - {fileID: 0}
   projectilePosition: {fileID: 0}
   spreadMax:
-  - 0
+  - 5
   - 0
   spreadMin:
-  - 0
+  - 2.5
   - 0
   speed:
-  - 100
+  - 125
   - 0
   lifeSpan:
-  - 10
+  - 2.5
   - 0

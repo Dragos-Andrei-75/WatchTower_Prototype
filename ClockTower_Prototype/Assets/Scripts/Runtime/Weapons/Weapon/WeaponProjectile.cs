@@ -31,9 +31,8 @@ public class WeaponProjectile : Weapon
 
         projectiles = new GameObject[weaponDataProjectile.ammount[0]];
 
-        ShootProjectile(new DataProjectile(weaponDataProjectile.projectileObject[0], weaponDataProjectile.damageMax[0], weaponDataProjectile.damageMin[0],
-                                           weaponDataProjectile.forceMax[0], weaponDataProjectile.forceMin[0], weaponDataProjectile.speed[0], weaponDataProjectile.spread[0],
-                                           weaponDataProjectile.lifeSpan[0]), weaponDataProjectile.ammount[0]);
+        ShootProjectile(new DataProjectile(weaponDataProjectile, 0), weaponDataProjectile.spreadMax[0], weaponDataProjectile.spreadMin[0],
+                        WeaponData.heatMax[0], ref WeaponData.heat[0]);
     }
 
     protected override void ShootSecondary()
@@ -42,14 +41,15 @@ public class WeaponProjectile : Weapon
 
         projectiles = new GameObject[weaponDataProjectile.ammount[1]];
 
-        ShootProjectile(new DataProjectile(weaponDataProjectile.projectileObject[1], weaponDataProjectile.damageMax[1], weaponDataProjectile.damageMin[1],
-                                           weaponDataProjectile.forceMax[1], weaponDataProjectile.forceMin[1], weaponDataProjectile.speed[1], weaponDataProjectile.spread[1],
-                                           weaponDataProjectile.lifeSpan[1]), weaponDataProjectile.ammount[1]);
+        ShootProjectile(new DataProjectile(weaponDataProjectile, 1), weaponDataProjectile.spreadMax[1], weaponDataProjectile.spreadMin[1],
+                        WeaponData.heatMax[1], ref WeaponData.heat[1]);
     }
 
-    protected virtual void ShootProjectile(DataProjectile projectileData, float ammount)
+    protected virtual void ShootProjectile(DataProjectile projectileData, float spreadMax, float spreadMin, float heatMax, ref float heat)
     {
-        for (int i = 0; i < ammount; i++)
+        float spread = Mathf.Lerp(spreadMin, spreadMax, heat / heatMax);
+
+        for (int i = 0; i < projectiles.Length; i++)
         {
             projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
 
@@ -58,7 +58,7 @@ public class WeaponProjectile : Weapon
             projectiles[i].transform.position = weaponDataProjectile.projectilePosition.position;
             projectiles[i].transform.rotation = weaponDataProjectile.projectilePosition.rotation;
 
-            projectiles[i].transform.rotation = Quaternion.RotateTowards(projectiles[i].transform.rotation, Random.rotation, projectileData.spread);
+            projectiles[i].transform.rotation = Quaternion.RotateTowards(projectiles[i].transform.rotation, Random.rotation, spread);
         }
     }
 }

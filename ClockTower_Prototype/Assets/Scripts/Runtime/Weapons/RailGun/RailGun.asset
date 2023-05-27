@@ -9,39 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
   m_Name: RailGun
   m_EditorClassIdentifier: 
   weaponName: RailGun
   position: {x: 0, y: 0.125, z: 0.5}
   index: 4
-  damageMax:
+  fireRateLimitUpper:
+  - 1.25
   - 0
-  - 0
-  damageMin:
-  - 0
-  - 0
-  forceMax:
-  - 0
-  - 0
-  forceMin:
-  - 0
+  fireRateLimitLower:
+  - 1.25
   - 0
   fireRate:
-  - 0.25
-  - 0.25
+  - 0
+  - 0
   fireNext:
   - 0
   - 0
-  ammunitionCapacity: 0100000001000000
-  ammunition: 0100000001000000
-  ammount: 0100000001000000
-  accuracyMax:
+  heatMax:
+  - 0.1
+  - 0
+  heat:
   - 0
   - 0
-  accuracyMin:
-  - 0
-  - 0
-  range:
-  - 1000
-  - 0
+  ammunitionCapacity: 190000004b000000
+  ammunition: 190000004b000000

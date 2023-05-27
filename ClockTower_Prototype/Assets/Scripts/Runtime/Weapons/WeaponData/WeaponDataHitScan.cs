@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponDataHitScan", menuName = "Weapon/Weapon Data HitScan")]
-public class WeaponDataHitScan : WeaponData
+[CreateAssetMenu(menuName = "Weapon/Weapon Data HitScan", fileName = "WeaponDataHitScan")]
+public class WeaponDataHitScan : WeaponDataFire
 {
     [Header("HitScan Attributes")]
     [Tooltip("The maximum accuracy of this weapon.")]                        public float[] accuracyMax;

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
-  m_Name: Revolver
+  m_Name: Cannon
   m_EditorClassIdentifier: 
-  weaponName: Revolver
-  position: {x: 0, y: 0.05, z: 0.25}
-  index: 0
+  weaponName: Cannon
+  position: {x: 0, y: 0.075, z: 0.25}
+  index: 3
   fireRateLimitUpper:
-  - 0.75
+  - 1
   - 0
   fireRateLimitLower:
-  - 0.25
+  - 1
   - 0
   fireRate:
-  - 0.25
   - 1
+  - 0
   fireNext:
   - 0
   - 0
   heatMax:
-  - 5
+  - 0.1
   - 0
   heat:
   - 0
   - 0
-  ammunitionCapacity: 6400000000000000
-  ammunition: 6400000000000000
+  ammunitionCapacity: 2d00000000000000
+  ammunition: 2d00000000000000

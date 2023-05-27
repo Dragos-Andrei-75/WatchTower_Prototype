@@ -7,7 +7,6 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Character Object and Component References")]
     [SerializeField] private Transform characterCameraTransform;
-    [SerializeField] private Camera characterCamera;
     [SerializeField] private CharacterShoot characterShoot;
 
     [Header("Weapon Attributes")]
@@ -23,16 +22,6 @@ public abstract class Weapon : MonoBehaviour
         get { return characterCameraTransform; }
     }
 
-    protected Camera CharacterCamera
-    {
-        get { return characterCamera; }
-    }
-
-    protected CharacterShoot CharacterShoot
-    {
-        get { return characterShoot; }
-    }
-
     public WeaponData WeaponData
     {
         get { return weaponData; }
@@ -44,34 +33,36 @@ public abstract class Weapon : MonoBehaviour
         weaponTransform = gameObject.transform;
 
         characterCameraTransform = WeaponTransform.root.GetChild(0).GetComponent<Transform>();
-        characterCamera = characterCameraTransform.GetComponent<Camera>();
         characterShoot = characterCameraTransform.GetComponent<CharacterShoot>();
     }
 
     protected virtual void OnEnable()
     {
-        CharacterShoot.OnShootPrimary += ShootPrimary;
-        CharacterShoot.OnShootSecondary -= ShootSecondary;
+        characterShoot.OnShootPrimary += ShootPrimary;
+        characterShoot.OnShootSecondary += ShootSecondary;
     }
 
     protected virtual void OnDisable()
     {
-        CharacterShoot.OnShootPrimary -= ShootPrimary;
-        CharacterShoot.OnShootSecondary -= ShootSecondary;
+        characterShoot.OnShootPrimary -= ShootPrimary;
+        characterShoot.OnShootSecondary -= ShootSecondary;
 
-        weaponData.fireNext[0] = 0;
-        weaponData.fireNext[1] = 0;
+        for (int i = 0; i < weaponData.fireNext.Length; i++)
+        {
+            weaponData.fireNext[i] = 0;
+            weaponData.heat[i] = 0;
+        }
     }
 
-    protected virtual void ShootPrimary()
-    {
-        weaponData.ammunition[0]--;
-        weaponData.fireNext[0] = Time.time + weaponData.fireRate[0];
-    }
+    protected virtual void ShootPrimary() => Shoot(0);
 
-    protected virtual void ShootSecondary()
+    protected virtual void ShootSecondary() => Shoot(1);
+
+    private void Shoot(int index)
     {
-        weaponData.ammunition[1]--;
-        weaponData.fireNext[1] = Time.time + weaponData.fireRate[1];
+        weaponData.ammunition[index]--;
+        weaponData.fireNext[index] = Time.time + weaponData.fireRate[index];
+
+        weaponData.fireRate[index] = Mathf.Lerp(weaponData.fireRateLimitLower[index], weaponData.fireRateLimitUpper[index], weaponData.heat[index] / weaponData.heatMax[index]);
     }
 }

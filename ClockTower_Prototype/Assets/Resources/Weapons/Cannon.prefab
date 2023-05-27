@@ -1497,9 +1497,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
-  characterCamera: {fileID: 0}
   characterShoot: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: aaa68e4ff888b1e46975cf75f459163e, type: 2}
+  weaponData: {fileID: 11400000, guid: f884bad8e096a9048a28346064e89424, type: 2}
+  projectiles: []
   weaponDataProjectile: {fileID: 11400000, guid: aaa68e4ff888b1e46975cf75f459163e, type: 2}
   weaponDataExplosive: {fileID: 11400000, guid: 78aa131dccb5eb34fa09914204304521, type: 2}
 --- !u!1 &3305111725266274189

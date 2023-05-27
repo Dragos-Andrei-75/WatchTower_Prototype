@@ -9,19 +9,17 @@ public struct DataProjectile
     public float forceMax;
     public float forceMin;
     public float speed;
-    public float spread;
     public float lifeSpan;
 
-    public DataProjectile(GameObject projectileObject, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float spread, float lifeSpan)
+    public DataProjectile(WeaponDataProjectile weaponDataProjectile, int index)
     {
-        this.projectileObject = projectileObject;
-        this.damageMax = damageMax;
-        this.damageMin = damageMin;
-        this.forceMax = forceMax;
-        this.forceMin = forceMin;
-        this.speed = speed;
-        this.spread = spread;
-        this.lifeSpan = lifeSpan;
+        projectileObject = weaponDataProjectile.projectileObject[index];
+        damageMax = weaponDataProjectile.damageMax[index];
+        damageMin = weaponDataProjectile.damageMin[index];
+        forceMax = weaponDataProjectile.forceMax[index];
+        forceMin = weaponDataProjectile.forceMin[index];
+        speed = weaponDataProjectile.speed[index];
+        lifeSpan = weaponDataProjectile.lifeSpan[index];
     }
 }
 

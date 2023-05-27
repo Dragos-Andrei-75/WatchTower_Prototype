@@ -9,39 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
   m_Name: GrappleGun
   m_EditorClassIdentifier: 
   weaponName: GrappleGun
-  position: {x: 0, y: 0.05, z: 0.25}
+  position: {x: 0, y: 0.085, z: 0.5}
   index: 5
-  damageMax:
-  - 0
-  - 0
-  damageMin:
-  - 0
-  - 0
-  forceMax:
-  - 0
-  - 0
-  forceMin:
-  - 0
-  - 0
-  fireRate:
-  - 0.25
-  - 0
-  fireNext:
-  - 0
-  - 0
-  ammunitionCapacity: 0100000000000000
-  ammunition: 0100000000000000
-  ammount: 0100000000000000
-  accuracyMax:
-  - 0
-  - 0
-  accuracyMin:
-  - 0
-  - 0
-  range:
-  - 100
-  - 0
+  fireRateLimitUpper: []
+  fireRateLimitLower: []
+  fireRate: []
+  fireNext: []
+  heatMax: []
+  heat: []
+  ammunitionCapacity: 
+  ammunition: 

@@ -18,8 +18,8 @@ public class CharacterShoot : MonoBehaviour
     [SerializeField] private bool rightButton = false;
 
     public delegate void ActionShoot();
-    public static event ActionShoot OnShootPrimary;
-    public static event ActionShoot OnShootSecondary;
+    public event ActionShoot OnShootPrimary;
+    public event ActionShoot OnShootSecondary;
 
     public bool LeftButton
     {
@@ -99,16 +99,35 @@ public class CharacterShoot : MonoBehaviour
             {
                 while (leftButton == true)
                 {
-                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext[0]) OnShootPrimary();
+                    if (characterLoadOut.WeaponCurrent.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[0]) OnShootPrimary();
+
+                    characterLoadOut.WeaponCurrent.heat[0] += Time.deltaTime;
+                    characterLoadOut.WeaponCurrent.heat[0] = Mathf.Clamp(characterLoadOut.WeaponCurrent.heat[0], 0, characterLoadOut.WeaponCurrent.heatMax[0]);
+
                     yield return null;
                 }
 
                 while (rightButton == true)
                 {
-                    if (characterLoadOut.WeaponCurrent.WeaponData.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.WeaponData.fireNext[1]) OnShootSecondary();
+                    if (characterLoadOut.WeaponCurrent.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[1]) OnShootSecondary();
+
+                    characterLoadOut.WeaponCurrent.heat[1] += Time.deltaTime;
+                    characterLoadOut.WeaponCurrent.heat[1] = Mathf.Clamp(characterLoadOut.WeaponCurrent.heat[0], 0, characterLoadOut.WeaponCurrent.heatMax[1]);
+
                     yield return null;
                 }
             }
+
+            while (characterLoadOut.WeaponCurrent.heat[0] > 0 || characterLoadOut.WeaponCurrent.heat[1] > 0)
+            {
+                characterLoadOut.WeaponCurrent.heat[0] -= Time.deltaTime;
+                characterLoadOut.WeaponCurrent.heat[1] -= Time.deltaTime;
+
+                yield return null;
+            }
+
+            characterLoadOut.WeaponCurrent.heat[0] = 0;
+            characterLoadOut.WeaponCurrent.heat[1] = 0;
         }
 
         yield break;

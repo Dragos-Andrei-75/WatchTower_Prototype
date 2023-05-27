@@ -9,43 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f47e8ed2cb5324ab7ea10d10d35646, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
   weaponName: ShotGun
   position: {x: 0, y: 0.05, z: 0.5}
   index: 1
-  damageMax:
-  - 5
+  fireRateLimitUpper:
+  - 1
   - 0
-  damageMin:
-  - 2.5
-  - 0
-  forceMax:
-  - 3.75
-  - 0
-  forceMin:
-  - 1.25
+  fireRateLimitLower:
+  - 0.5
   - 0
   fireRate:
-  - 0.75
+  - 0
   - 0
   fireNext:
   - 0
   - 0
-  ammunitionCapacity: 5600000000000000
-  ammunition: 5600000000000000
-  ammount: 0500000000000000
-  projectileObject:
-  - {fileID: 6884002406987904228, guid: 141db6f70ae3f394f942a4e2d49147bf, type: 3}
-  - {fileID: 0}
-  projectilePosition: {fileID: 0}
-  speed:
-  - 125
+  heatMax:
+  - 7.5
   - 0
-  spread:
-  - 2.5
+  heat:
   - 0
-  lifeSpan:
-  - 2.5
   - 0
+  ammunitionCapacity: 6400000000000000
+  ammunition: 6400000000000000

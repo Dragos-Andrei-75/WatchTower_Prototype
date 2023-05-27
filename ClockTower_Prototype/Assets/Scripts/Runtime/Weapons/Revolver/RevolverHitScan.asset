@@ -9,29 +9,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
-  m_Name: Revolver
+  m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
+  m_Name: RevolverHitScan
   m_EditorClassIdentifier: 
   weaponName: Revolver
   position: {x: 0, y: 0.05, z: 0.25}
   index: 0
-  fireRateLimitUpper:
-  - 0.75
+  damageMax:
+  - 1
   - 0
-  fireRateLimitLower:
+  damageMin:
   - 0.25
+  - 0
+  forceMax:
+  - 7.5
+  - 0
+  forceMin:
+  - 2.5
   - 0
   fireRate:
-  - 0.25
-  - 1
+  - 0.5
+  - 0
   fireNext:
   - 0
   - 0
-  heatMax:
-  - 5
+  ammunitionCapacity: 7d00000000000000
+  ammunition: 7d00000000000000
+  ammount: 0100000000000000
+  accuracyMax:
+  - 0.0125
   - 0
-  heat:
+  accuracyMin:
+  - -0.0125
   - 0
+  range:
+  - 1000
   - 0
-  ammunitionCapacity: 6400000000000000
-  ammunition: 6400000000000000

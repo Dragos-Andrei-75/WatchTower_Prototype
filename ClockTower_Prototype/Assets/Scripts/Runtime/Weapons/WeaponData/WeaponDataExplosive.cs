@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponDataProjectile", menuName = "Weapon/Weapon Data Explosive")]
+[CreateAssetMenu(menuName = "Weapon/Weapon Data Explosive", fileName = "WeaponDataExplosive")]
 public class WeaponDataExplosive : ScriptableObject
 {
     [Header("Explosive Attributes")]

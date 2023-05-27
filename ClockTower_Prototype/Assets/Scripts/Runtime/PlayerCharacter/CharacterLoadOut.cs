@@ -2,6 +2,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+public struct WeaponCurrent
+{
+    public float[] fireNext;
+    public float[] heatMax;
+    public float[] heat;
+    public int[] ammunition;
+
+    public WeaponCurrent(float[] fireNext, float[] heatMax, float[] heat, int[] ammunition)
+    {
+        this.fireNext = new float[fireNext.Length];
+        this.heatMax = new float[heatMax.Length];
+        this.heat = new float[heat.Length];
+        this.ammunition = new int[ammunition.Length];
+        this.fireNext = fireNext;
+        this.heatMax = heatMax;
+        this.heat = heat;
+        this.ammunition = ammunition;
+    }
+}
+
 public class CharacterLoadOut : MonoBehaviour
 {
     [Header("Character Object and Component References")]
@@ -10,7 +30,7 @@ public class CharacterLoadOut : MonoBehaviour
 
     [Header("LoadOut Attributes")]
     [SerializeField] private Transform[] weapons;
-    [SerializeField] private Weapon weaponCurrent;
+    [SerializeField] private WeaponCurrent weaponCurrent;
     [SerializeField] private int weaponSelected = 0;
     [SerializeField] private int loadOutSize = 11;
     [SerializeField] private bool holster = false;
@@ -39,7 +59,7 @@ public class CharacterLoadOut : MonoBehaviour
         set { weapons = value; }
     }
 
-    public Weapon WeaponCurrent
+    public WeaponCurrent WeaponCurrent
     {
         get { return weaponCurrent; }
         set { weaponCurrent = value; }
@@ -157,12 +177,16 @@ public class CharacterLoadOut : MonoBehaviour
 
     private void WeaponSelect()
     {
+        WeaponData weaponData;
+
         weapons[weaponSelected].gameObject.SetActive(false);
 
         if (weaponIndex != -1) WeaponSelectButton();
         else if (wheelScroll != 0) WeaponSelectWheel();
 
         weapons[weaponSelected].gameObject.SetActive(true);
+
+        weaponData = weapons[weaponSelected].GetComponent<Weapon>().WeaponData;
 
         if (weapons[weaponSelected].transform.childCount != 0)
         {
@@ -172,7 +196,7 @@ public class CharacterLoadOut : MonoBehaviour
             }
         }
 
-        weaponCurrent = weapons[weaponSelected].GetComponent<Weapon>();
+        weaponCurrent = new WeaponCurrent(weaponData.fireNext, weaponData.heatMax, weaponData.heat, weaponData.ammunition);
     }
 
     private void WeaponSelectButton()
