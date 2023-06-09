@@ -4,6 +4,7 @@ using System.Collections;
 public struct DataProjectile
 {
     public GameObject projectileObject;
+    public Vector3 direction;
     public float damageMax;
     public float damageMin;
     public float forceMax;
@@ -11,15 +12,16 @@ public struct DataProjectile
     public float speed;
     public float lifeSpan;
 
-    public DataProjectile(WeaponDataProjectile weaponDataProjectile, int index)
+    public DataProjectile(WeaponData weaponData, WeaponDataProjectile weaponDataProjectile, int index)
     {
         projectileObject = weaponDataProjectile.projectileObject[index];
-        damageMax = weaponDataProjectile.damageMax[index];
-        damageMin = weaponDataProjectile.damageMin[index];
-        forceMax = weaponDataProjectile.forceMax[index];
-        forceMin = weaponDataProjectile.forceMin[index];
+        damageMax = weaponData.damageMax[index];
+        damageMin = weaponData.damageMin[index];
+        forceMax = weaponData.forceMax[index];
+        forceMin = weaponData.forceMin[index];
         speed = weaponDataProjectile.speed[index];
         lifeSpan = weaponDataProjectile.lifeSpan[index];
+        direction = weaponData.direction;
     }
 }
 
@@ -117,7 +119,7 @@ public class Projectile : MonoBehaviour
         {
             positionPrevious = projectileTransform.position;
 
-            projectileTransform.position += projectileTransform.forward * projectileData.speed * Time.deltaTime;
+            projectileTransform.position += projectileData.direction * projectileData.speed * Time.deltaTime;
 
             direction = (projectileTransform.position - positionPrevious).normalized;
             distancePosition = Vector3.Distance(positionPrevious, projectileTransform.position);

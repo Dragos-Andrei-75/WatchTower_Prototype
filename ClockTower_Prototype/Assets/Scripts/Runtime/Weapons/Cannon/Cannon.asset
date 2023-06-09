@@ -15,10 +15,22 @@ MonoBehaviour:
   weaponName: Cannon
   position: {x: 0, y: 0.075, z: 0.25}
   index: 3
-  fireRateLimitUpper:
+  damageMax:
+  - 10
+  - 0
+  damageMin:
   - 1
   - 0
-  fireRateLimitLower:
+  forceMax:
+  - 100
+  - 0
+  forceMin:
+  - 10
+  - 0
+  fireRateMax:
+  - 1
+  - 0
+  fireRateMin:
   - 1
   - 0
   fireRate:
@@ -33,5 +45,6 @@ MonoBehaviour:
   heat:
   - 0
   - 0
-  ammunitionCapacity: 2d00000000000000
-  ammunition: 2d00000000000000
+  ammunitionCapacity: 3200000000000000
+  ammunition: 3200000000000000
+  amount: 0100000001000000

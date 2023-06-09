@@ -15,14 +15,26 @@ MonoBehaviour:
   weaponName: RailGun
   position: {x: 0, y: 0.125, z: 0.5}
   index: 4
-  fireRateLimitUpper:
+  damageMax:
+  - 25
+  - 0
+  damageMin:
+  - 12.5
+  - 0
+  forceMax:
+  - 0
+  - 0
+  forceMin:
+  - 0
+  - 0
+  fireRateMax:
   - 1.25
   - 0
-  fireRateLimitLower:
+  fireRateMin:
   - 1.25
   - 0
   fireRate:
-  - 0
+  - 1.25
   - 0
   fireNext:
   - 0
@@ -33,5 +45,6 @@ MonoBehaviour:
   heat:
   - 0
   - 0
-  ammunitionCapacity: 190000004b000000
-  ammunition: 190000004b000000
+  ammunitionCapacity: 1900000000000000
+  ammunition: 1900000000000000
+  amount: 

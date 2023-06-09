@@ -45472,7 +45472,7 @@ MonoBehaviour:
   dashCount: 0
   ladderTransform: {fileID: 0}
   inputMove:
-    m_Name: 
+    m_Name: Input Move
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 7548a60f-d3f0-4b7c-ad83-c485503bb8cf
@@ -45481,7 +45481,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   inputWalk:
-    m_Name: 
+    m_Name: Input Walk
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 71a7cc3d-49e6-4179-8bfd-56467bd3d445
@@ -45490,7 +45490,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   inputJump:
-    m_Name: 
+    m_Name: Input Jump
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 8c9d9b17-42c3-4f63-9961-c774c2723ff1
@@ -45499,7 +45499,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   inputCrouch:
-    m_Name: 
+    m_Name: Input Crouch
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 54d3eaca-26bb-4cd2-846e-2b28c2d75a0e
@@ -45508,7 +45508,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   inputSwim:
-    m_Name: 
+    m_Name: Input Swim
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 04c0fc35-f780-4de3-a445-efaddeecbadc
@@ -45517,7 +45517,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   inputDash:
-    m_Name: 
+    m_Name: Input Dash
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0a86645a-8a1b-4a60-b0a6-463267a6967b

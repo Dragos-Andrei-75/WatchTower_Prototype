@@ -17,9 +17,11 @@ public class CharacterShoot : MonoBehaviour
     [SerializeField] private bool leftButton = false;
     [SerializeField] private bool rightButton = false;
 
-    public delegate void ActionShoot();
-    public event ActionShoot OnShootPrimary;
-    public event ActionShoot OnShootSecondary;
+    public delegate void ShootRelease();
+    public event ShootRelease OnShootPrimary;
+    public event ShootRelease OnShootSecondary;
+    public event ShootRelease OnReleasePrimary;
+    public event ShootRelease OnReleaseSecondary;
 
     public bool LeftButton
     {
@@ -37,12 +39,12 @@ public class CharacterShoot : MonoBehaviour
 
         inputLeftButton = inputPlayer.Character.LeftButton;
         inputLeftButton.started += _ => leftButton = true;
-        inputLeftButton.started += _ => StartCoroutine(Shoot());
+        inputLeftButton.started += _ => Shoot();
         inputLeftButton.canceled += _ => leftButton = false;
 
         inputRightButton = inputPlayer.Character.RightButton;
         inputRightButton.started += _ => rightButton = true;
-        inputRightButton.started += _ => StartCoroutine(Shoot());
+        inputRightButton.started += _ => Shoot();
         inputRightButton.canceled += _ => rightButton = false;
     }
 
@@ -69,9 +71,10 @@ public class CharacterShoot : MonoBehaviour
     private void Start()
     {
         loadOutTransform = gameObject.transform.GetChild(1).GetComponent<Transform>();
+
         characterLook = gameObject.transform.GetComponent<CharacterLook>();
         characterInteract = gameObject.transform.root.GetComponent<CharacterInteract>();
-        characterLoadOut = loadOutTransform.GetComponent<CharacterLoadOut>();
+        characterLoadOut = gameObject.transform.GetChild(1).GetComponent<CharacterLoadOut>();
     }
 
     private void Update() => Sway();
@@ -91,43 +94,82 @@ public class CharacterShoot : MonoBehaviour
         loadOutTransform.localRotation = Quaternion.Slerp(loadOutTransform.localRotation, weaponSwayTarget, swaySmooth * Time.deltaTime);
     }
 
-    private IEnumerator Shoot()
+    private void Shoot()
     {
-        if (OnShootPrimary != null || OnShootSecondary != null)
+        if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
         {
-            if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
-            {
-                while (leftButton == true)
-                {
-                    if (characterLoadOut.WeaponCurrent.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[0]) OnShootPrimary();
+            if (leftButton == true) StartCoroutine(ShootPrimary());
+            else if (rightButton == true) StartCoroutine(ShootSecondary());
+        }
+    }
 
-                    characterLoadOut.WeaponCurrent.heat[0] += Time.deltaTime;
-                    characterLoadOut.WeaponCurrent.heat[0] = Mathf.Clamp(characterLoadOut.WeaponCurrent.heat[0], 0, characterLoadOut.WeaponCurrent.heatMax[0]);
+    private IEnumerator ShootPrimary()
+    {
+        if (rightButton == true) rightButton = false;
 
-                    yield return null;
-                }
+        while (OnShootPrimary != null && leftButton == true)
+        {
+            if (characterLoadOut.WeaponCurrent.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[0]) OnShootPrimary();
 
-                while (rightButton == true)
-                {
-                    if (characterLoadOut.WeaponCurrent.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[1]) OnShootSecondary();
+            characterLoadOut.WeaponCurrent.heat[0] += Time.deltaTime;
 
-                    characterLoadOut.WeaponCurrent.heat[1] += Time.deltaTime;
-                    characterLoadOut.WeaponCurrent.heat[1] = Mathf.Clamp(characterLoadOut.WeaponCurrent.heat[0], 0, characterLoadOut.WeaponCurrent.heatMax[1]);
+            yield return null;
+        }
 
-                    yield return null;
-                }
-            }
+        StartCoroutine(ReleasePrimary());
 
-            while (characterLoadOut.WeaponCurrent.heat[0] > 0 || characterLoadOut.WeaponCurrent.heat[1] > 0)
+        yield break;
+    }
+
+    private IEnumerator ShootSecondary()
+    {
+        if (leftButton == true) leftButton = false;
+
+        while (OnShootSecondary != null && rightButton == true)
+        {
+            if (characterLoadOut.WeaponCurrent.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[1]) OnShootSecondary();
+
+            characterLoadOut.WeaponCurrent.heat[1] += Time.deltaTime;
+
+            yield return null;
+        }
+
+        StartCoroutine(ReleaseSecondary());
+
+        yield break;
+    }
+
+    private IEnumerator ReleasePrimary()
+    {
+        while (OnReleasePrimary != null && leftButton == false)
+        {
+            while (characterLoadOut.WeaponCurrent.heat[0] > 0)
             {
                 characterLoadOut.WeaponCurrent.heat[0] -= Time.deltaTime;
-                characterLoadOut.WeaponCurrent.heat[1] -= Time.deltaTime;
-
                 yield return null;
             }
 
             characterLoadOut.WeaponCurrent.heat[0] = 0;
+
+            yield return null;
+        }
+
+        yield break;
+    }
+
+    private IEnumerator ReleaseSecondary()
+    {
+        while (OnReleaseSecondary != null && rightButton == false)
+        {
+            while (characterLoadOut.WeaponCurrent.heat[1] > 0)
+            {
+                characterLoadOut.WeaponCurrent.heat[1] -= Time.deltaTime;
+                yield return null;
+            }
+
             characterLoadOut.WeaponCurrent.heat[1] = 0;
+
+            yield return null;
         }
 
         yield break;

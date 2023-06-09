@@ -8,23 +8,19 @@ public class WeaponExplosive : WeaponProjectile
     protected override void ShootPrimary()
     {
         base.ShootPrimary();
-
-        ShootExplosive(new DataProjectile(WeaponDataProjectile, 0), new DataExplosive(weaponDataExplosive.radius[0]), WeaponDataProjectile.spreadMax[0],
-                       WeaponDataProjectile.spreadMin[0], WeaponDataProjectile.ammount[0], WeaponData.heatMax[0], ref WeaponData.heat[0]);
+        ShootExplosive(0);
     }
 
     protected override void ShootSecondary()
     {
         base.ShootSecondary();
-
-        ShootExplosive(new DataProjectile(WeaponDataProjectile, 0), new DataExplosive(weaponDataExplosive.radius[1]), WeaponDataProjectile.spreadMax[1],
-                       WeaponDataProjectile.spreadMin[1], WeaponDataProjectile.ammount[1], WeaponData.heatMax[1], ref WeaponData.heat[1]);
+        ShootExplosive(1);
     }
 
-    protected void ShootExplosive(DataProjectile dataProjectile, DataExplosive dataExplosive, float spreadMax, float spreadMin, float ammount, float heatMax, ref float heat)
+    protected void ShootExplosive(int index)
     {
-        base.ShootProjectile(dataProjectile, spreadMax, spreadMin, heatMax, ref heat);
+        base.ShootProjectile(index);
 
-        for (int i = 0; i < ammount; i++) Projectiles[i].GetComponent<Explosive>().ExplosiveData = dataExplosive;
+        for (int i = 0; i < WeaponData.amount[index]; i++) Projectiles[i].GetComponent<Explosive>().Radius = weaponDataExplosive.radius[index];
     }
 }

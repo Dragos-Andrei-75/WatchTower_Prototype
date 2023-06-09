@@ -15,10 +15,22 @@ MonoBehaviour:
   weaponName: MachineGun
   position: {x: 0, y: 0.125, z: 0.5}
   index: 2
-  fireRateLimitUpper:
+  damageMax:
+  - 2.5
+  - 0
+  damageMin:
+  - 1
+  - 0
+  forceMax:
+  - 3.75
+  - 0
+  forceMin:
+  - 1.25
+  - 0
+  fireRateMax:
   - 0.375
   - 0
-  fireRateLimitLower:
+  fireRateMin:
   - 0.125
   - 0
   fireRate:
@@ -35,3 +47,4 @@ MonoBehaviour:
   - 0
   ammunitionCapacity: fa00000000000000
   ammunition: fa00000000000000
+  amount: 0100000001000000

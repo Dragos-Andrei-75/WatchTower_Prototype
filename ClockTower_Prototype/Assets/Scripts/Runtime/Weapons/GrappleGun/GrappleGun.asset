@@ -15,11 +15,28 @@ MonoBehaviour:
   weaponName: GrappleGun
   position: {x: 0, y: 0.085, z: 0.5}
   index: 5
-  fireRateLimitUpper: []
-  fireRateLimitLower: []
-  fireRate: []
-  fireNext: []
-  heatMax: []
-  heat: []
-  ammunitionCapacity: 
-  ammunition: 
+  damageMax: []
+  damageMin: []
+  forceMax: []
+  forceMin: []
+  fireRateMax:
+  - 0
+  - 0
+  fireRateMin:
+  - 0
+  - 0
+  fireRate:
+  - 0
+  - 0
+  fireNext:
+  - 0
+  - 0
+  heatMax:
+  - 0
+  - 0
+  heat:
+  - 0
+  - 0
+  ammunitionCapacity: 0100000001000000
+  ammunition: 0100000001000000
+  amount: 

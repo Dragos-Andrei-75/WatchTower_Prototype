@@ -47,7 +47,7 @@ public abstract class Weapon : MonoBehaviour
         characterShoot.OnShootPrimary -= ShootPrimary;
         characterShoot.OnShootSecondary -= ShootSecondary;
 
-        for (int i = 0; i < weaponData.fireNext.Length; i++)
+        for (int i = 0; i < weaponData.heat.Length; i++)
         {
             weaponData.fireNext[i] = 0;
             weaponData.heat[i] = 0;
@@ -61,8 +61,8 @@ public abstract class Weapon : MonoBehaviour
     private void Shoot(int index)
     {
         weaponData.ammunition[index]--;
-        weaponData.fireNext[index] = Time.time + weaponData.fireRate[index];
 
-        weaponData.fireRate[index] = Mathf.Lerp(weaponData.fireRateLimitLower[index], weaponData.fireRateLimitUpper[index], weaponData.heat[index] / weaponData.heatMax[index]);
+        weaponData.fireNext[index] = Time.time + weaponData.fireRate[index];
+        weaponData.fireRate[index] = Mathf.Lerp(weaponData.fireRateMin[index], weaponData.fireRateMax[index], weaponData.heat[index] / weaponData.heatMax[index]);
     }
 }

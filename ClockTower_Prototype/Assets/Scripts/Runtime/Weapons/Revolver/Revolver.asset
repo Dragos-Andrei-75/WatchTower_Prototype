@@ -15,14 +15,26 @@ MonoBehaviour:
   weaponName: Revolver
   position: {x: 0, y: 0.05, z: 0.25}
   index: 0
-  fireRateLimitUpper:
-  - 0.75
+  damageMax:
+  - 5
   - 0
-  fireRateLimitLower:
+  damageMin:
+  - 2.5
+  - 0
+  forceMax:
+  - 5
+  - 0
+  forceMin:
+  - 2.5
+  - 0
+  fireRateMax:
+  - 0.5
+  - 0
+  fireRateMin:
   - 0.25
   - 0
   fireRate:
-  - 0.25
+  - 0.5
   - 1
   fireNext:
   - 0
@@ -35,3 +47,4 @@ MonoBehaviour:
   - 0
   ammunitionCapacity: 6400000000000000
   ammunition: 6400000000000000
+  amount: 0100000001000000

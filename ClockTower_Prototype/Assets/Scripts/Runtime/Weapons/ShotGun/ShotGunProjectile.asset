@@ -12,31 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f47e8ed2cb5324ab7ea10d10d35646, type: 3}
   m_Name: ShotGunProjectile
   m_EditorClassIdentifier: 
-  damageMax:
-  - 5
-  - 0
-  damageMin:
-  - 2.5
-  - 0
-  forceMax:
-  - 3.75
-  - 0
-  forceMin:
-  - 1.25
-  - 0
-  ammount: 0500000000000000
   projectileObject:
   - {fileID: 6884002406987904228, guid: 141db6f70ae3f394f942a4e2d49147bf, type: 3}
   - {fileID: 0}
   projectilePosition: {fileID: 0}
   spreadMax:
-  - 5
+  - 0.1
   - 0
   spreadMin:
-  - 2.5
+  - 0.075
   - 0
   speed:
-  - 125
+  - 150
   - 0
   lifeSpan:
   - 2.5

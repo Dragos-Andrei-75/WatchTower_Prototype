@@ -1,20 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
-public struct WeaponCurrent
+public struct CurrentWeapon
 {
     public float[] fireNext;
     public float[] heatMax;
     public float[] heat;
     public int[] ammunition;
 
-    public WeaponCurrent(float[] fireNext, float[] heatMax, float[] heat, int[] ammunition)
+    public CurrentWeapon(float[] fireNext, float[] heatMax, float[] heat, int[] ammunition)
     {
         this.fireNext = new float[fireNext.Length];
         this.heatMax = new float[heatMax.Length];
         this.heat = new float[heat.Length];
         this.ammunition = new int[ammunition.Length];
+
         this.fireNext = fireNext;
         this.heatMax = heatMax;
         this.heat = heat;
@@ -30,7 +30,7 @@ public class CharacterLoadOut : MonoBehaviour
 
     [Header("LoadOut Attributes")]
     [SerializeField] private Transform[] weapons;
-    [SerializeField] private WeaponCurrent weaponCurrent;
+    [SerializeField] private CurrentWeapon weaponCurrent;
     [SerializeField] private int weaponSelected = 0;
     [SerializeField] private int loadOutSize = 11;
     [SerializeField] private bool holster = false;
@@ -59,10 +59,9 @@ public class CharacterLoadOut : MonoBehaviour
         set { weapons = value; }
     }
 
-    public WeaponCurrent WeaponCurrent
+    public CurrentWeapon WeaponCurrent
     {
         get { return weaponCurrent; }
-        set { weaponCurrent = value; }
     }
 
     public bool Holster
@@ -80,7 +79,7 @@ public class CharacterLoadOut : MonoBehaviour
         inputPlayer = new InputPlayer();
 
         inputHolster = inputPlayer.LoadOut.Holster;
-        inputHolster.started += _ => StartCoroutine(WeaponHolster());
+        inputHolster.started += _ => WeaponHolster();
 
         inputWeapon1 = inputPlayer.LoadOut.Weapon1;
         inputWeapon1.started += _ => weaponIndex = 0;
@@ -158,7 +157,7 @@ public class CharacterLoadOut : MonoBehaviour
         Pause.onPauseResume -= OnDisable;
     }
 
-    private void LoadOutSetUp(int weaponIndexNew)
+    private void LoadOutSetUp(int indexNew)
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
@@ -168,9 +167,9 @@ public class CharacterLoadOut : MonoBehaviour
             weapons[index].gameObject.SetActive(false);
         }
 
-        if (weapons[weaponIndexNew] != null)
+        if (weapons[indexNew] != null)
         {
-            weaponSelected = weaponIndexNew;
+            weaponSelected = indexNew;
             WeaponSelect();
         }
     }
@@ -186,8 +185,6 @@ public class CharacterLoadOut : MonoBehaviour
 
         weapons[weaponSelected].gameObject.SetActive(true);
 
-        weaponData = weapons[weaponSelected].GetComponent<Weapon>().WeaponData;
-
         if (weapons[weaponSelected].transform.childCount != 0)
         {
             for (int i = 0; i < weapons[weaponSelected].transform.childCount; i++)
@@ -196,7 +193,9 @@ public class CharacterLoadOut : MonoBehaviour
             }
         }
 
-        weaponCurrent = new WeaponCurrent(weaponData.fireNext, weaponData.heatMax, weaponData.heat, weaponData.ammunition);
+        weaponData = weapons[weaponSelected].GetComponent<Weapon>().WeaponData;
+
+        weaponCurrent = new CurrentWeapon(weaponData.fireNext, weaponData.heatMax, weaponData.heat, weaponData.ammunition);
     }
 
     private void WeaponSelectButton()
@@ -219,7 +218,7 @@ public class CharacterLoadOut : MonoBehaviour
         }
     }
 
-    private IEnumerator WeaponHolster()
+    private void WeaponHolster()
     {
         if (characterMovement.CheckCarry == false)
         {
@@ -237,7 +236,5 @@ public class CharacterLoadOut : MonoBehaviour
                 }
             }
         }
-
-        yield break;
     }
 }

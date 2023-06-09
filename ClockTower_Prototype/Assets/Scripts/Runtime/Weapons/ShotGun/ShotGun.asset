@@ -15,14 +15,26 @@ MonoBehaviour:
   weaponName: ShotGun
   position: {x: 0, y: 0.05, z: 0.5}
   index: 1
-  fireRateLimitUpper:
+  damageMax:
+  - 7.5
+  - 0
+  damageMin:
+  - 2.5
+  - 0
+  forceMax:
+  - 3.75
+  - 0
+  forceMin:
+  - 1.25
+  - 0
+  fireRateMax:
   - 1
   - 0
-  fireRateLimitLower:
+  fireRateMin:
   - 0.5
   - 0
   fireRate:
-  - 0
+  - 0.5
   - 0
   fireNext:
   - 0
@@ -33,5 +45,6 @@ MonoBehaviour:
   heat:
   - 0
   - 0
-  ammunitionCapacity: 6400000000000000
-  ammunition: 6400000000000000
+  ammunitionCapacity: 4800000000000000
+  ammunition: 2a00000000000000
+  amount: 0600000001000000

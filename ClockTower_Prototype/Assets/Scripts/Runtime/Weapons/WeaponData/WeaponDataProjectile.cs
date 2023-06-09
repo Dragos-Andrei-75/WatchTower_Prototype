@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Weapon/Weapon Data Projectile", fileName = "WeaponDataProjectile")]
-public class WeaponDataProjectile : WeaponDataFire
+public class WeaponDataProjectile : ScriptableObject
 {
     [Header("Projectile Attributes")]
     [Tooltip("The projectile fired from this weapon.")]                                  public GameObject[] projectileObject;

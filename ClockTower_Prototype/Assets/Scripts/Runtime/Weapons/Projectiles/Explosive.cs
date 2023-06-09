@@ -1,22 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public struct DataExplosive
-{
-    public float radius;
-
-    public DataExplosive(float radius) => this.radius = radius;
-}
-
 public class Explosive : Projectile
 {
     [Header("Explosive Attributes")]
-    [SerializeField] private DataExplosive explosiveData;
+    [SerializeField] private float radius;
 
-    public DataExplosive ExplosiveData
+    public float Radius
     {
-        get { return explosiveData; }
-        set { explosiveData = value; }
+        get { return radius; }
+        set { radius = value; }
     }
 
     private void OnEnable() => OnContact += ExplosiveBehaviour;
@@ -32,7 +25,7 @@ public class Explosive : Projectile
         float damage;
         float force;
 
-        interactableColliders = Physics.OverlapSphere(HitPosition, explosiveData.radius, LayerInteractable);
+        interactableColliders = Physics.OverlapSphere(HitPosition, radius, LayerInteractable);
 
         interactableRigidBodies = new Rigidbody[interactableColliders.Length];
         interactableScripts = new Interactable[interactableColliders.Length];
@@ -47,10 +40,10 @@ public class Explosive : Projectile
         {
             distanceObject = Vector3.Distance(interactableColliders[i].transform.position, HitPosition);
 
-            damage = Mathf.Lerp(ProjectileData.damageMax, ProjectileData.damageMin, distanceObject / explosiveData.radius);
-            force = Mathf.Lerp(ProjectileData.forceMax, ProjectileData.forceMin, distanceObject / explosiveData.radius);
+            damage = Mathf.Lerp(ProjectileData.damageMax, ProjectileData.damageMin, distanceObject / radius);
+            force = Mathf.Lerp(ProjectileData.forceMax, ProjectileData.forceMin, distanceObject / radius);
 
-            interactableRigidBodies[i].AddExplosionForce(force, HitPosition, explosiveData.radius, 1, ForceMode.Impulse);
+            interactableRigidBodies[i].AddExplosionForce(force, HitPosition, radius, 1, ForceMode.Impulse);
 
             interactableScripts[i].TakeDamage(damage);
         }

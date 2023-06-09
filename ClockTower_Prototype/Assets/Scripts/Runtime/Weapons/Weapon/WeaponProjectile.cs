@@ -28,37 +28,38 @@ public class WeaponProjectile : Weapon
     protected override void ShootPrimary()
     {
         base.ShootPrimary();
-
-        projectiles = new GameObject[weaponDataProjectile.ammount[0]];
-
-        ShootProjectile(new DataProjectile(weaponDataProjectile, 0), weaponDataProjectile.spreadMax[0], weaponDataProjectile.spreadMin[0],
-                        WeaponData.heatMax[0], ref WeaponData.heat[0]);
+        ShootProjectile(0);
     }
 
     protected override void ShootSecondary()
     {
         base.ShootSecondary();
-
-        projectiles = new GameObject[weaponDataProjectile.ammount[1]];
-
-        ShootProjectile(new DataProjectile(weaponDataProjectile, 1), weaponDataProjectile.spreadMax[1], weaponDataProjectile.spreadMin[1],
-                        WeaponData.heatMax[1], ref WeaponData.heat[1]);
+        ShootProjectile(1);
     }
 
-    protected virtual void ShootProjectile(DataProjectile projectileData, float spreadMax, float spreadMin, float heatMax, ref float heat)
+    protected virtual void ShootProjectile(int index)
     {
-        float spread = Mathf.Lerp(spreadMin, spreadMax, heat / heatMax);
+        DataProjectile projectileData;
+        float spread;
+
+        spread = Mathf.Lerp(weaponDataProjectile.spreadMin[index], weaponDataProjectile.spreadMax[index], WeaponData.heat[index] / WeaponData.heatMax[index]);
+
+        projectiles = new GameObject[WeaponData.amount[index]];
 
         for (int i = 0; i < projectiles.Length; i++)
         {
+            WeaponData.direction = WeaponTransform.forward;
+            WeaponData.direction += i % 2 == 0 ? WeaponTransform.up * Random.Range(-spread, 0) : WeaponTransform.up * Random.Range(0, spread);
+            WeaponData.direction += i < projectiles.Length / 2 ? WeaponTransform.right * Random.Range(-spread, 0) : WeaponTransform.right * Random.Range(0, spread);
+
+            projectileData = new DataProjectile(WeaponData, weaponDataProjectile, index);
+
             projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
 
             projectiles[i].GetComponent<Projectile>().ProjectileData = projectileData;
 
             projectiles[i].transform.position = weaponDataProjectile.projectilePosition.position;
             projectiles[i].transform.rotation = weaponDataProjectile.projectilePosition.rotation;
-
-            projectiles[i].transform.rotation = Quaternion.RotateTowards(projectiles[i].transform.rotation, Random.rotation, spread);
         }
     }
 }
