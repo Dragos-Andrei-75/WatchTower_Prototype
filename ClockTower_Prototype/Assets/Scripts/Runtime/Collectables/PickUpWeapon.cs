@@ -3,23 +3,27 @@ using System.Collections;
 
 public class PickUpWeapon : MonoBehaviour
 {
+    [Header("Character Object and Component References")]
+    [SerializeField] private CharacterLoadOut loadOut;
+
     [Header("PickUp Object and Component References")]
     [SerializeField] private GameObject pickUp;
     [SerializeField] private Transform pickUpTransform;
     [SerializeField] private SphereCollider pickUpCollider;
     [SerializeField] private MeshRenderer pickUpMesh;
 
-    [Header("Player Object and Component References")]
-    [SerializeField] private CharacterLoadOut loadOut;
-
     [Header("PickUp Attributes")]
     [SerializeField] private GameObject weapon;
-    [SerializeField] private Vector3 holdPosition;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Quaternion startRotation;
     [SerializeField] private float speedRotation = 25.0f;
     [SerializeField] private float timeRespawn = 2.5f;
     [SerializeField] private bool canRespawn = false;
+
+    [Header("Weapon Attributes")]
+    [SerializeField] private WeaponData[] weaponData;
+    [SerializeField] private Vector3 position;
+    [SerializeField] private int index;
 
     public delegate void WeaponEquip(int weaponIndex);
     public static event WeaponEquip OnWeaponEquip;
@@ -33,6 +37,10 @@ public class PickUpWeapon : MonoBehaviour
 
         startPosition = pickUpTransform.position;
         startRotation = pickUpTransform.rotation;
+
+        weaponData = new WeaponData[weapon.transform.GetComponents<Weapon>().Length];
+
+        for (int i = 0; i < weaponData.Length; i++) weaponData[i] = weapon.transform.GetComponents<Weapon>()[i].WeaponData;
 
         StartCoroutine(Move());
     }
@@ -68,24 +76,18 @@ public class PickUpWeapon : MonoBehaviour
 
     private IEnumerator Equip()
     {
-        WeaponData weaponData;
-
-        if (weapon.transform.GetComponent<WeaponHitScan>() != null) weaponData = weapon.transform.GetComponent<WeaponHitScan>().WeaponData;
-        else if (weapon.transform.GetComponent<WeaponProjectile>() != null) weaponData = weapon.transform.GetComponent<WeaponProjectile>().WeaponData;
-        else weaponData = weapon.transform.GetComponent<Weapon>().WeaponData;
-
-        if (loadOut.Weapons[weaponData.index] == null)
+        if (loadOut.Weapons[index] == null)
         {
             Instantiate(weapon, loadOut.transform);
 
-            weapon.transform.localPosition = weaponData.position;
-            loadOut.Weapons[weaponData.index] = weapon.transform;
+            weapon.transform.localPosition = position;
+            loadOut.Weapons[index] = weapon.transform;
 
-            if (OnWeaponEquip != null) OnWeaponEquip(weaponData.index);
+            if (OnWeaponEquip != null) OnWeaponEquip(index);
         }
         else
         {
-            weaponData.ammunition = weaponData.ammunitionCapacity;
+            for (int i = 0; i < weaponData.Length; i++) weaponData[i].Ammunition = weaponData[i].AmmunitionCapacity;
         }
 
         yield break;

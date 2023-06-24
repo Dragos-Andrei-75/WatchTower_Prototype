@@ -1,36 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public struct CurrentWeapon
-{
-    public float[] fireNext;
-    public float[] heatMax;
-    public float[] heat;
-    public int[] ammunition;
-
-    public CurrentWeapon(float[] fireNext, float[] heatMax, float[] heat, int[] ammunition)
-    {
-        this.fireNext = new float[fireNext.Length];
-        this.heatMax = new float[heatMax.Length];
-        this.heat = new float[heat.Length];
-        this.ammunition = new int[ammunition.Length];
-
-        this.fireNext = fireNext;
-        this.heatMax = heatMax;
-        this.heat = heat;
-        this.ammunition = ammunition;
-    }
-}
-
 public class CharacterLoadOut : MonoBehaviour
 {
     [Header("Character Object and Component References")]
+    [SerializeField] private Transform loadOutTransform;
     [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private CharacterInteract characterInteract;
 
     [Header("LoadOut Attributes")]
     [SerializeField] private Transform[] weapons;
-    [SerializeField] private CurrentWeapon weaponCurrent;
+    [SerializeField] private WeaponData[] weaponCurrent;
     [SerializeField] private int weaponSelected = 0;
     [SerializeField] private int loadOutSize = 11;
     [SerializeField] private bool holster = false;
@@ -59,7 +39,7 @@ public class CharacterLoadOut : MonoBehaviour
         set { weapons = value; }
     }
 
-    public CurrentWeapon WeaponCurrent
+    public WeaponData[] WeaponCurrent
     {
         get { return weaponCurrent; }
     }
@@ -71,6 +51,8 @@ public class CharacterLoadOut : MonoBehaviour
 
     private void Awake()
     {
+        loadOutTransform = gameObject.transform;
+
         characterMovement = gameObject.transform.root.GetComponent<CharacterMovement>();
         characterInteract = gameObject.transform.root.GetComponent<CharacterInteract>();
 
@@ -157,64 +139,25 @@ public class CharacterLoadOut : MonoBehaviour
         Pause.onPauseResume -= OnDisable;
     }
 
-    private void LoadOutSetUp(int indexNew)
+    private void LoadOutSetUp(int index)
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        int indexChild = 0;
+
+        for (int i = 0; i < weapons.Length; i++)
         {
-            int index = gameObject.transform.GetChild(i).GetComponent<Weapon>().WeaponData.index;
-
-            weapons[index] = gameObject.transform.GetChild(i);
-            weapons[index].gameObject.SetActive(false);
-        }
-
-        if (weapons[indexNew] != null)
-        {
-            weaponSelected = indexNew;
-            WeaponSelect();
-        }
-    }
-
-    private void WeaponSelect()
-    {
-        WeaponData weaponData;
-
-        weapons[weaponSelected].gameObject.SetActive(false);
-
-        if (weaponIndex != -1) WeaponSelectButton();
-        else if (wheelScroll != 0) WeaponSelectWheel();
-
-        weapons[weaponSelected].gameObject.SetActive(true);
-
-        if (weapons[weaponSelected].transform.childCount != 0)
-        {
-            for (int i = 0; i < weapons[weaponSelected].transform.childCount; i++)
+            if (weapons[i] != null)
             {
-                weapons[weaponSelected].transform.GetChild(i).gameObject.SetActive(true);
+                weapons[i] = loadOutTransform.GetChild(indexChild);
+                weapons[i].gameObject.SetActive(false);
+
+                indexChild++;
             }
         }
 
-        weaponData = weapons[weaponSelected].GetComponent<Weapon>().WeaponData;
-
-        weaponCurrent = new CurrentWeapon(weaponData.fireNext, weaponData.heatMax, weaponData.heat, weaponData.ammunition);
-    }
-
-    private void WeaponSelectButton()
-    {
-        if (weapons[weaponIndex] != null) weaponSelected = weaponIndex;
-        weaponIndex = -1;
-    }
-
-    private void WeaponSelectWheel()
-    {
-        if (wheelScroll > 0)
+        if (weapons[index] != null)
         {
-            do weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
-            while (weapons[weaponSelected] == null);
-        }
-        else if (wheelScroll < 0)
-        {
-            do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
-            while (weapons[weaponSelected] == null);
+            weaponSelected = index;
+            WeaponSelect();
         }
     }
 
@@ -235,6 +178,54 @@ public class CharacterLoadOut : MonoBehaviour
                     holster = false;
                 }
             }
+        }
+    }
+
+    private void WeaponSelect()
+    {
+        int index = 0;
+
+        weapons[weaponSelected].gameObject.SetActive(false);
+
+        if (weaponIndex != -1) WeaponSelectButton();
+        else if (wheelScroll != 0) WeaponSelectWheel();
+
+        weapons[weaponSelected].gameObject.SetActive(true);
+
+        if (weapons[weaponSelected].transform.childCount != 0)
+        {
+            for (int i = 0; i < weapons[weaponSelected].transform.childCount; i++)
+            {
+                weapons[weaponSelected].transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+
+        weaponCurrent = new WeaponData[weapons[weaponSelected].GetComponents<Weapon>().Length];
+
+        while (index < weaponCurrent.Length)
+        {
+            weaponCurrent[index] = weapons[weaponSelected].GetComponents<Weapon>()[index].WeaponData;
+            index++;
+        }
+    }
+
+    private void WeaponSelectButton()
+    {
+        if (weapons[weaponIndex] != null) weaponSelected = weaponIndex;
+        weaponIndex = -1;
+    }
+
+    private void WeaponSelectWheel()
+    {
+        if (wheelScroll > 0)
+        {
+            do weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
+            while (weapons[weaponSelected] == null);
+        }
+        else if (wheelScroll < 0)
+        {
+            do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
+            while (weapons[weaponSelected] == null);
         }
     }
 }

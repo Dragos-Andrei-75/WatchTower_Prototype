@@ -111,6 +111,12 @@ public class CharacterMovement : MonoBehaviour
     private Coroutine coroutineWallRun;
     private Coroutine coroutineDash;
 
+    public Transform CharacterBodyTransform
+    {
+        get { return characterBodyTransform; }
+        set { characterBodyTransform = value; }
+    }
+
     public Vector3 CharacterVelocity
     {
         get { return characterVelocity; }

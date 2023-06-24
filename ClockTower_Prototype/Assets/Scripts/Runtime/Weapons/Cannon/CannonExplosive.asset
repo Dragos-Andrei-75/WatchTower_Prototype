@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461d9ee16e43c85448fa0905bc635478, type: 3}
   m_Name: CannonExplosive
   m_EditorClassIdentifier: 
-  radius:
-  - 10
-  - 0
+  radius: 10

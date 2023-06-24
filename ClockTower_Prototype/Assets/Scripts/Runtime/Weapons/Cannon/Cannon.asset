@@ -13,38 +13,22 @@ MonoBehaviour:
   m_Name: Cannon
   m_EditorClassIdentifier: 
   weaponName: Cannon
-  position: {x: 0, y: 0.075, z: 0.25}
-  index: 3
-  damageMax:
-  - 10
-  - 0
-  damageMin:
-  - 1
-  - 0
-  forceMax:
-  - 100
-  - 0
-  forceMin:
-  - 10
-  - 0
-  fireRateMax:
-  - 1
-  - 0
-  fireRateMin:
-  - 1
-  - 0
-  fireRate:
-  - 1
-  - 0
-  fireNext:
-  - 0
-  - 0
-  heatMax:
-  - 0.1
-  - 0
-  heat:
-  - 0
-  - 0
-  ammunitionCapacity: 3200000000000000
-  ammunition: 3200000000000000
-  amount: 0100000001000000
+  directions: []
+  damageMax: 10
+  damageMin: 1
+  forceMax: 100
+  forceMin: 10
+  spreadMax: 0
+  spreadMin: 0
+  spread: 0
+  fireRateMax: 1
+  fireRateMin: 1
+  fireRate: 1
+  fireNext: 0
+  heatMax: 0.1
+  heat: 0
+  ammunitionCapacity: 50
+  ammunition: 50
+  amountMax: 1
+  amountMin: 1
+  amount: 1

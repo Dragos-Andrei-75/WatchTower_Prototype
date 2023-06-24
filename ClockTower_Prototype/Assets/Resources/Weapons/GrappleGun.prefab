@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6216775301412834447
 Transform:
   m_ObjectHideFlags: 0
@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterCameraTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: f6308bbf4de74974a8d9925be0e27721, type: 2}
+  mode: 0
+  characterCameraTransform: {fileID: 0}
+  weaponDataHitScan: {fileID: 11400000, guid: a8a2fde393cbfd448822d10383174de3, type: 2}
+  layerDefault:
+    serializedVersion: 2
+    m_Bits: 0
   grappleGunTransform: {fileID: 0}
   hookOriginTransform: {fileID: 0}
   hookTransform: {fileID: 0}
@@ -65,7 +70,6 @@ MonoBehaviour:
   timePassedMove: 0
   timeToRotate: 1
   timePassedRotate: 0
-  ropeLengthMax: 100
   ropeLength: 0
   grappleDirection: {x: 0, y: 0, z: 0}
   grappleSpeedMax: 85

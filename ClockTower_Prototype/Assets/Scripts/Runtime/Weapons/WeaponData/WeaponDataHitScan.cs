@@ -4,7 +4,10 @@ using UnityEngine;
 public class WeaponDataHitScan : ScriptableObject
 {
     [Header("HitScan Attributes")]
-    [Tooltip("The maximum accuracy of this weapon.")]                        public float[] accuracyMax;
-    [Tooltip("The minimum accuracy of this weapon.")]                        public float[] accuracyMin;
-    [Tooltip("The travel distance of a projectile fired from this weapon.")] public float[] range;
+    [Tooltip("The travel distance of a projectile fired from this weapon."), SerializeField] private float range;
+
+    public float Range
+    {
+        get { return range; }
+    }
 }

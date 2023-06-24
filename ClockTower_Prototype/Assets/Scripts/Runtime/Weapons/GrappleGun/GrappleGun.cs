@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class GrappleGun : Weapon
+public class GrappleGun : WeaponHitScan
 {
     [Header("Grapple Gun Object and Component Referecnes")]
     [SerializeField] private Transform grappleGunTransform;
@@ -24,7 +24,6 @@ public class GrappleGun : Weapon
     [SerializeField] private float timePassedMove = 0.0f;
     [SerializeField] private float timeToRotate = 1.0f;
     [SerializeField] private float timePassedRotate = 0.0f;
-    [SerializeField] private float ropeLengthMax = 100;
     [SerializeField] private float ropeLength;
 
     [Header("Character Attributes")]
@@ -39,11 +38,7 @@ public class GrappleGun : Weapon
 
     private enum HookPosition : ushort { hookOrigin, hookTarget };
 
-    protected override void OnEnable() => base.OnEnable();
-
-    protected override void OnDisable() => base.OnDisable();
-
-    private void Start()
+    protected override void Start()
     {
         grappleGunTransform = gameObject.transform;
 
@@ -57,13 +52,13 @@ public class GrappleGun : Weapon
         hookIgnore = LayerMask.GetMask("Player");
     }
 
-    protected override void ShootPrimary() { if (grappled == false) StartCoroutine(Grapple()); }
+    protected override void Shoot() { if (grappled == false) StartCoroutine(Grapple()); }
 
     private IEnumerator Grapple()
     {
         RaycastHit hookHit;
 
-        grappled = Physics.Raycast(CharacterCameraTransform.position, CharacterCameraTransform.forward, out hookHit, ropeLengthMax, ~hookIgnore, QueryTriggerInteraction.Ignore);
+        grappled = Physics.Raycast(CharacterCameraTransform.position, CharacterCameraTransform.forward, out hookHit, WeaponDataHitScan.Range, ~hookIgnore, QueryTriggerInteraction.Ignore);
 
         if (grappled == true)
         {
@@ -90,7 +85,7 @@ public class GrappleGun : Weapon
 
                     drag = hookHit.rigidbody.drag;
                     angularDrag = hookHit.rigidbody.angularDrag;
-                    forceImpulse = Mathf.Lerp(2.5f, 15.0f, ropeLength / ropeLengthMax);
+                    forceImpulse = Mathf.Lerp(2.5f, 15.0f, ropeLength / WeaponDataHitScan.Range);
 
                     hookHit.rigidbody.drag = 0.5f;
                     hookHit.rigidbody.angularDrag = 0.0f;
@@ -146,7 +141,7 @@ public class GrappleGun : Weapon
                     while (Vector3.Distance(hookOriginTransform.position, hookHitTransform.position) > 5)
                     {
                         ropeLength = Vector3.Distance(hookOriginTransform.position, hookHit.point);
-                        grappleSpeed = Mathf.Lerp(grappleSpeedMax, grappleSpeedMin, ropeLength / ropeLengthMax);
+                        grappleSpeed = Mathf.Lerp(grappleSpeedMax, grappleSpeedMin, ropeLength / WeaponDataHitScan.Range);
 
                         characterMovement.CharacterVelocity = grappleDirection * grappleSpeed;
 
@@ -166,7 +161,7 @@ public class GrappleGun : Weapon
     {
         Transform transform;
 
-        timeToMove = Mathf.Lerp(timeToMoveMin, timeToMoveMax, ropeLength / ropeLengthMax);
+        timeToMove = Mathf.Lerp(timeToMoveMin, timeToMoveMax, ropeLength / WeaponDataHitScan.Range);
 
         if (hookPosition == HookPosition.hookTarget) transform = hookHitTransform;
         else transform = hookTransform;
@@ -240,6 +235,7 @@ public class GrappleGun : Weapon
         grappleDirection = Vector3.zero;
         grappled = false;
 
+        characterMovement.CharacterVelocity = characterMovement.CharacterBodyTransform.forward * (characterMovement.CharacterVelocity.magnitude / 2);
         characterMovement.CheckGrapple = false;
 
         yield break;

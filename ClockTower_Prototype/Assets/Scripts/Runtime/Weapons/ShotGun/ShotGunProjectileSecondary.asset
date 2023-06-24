@@ -10,34 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53f47e8ed2cb5324ab7ea10d10d35646, type: 3}
-  m_Name: RailGunProjectile
+  m_Name: ShotGunProjectileSecondary
   m_EditorClassIdentifier: 
-  damageMax:
-  - 0
-  - 0
-  damageMin:
-  - 0
-  - 0
-  forceMax:
-  - 0
-  - 0
-  forceMin:
-  - 0
-  - 0
-  ammount: 0100000001000000
-  projectileObject:
-  - {fileID: 0}
-  - {fileID: 0}
+  projectileObject: {fileID: 8466205795590584973, guid: 78713c2b73720e141a26cb67fdc3275e, type: 3}
   projectilePosition: {fileID: 0}
-  spreadMax:
-  - 0
-  - 0
-  spreadMin:
-  - 0
-  - 0
-  speed:
-  - 1000
-  - 250
-  lifeSpan:
-  - 0
-  - 0
+  speed: 75
+  lifeSpan: 5

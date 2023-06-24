@@ -703,7 +703,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterCameraTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: efc2bbd4fc9cd7f4bbfcc27509b41c99, type: 2}
+  mode: 0
+  characterCameraTransform: {fileID: 0}
   weaponDataHitScan: {fileID: 11400000, guid: 964c1e1100406aa4199c2a1ca14bd404, type: 2}
+  layerDefault:
+    serializedVersion: 2
+    m_Bits: 0

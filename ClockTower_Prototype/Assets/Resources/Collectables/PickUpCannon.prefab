@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2783
+  m_VersionIndex: 2807
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1508,15 +1508,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fcdc6ba2bc209a45a4b56f539056f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadOut: {fileID: 0}
   pickUp: {fileID: 0}
   pickUpTransform: {fileID: 0}
   pickUpCollider: {fileID: 0}
   pickUpMesh: {fileID: 0}
-  loadOut: {fileID: 0}
   weapon: {fileID: 2579755287035718122, guid: 63e9e647afdaa834f8efc417f169be9f, type: 3}
-  holdPosition: {x: 0, y: 0, z: 0}
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   speedRotation: 25
   timeRespawn: 2.5
   canRespawn: 1
+  weaponData: []
+  position: {x: 0, y: 0.075, z: 0.25}
+  index: 3

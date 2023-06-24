@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
-  m_Name: RevolverHitScan
+  m_Script: {fileID: 11500000, guid: 461d9ee16e43c85448fa0905bc635478, type: 3}
+  m_Name: ShotGunExplosive
   m_EditorClassIdentifier: 
-  range: 1000
+  projectileObject: {fileID: 8466205795590584973, guid: 78713c2b73720e141a26cb67fdc3275e, type: 3}
+  projectilePosition: {fileID: 0}
+  speed: 75
+  lifeSpan: 5
+  radius: 5

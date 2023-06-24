@@ -12,36 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe3415829bde424a82f6a2ddbba5c05, type: 3}
   m_Name: MachineGunHitScan
   m_EditorClassIdentifier: 
-  weaponName: MachineGun
-  position: {x: 0, y: 0.125, z: 0.5}
-  index: 2
-  fireRate:
-  - 0.25
-  - 0
-  fireNext:
-  - 0
-  - 0
-  ammunitionCapacity: fa00000000000000
-  ammunition: fa00000000000000
-  damageMax:
-  - 2.5
-  - 0
-  damageMin:
-  - 1
-  - 0
-  forceMax:
-  - 5
-  - 0
-  forceMin:
-  - 2.5
-  - 0
-  ammount: 0100000000000000
-  accuracyMax:
-  - 0.025
-  - 0
-  accuracyMin:
-  - -0.025
-  - 0
-  range:
-  - 1000
-  - 0
+  range: 1250

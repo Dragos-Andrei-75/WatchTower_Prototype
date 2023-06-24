@@ -21,45 +21,29 @@ public class WeaponProjectile : Weapon
     protected override void Awake()
     {
         base.Awake();
-
-        weaponDataProjectile.projectilePosition = WeaponTransform.GetChild(0);
+        weaponDataProjectile.ProjectilePosition = WeaponTransform.GetChild(0);
+        projectiles = new GameObject[WeaponData.Amount];
     }
 
-    protected override void ShootPrimary()
+    protected override void Shoot()
     {
-        base.ShootPrimary();
-        ShootProjectile(0);
+        base.Shoot();
+        ShootProjectile();
     }
 
-    protected override void ShootSecondary()
+    protected virtual void ShootProjectile()
     {
-        base.ShootSecondary();
-        ShootProjectile(1);
-    }
-
-    protected virtual void ShootProjectile(int index)
-    {
-        DataProjectile projectileData;
-        float spread;
-
-        spread = Mathf.Lerp(weaponDataProjectile.spreadMin[index], weaponDataProjectile.spreadMax[index], WeaponData.heat[index] / WeaponData.heatMax[index]);
-
-        projectiles = new GameObject[WeaponData.amount[index]];
-
-        for (int i = 0; i < projectiles.Length; i++)
+        for (int i = 0; i < WeaponData.Amount; i++)
         {
-            WeaponData.direction = WeaponTransform.forward;
-            WeaponData.direction += i % 2 == 0 ? WeaponTransform.up * Random.Range(-spread, 0) : WeaponTransform.up * Random.Range(0, spread);
-            WeaponData.direction += i < projectiles.Length / 2 ? WeaponTransform.right * Random.Range(-spread, 0) : WeaponTransform.right * Random.Range(0, spread);
-
-            projectileData = new DataProjectile(WeaponData, weaponDataProjectile, index);
+            DataProjectile projectileData = new DataProjectile(weaponDataProjectile.ProjectileObject, WeaponData.Directions[i], WeaponData.DamageMax, WeaponData.DamageMin,
+                                                               WeaponData.ForceMax, WeaponData.ForceMin, weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
 
             projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
 
             projectiles[i].GetComponent<Projectile>().ProjectileData = projectileData;
 
-            projectiles[i].transform.position = weaponDataProjectile.projectilePosition.position;
-            projectiles[i].transform.rotation = weaponDataProjectile.projectilePosition.rotation;
+            projectiles[i].transform.position = weaponDataProjectile.ProjectilePosition.position;
+            projectiles[i].transform.rotation = weaponDataProjectile.ProjectilePosition.rotation;
         }
     }
 }

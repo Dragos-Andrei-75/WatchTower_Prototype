@@ -98,20 +98,18 @@ public class CharacterShoot : MonoBehaviour
     {
         if (characterInteract.ObjectCarriedTransform == null && characterInteract.CheckThrow == false)
         {
-            if (leftButton == true) StartCoroutine(ShootPrimary());
-            else if (rightButton == true) StartCoroutine(ShootSecondary());
+            if (OnShootPrimary != null && leftButton == true) StartCoroutine(ShootPrimary());
+            else if (OnShootSecondary != null && rightButton == true) StartCoroutine(ShootSecondary());
         }
     }
 
     private IEnumerator ShootPrimary()
     {
-        if (rightButton == true) rightButton = false;
-
-        while (OnShootPrimary != null && leftButton == true)
+        while (OnShootPrimary != null && leftButton == true && rightButton == false)
         {
-            if (characterLoadOut.WeaponCurrent.ammunition[0] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[0]) OnShootPrimary();
+            if (characterLoadOut.WeaponCurrent[0].Ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent[0].FireNext) OnShootPrimary();
 
-            characterLoadOut.WeaponCurrent.heat[0] += Time.deltaTime;
+            characterLoadOut.WeaponCurrent[0].Heat += Time.deltaTime;
 
             yield return null;
         }
@@ -123,13 +121,11 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator ShootSecondary()
     {
-        if (leftButton == true) leftButton = false;
-
-        while (OnShootSecondary != null && rightButton == true)
+        while (OnShootSecondary != null && leftButton == false && rightButton == true)
         {
-            if (characterLoadOut.WeaponCurrent.ammunition[1] > 0 && Time.time > characterLoadOut.WeaponCurrent.fireNext[1]) OnShootSecondary();
+            if (characterLoadOut.WeaponCurrent[1].Ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent[1].FireNext) OnShootSecondary();
 
-            characterLoadOut.WeaponCurrent.heat[1] += Time.deltaTime;
+            characterLoadOut.WeaponCurrent[1].Heat += Time.deltaTime;
 
             yield return null;
         }
@@ -141,36 +137,30 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator ReleasePrimary()
     {
-        while (OnReleasePrimary != null && leftButton == false)
+        while (characterLoadOut.WeaponCurrent[0].Heat > 0)
         {
-            while (characterLoadOut.WeaponCurrent.heat[0] > 0)
-            {
-                characterLoadOut.WeaponCurrent.heat[0] -= Time.deltaTime;
-                yield return null;
-            }
-
-            characterLoadOut.WeaponCurrent.heat[0] = 0;
+            if (OnReleasePrimary != null && leftButton == false) characterLoadOut.WeaponCurrent[0].Heat -= Time.deltaTime;
+            else yield break;
 
             yield return null;
         }
+
+        characterLoadOut.WeaponCurrent[0].Heat = 0;
 
         yield break;
     }
 
     private IEnumerator ReleaseSecondary()
     {
-        while (OnReleaseSecondary != null && rightButton == false)
+        while (characterLoadOut.WeaponCurrent[1].Heat > 0)
         {
-            while (characterLoadOut.WeaponCurrent.heat[1] > 0)
-            {
-                characterLoadOut.WeaponCurrent.heat[1] -= Time.deltaTime;
-                yield return null;
-            }
-
-            characterLoadOut.WeaponCurrent.heat[1] = 0;
+            if (OnReleaseSecondary != null && rightButton == false) characterLoadOut.WeaponCurrent[1].Heat -= Time.deltaTime;
+            else yield break;
 
             yield return null;
         }
+
+        characterLoadOut.WeaponCurrent[1].Heat = 0;
 
         yield break;
     }

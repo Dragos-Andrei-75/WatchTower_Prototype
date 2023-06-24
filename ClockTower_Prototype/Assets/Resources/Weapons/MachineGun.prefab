@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6062210099632013541
 Transform:
   m_ObjectHideFlags: 0
@@ -943,7 +943,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterCameraTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 1a79a4d1bbd558d49a42da2710787095, type: 2}
+  mode: 0
+  characterCameraTransform: {fileID: 0}
   weaponDataHitScan: {fileID: 11400000, guid: cf7125e2044d1ed40962b7bcb9b35e37, type: 2}
+  layerDefault:
+    serializedVersion: 2
+    m_Bits: 0

@@ -13,30 +13,22 @@ MonoBehaviour:
   m_Name: GrappleGun
   m_EditorClassIdentifier: 
   weaponName: GrappleGun
-  position: {x: 0, y: 0.085, z: 0.5}
-  index: 5
-  damageMax: []
-  damageMin: []
-  forceMax: []
-  forceMin: []
-  fireRateMax:
-  - 0
-  - 0
-  fireRateMin:
-  - 0
-  - 0
-  fireRate:
-  - 0
-  - 0
-  fireNext:
-  - 0
-  - 0
-  heatMax:
-  - 0
-  - 0
-  heat:
-  - 0
-  - 0
-  ammunitionCapacity: 0100000001000000
-  ammunition: 0100000001000000
-  amount: 
+  directions: []
+  damageMax: 0
+  damageMin: 0
+  forceMax: 0
+  forceMin: 0
+  spreadMax: 0
+  spreadMin: 0
+  spread: 0
+  fireRateMax: 0
+  fireRateMin: 0
+  fireRate: 0
+  fireNext: 0
+  heatMax: 0
+  heat: 0
+  ammunitionCapacity: 1
+  ammunition: 1
+  amountMax: 1
+  amountMin: 1
+  amount: 1

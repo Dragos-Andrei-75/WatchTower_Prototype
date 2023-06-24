@@ -2,8 +2,17 @@ using UnityEngine;
 
 public class WeaponHitScan : Weapon
 {
+    [Header("Character Object and Component References")]
+    [SerializeField] private Transform characterCameraTransform;
+
     [Header("HitScan Weapon Attributes")]
     [SerializeField] private WeaponDataHitScan weaponDataHitScan;
+    [SerializeField] LayerMask layerDefault;
+
+    protected Transform CharacterCameraTransform
+    {
+        get { return characterCameraTransform; }
+    }
 
     protected WeaponDataHitScan WeaponDataHitScan
     {
@@ -11,46 +20,34 @@ public class WeaponHitScan : Weapon
         set { weaponDataHitScan = value; }
     }
 
-    protected override void ShootPrimary()
+    protected override void Awake()
     {
-        base.ShootPrimary();
-        ShootHitScan(0);
+        base.Awake();
+
+        characterCameraTransform = WeaponTransform.root.GetChild(0).GetComponent<Transform>();
+        layerDefault = LayerMask.GetMask("Default");
     }
 
-    protected override void ShootSecondary()
+    protected override void Shoot()
     {
-        base.ShootSecondary();
-        ShootHitScan(1);
+        base.Shoot();
+        ShootHitScan();
     }
 
-    protected void ShootHitScan(int index)
+    private void ShootHitScan()
     {
         RaycastHit hit;
-        LayerMask layerDefault;
-        float accuracyLimitUpper;
-        float accuracyLimitLower;
         bool shot;
 
-        layerDefault = LayerMask.GetMask("Default");
-
-        for (int i = 0; i < WeaponData.amount[index]; i++)
+        for (int i = 0; i < WeaponData.Amount; i++)
         {
-            accuracyLimitUpper = Mathf.Lerp(0, weaponDataHitScan.accuracyMax[index], WeaponData.heat[index] / WeaponData.heatMax[index]);
-            accuracyLimitLower = Mathf.Lerp(0, weaponDataHitScan.accuracyMin[index], WeaponData.heat[index] / WeaponData.heatMax[index]);
-
-            WeaponData.direction = CharacterCameraTransform.forward;
-
-            WeaponData.direction.x += Random.Range(accuracyLimitLower, accuracyLimitUpper);
-            WeaponData.direction.y += Random.Range(accuracyLimitLower, accuracyLimitUpper);
-            WeaponData.direction.z += Random.Range(accuracyLimitLower, accuracyLimitUpper);
-
-            shot = Physics.Raycast(CharacterCameraTransform.position, WeaponData.direction, out hit, weaponDataHitScan.range[index], ~layerDefault, QueryTriggerInteraction.Ignore);
+            shot = Physics.Raycast(CharacterCameraTransform.position, WeaponData.Directions[i], out hit, weaponDataHitScan.Range, ~layerDefault, QueryTriggerInteraction.Ignore);
 
             if (shot == true)
             {
                 float distance = Vector3.Distance(WeaponTransform.position, hit.point);
-                float damage = Mathf.Lerp(WeaponData.damageMax[index], WeaponData.damageMin[index], distance / WeaponDataHitScan.range[index]);
-                float force = Mathf.Lerp(WeaponData.forceMax[index], WeaponData.forceMin[index], distance / WeaponDataHitScan.range[index]);
+                float damage = Mathf.Lerp(WeaponData.DamageMax, WeaponData.DamageMin, distance / WeaponDataHitScan.Range);
+                float force = Mathf.Lerp(WeaponData.ForceMax, WeaponData.ForceMin, distance / WeaponDataHitScan.Range);
 
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {

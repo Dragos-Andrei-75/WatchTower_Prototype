@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
-  m_Name: RailGun
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
-  weaponName: RailGun
+  weaponName: MachineGun
   directions: []
-  damageMax: 50
-  damageMin: 25
-  forceMax: 25
-  forceMin: 12.5
-  spreadMax: 0
-  spreadMin: 0
+  damageMax: 2.5
+  damageMin: 1
+  forceMax: 3.75
+  forceMin: 1.25
+  spreadMax: 0.25
+  spreadMin: 0.1
   spread: 0
-  fireRateMax: 2.5
-  fireRateMin: 1
+  fireRateMax: 0.375
+  fireRateMin: 0.125
   fireRate: 0
   fireNext: 0
-  heatMax: 2.5
+  heatMax: 10
   heat: 0
-  ammunitionCapacity: 25
-  ammunition: 25
+  ammunitionCapacity: 250
+  ammunition: 250
   amountMax: 1
   amountMin: 1
   amount: 0
