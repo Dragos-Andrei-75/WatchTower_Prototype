@@ -111,6 +111,8 @@ public class CharacterLoadOut : MonoBehaviour
         inputWheel.performed += _ => WeaponSelect();
         inputWheel.performed += _ => wheelScroll = inputWheel.ReadValue<float>();
         inputWheel.canceled += _ => wheelScroll = 0;
+
+        LoadOutSetup();
     }
 
     private void OnEnable()
@@ -118,7 +120,7 @@ public class CharacterLoadOut : MonoBehaviour
         inputPlayer.Enable();
         inputWheel.Enable();
 
-        PickUpWeapon.OnWeaponEquip += LoadOutSetUp;
+        PickUpWeapon.OnWeaponEquip += WeaponSwitch;
 
         characterInteract.OnCarry += WeaponHolster;
 
@@ -131,7 +133,7 @@ public class CharacterLoadOut : MonoBehaviour
         inputPlayer.Disable();
         inputWheel.Disable();
 
-        PickUpWeapon.OnWeaponEquip -= LoadOutSetUp;
+        PickUpWeapon.OnWeaponEquip -= WeaponSwitch;
 
         characterInteract.OnCarry -= WeaponHolster;
 
@@ -139,46 +141,18 @@ public class CharacterLoadOut : MonoBehaviour
         Pause.onPauseResume -= OnDisable;
     }
 
-    private void LoadOutSetUp(int index)
+    private void LoadOutSetup()
     {
-        int indexChild = 0;
-
-        for (int i = 0; i < weapons.Length; i++)
-        {
-            if (weapons[i] != null)
-            {
-                weapons[i] = loadOutTransform.GetChild(indexChild);
-                weapons[i].gameObject.SetActive(false);
-
-                indexChild++;
-            }
-        }
-
-        if (weapons[index] != null)
-        {
-            weaponSelected = index;
-            WeaponSelect();
-        }
+        for (int i = 0; i < loadOutSize; i++) if (weapons[i] != null && weaponSelected != i) weapons[i].gameObject.SetActive(false);
     }
 
-    private void WeaponHolster()
+    private void WeaponSwitch(int index)
     {
-        if (characterMovement.CheckCarry == false)
-        {
-            if (weapons[weaponSelected] != null && weaponSelected != 5)
-            {
-                if (weapons[weaponSelected].gameObject.activeSelf == true)
-                {
-                    weapons[weaponSelected].gameObject.SetActive(false);
-                    holster = true;
-                }
-                else
-                {
-                    weapons[weaponSelected].gameObject.SetActive(true);
-                    holster = false;
-                }
-            }
-        }
+        if (weapons[weaponSelected] != null) weapons[weaponSelected].gameObject.SetActive(false);
+
+        weaponSelected = index;
+
+        WeaponSelect();
     }
 
     private void WeaponSelect()
@@ -226,6 +200,26 @@ public class CharacterLoadOut : MonoBehaviour
         {
             do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
             while (weapons[weaponSelected] == null);
+        }
+    }
+
+    private void WeaponHolster()
+    {
+        if (characterMovement.CheckCarry == false)
+        {
+            if (weapons[weaponSelected] != null && weaponSelected != 5)
+            {
+                if (weapons[weaponSelected].gameObject.activeSelf == true)
+                {
+                    weapons[weaponSelected].gameObject.SetActive(false);
+                    holster = true;
+                }
+                else
+                {
+                    weapons[weaponSelected].gameObject.SetActive(true);
+                    holster = false;
+                }
+            }
         }
     }
 }

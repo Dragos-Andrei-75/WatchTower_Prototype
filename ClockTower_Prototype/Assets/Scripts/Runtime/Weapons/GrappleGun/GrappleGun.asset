@@ -18,17 +18,11 @@ MonoBehaviour:
   damageMin: 0
   forceMax: 0
   forceMin: 0
-  spreadMax: 0
-  spreadMin: 0
-  spread: 0
-  fireRateMax: 0
-  fireRateMin: 0
   fireRate: 0
   fireNext: 0
+  spread: 0
   heatMax: 0
   heat: 0
   ammunitionCapacity: 1
   ammunition: 1
-  amountMax: 1
-  amountMin: 1
   amount: 1

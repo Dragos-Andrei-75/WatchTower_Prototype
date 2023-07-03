@@ -99,6 +99,8 @@ public class Projectile : MonoBehaviour
         projectileLayer = LayerMask.GetMask("Projectile");
         layerInteractable = LayerMask.GetMask("Interactable");
 
+        projectileTransform.rotation = Quaternion.LookRotation(projectileData.direction);
+
         StartCoroutine(ProjectileBehaviour());
     }
 

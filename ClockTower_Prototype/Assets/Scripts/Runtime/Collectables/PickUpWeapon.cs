@@ -13,7 +13,7 @@ public class PickUpWeapon : MonoBehaviour
     [SerializeField] private MeshRenderer pickUpMesh;
 
     [Header("PickUp Attributes")]
-    [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject weaponPrefab;
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Quaternion startRotation;
     [SerializeField] private float speedRotation = 25.0f;
@@ -38,9 +38,9 @@ public class PickUpWeapon : MonoBehaviour
         startPosition = pickUpTransform.position;
         startRotation = pickUpTransform.rotation;
 
-        weaponData = new WeaponData[weapon.transform.GetComponents<Weapon>().Length];
+        weaponData = new WeaponData[weaponPrefab.transform.GetComponents<Weapon>().Length];
 
-        for (int i = 0; i < weaponData.Length; i++) weaponData[i] = weapon.transform.GetComponents<Weapon>()[i].WeaponData;
+        for (int i = 0; i < weaponData.Length; i++) weaponData[i] = weaponPrefab.transform.GetComponents<Weapon>()[i].WeaponData;
 
         StartCoroutine(Move());
     }
@@ -78,7 +78,7 @@ public class PickUpWeapon : MonoBehaviour
     {
         if (loadOut.Weapons[index] == null)
         {
-            Instantiate(weapon, loadOut.transform);
+            GameObject weapon = Instantiate(weaponPrefab, loadOut.transform);
 
             weapon.transform.localPosition = position;
             loadOut.Weapons[index] = weapon.transform;

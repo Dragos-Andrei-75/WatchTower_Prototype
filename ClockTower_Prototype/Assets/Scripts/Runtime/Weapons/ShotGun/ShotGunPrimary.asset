@@ -18,17 +18,11 @@ MonoBehaviour:
   damageMin: 2.5
   forceMax: 3.75
   forceMin: 1.25
-  spreadMax: 0.1
-  spreadMin: 0.075
-  spread: 0
-  fireRateMax: 1
-  fireRateMin: 0.5
   fireRate: 0
   fireNext: 0
+  spread: 0
   heatMax: 7.5
   heat: 0
   ammunitionCapacity: 75
   ammunition: 75
-  amountMax: 10
-  amountMin: 5
   amount: 5

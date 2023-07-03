@@ -21,9 +21,27 @@ public class WeaponProjectile : Weapon
     protected override void Awake()
     {
         base.Awake();
+
         weaponDataProjectile.ProjectilePosition = WeaponTransform.GetChild(0);
-        projectiles = new GameObject[WeaponData.Amount];
+
+        SetProjectilesSize();
     }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        WeaponData.OnAmountSet += SetProjectilesSize;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        WeaponData.OnAmountSet -= SetProjectilesSize;
+    }
+
+    private void SetProjectilesSize() => projectiles = new GameObject[WeaponData.Amount];
 
     protected override void Shoot()
     {

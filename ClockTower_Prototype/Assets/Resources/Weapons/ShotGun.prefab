@@ -46,13 +46,14 @@ GameObject:
   - component: {fileID: 4283855264296335158}
   - component: {fileID: 7456115661906446531}
   - component: {fileID: -3733521916468071221}
+  - component: {fileID: -2678186969398067812}
   m_Layer: 11
   m_Name: ShotGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8875273204714065887
 Transform:
   m_ObjectHideFlags: 0
@@ -761,7 +762,31 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 3290faa0095a0234eb631a4504bd5a81, type: 2}
-  mode: 1
+  mode: 0
   projectiles: []
   weaponDataProjectile: {fileID: 11400000, guid: 9af755662286e6a4981105372dc7a4c1, type: 2}
   weaponDataExplosive: {fileID: 11400000, guid: 9f6114408505a3e47b2276f485b63ac1, type: 2}
+--- !u!114 &-2678186969398067812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797631409972636595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369a0ac38d1745345aa87801d6e034ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 0}
+  mode: 0
+  weaponAttributes: 
+  valuesMax:
+  - 0.1
+  - 1
+  - 10
+  valuesMin:
+  - 0.075
+  - 0.5
+  - 5
+  weaponAttributesSize: 3

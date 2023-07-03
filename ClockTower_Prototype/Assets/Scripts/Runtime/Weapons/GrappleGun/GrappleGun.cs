@@ -38,7 +38,7 @@ public class GrappleGun : WeaponHitScan
 
     private enum HookPosition : ushort { hookOrigin, hookTarget };
 
-    protected override void Start()
+    private void Start()
     {
         grappleGunTransform = gameObject.transform;
 

@@ -726,7 +726,7 @@ MonoBehaviour:
   pickUpTransform: {fileID: 0}
   pickUpCollider: {fileID: 0}
   pickUpMesh: {fileID: 0}
-  weapon: {fileID: 8797631409972636595, guid: f8d50c8d1a89aa242868a5f7b80ef4dc, type: 3}
+  weaponPrefab: {fileID: 8797631409972636595, guid: f8d50c8d1a89aa242868a5f7b80ef4dc, type: 3}
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   speedRotation: 25

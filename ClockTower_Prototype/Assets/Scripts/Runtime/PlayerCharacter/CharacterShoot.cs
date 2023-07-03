@@ -20,8 +20,6 @@ public class CharacterShoot : MonoBehaviour
     public delegate void ShootRelease();
     public event ShootRelease OnShootPrimary;
     public event ShootRelease OnShootSecondary;
-    public event ShootRelease OnReleasePrimary;
-    public event ShootRelease OnReleaseSecondary;
 
     public bool LeftButton
     {
@@ -110,6 +108,7 @@ public class CharacterShoot : MonoBehaviour
             if (characterLoadOut.WeaponCurrent[0].Ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent[0].FireNext) OnShootPrimary();
 
             characterLoadOut.WeaponCurrent[0].Heat += Time.deltaTime;
+            characterLoadOut.WeaponCurrent[0].Heat = Mathf.Clamp(characterLoadOut.WeaponCurrent[0].Heat, 0, characterLoadOut.WeaponCurrent[0].HeatMax);
 
             yield return null;
         }
@@ -126,6 +125,7 @@ public class CharacterShoot : MonoBehaviour
             if (characterLoadOut.WeaponCurrent[1].Ammunition > 0 && Time.time > characterLoadOut.WeaponCurrent[1].FireNext) OnShootSecondary();
 
             characterLoadOut.WeaponCurrent[1].Heat += Time.deltaTime;
+            characterLoadOut.WeaponCurrent[1].Heat = Mathf.Clamp(characterLoadOut.WeaponCurrent[1].Heat, 0, characterLoadOut.WeaponCurrent[1].HeatMax);
 
             yield return null;
         }
@@ -139,7 +139,7 @@ public class CharacterShoot : MonoBehaviour
     {
         while (characterLoadOut.WeaponCurrent[0].Heat > 0)
         {
-            if (OnReleasePrimary != null && leftButton == false) characterLoadOut.WeaponCurrent[0].Heat -= Time.deltaTime;
+            if (OnShootPrimary != null && leftButton == false) characterLoadOut.WeaponCurrent[0].Heat -= Time.deltaTime;
             else yield break;
 
             yield return null;
@@ -154,7 +154,7 @@ public class CharacterShoot : MonoBehaviour
     {
         while (characterLoadOut.WeaponCurrent[1].Heat > 0)
         {
-            if (OnReleaseSecondary != null && rightButton == false) characterLoadOut.WeaponCurrent[1].Heat -= Time.deltaTime;
+            if (OnShootSecondary != null && rightButton == false) characterLoadOut.WeaponCurrent[1].Heat -= Time.deltaTime;
             else yield break;
 
             yield return null;

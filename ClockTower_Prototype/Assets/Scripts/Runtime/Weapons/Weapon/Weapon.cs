@@ -12,6 +12,9 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private Mode mode;
 
+    public delegate void WeaponShoot();
+    public event WeaponShoot OnWeaponShoot;
+
     private enum Mode : ushort { Primary, Secondary }
 
     protected Transform WeaponTransform
@@ -27,40 +30,47 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Weapon[] weapon;
+
         weaponTransform = gameObject.transform;
         characterShoot = weaponTransform.GetComponentInParent<CharacterShoot>();
 
-        WeaponData.Directions = new Vector3[WeaponData.Amount];
-    }
-
-    protected virtual void Start()
-    {
-        WeaponData.Spread = weaponData.SpreadMin;
-        WeaponData.FireRate = weaponData.FireRateMin;
         WeaponData.FireNext = 0;
-        WeaponData.Amount = WeaponData.AmountMin;
+        WeaponData.Heat = 0;
+
+        weapon = weaponTransform.GetComponents<Weapon>();
+
+        for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) mode = (Mode)i;
+
+        SetDirectionsSize();
     }
 
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         if (mode == Mode.Primary) characterShoot.OnShootPrimary += Shoot;
         else if (mode == Mode.Secondary) characterShoot.OnShootSecondary += Shoot;
+
+        WeaponData.OnAmountSet += SetDirectionsSize;
     }
 
-    protected void OnDisable()
+    protected virtual void OnDisable()
     {
         if (mode == Mode.Primary) characterShoot.OnShootPrimary -= Shoot;
         else if (mode == Mode.Secondary) characterShoot.OnShootSecondary -= Shoot;
+
+        WeaponData.OnAmountSet -= SetDirectionsSize;
     }
+
+    private void SetDirectionsSize() => WeaponData.Directions = new Vector3[WeaponData.Amount];
 
     protected virtual void Shoot()
     {
         weaponData.Ammunition--;
         weaponData.FireNext = Time.time + weaponData.FireRate;
-        weaponData.FireRate = Mathf.Lerp(WeaponData.FireRateMin, WeaponData.FireRateMax, WeaponData.Heat / WeaponData.HeatMax);
-        weaponData.Spread = Mathf.Lerp(WeaponData.SpreadMin, WeaponData.SpreadMax, WeaponData.Heat / WeaponData.HeatMax);
 
-        for (int i = 0; i < WeaponData.Directions.Length; i++)
+        if (OnWeaponShoot != null) OnWeaponShoot();
+
+        for (int i = 0; i < WeaponData.Amount; i++)
         {
             WeaponData.Directions[i] = WeaponTransform.forward;
 
