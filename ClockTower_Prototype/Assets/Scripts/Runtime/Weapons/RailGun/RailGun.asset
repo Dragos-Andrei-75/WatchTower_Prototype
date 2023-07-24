@@ -13,22 +13,17 @@ MonoBehaviour:
   m_Name: RailGun
   m_EditorClassIdentifier: 
   weaponName: RailGun
-  directions: []
+  directions:
+  - {x: 0, y: 0, z: 0}
   damageMax: 50
   damageMin: 25
   forceMax: 25
   forceMin: 12.5
-  spreadMax: 0
-  spreadMin: 0
-  spread: 0
-  fireRateMax: 2.5
-  fireRateMin: 1
-  fireRate: 0
+  fireRate: 1.25
   fireNext: 0
+  spread: 0
   heatMax: 2.5
   heat: 0
   ammunitionCapacity: 25
   ammunition: 25
-  amountMax: 1
-  amountMin: 1
-  amount: 0
+  amount: 1

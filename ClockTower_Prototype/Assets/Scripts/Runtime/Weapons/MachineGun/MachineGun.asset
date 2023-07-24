@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MachineGun
   m_EditorClassIdentifier: 
   weaponName: MachineGun
-  directions: []
+  directions:
+  - {x: 0, y: 0, z: 0}
   damageMax: 2.5
   damageMin: 1
   forceMax: 3.75

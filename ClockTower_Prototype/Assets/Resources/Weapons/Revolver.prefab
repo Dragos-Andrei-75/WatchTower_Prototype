@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2809084543955411979}
   - component: {fileID: 6795072065399905296}
   - component: {fileID: 1336592033478466992}
+  - component: {fileID: 8268078651993198671}
   m_Layer: 11
   m_Name: Revolver
   m_TagString: Untagged
@@ -705,9 +706,26 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: efc2bbd4fc9cd7f4bbfcc27509b41c99, type: 2}
-  mode: 0
+  fire: 0
   characterCameraTransform: {fileID: 0}
   weaponDataHitScan: {fileID: 11400000, guid: 964c1e1100406aa4199c2a1ca14bd404, type: 2}
   layerDefault:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &8268078651993198671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4847356221429828701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2ca150e14c83847b022cf1bdb00ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 0}
+  fireMod: 0
+  damage: 0.1
+  time: 1
+  tick: 0.1

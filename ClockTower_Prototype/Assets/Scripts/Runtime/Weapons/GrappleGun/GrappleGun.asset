@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: GrappleGun
   m_EditorClassIdentifier: 
   weaponName: GrappleGun
-  directions: []
+  directions:
+  - {x: 0, y: 0, z: 0}
   damageMax: 0
   damageMin: 0
   forceMax: 0

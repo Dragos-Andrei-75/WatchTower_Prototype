@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cannon
   m_EditorClassIdentifier: 
   weaponName: Cannon
-  directions: []
+  directions:
+  - {x: 0, y: 0, z: 0}
   damageMax: 10
   damageMin: 1
   forceMax: 100

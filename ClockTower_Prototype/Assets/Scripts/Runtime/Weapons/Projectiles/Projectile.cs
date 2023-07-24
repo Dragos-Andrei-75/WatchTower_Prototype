@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+using static WeaponData;
+
 public struct DataProjectile
 {
+    public WeaponHit OnWeaponHit;
     public GameObject projectileObject;
     public Vector3 direction;
     public float damageMax;
@@ -12,8 +15,9 @@ public struct DataProjectile
     public float speed;
     public float lifeSpan;
 
-    public DataProjectile(GameObject projectileObject, Vector3 direction, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float lifeSpan)
+    public DataProjectile(WeaponHit onWeaponHit, GameObject projectileObject, Vector3 direction, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float lifeSpan)
     {
+        this.OnWeaponHit = onWeaponHit;
         this.projectileObject = projectileObject;
         this.direction = direction;
         this.damageMax = damageMax;
@@ -43,21 +47,13 @@ public class Projectile : MonoBehaviour
     [SerializeField] private LayerMask layerInteractable;
     [SerializeField] private Vector3 hitPosition;
 
-    private Coroutine coroutineOnContact;
-
-    protected delegate IEnumerator Contact();
+    protected delegate void Contact();
     protected event Contact OnContact;
 
     protected Rigidbody HitRigidbody
     {
         get { return hitRigidbody; }
         set { hitRigidbody = value; }
-    }
-
-    protected Coroutine CoroutineActive
-    {
-        get { return coroutineOnContact; }
-        set { coroutineOnContact = value; }
     }
 
     protected LayerMask LayerInteractable
@@ -80,11 +76,6 @@ public class Projectile : MonoBehaviour
         get { return lifeSpan; }
     }
 
-    protected bool Hit
-    {
-        get { return hit; }
-    }
-
     public DataProjectile ProjectileData
     {
         get { return projectileData; }
@@ -101,16 +92,17 @@ public class Projectile : MonoBehaviour
 
         projectileTransform.rotation = Quaternion.LookRotation(projectileData.direction);
 
-        StartCoroutine(ProjectileBehaviour());
+        StartCoroutine(ProjectileBehavior());
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
         hitPosition = projectileTransform.position;
+        hitRigidbody = collision.rigidbody;
         hit = true;
     }
 
-    private IEnumerator ProjectileBehaviour()
+    protected virtual IEnumerator ProjectileBehavior()
     {
         Vector3 positionPrevious;
         float distancePosition;
@@ -126,10 +118,14 @@ public class Projectile : MonoBehaviour
             direction = (projectileTransform.position - positionPrevious).normalized;
             distancePosition = Vector3.Distance(positionPrevious, projectileTransform.position);
 
-            if (Physics.Raycast(positionPrevious, direction, out RaycastHit hit, distancePosition, ~projectileLayer, QueryTriggerInteraction.Ignore) == true)
+            hit = Physics.Raycast(positionPrevious, direction, out RaycastHit rayCastHit, distancePosition, ~projectileLayer, QueryTriggerInteraction.Ignore);
+
+            if (hit == true)
             {
-                hitPosition = hit.point;
-                hitRigidbody = hit.rigidbody;
+                hitPosition = rayCastHit.point;
+                hitRigidbody = rayCastHit.rigidbody;
+
+                if (OnContact != null) OnContact();
 
                 break;
             }
@@ -138,10 +134,6 @@ public class Projectile : MonoBehaviour
 
             yield return null;
         }
-
-        if (OnContact != null) coroutineOnContact = StartCoroutine(OnContact());
-
-        while (coroutineOnContact != null) yield return null;
 
         Destroy(projectileObject);
 

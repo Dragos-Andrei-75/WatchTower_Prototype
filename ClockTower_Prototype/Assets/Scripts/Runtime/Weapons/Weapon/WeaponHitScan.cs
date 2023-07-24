@@ -46,22 +46,23 @@ public class WeaponHitScan : Weapon
             if (shot == true)
             {
                 float distance = Vector3.Distance(WeaponTransform.position, hit.point);
-                float damage = Mathf.Lerp(WeaponData.DamageMax, WeaponData.DamageMin, distance / WeaponDataHitScan.Range);
-                float force = Mathf.Lerp(WeaponData.ForceMax, WeaponData.ForceMin, distance / WeaponDataHitScan.Range);
 
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+                if (hit.transform.GetComponent<ManagerHealth>() != null)
                 {
-                    if (hit.transform.GetComponent<Interactable>() != null)
-                    {
-                        Interactable objectInteractive = hit.transform.GetComponent<Interactable>();
-                        objectInteractive.TakeDamage(damage);
-                    }
+                    ManagerHealth managerHealth = hit.transform.GetComponent<ManagerHealth>();
+                    float damage = Mathf.Lerp(WeaponData.DamageMax, WeaponData.DamageMin, distance / WeaponDataHitScan.Range);
 
-                    if (hit.rigidbody != null)
-                    {
-                        Vector3 directionPush = (hit.point - CharacterCameraTransform.position).normalized;
-                        hit.rigidbody.AddForce(directionPush * force, ForceMode.Impulse);
-                    }
+                    managerHealth.TakeDamage(damage);
+
+                    if (WeaponData.OnWeaponHit != null) StartCoroutine(WeaponData.OnWeaponHit(managerHealth));
+                }
+
+                if (hit.rigidbody != null)
+                {
+                    Vector3 direction = (hit.point - CharacterCameraTransform.position).normalized;
+                    float force = Mathf.Lerp(WeaponData.ForceMax, WeaponData.ForceMin, distance / WeaponDataHitScan.Range);
+
+                    hit.rigidbody.AddForce(direction * force, ForceMode.Impulse);
                 }
             }
         }

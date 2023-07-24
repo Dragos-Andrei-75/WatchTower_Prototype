@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   weaponName: Revolver
-  directions: []
+  directions:
+  - {x: 0, y: 0, z: 0}
   damageMax: 5
   damageMin: 2.5
   forceMax: 5

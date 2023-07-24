@@ -1,11 +1,10 @@
 using UnityEngine;
-using System.Collections;
 
 public class Pellet : Projectile
 {
-    private void OnEnable() => OnContact += PelletBehaviour;
+    private void OnEnable() => OnContact += PelletBehavior;
 
-    private void OnDisable() => OnContact -= PelletBehaviour;
+    private void OnDisable() => OnContact -= PelletBehavior;
 
     protected override void OnCollisionEnter(Collision collision)
     {
@@ -13,12 +12,23 @@ public class Pellet : Projectile
         HitRigidbody = collision.rigidbody;
     }
 
-    private IEnumerator PelletBehaviour()
+    private void PelletBehavior()
     {
-        float hitForce = Mathf.Lerp(ProjectileData.forceMin, ProjectileData.forceMax, LifeSpan / ProjectileData.lifeSpan);
+        ManagerHealth managerHealth;
+        float damage;
+        float force;
 
-        if (HitRigidbody != null && HitRigidbody.gameObject.layer == LayerMask.NameToLayer("Interactable")) HitRigidbody.AddForce(Direction * hitForce, ForceMode.Impulse);
+        damage = Mathf.Lerp(ProjectileData.damageMax, ProjectileData.damageMin, LifeSpan / ProjectileData.lifeSpan);
+        force = Mathf.Lerp(ProjectileData.forceMin, ProjectileData.forceMax, LifeSpan / ProjectileData.lifeSpan);
 
-        yield break;
+        if (HitRigidbody != null && HitRigidbody.GetComponent<ManagerHealth>() != null)
+        {
+            managerHealth = HitRigidbody.GetComponent<ManagerHealth>();
+            managerHealth.TakeDamage(damage);
+
+            HitRigidbody.AddForce(Direction * force, ForceMode.Impulse);
+
+            if (ProjectileData.OnWeaponHit != null) ProjectileData.OnWeaponHit(managerHealth);
+        }
     }
 }

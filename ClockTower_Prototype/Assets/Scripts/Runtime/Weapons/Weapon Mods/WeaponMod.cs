@@ -4,32 +4,23 @@ public abstract class WeaponMod : MonoBehaviour
 {
     [Header("Weapon Mod Attributes")]
     [SerializeField] private WeaponData weaponData;
-    [SerializeField] private Mode mode;
+    [SerializeField] private ModFire fireMod;
 
-    private enum Mode : ushort { Primary, Secondary };
+    protected enum ModFire : ushort { Primary, Secondary };
 
     protected WeaponData WeaponData
     {
         get { return weaponData; }
     }
 
-    protected virtual void Awake()
+    protected ModFire FireMod
     {
-        if (mode == Mode.Primary) weaponData = GetComponents<Weapon>()[0].WeaponData;
-        else if (mode == Mode.Secondary) weaponData = GetComponents<Weapon>()[1].WeaponData;
+        get { return fireMod; }
     }
 
-    protected void OnEnable()
+    protected void Awake()
     {
-        if (mode == Mode.Primary) GetComponents<Weapon>()[0].OnWeaponShoot += Mod;
-        else if (mode == Mode.Secondary) GetComponents<Weapon>()[1].OnWeaponShoot += Mod;
+        if (fireMod == ModFire.Primary) weaponData = GetComponents<Weapon>()[0].WeaponData;
+        else if (fireMod == ModFire.Secondary) weaponData = GetComponents<Weapon>()[1].WeaponData;
     }
-
-    protected void OnDisable()
-    {
-        if (mode == Mode.Primary) GetComponents<Weapon>()[0].OnWeaponShoot -= Mod;
-        else if (mode == Mode.Secondary) GetComponents<Weapon>()[1].OnWeaponShoot -= Mod;
-    }
-
-    protected abstract void Mod();
 }

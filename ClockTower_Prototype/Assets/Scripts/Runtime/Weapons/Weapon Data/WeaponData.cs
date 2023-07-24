@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(menuName = "Weapon/Weapon Data", fileName = "WeaponData")]
 public class WeaponData : ScriptableObject
@@ -19,7 +20,13 @@ public class WeaponData : ScriptableObject
     [Tooltip("The amount of time during which projectiles have been fired from this weapon."), SerializeField]                                    private float heat;
     [Tooltip("The maximum amount of ammunition this weapon can hold."), SerializeField]                                                           private int ammunitionCapacity;
     [Tooltip("The amount of ammunition this weapon has."), SerializeField]                                                                        private int ammunition;
-    [Tooltip("The ammount of projectiles fired simultaneously by this weapon."), SerializeField]                                                  private int amount;
+    [Tooltip("The amount of projectiles fired simultaneously by this weapon."), SerializeField]                                                   private int amount;
+
+    public delegate void WeaponShoot();
+    public WeaponShoot OnWeaponShoot;
+
+    public delegate IEnumerator WeaponHit(ManagerHealth managerHealth);
+    public WeaponHit OnWeaponHit;
 
     public delegate void AmountSet();
     public event AmountSet OnAmountSet;
@@ -106,6 +113,8 @@ public class WeaponData : ScriptableObject
             if (value != amount)
             {
                 amount = value;
+
+                directions = new Vector3[amount];
 
                 if (OnAmountSet != null) OnAmountSet();
             }

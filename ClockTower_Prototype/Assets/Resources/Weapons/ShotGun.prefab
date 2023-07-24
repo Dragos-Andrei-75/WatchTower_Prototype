@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4283855264296335158}
   - component: {fileID: 7456115661906446531}
   - component: {fileID: -3733521916468071221}
-  - component: {fileID: -2678186969398067812}
+  - component: {fileID: 8465513991534300082}
   m_Layer: 11
   m_Name: ShotGun
   m_TagString: Untagged
@@ -745,7 +745,6 @@ MonoBehaviour:
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 5f2631657a9664843b70fd4de4a3a8ad, type: 2}
   mode: 0
-  projectiles: []
   weaponDataProjectile: {fileID: 11400000, guid: bca00890150ad8b4baf0dd38c205c064, type: 2}
 --- !u!114 &-3733521916468071221
 MonoBehaviour:
@@ -762,11 +761,10 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 3290faa0095a0234eb631a4504bd5a81, type: 2}
-  mode: 0
-  projectiles: []
+  mode: 1
   weaponDataProjectile: {fileID: 11400000, guid: 9af755662286e6a4981105372dc7a4c1, type: 2}
   weaponDataExplosive: {fileID: 11400000, guid: 9f6114408505a3e47b2276f485b63ac1, type: 2}
---- !u!114 &-2678186969398067812
+--- !u!114 &8465513991534300082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -780,13 +778,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 0}
   mode: 0
-  weaponAttributes: 
+  weaponAttributes: 000001000200
   valuesMax:
+  - 0.75
   - 0.1
-  - 1
   - 10
   valuesMin:
+  - 0.25
   - 0.075
-  - 0.5
   - 5
-  weaponAttributesSize: 3

@@ -10,12 +10,9 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Weapon Base Attributes")]
     [SerializeField] private WeaponData weaponData;
-    [SerializeField] private Mode mode;
+    [SerializeField] private Fire fire;
 
-    public delegate void WeaponShoot();
-    public event WeaponShoot OnWeaponShoot;
-
-    private enum Mode : ushort { Primary, Secondary }
+    private enum Fire : ushort { Primary, Secondary }
 
     protected Transform WeaponTransform
     {
@@ -40,35 +37,27 @@ public abstract class Weapon : MonoBehaviour
 
         weapon = weaponTransform.GetComponents<Weapon>();
 
-        for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) mode = (Mode)i;
-
-        SetDirectionsSize();
+        for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) fire = (Fire)i;
     }
 
     protected virtual void OnEnable()
     {
-        if (mode == Mode.Primary) characterShoot.OnShootPrimary += Shoot;
-        else if (mode == Mode.Secondary) characterShoot.OnShootSecondary += Shoot;
-
-        WeaponData.OnAmountSet += SetDirectionsSize;
+        if (fire == Fire.Primary) characterShoot.OnShootPrimary += Shoot;
+        else if (fire == Fire.Secondary) characterShoot.OnShootSecondary += Shoot;
     }
 
     protected virtual void OnDisable()
     {
-        if (mode == Mode.Primary) characterShoot.OnShootPrimary -= Shoot;
-        else if (mode == Mode.Secondary) characterShoot.OnShootSecondary -= Shoot;
-
-        WeaponData.OnAmountSet -= SetDirectionsSize;
+        if (fire == Fire.Primary) characterShoot.OnShootPrimary -= Shoot;
+        else if (fire == Fire.Secondary) characterShoot.OnShootSecondary -= Shoot;
     }
-
-    private void SetDirectionsSize() => WeaponData.Directions = new Vector3[WeaponData.Amount];
 
     protected virtual void Shoot()
     {
         weaponData.Ammunition--;
         weaponData.FireNext = Time.time + weaponData.FireRate;
 
-        if (OnWeaponShoot != null) OnWeaponShoot();
+        if (WeaponData.OnWeaponShoot != null) WeaponData.OnWeaponShoot();
 
         for (int i = 0; i < WeaponData.Amount; i++)
         {

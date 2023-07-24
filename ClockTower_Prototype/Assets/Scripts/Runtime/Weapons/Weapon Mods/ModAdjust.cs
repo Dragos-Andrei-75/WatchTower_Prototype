@@ -1,25 +1,27 @@
 using UnityEngine;
 
-public class WeaponModAdjust : WeaponMod
+public class ModAdjust : WeaponMod
 {
     [Header("Adjust Attributes")]
     [SerializeField] private WeaponAttributes[] weaponAttributes;
     [SerializeField] private float[] valuesMax;
     [SerializeField] private float[] valuesMin;
-    [SerializeField, Range(1, 3)] private int weaponAttributesSize;
 
-    private enum WeaponAttributes : ushort { Spread, FireRate, Amount };
+    private enum WeaponAttributes : ushort {FireRate, Spread, Amount };
 
-    protected override void Awake()
+    private void OnEnable()
     {
-        base.Awake();
-
-        weaponAttributes = new WeaponAttributes[weaponAttributesSize];
-
-        for (int i = 0; i < weaponAttributesSize; i++) weaponAttributes[i] = (WeaponAttributes)i;
+        WeaponData.OnWeaponShoot += Adjust;
+        WeaponData.OnWeaponShoot += Adjust;
     }
 
-    protected override void Mod()
+    private void OnDisable()
+    {
+        WeaponData.OnWeaponShoot -= Adjust;
+        WeaponData.OnWeaponShoot -= Adjust;
+    }
+
+    private void Adjust()
     {
         for (int i = 0; i < weaponAttributes.Length; i++)
         {

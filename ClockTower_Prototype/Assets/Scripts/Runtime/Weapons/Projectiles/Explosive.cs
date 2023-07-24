@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Explosive : Projectile
 {
@@ -12,42 +11,42 @@ public class Explosive : Projectile
         set { radius = value; }
     }
 
-    private void OnEnable() => OnContact += ExplosiveBehaviour;
+    private void OnEnable() => OnContact += ExplosiveBehavior;
 
-    private void OnDisable() => OnContact -= ExplosiveBehaviour;
+    private void OnDisable() => OnContact -= ExplosiveBehavior;
 
-    private IEnumerator ExplosiveBehaviour()
+    private void ExplosiveBehavior()
     {
-        Collider[] interactableColliders;
-        Rigidbody[] interactableRigidBodies;
-        Interactable[] interactableScripts;
+        Collider[] colliders;
+        Rigidbody[] rigidBodies;
+        ManagerHealth[] healthManagers;
         float distanceObject;
         float damage;
         float force;
 
-        interactableColliders = Physics.OverlapSphere(HitPosition, radius, LayerInteractable);
+        colliders = Physics.OverlapSphere(HitPosition, radius, LayerInteractable);
 
-        interactableRigidBodies = new Rigidbody[interactableColliders.Length];
-        interactableScripts = new Interactable[interactableColliders.Length];
+        rigidBodies = new Rigidbody[colliders.Length];
+        healthManagers = new ManagerHealth[colliders.Length];
 
-        for (int i = 0; i < interactableColliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            interactableRigidBodies[i] = interactableColliders[i].GetComponent<Rigidbody>();
-            interactableScripts[i] = interactableColliders[i].GetComponent<Interactable>();
+            rigidBodies[i] = colliders[i].GetComponent<Rigidbody>();
+            healthManagers[i] = colliders[i].GetComponent<ManagerHealth>();
         }
 
-        for (int i = 0; i < interactableColliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            distanceObject = Vector3.Distance(interactableColliders[i].transform.position, HitPosition);
+            distanceObject = Vector3.Distance(colliders[i].transform.position, HitPosition);
 
             damage = Mathf.Lerp(ProjectileData.damageMax, ProjectileData.damageMin, distanceObject / radius);
             force = Mathf.Lerp(ProjectileData.forceMax, ProjectileData.forceMin, distanceObject / radius);
 
-            interactableRigidBodies[i].AddExplosionForce(force, HitPosition, radius, 1, ForceMode.Impulse);
+            rigidBodies[i].AddExplosionForce(force, HitPosition, radius, 1, ForceMode.Impulse);
 
-            interactableScripts[i].TakeDamage(damage);
+            healthManagers[i].TakeDamage(damage);
+
+            if (ProjectileData.OnWeaponHit != null) ProjectileData.OnWeaponHit(healthManagers[i]);
         }
-
-        yield break;
     }
 }

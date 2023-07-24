@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5026760614926630197}
   - component: {fileID: 6771285907867269614}
   - component: {fileID: 1997943634598936817}
+  - component: {fileID: 6498139526153628876}
   m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
@@ -1696,9 +1697,9 @@ MonoBehaviour:
   interactableCollider: {fileID: 0}
   interactableRigidbody: {fileID: 0}
   interactableRenderer: {fileID: 0}
+  healthManager: {fileID: 0}
   materialOpaque: {fileID: 2100000, guid: a2b2e4b771aeff9438f9b1191ac499f9, type: 2}
   materialTransparent: {fileID: 2100000, guid: 3e955b19db7c3a546b962fc1f6ca9832, type: 2}
-  health: 10
   velocityTresholdLower: 10
   velocityTresholdUpper: 25
   collisionDamage: 5
@@ -1706,3 +1707,16 @@ MonoBehaviour:
   contactKinematic: 0
   carried: 0
   collisionsSize: 0
+--- !u!114 &6498139526153628876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441194805686301736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53f9161d28323a43b6df32a9f9eb3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10

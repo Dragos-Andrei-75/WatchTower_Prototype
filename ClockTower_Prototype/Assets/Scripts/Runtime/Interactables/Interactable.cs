@@ -25,11 +25,11 @@ public class Interactable : MonoBehaviour
     [SerializeField] private Collider interactableCollider;
     [SerializeField] private Rigidbody interactableRigidbody;
     [SerializeField] private Renderer interactableRenderer;
+    [SerializeField] private ManagerHealth healthManager;
 
     [Header("Interactable Object Atrributes")]
     [SerializeField] private Material materialOpaque;
     [SerializeField] private Material materialTransparent;
-    [SerializeField] private float health = 10.0f;
     [SerializeField] private float velocityTresholdLower = 10.0f;
     [SerializeField] private float velocityTresholdUpper = 25.0f;
     [SerializeField] private float collisionDamage = 5.0f;
@@ -71,6 +71,7 @@ public class Interactable : MonoBehaviour
         interactableCollider = interactableTransform.GetComponent<Collider>();
         interactableRigidbody = interactableTransform.GetComponent<Rigidbody>();
         interactableRenderer = interactableTransform.GetComponent<Renderer>();
+        healthManager = interactableTransform.GetComponent<ManagerHealth>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -93,6 +94,13 @@ public class Interactable : MonoBehaviour
         if (collision.transform.GetComponent<Interactable>() != null) collision.transform.GetComponent<Interactable>().OnInteractableDestroy -= CollisionRemove;
 
         if (collisionsSize == 0) contact = false;
+    }
+
+    private void OnDestroy()
+    {
+        if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
+        if (OnInteractableCarriedDestroy != null) OnInteractableCarriedDestroy();
+        if (OnInteractableGrappleDestroy != null) OnInteractableGrappleDestroy();
     }
 
     private void CollisionAdd(string hitName, Vector3 hitNormal, Collider hitCollider)
@@ -206,7 +214,7 @@ public class Interactable : MonoBehaviour
             float velocity = interactableRigidbody.velocity.magnitude;
             float damage = Mathf.Lerp(0, collisionDamage, velocity / velocityTresholdUpper);
 
-            TakeDamage(damage);
+            healthManager.TakeDamage(damage);
         }
     }
 
@@ -220,26 +228,10 @@ public class Interactable : MonoBehaviour
                 {
                     if (collisions[j].interactable == null)
                     {
-                        if (Mathf.Round(Vector3.Dot(collisions[i].normal, collisions[j].normal) * 10) / 10 < 0) TakeDamage(health);
+                        if (Mathf.Round(Vector3.Dot(collisions[i].normal, collisions[j].normal) * 10) / 10 < 0) healthManager.TakeDamage(healthManager.Health);
                     }
                 }
             }
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        if (health <= 0) Brake();
-    }
-
-    public void Brake()
-    {
-        Destroy(gameObject);
-
-        if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
-        if (OnInteractableCarriedDestroy != null) OnInteractableCarriedDestroy();
-        if (OnInteractableGrappleDestroy != null) OnInteractableGrappleDestroy();
     }
 }

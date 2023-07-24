@@ -3,14 +3,7 @@ using UnityEngine;
 public class WeaponProjectile : Weapon
 {
     [Header("Projectile Weapon Attributes")]
-    [SerializeField] private GameObject[] projectiles;
     [SerializeField] private WeaponDataProjectile weaponDataProjectile;
-
-    protected GameObject[] Projectiles
-    {
-        get { return projectiles; }
-        set { projectiles = value; }
-    }
 
     protected WeaponDataProjectile WeaponDataProjectile
     {
@@ -41,7 +34,7 @@ public class WeaponProjectile : Weapon
         WeaponData.OnAmountSet -= SetProjectilesSize;
     }
 
-    private void SetProjectilesSize() => projectiles = new GameObject[WeaponData.Amount];
+    private void SetProjectilesSize() => weaponDataProjectile.Projectiles = new GameObject[WeaponData.Amount];
 
     protected override void Shoot()
     {
@@ -53,15 +46,16 @@ public class WeaponProjectile : Weapon
     {
         for (int i = 0; i < WeaponData.Amount; i++)
         {
-            DataProjectile projectileData = new DataProjectile(weaponDataProjectile.ProjectileObject, WeaponData.Directions[i], WeaponData.DamageMax, WeaponData.DamageMin,
-                                                               WeaponData.ForceMax, WeaponData.ForceMin, weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
+            DataProjectile projectileData = new DataProjectile(WeaponData.OnWeaponHit, weaponDataProjectile.ProjectileObject, WeaponData.Directions[i],
+                                                               WeaponData.DamageMax, WeaponData.DamageMin, WeaponData.ForceMax, WeaponData.ForceMin,
+                                                               weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
 
-            projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
+            weaponDataProjectile.Projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
 
-            projectiles[i].GetComponent<Projectile>().ProjectileData = projectileData;
+            weaponDataProjectile.Projectiles[i].GetComponent<Projectile>().ProjectileData = projectileData;
 
-            projectiles[i].transform.position = weaponDataProjectile.ProjectilePosition.position;
-            projectiles[i].transform.rotation = weaponDataProjectile.ProjectilePosition.rotation;
+            weaponDataProjectile.Projectiles[i].transform.position = weaponDataProjectile.ProjectilePosition.position;
+            weaponDataProjectile.Projectiles[i].transform.rotation = weaponDataProjectile.ProjectilePosition.rotation;
         }
     }
 }
