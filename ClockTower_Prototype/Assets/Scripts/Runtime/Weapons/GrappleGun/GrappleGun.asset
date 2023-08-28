@@ -24,6 +24,7 @@ MonoBehaviour:
   spread: 0
   heatMax: 0
   heat: 0
+  heatLevels: []
   ammunitionCapacity: 1
   ammunition: 1
   amount: 1

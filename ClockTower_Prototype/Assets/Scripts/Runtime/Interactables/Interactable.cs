@@ -49,7 +49,7 @@ public class Interactable : MonoBehaviour
     public event InteractableDestroy OnInteractableDestroy;
 
     public delegate void interactableCarriedDestroy();
-    public event interactableCarriedDestroy OnInteractableCarriedDestroy;
+    public event interactableCarriedDestroy OnInteractableHeldDestroy;
 
     public delegate IEnumerator interactableGrappleDestroy();
     public event interactableGrappleDestroy OnInteractableGrappleDestroy;
@@ -59,7 +59,7 @@ public class Interactable : MonoBehaviour
         get { return contact; }
     }
 
-    public bool Carried
+    public bool Held
     {
         get { return carried; }
         set { carried = value; if (carried == true) interactableRenderer.material = materialTransparent; else interactableRenderer.material = materialOpaque; }
@@ -99,7 +99,7 @@ public class Interactable : MonoBehaviour
     private void OnDestroy()
     {
         if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
-        if (OnInteractableCarriedDestroy != null) OnInteractableCarriedDestroy();
+        if (OnInteractableHeldDestroy != null) OnInteractableHeldDestroy();
         if (OnInteractableGrappleDestroy != null) OnInteractableGrappleDestroy();
     }
 

@@ -83,7 +83,7 @@ public class PickUpWeapon : MonoBehaviour
             weapon.transform.localPosition = position;
             loadOut.Weapons[index] = weapon.transform;
 
-            if (OnWeaponEquip != null) OnWeaponEquip(index);
+            if (loadOut.Holster == false && OnWeaponEquip != null) OnWeaponEquip(index);
         }
         else
         {

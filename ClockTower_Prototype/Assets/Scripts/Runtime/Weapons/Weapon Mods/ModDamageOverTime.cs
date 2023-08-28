@@ -4,9 +4,9 @@ using System.Collections;
 public class ModDamageOverTime : WeaponMod
 {
     [Header("Damage Over Time Attributes")]
-    [SerializeField] private float damage = 0.1f;
-    [SerializeField] private float time = 1.0f;
-    [SerializeField] private float tick = 0.1f;
+    [SerializeField] private float damage;
+    [SerializeField] private float time;
+    [SerializeField] private float tick;
 
     private void OnEnable() => WeaponData.OnWeaponHit += DamageOverTime;
 

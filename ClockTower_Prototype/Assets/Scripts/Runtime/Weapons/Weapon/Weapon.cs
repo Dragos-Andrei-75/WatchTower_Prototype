@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private Fire fire;
 
-    private enum Fire : ushort { Primary, Secondary }
+    public enum Fire : ushort { Primary, Secondary }
 
     protected Transform WeaponTransform
     {
@@ -40,17 +41,9 @@ public abstract class Weapon : MonoBehaviour
         for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) fire = (Fire)i;
     }
 
-    protected virtual void OnEnable()
-    {
-        if (fire == Fire.Primary) characterShoot.OnShootPrimary += Shoot;
-        else if (fire == Fire.Secondary) characterShoot.OnShootSecondary += Shoot;
-    }
+    protected virtual void OnEnable() => characterShoot.OnShoot[Convert.ToInt16(fire)] += Shoot;
 
-    protected virtual void OnDisable()
-    {
-        if (fire == Fire.Primary) characterShoot.OnShootPrimary -= Shoot;
-        else if (fire == Fire.Secondary) characterShoot.OnShootSecondary -= Shoot;
-    }
+    protected virtual void OnDisable() => characterShoot.OnShoot[Convert.ToInt16(fire)] -= Shoot;
 
     protected virtual void Shoot()
     {
@@ -63,9 +56,9 @@ public abstract class Weapon : MonoBehaviour
         {
             WeaponData.Directions[i] = WeaponTransform.forward;
 
-            WeaponData.Directions[i].x += Random.Range(-WeaponData.Spread, WeaponData.Spread);
-            WeaponData.Directions[i].y += Random.Range(-WeaponData.Spread, WeaponData.Spread);
-            WeaponData.Directions[i].z += Random.Range(-WeaponData.Spread, WeaponData.Spread);
+            WeaponData.Directions[i].x += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
+            WeaponData.Directions[i].y += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
+            WeaponData.Directions[i].z += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
         }
     }
 }

@@ -38,8 +38,10 @@ public class GrappleGun : WeaponHitScan
 
     private enum HookPosition : ushort { hookOrigin, hookTarget };
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         grappleGunTransform = gameObject.transform;
 
         hookOriginTransform = grappleGunTransform.GetChild(0).GetChild(0).GetComponent<Transform>();
@@ -121,7 +123,7 @@ public class GrappleGun : WeaponHitScan
                             hookHit.rigidbody.angularDrag = angularDrag;
                             hookHit.rigidbody.drag = drag;
 
-                            if (Vector3.Distance(CharacterCameraTransform.position, hookHitTransform.position) < 5)
+                            if (Vector3.Distance(hookHitTransform.position, CharacterCameraTransform.position) < 5)
                             {
                                 if (OnGrappleInteractable != null) OnGrappleInteractable(hookHit.transform);
                             }
@@ -134,14 +136,15 @@ public class GrappleGun : WeaponHitScan
                 }
                 else
                 {
+                    characterMovement.CharacterVelocity = Vector3.zero;
+
                     characterMovement.CheckGrapple = true;
 
-                    grappleDirection = (hookHitTransform.position - characterBodyTransform.position).normalized;
-
-                    while (Vector3.Distance(hookOriginTransform.position, hookHitTransform.position) > 5)
+                    while (Vector3.Distance(hookHitTransform.position, hookOriginTransform.position) > 5)
                     {
                         ropeLength = Vector3.Distance(hookOriginTransform.position, hookHit.point);
                         grappleSpeed = Mathf.Lerp(grappleSpeedMax, grappleSpeedMin, ropeLength / WeaponDataHitScan.Range);
+                        grappleDirection = (hookHitTransform.position - characterBodyTransform.position).normalized;
 
                         characterMovement.CharacterVelocity = grappleDirection * grappleSpeed;
 
@@ -187,7 +190,7 @@ public class GrappleGun : WeaponHitScan
 
     private IEnumerator GrappleRotate()
     {
-        while (Vector3.Distance(hookOriginTransform.position, hookTransform.position) < 3.75f) yield return null;
+        while (Vector3.Distance(hookTransform.position, hookOriginTransform.position) < 3.75f) yield return null;
 
         while (grappled == true || hookTransform.position != hookOriginTransform.position)
         {
@@ -229,14 +232,16 @@ public class GrappleGun : WeaponHitScan
 
     private IEnumerator GrappleEnd()
     {
+        if (characterMovement.Controller.isGrounded == true) characterMovement.CharacterVelocity = characterMovement.CharacterStationary;
+        else characterMovement.CharacterVelocity = grappleDirection * (characterMovement.CharacterVelocity.magnitude / 2);
+
         if (hookHitTransform != null) Destroy(hookHitTransform.gameObject);
+
+        characterMovement.CheckGrapple = false;
 
         hookTransform.SetParent(grappleGunTransform);
         grappleDirection = Vector3.zero;
         grappled = false;
-
-        characterMovement.CharacterVelocity = characterMovement.CharacterBodyTransform.forward * (characterMovement.CharacterVelocity.magnitude / 2);
-        characterMovement.CheckGrapple = false;
 
         yield break;
     }

@@ -1,18 +1,29 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIFade : MonoBehaviour
+public class Fade : MonoBehaviour
 {
+    //Canvas
     private CanvasGroup canvasGroup;
 
+    //Fade Attributes
     [SerializeField] private float speedFade = 10.0f;
 
-    private void Start()
+    private void Awake() => canvasGroup = gameObject.transform.GetComponent<CanvasGroup>();
+
+    private void OnEnable()
     {
-        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        Pause.OnPauseCoroutine += FadeOut;
+        Pause.OnResumeCoroutine += FadeIn;
     }
 
-    public IEnumerator FadeIn()
+    private void OnDisable()
+    {
+        Pause.OnPauseCoroutine -= FadeOut;
+        Pause.OnResumeCoroutine -= FadeIn;
+    }
+
+    private IEnumerator FadeIn()
     {
         while (canvasGroup.alpha < 1)
         {
@@ -20,20 +31,16 @@ public class UIFade : MonoBehaviour
             yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
         }
 
-        canvasGroup.alpha = 1;
-
         yield break;
     }
 
-    public IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
         while (canvasGroup.alpha > 0)
         {
             canvasGroup.alpha -= Time.unscaledDeltaTime * speedFade;
             yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
         }
-
-        canvasGroup.alpha = 0;
 
         yield break;
     }

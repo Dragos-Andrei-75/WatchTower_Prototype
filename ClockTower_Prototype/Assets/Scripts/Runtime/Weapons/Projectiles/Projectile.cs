@@ -17,7 +17,8 @@ public struct DataProjectile
 
     public DataProjectile(WeaponHit onWeaponHit, GameObject projectileObject, Vector3 direction, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float lifeSpan)
     {
-        this.OnWeaponHit = onWeaponHit;
+        OnWeaponHit = onWeaponHit;
+
         this.projectileObject = projectileObject;
         this.direction = direction;
         this.damageMax = damageMax;
@@ -29,7 +30,7 @@ public struct DataProjectile
     }
 }
 
-public class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
     [Header("Projectile Object and Components References")]
     [SerializeField] private GameObject projectileObject;
@@ -49,6 +50,12 @@ public class Projectile : MonoBehaviour
 
     protected delegate void Contact();
     protected event Contact OnContact;
+
+    public DataProjectile ProjectileData
+    {
+        get { return projectileData; }
+        set { projectileData = value; }
+    }
 
     protected Rigidbody HitRigidbody
     {
@@ -76,12 +83,6 @@ public class Projectile : MonoBehaviour
         get { return lifeSpan; }
     }
 
-    public DataProjectile ProjectileData
-    {
-        get { return projectileData; }
-        set { projectileData = value; }
-    }
-
     protected virtual void Start()
     {
         projectileObject = gameObject;
@@ -102,7 +103,7 @@ public class Projectile : MonoBehaviour
         hit = true;
     }
 
-    protected virtual IEnumerator ProjectileBehavior()
+    private IEnumerator ProjectileBehavior()
     {
         Vector3 positionPrevious;
         float distancePosition;
@@ -125,8 +126,6 @@ public class Projectile : MonoBehaviour
                 hitPosition = rayCastHit.point;
                 hitRigidbody = rayCastHit.rigidbody;
 
-                if (OnContact != null) OnContact();
-
                 break;
             }
 
@@ -134,6 +133,8 @@ public class Projectile : MonoBehaviour
 
             yield return null;
         }
+
+        if (OnContact != null) OnContact();
 
         Destroy(projectileObject);
 

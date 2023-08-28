@@ -5,46 +5,63 @@ using System.Collections;
 public class CharacterInteract : MonoBehaviour
 {
     [Header("Character Object and Component References")]
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform characterCameraTransform;
     [SerializeField] private Transform characterBodyTransform;
     [SerializeField] private Camera characterCamera;
-    [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private CharacterLoadOut characterLoadOut;
     [SerializeField] private CharacterShoot characterShoot;
 
-    [Header("Object and Component References")]
-    [SerializeField] private Transform objectCarriedTransform;
-    [SerializeField] private Rigidbody objectCarriedRigidBody;
-    [SerializeField] private Interactable objectCarriedInteractable;
+    [Header("Other Object and Component References")]
+    [SerializeField] private Transform objectHeldTransform;
+    [SerializeField] private Rigidbody objectHeldRigidBody;
+    [SerializeField] private Interactable objectHeldInteractable;
 
-    [Header("Check State")]
+    [Header("Character States")]
+    [SerializeField] private bool checkHold = false;
     [SerializeField] private bool checkThrow = false;
+
+    [Header("Interaction Attributes")]
+    [SerializeField] private LayerMask layer;
+    [SerializeField] private Vector3 rayPosition;
+    [SerializeField] private int rayPositionX;
+    [SerializeField] private int rayPositionY;
+    [SerializeField] private int length = 5;
+
+    [Header("Hold Attributes")]
+    [SerializeField] private float holdDistance = 2.5f;
+
+    [Header("Throw Attributes")]
+    [SerializeField] private float forceThrow = 25.0f;
 
     [Header("Input Player")]
     [SerializeField] private InputPlayer inputPlayer;
     [SerializeField] private InputAction inputUse;
-    [SerializeField] private bool use = false;
 
     private Coroutine coroutineHoldObject;
 
     public delegate void Carry();
     public event Carry OnCarry;
 
-    public Transform ObjectCarriedTransform
+    private Transform ObjectHeldTransform
     {
         get
         {
-            return objectCarriedTransform;
+            return objectHeldTransform;
         }
         set
         {
-            objectCarriedTransform = value;
+            objectHeldTransform = value;
 
-            if ((objectCarriedTransform != null && characterLoadOut.Holster == false) || (objectCarriedTransform == null && characterLoadOut.Holster == true))
+            if ((objectHeldTransform != null && characterLoadOut.Holster == false) || (objectHeldTransform == null && characterLoadOut.Holster == true))
             {
                 if (OnCarry != null) OnCarry();
             }
         }
+    }
+
+    public bool CheckHold
+    {
+        get { return checkHold; }
     }
 
     public bool CheckThrow
@@ -54,10 +71,22 @@ public class CharacterInteract : MonoBehaviour
 
     private void Awake()
     {
+        characterCameraTransform = gameObject.transform.GetChild(0).transform;
+        characterCamera = characterCameraTransform.GetComponent<Camera>();
+        characterBodyTransform = gameObject.transform.GetChild(1).transform;
+        characterLoadOut = characterCameraTransform.GetChild(1).GetComponent<CharacterLoadOut>();
+        characterShoot = characterCameraTransform.GetComponent<CharacterShoot>();
+
+        rayPositionX = Screen.width / 2;
+        rayPositionY = Screen.height / 2;
+
+        rayPosition = new Vector3(rayPositionX, rayPositionY);
+
+        layer = LayerMask.GetMask("Player");
+
         inputPlayer = new InputPlayer();
 
         inputUse = inputPlayer.Character.Use;
-        inputUse.started += _ => Interact();
     }
 
     private void OnEnable()
@@ -65,10 +94,12 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Enable();
         inputUse.Enable();
 
+        inputUse.started += Interact;
+
         GrappleGun.OnGrappleInteractable += HoldObjectStart;
 
-        Pause.onPauseResume -= OnEnable;
-        Pause.onPauseResume += OnDisable;
+        Pause.OnPauseResume -= OnEnable;
+        Pause.OnPauseResume += OnDisable;
     }
 
     private void OnDisable()
@@ -76,35 +107,22 @@ public class CharacterInteract : MonoBehaviour
         inputPlayer.Disable();
         inputUse.Disable();
 
+        inputUse.started -= Interact;
+
         GrappleGun.OnGrappleInteractable -= HoldObjectStart;
 
-        Pause.onPauseResume += OnEnable;
-        Pause.onPauseResume -= OnDisable;
+        Pause.OnPauseResume += OnEnable;
+        Pause.OnPauseResume -= OnDisable;
     }
 
-    private void Start()
-    {
-        cameraTransform = gameObject.transform.GetChild(0).transform;
-        characterBodyTransform = gameObject.transform.GetChild(1).transform;
-        characterCamera = gameObject.transform.GetChild(0).GetComponent<Camera>();
-        characterMovement = gameObject.transform.GetComponent<CharacterMovement>();
-        characterLoadOut = cameraTransform.GetChild(1).GetComponent<CharacterLoadOut>();
-        characterShoot = cameraTransform.GetComponent<CharacterShoot>();
-    }
+    private void Interact(InputAction.CallbackContext contextInteract) => Interact();
 
     private void Interact()
     {
-        if (objectCarriedTransform == null)
+        if (objectHeldTransform == null)
         {
-            int x = Screen.width / 2;
-            int y = Screen.height / 2;
-
-            Vector3 rayPosition = new Vector3(x, y);
-
             Ray ray = characterCamera.ScreenPointToRay(rayPosition, Camera.MonoOrStereoscopicEye.Mono);
             RaycastHit hit;
-            int length = 5;
-            LayerMask layer = LayerMask.GetMask("Player");
 
             if (Physics.Raycast(ray, out hit, length, ~layer, QueryTriggerInteraction.Ignore) == true)
             {
@@ -122,68 +140,52 @@ public class CharacterInteract : MonoBehaviour
         }
         else
         {
-            use = false;
+            checkHold = false;
         }
     }
 
     private void HoldObjectStart(Transform objectToHold)
     {
-        ObjectCarriedTransform = objectToHold;
-        objectCarriedRigidBody = objectCarriedTransform.GetComponent<Rigidbody>();
-        objectCarriedInteractable = objectCarriedTransform.GetComponent<Interactable>();
+        ObjectHeldTransform = objectToHold;
+        objectHeldRigidBody = objectHeldTransform.GetComponent<Rigidbody>();
+        objectHeldInteractable = objectHeldTransform.GetComponent<Interactable>();
 
-        objectCarriedRigidBody.freezeRotation = true;
-        objectCarriedRigidBody.useGravity = false;
+        objectHeldRigidBody.useGravity = false;
+        objectHeldRigidBody.freezeRotation = true;
 
-        objectCarriedInteractable.Carried = true;
-        objectCarriedInteractable.OnInteractableCarriedDestroy += HoldObjectStop;
-
-        characterMovement.CheckCarry = true;
+        objectHeldInteractable.Held = true;
+        objectHeldInteractable.OnInteractableHeldDestroy += HoldObjectStop;
 
         coroutineHoldObject = StartCoroutine(HoldObject());
+
+        characterShoot.InputClickLeft.started += ThrowObject;
+        characterShoot.InputClickRight.started += ThrowObject;
     }
 
     private IEnumerator HoldObject()
     {
-        float holdDistance = 2.5f;
-        float forceThrow = 25;
-        float speed = 75;
+        Quaternion rotation;
+        Vector3 position;
+        Vector3 direction;
+        float speed;
 
-        use = true;
+        speed = 100.0f;
 
-        while (use == true && checkThrow == false)
+        checkHold = true;
+
+        while (checkHold == true && checkThrow == false)
         {
-            if (characterShoot.LeftButton == false && characterShoot.RightButton == false)
-            {
-                Vector3 holdPosition = cameraTransform.position + cameraTransform.forward * holdDistance;
-                Vector3 direction = holdPosition - objectCarriedTransform.position;
-                Quaternion rotation = characterBodyTransform.rotation;
+            rotation = characterBodyTransform.rotation;
+            position = characterCameraTransform.position + characterCameraTransform.forward * holdDistance;
+            direction = position - objectHeldTransform.position;
 
-                if (direction.magnitude > 1) direction = direction.normalized;
+            if (direction.magnitude > 1) direction.Normalize();
 
-                if (objectCarriedInteractable.Contact == false) objectCarriedRigidBody.MoveRotation(Quaternion.Lerp(objectCarriedTransform.rotation, rotation, Time.fixedDeltaTime * 25));
+            if (objectHeldInteractable.Contact == false) objectHeldTransform.rotation = Quaternion.Lerp(objectHeldTransform.rotation, rotation, Time.deltaTime * 50);
 
-                if (objectCarriedTransform.position != holdPosition) objectCarriedRigidBody.velocity = direction * speed;
+            if (objectHeldTransform.position != position) objectHeldRigidBody.velocity = direction * speed;
 
-                if (Vector3.Distance(characterBodyTransform.position, objectCarriedTransform.position) > holdDistance * 3)
-                {
-                    objectCarriedRigidBody.velocity = Vector3.zero;
-                    use = false;
-                }
-            }
-            else
-            {
-                objectCarriedRigidBody.AddForce(cameraTransform.forward * forceThrow, ForceMode.Impulse);
-                checkThrow = true;
-            }
-
-            yield return null;
-        }
-
-        while (checkThrow == true)
-        {
-            if (characterShoot.LeftButton == true || characterShoot.RightButton == true) checkThrow = true;
-            else checkThrow = false;
+            if (Vector3.Distance(characterBodyTransform.position, objectHeldTransform.position) > holdDistance * 3) break;
 
             yield return null;
         }
@@ -195,19 +197,37 @@ public class CharacterInteract : MonoBehaviour
 
     private void HoldObjectStop()
     {
+        Interact();
+
+        characterShoot.InputClickRight.started -= ThrowObject;
+        characterShoot.InputClickLeft.started -= ThrowObject;
+
         StopCoroutine(coroutineHoldObject);
         coroutineHoldObject = null;
 
-        characterMovement.CheckCarry = false;
+        objectHeldInteractable.OnInteractableHeldDestroy -= HoldObjectStop;
+        objectHeldInteractable.Held = false;
 
-        objectCarriedInteractable.OnInteractableCarriedDestroy -= HoldObjectStop;
-        objectCarriedInteractable.Carried = false;
+        objectHeldRigidBody.freezeRotation = false;
+        objectHeldRigidBody.useGravity = true;
 
-        objectCarriedRigidBody.useGravity = true;
-        objectCarriedRigidBody.freezeRotation = false;
+        objectHeldInteractable = null;
+        objectHeldRigidBody = null;
+        ObjectHeldTransform = null;
+    }
 
-        objectCarriedInteractable = null;
-        objectCarriedRigidBody = null;
-        ObjectCarriedTransform = null;
+    private void ThrowObject(InputAction.CallbackContext context) => StartCoroutine(ThrowObject());
+
+    private IEnumerator ThrowObject()
+    {
+        checkThrow = true;
+
+        objectHeldRigidBody.AddForce(characterCameraTransform.forward * forceThrow, ForceMode.Impulse);
+
+        while (characterShoot.InputClickLeft.ReadValue<float>() == 1 || characterShoot.InputClickRight.ReadValue<float>() == 1) yield return null;
+
+        checkThrow = false;
+
+        yield break;
     }
 }

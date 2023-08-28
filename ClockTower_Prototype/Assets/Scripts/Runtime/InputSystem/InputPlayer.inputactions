@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "2e92cc97-d1c0-4e8c-86f1-aef4eea6fd0a",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Walk",
@@ -69,25 +69,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MouseX",
-                    "type": "PassThrough",
-                    "id": "3d68f362-a925-46fa-bf35-05af35ff8a66",
-                    "expectedControlType": "Axis",
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "5be596de-1518-4ed4-957c-91be57a8b6c0",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "MouseY",
-                    "type": "PassThrough",
-                    "id": "eda33cea-c9d8-4f43-82a5-3d7b6a84ce5d",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LeftButton",
+                    "name": "ClickLeft",
                     "type": "Button",
                     "id": "bdca1ce9-b73c-47f5-b005-4e586d4b6e86",
                     "expectedControlType": "Button",
@@ -96,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightButton",
+                    "name": "ClickRight",
                     "type": "Button",
                     "id": "809f165b-81a5-4025-8ed5-6734264e78e7",
                     "expectedControlType": "Button",
@@ -163,28 +154,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c21063b2-b6af-4717-92f1-16f2efb29176",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseX",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9975cf5d-014a-4c47-af68-f3a454ab3bf7",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseY",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8392485c-b63a-4fed-807d-2d176f518886",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -212,7 +181,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftButton",
+                    "action": "ClickLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -223,7 +192,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightButton",
+                    "action": "ClickRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -268,6 +237,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2208d8a1-e4e3-4087-96ad-1d0fcf8e0409",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

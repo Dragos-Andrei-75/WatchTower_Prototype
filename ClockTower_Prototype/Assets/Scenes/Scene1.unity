@@ -727,6 +727,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &59331154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1568,6 +1569,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &82443841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,6 +2083,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &122307053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2430,6 +2433,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &131207061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,6 +2705,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &151629432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3141,6 +3146,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &176018717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3412,6 +3418,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &181385540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4011,6 +4018,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &192735459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4282,6 +4290,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &203305316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5209,6 +5218,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &322564264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5644,6 +5654,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &339200112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6407,6 +6418,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &385228764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6842,6 +6854,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &404431546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7113,6 +7126,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865347
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &409277086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7934,6 +7948,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &454240328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8205,6 +8220,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &472675108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9994,6 +10010,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &529513471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10265,6 +10282,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &531200167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10700,6 +10718,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &553558426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11135,6 +11154,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &565192731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12163,7 +12183,7 @@ GameObject:
   - component: {fileID: 632663916}
   - component: {fileID: 632663918}
   m_Layer: 5
-  m_Name: DisplayFPS
+  m_Name: FrameRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12311,6 +12331,7 @@ GameObject:
   - component: {fileID: 634802063}
   - component: {fileID: 634802062}
   - component: {fileID: 634802067}
+  - component: {fileID: 634802069}
   - component: {fileID: 634802068}
   m_Layer: 5
   m_Name: Canvas
@@ -12392,10 +12413,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1553602608}
-  - {fileID: 632663915}
   - {fileID: 779893143}
-  - {fileID: 1808178536}
+  - {fileID: 632663915}
+  - {fileID: 1553602608}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12412,7 +12432,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634802061}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -12429,6 +12449,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedFade: 10
+--- !u!114 &634802069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634802061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e985d23e5b145134d9e14f7e2f4ef870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &647587121
 Mesh:
   m_ObjectHideFlags: 0
@@ -12705,6 +12737,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &653224445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12976,6 +13009,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &656240606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13247,6 +13281,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &664638450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14268,6 +14303,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &722958700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15031,6 +15067,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &757222607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15635,6 +15672,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &775806822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15807,7 +15845,7 @@ GameObject:
   - component: {fileID: 779893145}
   - component: {fileID: 779893144}
   m_Layer: 5
-  m_Name: DisplayTime
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15826,7 +15864,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 634802065}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -16546,6 +16584,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &797756278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16981,6 +17020,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &814824196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18209,6 +18249,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &890428802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18480,6 +18521,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &906379617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19354,6 +19396,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &947616599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19824,6 +19867,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &951512920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19994,7 +20038,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
+  - component: {fileID: 963194231}
   - component: {fileID: 963194230}
   m_Layer: 6
   m_Name: Main Camera
@@ -20071,49 +20115,6 @@ Transform:
   m_Father: {fileID: 2135729778}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16017f15a04a4294c88dd02cc275c94d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterTransform: {fileID: 0}
-  characterCameraTransform: {fileID: 0}
-  characterMovement: {fileID: 0}
-  lookSensitivityX: 2.5
-  lookSensitivityY: 2.5
-  lookXReference: 0
-  lookXMin: -150
-  lookXMax: 150
-  lookYMin: -90
-  lookYMax: 90
-  delta: 0.025
-  inputMouseX:
-    m_Name: Input Mouse X
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 166b29b8-f743-4204-a389-076566886112
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputMouseY:
-    m_Name: Input Mouse Y
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 333c0f24-30e7-418c-9c19-361d0aa3ef60
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  mouseX: 0
-  mouseY: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20130,26 +20131,66 @@ MonoBehaviour:
   characterLook: {fileID: 0}
   characterInteract: {fileID: 0}
   characterLoadOut: {fileID: 0}
-  inputLeftButton:
-    m_Name: Input Left Button
+  weaponSwayTarget: {x: 0, y: 0, z: 0, w: 0}
+  weaponSwayX: {x: 0, y: 0, z: 0, w: 0}
+  weaponSwayY: {x: 0, y: 0, z: 0, w: 0}
+  swayX: 0
+  swayY: 0
+  swayXMultiplier: 5
+  swayYMultiplier: 2.5
+  swaySmooth: 0
+  inputClickLeft:
+    m_Name: Input Click Left
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 55d41524-c1e9-4a62-a709-45f35cb13e46
+    m_Id: 4d101f01-0673-459f-815b-7a3883e2dab1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  inputRightButton:
-    m_Name: Input Right Button
+  inputClickRight:
+    m_Name: Input Click Right
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 307008a7-c8f7-461a-bf95-ce275e34395b
+    m_Id: 1617c5dd-1a8e-449e-9385-9b71a7af2e34
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  leftButton: 0
-  rightButton: 0
+  click: 
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200b13080284ad74bb3cdb5bdd0faa1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterTransform: {fileID: 0}
+  characterCameraTransform: {fileID: 0}
+  characterMovement: {fileID: 0}
+  lookSensitivityX: 0.05
+  lookSensitivityY: 0.05
+  lookXReference: 0
+  lookXMin: -135
+  lookXMax: 135
+  lookYMin: -90
+  lookYMax: 90
+  inputLook:
+    m_Name: Input Look
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5e08e252-a9c9-4916-9ad3-a9aafa6a3fa5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  mouseX: 0
+  mouseY: 0
 --- !u!43 &966635037
 Mesh:
   m_ObjectHideFlags: 0
@@ -20590,6 +20631,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &973625053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21353,6 +21395,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1020485105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21624,6 +21667,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1028200277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22173,6 +22217,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1052312512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23428,6 +23473,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1171241660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24847,6 +24893,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1272830078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25282,6 +25329,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1275618139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25717,6 +25765,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1287372999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25988,6 +26037,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1287814979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27052,6 +27102,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1343089480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27729,6 +27780,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1393546893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28000,6 +28052,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1399983829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28271,6 +28324,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1413873474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28870,6 +28924,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1448788249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29727,6 +29782,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1500504148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30162,6 +30218,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1507206872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30365,8 +30422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2829aa4b7df908a4f945f7c30a2eda6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadOutTransform: {fileID: 0}
-  characterMovement: {fileID: 0}
   characterInteract: {fileID: 0}
   weapons: []
   weaponCurrent: []
@@ -30377,106 +30432,7 @@ MonoBehaviour:
     m_Name: Input Holster
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e04f3b55-fe10-4b9d-906d-bd20077c5cba
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon1:
-    m_Name: Input Weapon 1
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 07355bc1-2fc5-4b3f-b1f8-d9a1e3616510
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon2:
-    m_Name: Input Weapon 2
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 587d2af2-92de-453d-85c4-e0dfd30d07f3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon3:
-    m_Name: Input Weapon 3
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 50e2faaf-e44a-45b6-a5b2-3a46392c1a46
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon4:
-    m_Name: Input Weapon 4
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ed6c651d-a2a3-4ab8-b5da-8c3f06512b04
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon5:
-    m_Name: Input Weapon 5
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 3f5517b4-496f-436d-b57c-a54d2a68b15c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon6:
-    m_Name: Input Weapon 6
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7c7de2b1-264e-492d-a5b2-06e03abbe186
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon7:
-    m_Name: Input Weapon 7
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e4c16865-f124-406b-810a-0a6cf29b54f3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon8:
-    m_Name: Input Weapon 8
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: bd6203e1-bc39-4e78-9405-2152e519ea28
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon9:
-    m_Name: Input Weapon 9
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0a21072c-5a7c-42d1-9e23-278b2b1a152d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon10:
-    m_Name: Input Weapon 10
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a758faad-8614-427d-b8e7-b99055b1b2a7
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWeapon11:
-    m_Name: Input Weapon 11
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1ef9012e-676b-48a3-853e-00d2d0053a58
+    m_Id: 8f055915-3a31-46a4-b2d3-b1d5c19277d5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -30485,13 +30441,12 @@ MonoBehaviour:
     m_Name: Input Wheel
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: b41c833c-7546-4529-bc42-d4b88dfe7c82
+    m_Id: 510b97b6-3ed3-497e-8811-489a54605033
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  wheelScroll: 0
-  weaponIndex: -1
+  inputButtons: []
 --- !u!1 &1518133299
 GameObject:
   m_ObjectHideFlags: 0
@@ -30604,6 +30559,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1518133304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31724,7 +31680,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 634802065}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32045,6 +32001,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1560760762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32316,6 +32273,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1560863236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32751,6 +32709,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1583895512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33186,6 +33145,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1595812553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34148,6 +34108,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1614399238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35213,6 +35174,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1712943966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35648,6 +35610,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1719864077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36083,6 +36046,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1727602084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36387,6 +36351,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1735989114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36822,6 +36787,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1776124399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37462,6 +37428,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1803725765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37621,55 +37588,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &1808178535
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1808178536}
-  - component: {fileID: 1808178537}
-  m_Layer: 5
-  m_Name: Menu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1808178536
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808178535}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 634802065}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1808178537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808178535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e985d23e5b145134d9e14f7e2f4ef870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1823297985
 GameObject:
   m_ObjectHideFlags: 0
@@ -38276,6 +38194,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1871277790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39039,6 +38958,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1920554712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39474,6 +39394,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1923575042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39745,6 +39666,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1924268262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40344,6 +40266,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1938892603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40615,6 +40538,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1943712708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41050,6 +40974,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1948737714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41321,6 +41246,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1955987633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41920,6 +41846,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1961813765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42355,6 +42282,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1964812920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42790,6 +42718,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1973320170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43225,6 +43154,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1995416600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43496,6 +43426,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &1995970582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44481,6 +44412,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &2056400952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45368,26 +45300,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c8abad41ce8347acb0e7d99c78a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
+  characterCameraTransform: {fileID: 0}
   characterBodyTransform: {fileID: 0}
   characterCamera: {fileID: 0}
-  characterMovement: {fileID: 0}
   characterLoadOut: {fileID: 0}
   characterShoot: {fileID: 0}
-  objectCarriedTransform: {fileID: 0}
-  objectCarriedRigidBody: {fileID: 0}
-  objectCarriedInteractable: {fileID: 0}
+  objectHeldTransform: {fileID: 0}
+  objectHeldRigidBody: {fileID: 0}
+  objectHeldInteractable: {fileID: 0}
+  checkHold: 0
   checkThrow: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  rayPosition: {x: 0, y: 0, z: 0}
+  rayPositionX: 0
+  rayPositionY: 0
+  length: 5
+  holdDistance: 2.5
+  forceThrow: 25
   inputUse:
     m_Name: Input Use
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 620ffcec-227f-44cb-bf36-8c74c0dbf816
+    m_Id: f7c87d5c-f0e4-46de-bc66-04783ea84584
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  use: 0
 --- !u!114 &2135729781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45405,6 +45345,7 @@ MonoBehaviour:
   characterBodyTransform: {fileID: 0}
   characterController: {fileID: 0}
   characterLook: {fileID: 0}
+  ladderTransform: {fileID: 0}
   gravity: -25
   friction: 10
   sphereTransform: {fileID: 0}
@@ -45426,8 +45367,10 @@ MonoBehaviour:
   sphereRadius: 0.5
   heightTarget: 0
   checkSurface: 0
+  checkMove: 0
   checkSlip: 0
   checkFall: 0
+  checkWalk: 0
   checkJump: 0
   checkCrouch: 0
   checkVault: 0
@@ -45437,10 +45380,11 @@ MonoBehaviour:
   checkSwim: 0
   checkDash: 0
   checkCharge: 0
-  checkCarry: 0
   checkGrapple: 0
   move: {x: 0, y: 0, z: 0}
+  characterStationary: {x: 0, y: 0, z: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
+  mass: 7.5
   speedMove: 0
   speedRun: 25
   speedWalk: 12.5
@@ -45460,6 +45404,7 @@ MonoBehaviour:
   reactionTimeJump: 0.25
   heightStand: 1.85
   heightCrouch: 1
+  clearance: 0.85
   headTilt: 0
   headTiltAngle: 12.5
   timeCrouch: 0.125
@@ -45472,12 +45417,11 @@ MonoBehaviour:
   jumpCount: 0
   dashCountMax: 3
   dashCount: 0
-  ladderTransform: {fileID: 0}
   inputMove:
     m_Name: Input Move
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 7548a60f-d3f0-4b7c-ad83-c485503bb8cf
+    m_Id: a41e6c09-eeca-438f-abfe-efa6db5766ed
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45486,7 +45430,7 @@ MonoBehaviour:
     m_Name: Input Walk
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 71a7cc3d-49e6-4179-8bfd-56467bd3d445
+    m_Id: 7ec2dca6-70cc-4ee8-ab29-bd512657e3e0
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45495,7 +45439,7 @@ MonoBehaviour:
     m_Name: Input Jump
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 8c9d9b17-42c3-4f63-9961-c774c2723ff1
+    m_Id: d758295c-fcef-4ee8-8618-80040a94ccb1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45504,7 +45448,7 @@ MonoBehaviour:
     m_Name: Input Crouch
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 54d3eaca-26bb-4cd2-846e-2b28c2d75a0e
+    m_Id: fbf454e3-f94a-4ba0-89bc-9930dd5bb1c4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45513,7 +45457,7 @@ MonoBehaviour:
     m_Name: Input Swim
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 04c0fc35-f780-4de3-a445-efaddeecbadc
+    m_Id: 8fc28f09-0e32-4cf0-a875-e379084965a1
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45522,7 +45466,7 @@ MonoBehaviour:
     m_Name: Input Dash
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 0a86645a-8a1b-4a60-b0a6-463267a6967b
+    m_Id: d5742d19-e8bf-4f1a-95ab-3d98d2e9fcdd
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -45646,6 +45590,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &2136231451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46569,6 +46514,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865352
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!114 &3517005600078229295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47057,6 +47003,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803499639865347
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!1 &3517005601173359855
 GameObject:
   m_ObjectHideFlags: 0

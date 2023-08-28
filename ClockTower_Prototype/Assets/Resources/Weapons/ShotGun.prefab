@@ -679,6 +679,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803346122309635
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &5381569410936783075
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -744,7 +745,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 5f2631657a9664843b70fd4de4a3a8ad, type: 2}
-  mode: 0
+  fire: 0
   weaponDataProjectile: {fileID: 11400000, guid: bca00890150ad8b4baf0dd38c205c064, type: 2}
 --- !u!114 &-3733521916468071221
 MonoBehaviour:
@@ -761,7 +762,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 0}
   characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 3290faa0095a0234eb631a4504bd5a81, type: 2}
-  mode: 1
+  fire: 0
   weaponDataProjectile: {fileID: 11400000, guid: 9af755662286e6a4981105372dc7a4c1, type: 2}
   weaponDataExplosive: {fileID: 11400000, guid: 9f6114408505a3e47b2276f485b63ac1, type: 2}
 --- !u!114 &8465513991534300082
@@ -777,13 +778,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 0}
-  mode: 0
+  fire: 0
   weaponAttributes: 000001000200
   valuesMax:
-  - 0.75
+  - 1
   - 0.1
   - 10
   valuesMin:
-  - 0.25
-  - 0.075
+  - 0.5
+  - 0.05
   - 5
