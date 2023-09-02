@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections;
 
 public struct CollisionData
 {
@@ -30,12 +29,12 @@ public class Interactable : MonoBehaviour
     [Header("Interactable Object Atrributes")]
     [SerializeField] private Material materialOpaque;
     [SerializeField] private Material materialTransparent;
-    [SerializeField] private float velocityTresholdLower = 10.0f;
+    [SerializeField] private float velocityTresholdLower = 5.0f;
     [SerializeField] private float velocityTresholdUpper = 25.0f;
-    [SerializeField] private float collisionDamage = 5.0f;
+    [SerializeField] private float collisionDamageMax = 5.0f;
     [SerializeField] private bool contact = false;
     [SerializeField] private bool contactKinematic = false;
-    [SerializeField] private bool carried = false;
+    [SerializeField] private bool held = false;
 
     [Header("Collisions Information")]
     [SerializeField] private CollisionData[] collisions;
@@ -48,12 +47,6 @@ public class Interactable : MonoBehaviour
     public delegate void InteractableDestroy(Collider collider);
     public event InteractableDestroy OnInteractableDestroy;
 
-    public delegate void interactableCarriedDestroy();
-    public event interactableCarriedDestroy OnInteractableHeldDestroy;
-
-    public delegate IEnumerator interactableGrappleDestroy();
-    public event interactableGrappleDestroy OnInteractableGrappleDestroy;
-
     public bool Contact
     {
         get { return contact; }
@@ -61,30 +54,42 @@ public class Interactable : MonoBehaviour
 
     public bool Held
     {
-        get { return carried; }
-        set { carried = value; if (carried == true) interactableRenderer.material = materialTransparent; else interactableRenderer.material = materialOpaque; }
+        get
+        {
+            return held;
+        }
+        set
+        {
+            held = value;
+
+            if (held == true) interactableRenderer.material = materialTransparent;
+            else interactableRenderer.material = materialOpaque;
+        }
     }
 
-    private void Start()
+    private void Awake()
     {
         interactableTransform = gameObject.transform;
         interactableCollider = interactableTransform.GetComponent<Collider>();
         interactableRigidbody = interactableTransform.GetComponent<Rigidbody>();
         interactableRenderer = interactableTransform.GetComponent<Renderer>();
         healthManager = interactableTransform.GetComponent<ManagerHealth>();
+
+        materialOpaque = Resources.Load<Material>("Materials/Interactables/InteractableOpaqueMat");
+        materialTransparent = Resources.Load<Material>("Materials/Interactables/InteractableTransparentMat");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        contact = true;
+        if (collisionsSize == 0) contact = true;
 
-        CollisionAdd(collision.gameObject.name, collision.GetContact(0).normal, collision.collider);
+        if (collision.transform.gameObject.layer != LayerMask.NameToLayer("Player") && collision.transform.gameObject.layer != LayerMask.NameToLayer("Projectile")) CollisionAdd(collision.gameObject.name, collision.GetContact(0).normal, collision.collider);
 
         if (collision.transform.GetComponent<Interactable>() != null) collision.transform.GetComponent<Interactable>().OnInteractableDestroy += CollisionRemove;
 
         if (collision.rigidbody == null || collision.rigidbody.isKinematic == true || collision.transform.GetComponent<Interactable>().contactKinematic == true) Shatter();
 
-        if (collision.transform.gameObject.layer != LayerMask.NameToLayer("Player") && carried == false) CollisionDamage();
+        CollisionDamage(collision.relativeVelocity);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -99,8 +104,6 @@ public class Interactable : MonoBehaviour
     private void OnDestroy()
     {
         if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
-        if (OnInteractableHeldDestroy != null) OnInteractableHeldDestroy();
-        if (OnInteractableGrappleDestroy != null) OnInteractableGrappleDestroy();
     }
 
     private void CollisionAdd(string hitName, Vector3 hitNormal, Collider hitCollider)
@@ -207,12 +210,11 @@ public class Interactable : MonoBehaviour
         kinematicsRemoved = true;
     }
 
-    private void CollisionDamage()
+    private void CollisionDamage(Vector3 relativeVelocity)
     {
-        if (interactableRigidbody.velocity.magnitude > velocityTresholdLower)
+        if (relativeVelocity.magnitude > velocityTresholdLower)
         {
-            float velocity = interactableRigidbody.velocity.magnitude;
-            float damage = Mathf.Lerp(0, collisionDamage, velocity / velocityTresholdUpper);
+            float damage = Mathf.Lerp(0, collisionDamageMax, relativeVelocity.magnitude / velocityTresholdUpper);
 
             healthManager.TakeDamage(damage);
         }

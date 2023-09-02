@@ -251,7 +251,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3114
+  m_VersionIndex: 3132
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -283,6 +283,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4945499133555245073
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &159619282219174261
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -379,14 +380,14 @@ MonoBehaviour:
   interactableRigidbody: {fileID: 0}
   interactableRenderer: {fileID: 0}
   healthManager: {fileID: 0}
-  materialOpaque: {fileID: 2100000, guid: a2b2e4b771aeff9438f9b1191ac499f9, type: 2}
-  materialTransparent: {fileID: 2100000, guid: 3e955b19db7c3a546b962fc1f6ca9832, type: 2}
-  velocityTresholdLower: 10
+  materialOpaque: {fileID: 0}
+  materialTransparent: {fileID: 0}
+  velocityTresholdLower: 5
   velocityTresholdUpper: 25
-  collisionDamage: 5
+  collisionDamageMax: 5
   contact: 0
   contactKinematic: 0
-  carried: 0
+  held: 0
   collisionsSize: 0
 --- !u!114 &855100036542641612
 MonoBehaviour:

@@ -137,6 +137,11 @@ public class CharacterMovement : MonoBehaviour
         get { return characterController; }
     }
 
+    public Vector3 MoveInput
+    {
+        get { return move; }
+    }
+
     public Vector3 CharacterVelocity
     {
         get { return characterVelocity; }
@@ -147,6 +152,11 @@ public class CharacterMovement : MonoBehaviour
     {
         get { return characterStationary; }
         set { characterStationary = value; }
+    }
+
+    public float SpeedRun
+    {
+        get { return speedRun; }
     }
 
     public bool CheckSlide
@@ -721,7 +731,7 @@ public class CharacterMovement : MonoBehaviour
             centerTarget = centerStand;
             heightTarget = heightStand;
 
-            speedMove = speedRun;
+            speedMove = checkWalk == true ? speedWalk : speedRun;
         }
 
         checkCrouch = true;

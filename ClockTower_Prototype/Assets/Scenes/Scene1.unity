@@ -45303,6 +45303,7 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterBodyTransform: {fileID: 0}
   characterCamera: {fileID: 0}
+  characterMovement: {fileID: 0}
   characterLoadOut: {fileID: 0}
   characterShoot: {fileID: 0}
   objectHeldTransform: {fileID: 0}
@@ -45316,14 +45317,15 @@ MonoBehaviour:
   rayPosition: {x: 0, y: 0, z: 0}
   rayPositionX: 0
   rayPositionY: 0
-  length: 5
+  rayLength: 5
   holdDistance: 2.5
+  holdSpeed: 100
   forceThrow: 25
   inputUse:
     m_Name: Input Use
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f7c87d5c-f0e4-46de-bc66-04783ea84584
+    m_Id: d408b13e-5e18-4a1f-9506-ef19c9e6ce91
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -46324,10 +46326,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 869918914}
-    - target: {fileID: 3767413970849330482, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
-      propertyPath: m_VersionIndex
-      value: 3120
-      objectReference: {fileID: 0}
     - target: {fileID: 7927308258535646027, guid: 1b9de933f7b2d5d499df78754a76d9d9, type: 3}
       propertyPath: m_Name
       value: Box
@@ -47479,10 +47477,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 681086910}
-    - target: {fileID: 5111822111466507106, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
-      propertyPath: m_VersionIndex
-      value: 4618
-      objectReference: {fileID: 0}
     - target: {fileID: 5295232437877151116, guid: ba1727540ad6e8f4e8336cd70c01e590, type: 3}
       propertyPath: m_Mesh
       value: 

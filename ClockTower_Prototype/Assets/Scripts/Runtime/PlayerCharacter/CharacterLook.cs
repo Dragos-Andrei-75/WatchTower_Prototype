@@ -74,7 +74,7 @@ public class CharacterLook : MonoBehaviour
         inputPlayer.Disable();
         inputLook.Disable();
 
-        inputLook.performed += Look;
+        inputLook.performed -= Look;
 
         characterMovement.OnActionSlide -= LookSlide;
 
@@ -84,8 +84,8 @@ public class CharacterLook : MonoBehaviour
 
     private void Look(InputAction.CallbackContext contextLook)
     {
-        mouseX += inputLook.ReadValue<Vector2>().x * lookSensitivityX;
-        mouseY -= inputLook.ReadValue<Vector2>().y * lookSensitivityY;
+        mouseX += contextLook.ReadValue<Vector2>().x * lookSensitivityX;
+        mouseY -= contextLook.ReadValue<Vector2>().y * lookSensitivityY;
 
         mouseY = Mathf.Clamp(mouseY, lookYMin, lookYMax);
 

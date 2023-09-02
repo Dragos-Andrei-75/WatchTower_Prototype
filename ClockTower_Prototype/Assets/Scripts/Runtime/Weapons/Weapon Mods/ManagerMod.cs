@@ -3,12 +3,12 @@ using System;
 
 public class ManagerMod : MonoBehaviour
 {
-    [Header("Mod Attributes")]
-    [SerializeField] private Weapon.Fire fire;
-
     [Header("Mod References")]
     [SerializeField] private WeaponMod[] weaponMods;
     [SerializeField] private int weaponModsSize;
+
+    [Header("Mod Attributes")]
+    [SerializeField] private Weapon.Fire fire;
 
     private void Awake()
     {

@@ -131,7 +131,7 @@ public class GrappleGun : WeaponHitScan
                             break;
                         }
 
-                        yield return new WaitForFixedUpdate();
+                        yield return new WaitForSeconds(Time.fixedDeltaTime);
                     }
                 }
                 else

@@ -8,6 +8,7 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private Transform characterCameraTransform;
     [SerializeField] private Transform characterBodyTransform;
     [SerializeField] private Camera characterCamera;
+    [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private CharacterLoadOut characterLoadOut;
     [SerializeField] private CharacterShoot characterShoot;
 
@@ -25,10 +26,11 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private Vector3 rayPosition;
     [SerializeField] private int rayPositionX;
     [SerializeField] private int rayPositionY;
-    [SerializeField] private int length = 5;
+    [SerializeField] private int rayLength = 5;
 
     [Header("Hold Attributes")]
     [SerializeField] private float holdDistance = 2.5f;
+    [SerializeField] private float holdSpeed = 100.0f;
 
     [Header("Throw Attributes")]
     [SerializeField] private float forceThrow = 25.0f;
@@ -74,6 +76,7 @@ public class CharacterInteract : MonoBehaviour
         characterCameraTransform = gameObject.transform.GetChild(0).transform;
         characterCamera = characterCameraTransform.GetComponent<Camera>();
         characterBodyTransform = gameObject.transform.GetChild(1).transform;
+        characterMovement = gameObject.transform.GetComponent<CharacterMovement>();
         characterLoadOut = characterCameraTransform.GetChild(1).GetComponent<CharacterLoadOut>();
         characterShoot = characterCameraTransform.GetComponent<CharacterShoot>();
 
@@ -124,7 +127,7 @@ public class CharacterInteract : MonoBehaviour
             Ray ray = characterCamera.ScreenPointToRay(rayPosition, Camera.MonoOrStereoscopicEye.Mono);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, length, ~layer, QueryTriggerInteraction.Ignore) == true)
+            if (Physics.Raycast(ray, out hit, rayLength, ~layer, QueryTriggerInteraction.Ignore) == true)
             {
                 if (hit.transform.GetComponent<Interactive>() != null)
                 {
@@ -154,7 +157,6 @@ public class CharacterInteract : MonoBehaviour
         objectHeldRigidBody.freezeRotation = true;
 
         objectHeldInteractable.Held = true;
-        objectHeldInteractable.OnInteractableHeldDestroy += HoldObjectStop;
 
         coroutineHoldObject = StartCoroutine(HoldObject());
 
@@ -167,27 +169,31 @@ public class CharacterInteract : MonoBehaviour
         Quaternion rotation;
         Vector3 position;
         Vector3 direction;
+        float distance;
         float speed;
-
-        speed = 100.0f;
 
         checkHold = true;
 
-        while (checkHold == true && checkThrow == false)
+        while (objectHeldTransform != null && checkHold == true && checkThrow == false)
         {
             rotation = characterBodyTransform.rotation;
             position = characterCameraTransform.position + characterCameraTransform.forward * holdDistance;
-            direction = position - objectHeldTransform.position;
+            direction = (position - objectHeldTransform.position).normalized;
+            distance = Vector3.Distance(objectHeldTransform.position, position);
 
-            if (direction.magnitude > 1) direction.Normalize();
-
-            if (objectHeldInteractable.Contact == false) objectHeldTransform.rotation = Quaternion.Lerp(objectHeldTransform.rotation, rotation, Time.deltaTime * 50);
+            speed = Mathf.Lerp(0, holdSpeed, distance);
 
             if (objectHeldTransform.position != position) objectHeldRigidBody.velocity = direction * speed;
 
-            if (Vector3.Distance(characterBodyTransform.position, objectHeldTransform.position) > holdDistance * 3) break;
+            if (objectHeldInteractable.Contact == false) objectHeldRigidBody.MoveRotation(Quaternion.Lerp(objectHeldTransform.rotation, rotation, Time.fixedDeltaTime * holdSpeed));
 
-            yield return null;
+            if (Vector3.Distance(characterBodyTransform.position, objectHeldTransform.position) > holdDistance * 3)
+            {
+                objectHeldRigidBody.velocity = Vector3.zero;
+                break;
+            }
+
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
 
         HoldObjectStop();
@@ -205,7 +211,6 @@ public class CharacterInteract : MonoBehaviour
         StopCoroutine(coroutineHoldObject);
         coroutineHoldObject = null;
 
-        objectHeldInteractable.OnInteractableHeldDestroy -= HoldObjectStop;
         objectHeldInteractable.Held = false;
 
         objectHeldRigidBody.freezeRotation = false;
