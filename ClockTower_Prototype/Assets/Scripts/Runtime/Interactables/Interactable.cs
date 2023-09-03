@@ -29,6 +29,7 @@ public class Interactable : MonoBehaviour
     [Header("Interactable Object Atrributes")]
     [SerializeField] private Material materialOpaque;
     [SerializeField] private Material materialTransparent;
+    [SerializeField] private Vector3 velocityBeforeCollision;
     [SerializeField] private float velocityTresholdLower = 5.0f;
     [SerializeField] private float velocityTresholdUpper = 25.0f;
     [SerializeField] private float collisionDamageMax = 5.0f;
@@ -79,6 +80,8 @@ public class Interactable : MonoBehaviour
         materialTransparent = Resources.Load<Material>("Materials/Interactables/InteractableTransparentMat");
     }
 
+    private void FixedUpdate() => velocityBeforeCollision = interactableRigidbody.velocity;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collisionsSize == 0) contact = true;
@@ -89,7 +92,7 @@ public class Interactable : MonoBehaviour
 
         if (collision.rigidbody == null || collision.rigidbody.isKinematic == true || collision.transform.GetComponent<Interactable>().contactKinematic == true) Shatter();
 
-        CollisionDamage(collision.relativeVelocity);
+        CollisionDamage(collision.GetContact(0).normal);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -210,13 +213,16 @@ public class Interactable : MonoBehaviour
         kinematicsRemoved = true;
     }
 
-    private void CollisionDamage(Vector3 relativeVelocity)
+    private void CollisionDamage(Vector3 collisionNormal)
     {
-        if (relativeVelocity.magnitude > velocityTresholdLower)
+        if (velocityBeforeCollision.magnitude > velocityTresholdLower)
         {
-            float damage = Mathf.Lerp(0, collisionDamageMax, relativeVelocity.magnitude / velocityTresholdUpper);
+            Vector3 direction = -velocityBeforeCollision.normalized;
+            float magnitude = velocityBeforeCollision.magnitude;
+            float damage = Mathf.Lerp(0, collisionDamageMax, magnitude / velocityTresholdUpper);
+            float cosine = Mathf.Cos(Vector3.Angle(direction, collisionNormal) * Mathf.Deg2Rad);
 
-            healthManager.TakeDamage(damage);
+            healthManager.TakeDamage(damage * cosine);
         }
     }
 

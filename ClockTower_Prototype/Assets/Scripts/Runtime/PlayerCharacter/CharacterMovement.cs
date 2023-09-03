@@ -557,6 +557,10 @@ public class CharacterMovement : MonoBehaviour
                     while (checkCrouch == true) yield return null;
                     StartCoroutine(CheckClearance());
                 }
+                else if (checkSlide == true)
+                {
+                    characterVelocity.y = 0;
+                }
             }
         }
 
@@ -841,6 +845,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 positionPrevious;
         Vector3 slideDirection;
         Vector3 slideMove;
+        float slideAngle;
         float slideSpeed;
 
         positionPrevious = characterBodyTransform.position;
@@ -848,8 +853,6 @@ public class CharacterMovement : MonoBehaviour
         slideSpeed = speedDash;
 
         characterLook.LookXReference = characterLook.MouseX;
-
-        characterVelocity.y = -1;
 
         checkSlide = true;
 
@@ -864,8 +867,11 @@ public class CharacterMovement : MonoBehaviour
 
             if(checkSurface == true)
             {
-                if (Mathf.Round(Vector3.Angle(Vector3.up, slideDirection)) > 90) slideSpeed = Mathf.Lerp(slideSpeed, speedSlide, Time.deltaTime);
-                else if (Mathf.Round(Vector3.Angle(Vector3.up, slideDirection)) == 90) slideSpeed = Mathf.Lerp(slideSpeed, 0, Time.deltaTime);
+                slideAngle = Mathf.Cos(Vector3.Angle(Vector3.up, slideDirection) * Mathf.Deg2Rad);
+                slideAngle = Mathf.Round(slideAngle * 100) / 100;
+
+                if (slideAngle < 0) slideSpeed = Mathf.Lerp(slideSpeed, speedSlide, Time.deltaTime);
+                else if (slideAngle == 0) slideSpeed = Mathf.Lerp(slideSpeed, 0, Time.deltaTime);
                 else slideSpeed = Mathf.Lerp(slideSpeed, 0, Time.deltaTime * 2);
             }
             else
