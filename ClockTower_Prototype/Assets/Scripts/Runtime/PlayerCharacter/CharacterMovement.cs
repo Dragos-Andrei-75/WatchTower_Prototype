@@ -111,35 +111,15 @@ public class CharacterMovement : MonoBehaviour
 
     private Coroutine coroutineGait;
     private Coroutine coroutineVault;
-    private Coroutine coroutineSlide;
     private Coroutine coroutineWallRun;
     private Coroutine coroutineDash;
 
     public delegate IEnumerator ActionSlide();
     public event ActionSlide OnActionSlide;
 
-    private Coroutine CoroutineGait
-    {
-        get
-        {
-            return coroutineGait;
-        }
-        set
-        {
-            if (coroutineGait != null) StopCoroutine(coroutineGait);
-
-            coroutineGait = value;
-        }
-    }
-
     public CharacterController Controller
     {
         get { return characterController; }
-    }
-
-    public Vector3 MoveInput
-    {
-        get { return move; }
     }
 
     public Vector3 CharacterVelocity
@@ -152,11 +132,6 @@ public class CharacterMovement : MonoBehaviour
     {
         get { return characterStationary; }
         set { characterStationary = value; }
-    }
-
-    public float SpeedRun
-    {
-        get { return speedRun; }
     }
 
     public bool CheckSlide
@@ -172,7 +147,7 @@ public class CharacterMovement : MonoBehaviour
         }
         set
         {
-            if (checkClimb == true && value == true) checkClimb = false;
+            if (checkClimb == true && value == true) StartCoroutine(ClimbExit());
 
             StartCoroutine(Move());
 
@@ -280,13 +255,11 @@ public class CharacterMovement : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Climb"))
         {
-            checkClimb = true;
             ladderTransform = other.transform;
             StartCoroutine(Climb());
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
-            checkSwim = true;
             StartCoroutine(Swim());
         }
 
@@ -303,12 +276,6 @@ public class CharacterMovement : MonoBehaviour
             else if (crouch == true)
             {
                 StartCoroutine(Crouch());
-
-                if (checkSlide == true)
-                {
-                    StopCoroutine(coroutineSlide);
-                    checkSlide = false;
-                }
             }
             else if (checkWallRun == true)
             {
@@ -402,7 +369,7 @@ public class CharacterMovement : MonoBehaviour
         if (checkSurface != contact)
         {
             checkSurface = contact;
-            StartCoroutine(CheckSurface());
+            CheckSurface();
         }
 
         if (checkSurface == false)
@@ -475,7 +442,7 @@ public class CharacterMovement : MonoBehaviour
         characterVelocity.z *= velocityHorizontal;
     }
 
-    private void MoveGround()
+    private void MoveSurface()
     {
         Friction();
         Acceleration(speedMove);
@@ -487,17 +454,80 @@ public class CharacterMovement : MonoBehaviour
         AirControl();
     }
 
-    private void InputMove(InputAction.CallbackContext contextInputMove) => StartCoroutine(InputMove());
+    private void CheckSurface()
+    {
+        if (checkSurface == true)
+        {
+            gravity = -25;
+            jumpCount = 0;
+            checkFall = false;
+            checkJump = false;
 
-    private void InputSwim(InputAction.CallbackContext contextInputSwim) => swimOut = contextInputSwim.ReadValueAsButton();
+            characterVelocity.y = -mass;
 
-    private void CheckClearance(InputAction.CallbackContext contextCheckClearance) => StartCoroutine(CheckClearance());
+            if (checkClimb == true) StartCoroutine(ClimbExit());
+        }
+        else
+        {
+            if (checkClimb == true || checkSwim == true || checkDash == true || checkGrapple == true) return;
 
-    private void Move(InputAction.CallbackContext contextMove) => StartCoroutine(Move());
+            if (checkJump == true)
+            {
+                gravity = -37.5f;
+            }
+            else
+            {
+                checkFall = true;
+                StartCoroutine(Jump(reactionTimeAir));
+            }
 
-    private void Gait(InputAction.CallbackContext contextCheckClearance) => CoroutineGait = StartCoroutine(Gait());
+            if (crouch == true)
+            {
+                int depth = 5;
 
-    private void Dash(InputAction.CallbackContext contextMoveInput) => coroutineDash = StartCoroutine(Dash());
+                if (Physics.Raycast(sphereTransform.position, Vector3.down, depth, ~layerCharacter, QueryTriggerInteraction.Ignore) == false) StartCoroutine(Crouch());
+                else if (checkSlide == true) characterVelocity.y = 0;
+            }
+        }
+    }
+
+    private void CheckClearance()
+    {
+        if (checkVault == true || checkSwim == true) return;
+
+        if (characterController.height == heightCrouch)
+        {
+            bool clear = !Physics.Raycast(characterCameraTransform.position, Vector3.up, clearance, ~layerInteractable, QueryTriggerInteraction.Ignore);
+
+            if (clear == false)
+            {
+                return;
+            }
+            else if (inputJump.ReadValue<float>() == 1)
+            {
+                if (checkSlide == true) StartCoroutine(Jump(reactionTimeJump));
+
+                StartCoroutine(Crouch());
+
+                return;
+            }
+        }
+
+        if (inputJump.ReadValue<float>() == 1) StartCoroutine(Jump(reactionTimeJump));
+        else if (checkCrouch == false) StartCoroutine(Crouch());
+    }
+
+    private void CheckClearance(InputAction.CallbackContext contextCheckClearance) { CheckClearance(); }
+
+    private void InputMove(InputAction.CallbackContext contextInputMove) { StartCoroutine(InputMove()); }
+
+    private void InputSwim(InputAction.CallbackContext contextInputSwim) { swimOut = contextInputSwim.ReadValueAsButton(); }
+
+    private void Move(InputAction.CallbackContext contextMove) { StartCoroutine(Move()); }
+
+    private void Gait(InputAction.CallbackContext contextGait) { if (coroutineGait != null) StopCoroutine(coroutineGait); coroutineGait = StartCoroutine(Gait()); }
+
+    private void Dash(InputAction.CallbackContext contextDash) { coroutineDash = StartCoroutine(Dash()); }
 
     private IEnumerator InputMove()
     {
@@ -521,83 +551,6 @@ public class CharacterMovement : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator CheckSurface()
-    {
-        if (checkSurface == true)
-        {
-            gravity = -25;
-            jumpCount = 0;
-            checkFall = false;
-            checkJump = false;
-
-            characterVelocity.y = -mass;
-
-            if (checkClimb == true) StartCoroutine(ClimbExit());
-        }
-        else
-        {
-            if (checkClimb == true || checkSwim == true || checkDash == true || checkGrapple == true) yield break;
-
-            if (checkJump == true)
-            {
-                gravity = -37.5f;
-            }
-            else
-            {
-                checkFall = true;
-                StartCoroutine(Jump(reactionTimeAir));
-            }
-
-            if (crouch == true)
-            {
-                float depth = 7.5f;
-
-                if (Physics.Raycast(sphereTransform.position, Vector3.down, depth, ~layerCharacter, QueryTriggerInteraction.Ignore) == false)
-                {
-                    while (checkCrouch == true) yield return null;
-                    StartCoroutine(CheckClearance());
-                }
-                else if (checkSlide == true)
-                {
-                    characterVelocity.y = 0;
-                }
-            }
-        }
-
-        yield break;
-    }
-
-    private IEnumerator CheckClearance()
-    {
-        if (checkVault == true || checkSwim == true) yield break;
-
-        if (characterController.height == heightCrouch)
-        {
-            bool clear = !Physics.Raycast(characterCameraTransform.position, Vector3.up, clearance, ~layerInteractable, QueryTriggerInteraction.Ignore);
-
-            if (clear == false)
-            {
-                yield break;
-            }
-            else if (inputJump.ReadValue<float>() == 1)
-            {
-                StartCoroutine(Crouch());
-                if (checkSlide == false) yield break;
-            }
-
-            if (checkSlide == true)
-            {
-                checkSlide = false;
-                StopCoroutine(coroutineSlide);
-            }
-        }
-
-        if (inputJump.ReadValue<float>() == 1) StartCoroutine(Jump(reactionTimeJump));
-        else if (checkCrouch == false) StartCoroutine(Crouch());
-
-        yield break;
-    }
-
     private IEnumerator Move()
     {
         if (checkMove == true) yield break;
@@ -608,7 +561,7 @@ public class CharacterMovement : MonoBehaviour
         {
             if (checkSlip == false && checkVault == false && checkSlide == false && checkWallRun == false && checkClimb == false && checkSwim == false && checkDash == false)
             {
-                if (checkSurface == true) MoveGround();
+                if (checkSurface == true) MoveSurface();
                 else MoveAir();
             }
 
@@ -651,7 +604,7 @@ public class CharacterMovement : MonoBehaviour
 
         float speedTarget;
 
-        checkWalk = !checkWalk;
+        checkWalk = Convert.ToBoolean(inputWalk.ReadValue<float>());
 
         if (checkWalk == true) speedTarget = speedWalk;
         else speedTarget = speedRun;
@@ -679,7 +632,14 @@ public class CharacterMovement : MonoBehaviour
             {
                 if (checkSurface == true || (checkFall == true && checkJump == false) || ((checkFall == true || checkJump == true) && jumpCount < jumpCountMax))
                 {
+                    if (checkSlide == true)
+                    {
+                        characterVelocity.x *= 2;
+                        characterVelocity.z *= 2;
+                    }
+
                     characterVelocity.y = Mathf.Sqrt(-2 * gravity * jumpHeight);
+
                     break;
                 }
                 else if (checkClimb == true)
@@ -721,7 +681,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (crouch == true)
         {
-            if (characterTransform.InverseTransformDirection(characterVelocity).z > speedWalk) coroutineSlide = StartCoroutine(Slide());
+            if (characterTransform.InverseTransformDirection(characterVelocity).z > speedWalk) StartCoroutine(Slide());
 
             cameraTarget = cameraCrouch;
             centerTarget = centerCrouch;
@@ -858,7 +818,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (OnActionSlide != null) StartCoroutine(OnActionSlide());
 
-        while (Mathf.Round(slideSpeed * 10) / 10 > 2.5f)
+        while (Mathf.Round(slideSpeed * 10) / 10 > 2.5f && crouch == true)
         {
             slideDirection = characterBodyTransform.position - positionPrevious;
             slideDirection.Normalize();
@@ -967,14 +927,35 @@ public class CharacterMovement : MonoBehaviour
 
     private IEnumerator Climb()
     {
-        Vector3 directionUp = Vector3.Dot(ladderTransform.up, characterBodyTransform.up) > 0 ? ladderTransform.up : -ladderTransform.up;
+        Vector3 directionUp;
+        Vector3 climbVertical;
+        Vector3 climbHorizontal;
+        float dotSuface;
+        float dotAir;
+
+        directionUp = Vector3.Dot(ladderTransform.up, characterBodyTransform.up) > 0 ? ladderTransform.up : -ladderTransform.up;
+
+        dotSuface = Vector3.Dot(characterBodyTransform.forward, (characterBodyTransform.position - ladderTransform.position).normalized);
+
+        checkClimb = true;
 
         while (checkClimb == true)
         {
-            float angle = Vector3.Angle(ladderTransform.forward, characterBodyTransform.forward);
+            if (checkSurface == true)
+            {
+                if (dotSuface > 0 && inputZ > 0) climbVertical = characterBodyTransform.forward;
+                else if (dotSuface < 0 && inputZ < 0) climbVertical = -characterBodyTransform.forward;
+                else climbVertical = directionUp * Mathf.Abs(inputZ);
 
-            Vector3 climbVertical = characterCameraTransform.localRotation.x < 0.125f ? directionUp * inputZ : -directionUp * inputZ;
-            Vector3 climbHorizontal = angle < 90 ? ladderTransform.right * (inputX / 2.5f) : -ladderTransform.right * (inputX / 2.5f);
+                climbHorizontal = characterBodyTransform.right * inputX;
+            }
+            else
+            {
+                dotAir = Vector3.Dot(characterBodyTransform.forward, ladderTransform.forward);
+
+                climbVertical = characterCameraTransform.localRotation.x < 0.125f ? directionUp * inputZ : -directionUp * inputZ;
+                climbHorizontal = dotAir < 90 ? ladderTransform.right * (inputX / 2.5f) : -ladderTransform.right * (inputX / 2.5f);
+            }
 
             characterVelocity = (climbVertical + climbHorizontal) * speedClimb;
 
@@ -991,46 +972,37 @@ public class CharacterMovement : MonoBehaviour
         Vector3 direction;
         float ladderLimitLeft;
         float ladderLimitRight;
-        float value;
+        float dot;
 
         characterOnLadder = ladderTransform.TransformDirection(characterBodyTransform.position);
 
         ladderToCharacter = characterBodyTransform.position - ladderTransform.position;
-        ladderToCharacter.y = 0;
         ladderToCharacter.Normalize();
 
         ladderLimitLeft = ladderTransform.TransformDirection(ladderTransform.position).x - (ladderTransform.GetComponent<BoxCollider>().size.x / 2);
         ladderLimitRight = ladderTransform.TransformDirection(ladderTransform.position).x + (ladderTransform.GetComponent<BoxCollider>().size.x / 2);
 
-        if ((characterCameraTransform.localRotation.x < 0.125f && inputZ < 0) || (characterCameraTransform.localRotation.x > 0.125f && inputZ > 0))
+        if ((characterCameraTransform.localRotation.x < 0.125f && inputZ > 0) || (characterCameraTransform.localRotation.x > 0.125f && inputZ < 0))
         {
-            if (checkSurface == true)
-            {
-                characterVelocity.y = 0;
-            }
-        }
-        else if (characterBodyTransform.position.y > ladderTransform.position.y + (ladderTransform.GetComponent<BoxCollider>().size.y / 2))
-        {
-            if ((characterCameraTransform.localRotation.x < 0.125f && inputZ > 0) || (characterCameraTransform.localRotation.x > 0.125f && inputZ < 0))
+            if (characterBodyTransform.position.y > ladderTransform.position.y + (ladderTransform.GetComponent<BoxCollider>().size.y / 2))
             {
                 characterVelocity.y = Mathf.Sqrt(-2 * gravity);
             }
         }
         else if (characterOnLadder.x < ladderLimitLeft || characterOnLadder.x > ladderLimitRight)
         {
-            value = Vector3.Angle(ladderTransform.forward, characterTransform.forward);
-            direction = value < 90 ? ladderTransform.right : -ladderTransform.right;
+            dot = Vector3.Dot(ladderTransform.forward, characterTransform.forward);
+            direction = dot > 0 ? ladderTransform.right : -ladderTransform.right;
 
             characterVelocity = direction * inputX * speedAir;
         }
         else if (jump == true)
         {
-            value = Vector3.Dot(ladderTransform.forward, ladderToCharacter);
-            direction = value > 0 ? ladderTransform.forward : -ladderTransform.forward;
+            dot = Vector3.Dot(ladderTransform.forward, ladderToCharacter);
+            direction = dot > 0 ? ladderTransform.forward : -ladderTransform.forward;
 
             characterVelocity = direction * Mathf.Sqrt(-2 * gravity * jumpHeight);
         }
-        else yield break;
 
         ladderTransform = null;
         checkClimb = false;
@@ -1044,6 +1016,8 @@ public class CharacterMovement : MonoBehaviour
         Vector3 swimVertical;
         float smoothInputX;
         float smoothInputZ;
+
+        checkSwim = true;
 
         while (checkSwim == true)
         {
@@ -1069,7 +1043,7 @@ public class CharacterMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         if (checkCrouch == true || checkVault == true || checkWallRun == true || checkClimb == true || checkDash == true) yield break;
-        else if (crouch == true || checkSlide == true) StartCoroutine(CheckClearance());
+        else if (crouch == true || checkSlide == true) CheckClearance();
 
         if (move != Vector3.zero && dashCount > 0)
         {
