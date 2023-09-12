@@ -8,9 +8,7 @@ public class CharacterInteract : MonoBehaviour
     [SerializeField] private Transform characterCameraTransform;
     [SerializeField] private Transform characterBodyTransform;
     [SerializeField] private Camera characterCamera;
-    [SerializeField] private CharacterMovement characterMovement;
     [SerializeField] private CharacterLoadOut characterLoadOut;
-    [SerializeField] private CharacterShoot characterShoot;
 
     [Header("Other Object and Component References")]
     [SerializeField] private Transform objectHeldTransform;
@@ -35,31 +33,14 @@ public class CharacterInteract : MonoBehaviour
     [Header("Throw Attributes")]
     [SerializeField] private float forceThrow = 25.0f;
 
-    [Header("Input Player")]
-    [SerializeField] private InputPlayer inputPlayer;
-    [SerializeField] private InputAction inputUse;
+    [Header("Input Interact")]
+    [SerializeField] private InputCharacterInteract inputCharacterInteract;
+    [SerializeField] private InputCharacterShoot inputCharacterShoot;
 
     private Coroutine coroutineHoldObject;
 
     public delegate void Carry();
     public event Carry OnCarry;
-
-    private Transform ObjectHeldTransform
-    {
-        get
-        {
-            return objectHeldTransform;
-        }
-        set
-        {
-            objectHeldTransform = value;
-
-            if ((objectHeldTransform != null && characterLoadOut.Holster == false) || (objectHeldTransform == null && characterLoadOut.Holster == true))
-            {
-                if (OnCarry != null) OnCarry();
-            }
-        }
-    }
 
     public bool CheckHold
     {
@@ -76,9 +57,7 @@ public class CharacterInteract : MonoBehaviour
         characterCameraTransform = gameObject.transform.GetChild(0).transform;
         characterCamera = characterCameraTransform.GetComponent<Camera>();
         characterBodyTransform = gameObject.transform.GetChild(1).transform;
-        characterMovement = gameObject.transform.GetComponent<CharacterMovement>();
         characterLoadOut = characterCameraTransform.GetChild(1).GetComponent<CharacterLoadOut>();
-        characterShoot = characterCameraTransform.GetComponent<CharacterShoot>();
 
         rayPositionX = Screen.width / 2;
         rayPositionY = Screen.height / 2;
@@ -87,35 +66,22 @@ public class CharacterInteract : MonoBehaviour
 
         layer = LayerMask.GetMask("Player");
 
-        inputPlayer = new InputPlayer();
-
-        inputUse = inputPlayer.Character.Use;
+        inputCharacterInteract = InputCharacterInteract.Instance;
+        inputCharacterShoot = InputCharacterShoot.Instance;
     }
 
     private void OnEnable()
     {
-        inputPlayer.Enable();
-        inputUse.Enable();
-
-        inputUse.started += Interact;
+        inputCharacterInteract.InputUse.started += Interact;
 
         GrappleGun.OnGrappleInteractable += HoldObjectStart;
-
-        Pause.OnPauseResume -= OnEnable;
-        Pause.OnPauseResume += OnDisable;
     }
 
     private void OnDisable()
     {
-        inputPlayer.Disable();
-        inputUse.Disable();
-
-        inputUse.started -= Interact;
+        inputCharacterInteract.InputUse.started -= Interact;
 
         GrappleGun.OnGrappleInteractable -= HoldObjectStart;
-
-        Pause.OnPauseResume += OnEnable;
-        Pause.OnPauseResume -= OnDisable;
     }
 
     private void Interact(InputAction.CallbackContext contextInteract) => Interact();
@@ -149,7 +115,9 @@ public class CharacterInteract : MonoBehaviour
 
     private void HoldObjectStart(Transform objectToHold)
     {
-        ObjectHeldTransform = objectToHold;
+        if (characterLoadOut.Holster == false && OnCarry != null) OnCarry();
+
+        objectHeldTransform = objectToHold;
         objectHeldRigidBody = objectHeldTransform.GetComponent<Rigidbody>();
         objectHeldInteractable = objectHeldTransform.GetComponent<Interactable>();
 
@@ -160,8 +128,8 @@ public class CharacterInteract : MonoBehaviour
 
         coroutineHoldObject = StartCoroutine(HoldObject());
 
-        characterShoot.InputClickLeft.started += ThrowObject;
-        characterShoot.InputClickRight.started += ThrowObject;
+        inputCharacterShoot.InputShootPrimary.started += ThrowObject;
+        inputCharacterShoot.InputShootSecondary.started += ThrowObject;
     }
 
     private IEnumerator HoldObject()
@@ -205,8 +173,8 @@ public class CharacterInteract : MonoBehaviour
     {
         Interact();
 
-        characterShoot.InputClickRight.started -= ThrowObject;
-        characterShoot.InputClickLeft.started -= ThrowObject;
+        inputCharacterShoot.InputShootSecondary.started -= ThrowObject;
+        inputCharacterShoot.InputShootPrimary.started -= ThrowObject;
 
         StopCoroutine(coroutineHoldObject);
         coroutineHoldObject = null;
@@ -218,7 +186,9 @@ public class CharacterInteract : MonoBehaviour
 
         objectHeldInteractable = null;
         objectHeldRigidBody = null;
-        ObjectHeldTransform = null;
+        objectHeldTransform = null;
+
+        if (characterLoadOut.Holster == true && OnCarry != null) OnCarry();
     }
 
     private void ThrowObject(InputAction.CallbackContext context) => StartCoroutine(ThrowObject());
@@ -229,7 +199,7 @@ public class CharacterInteract : MonoBehaviour
 
         objectHeldRigidBody.AddForce(characterCameraTransform.forward * forceThrow, ForceMode.Impulse);
 
-        while (characterShoot.InputClickLeft.ReadValue<float>() == 1 || characterShoot.InputClickRight.ReadValue<float>() == 1) yield return null;
+        while (inputCharacterShoot.InputShootPrimary.ReadValue<float>() == 1 || inputCharacterShoot.InputShootSecondary.ReadValue<float>() == 1) yield return null;
 
         checkThrow = false;
 

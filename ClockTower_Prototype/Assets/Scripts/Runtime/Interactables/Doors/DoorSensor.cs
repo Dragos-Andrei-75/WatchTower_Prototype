@@ -6,7 +6,7 @@ public class DoorSensor : MonoBehaviour
     [Header("Sensor Object and Component References")]
     [SerializeField] private BoxCollider colliderSensor;
 
-    [Header("Object and Component References")]
+    [Header("Other Object and Component References")]
     [SerializeField] private BoxCollider[] colliderDoors;
     [SerializeField] private Door[] doors;
 
@@ -34,7 +34,7 @@ public class DoorSensor : MonoBehaviour
         set { openType = value; }
     }
 
-    private void Start()
+    private void Awake()
     {
         SensorSetUp();
 
@@ -137,8 +137,6 @@ public class DoorSensor : MonoBehaviour
                     doors[i].transform.localPosition -= new Vector3(colliderDoors[i].size.x, 0, 0);
                 }
             }
-
-            doors[i].Setup();
         }
 
         colliderSensor.size = new Vector3(sensorSizeX, sensorSizeY, sensorArea);

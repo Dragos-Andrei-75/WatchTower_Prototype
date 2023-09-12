@@ -13,11 +13,8 @@ public class CharacterLoadOut : MonoBehaviour
     [SerializeField] private int loadOutSize = 11;
     [SerializeField] private bool holster = false;
 
-    [Header("Input Player")]
-    [SerializeField] private InputPlayer inputPlayer;
-    [SerializeField] private InputAction inputHolster;
-    [SerializeField] private InputAction inputWheel;
-    [SerializeField] private InputAction[] inputButtons;
+    [Header("Input LoadOut")]
+    [SerializeField] private InputCharacterLoadOut inputCharacterLoadOut;
 
     public Transform[] Weapons
     {
@@ -41,109 +38,55 @@ public class CharacterLoadOut : MonoBehaviour
 
         weapons = new Transform[loadOutSize];
 
-        inputPlayer = new InputPlayer();
-
-        inputButtons = new InputAction[loadOutSize];
-
-        inputButtons[0] = inputPlayer.LoadOut.Weapon1;
-        inputButtons[1] = inputPlayer.LoadOut.Weapon2;
-        inputButtons[2] = inputPlayer.LoadOut.Weapon3;
-        inputButtons[3] = inputPlayer.LoadOut.Weapon4;
-        inputButtons[4] = inputPlayer.LoadOut.Weapon5;
-        inputButtons[5] = inputPlayer.LoadOut.Weapon6;
-        inputButtons[6] = inputPlayer.LoadOut.Weapon7;
-        inputButtons[7] = inputPlayer.LoadOut.Weapon8;
-        inputButtons[8] = inputPlayer.LoadOut.Weapon9;
-        inputButtons[9] = inputPlayer.LoadOut.Weapon10;
-        inputButtons[10] = inputPlayer.LoadOut.Weapon11;
-
-        inputWheel = inputPlayer.LoadOut.Wheel;
-
-        inputHolster = inputPlayer.LoadOut.Holster;
+        inputCharacterLoadOut = InputCharacterLoadOut.Instance;
 
         LoadOutSetup();
     }
 
     private void OnEnable()
     {
-        inputPlayer.Enable();
-        inputHolster.Enable();
-        inputButtons[0].Enable();
-        inputButtons[1].Enable();
-        inputButtons[2].Enable();
-        inputButtons[3].Enable();
-        inputButtons[4].Enable();
-        inputButtons[5].Enable();
-        inputButtons[6].Enable();
-        inputButtons[7].Enable();
-        inputButtons[8].Enable();
-        inputButtons[9].Enable();
-        inputButtons[10].Enable();
-        inputWheel.Enable();
+        inputCharacterLoadOut.InputHolster.started += WeaponHolster;
 
-        inputHolster.started += WeaponHolster;
+        inputCharacterLoadOut.InputButtons[0].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[1].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[2].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[3].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[4].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[5].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[6].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[7].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[8].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[9].started += WeaponSelect;
+        inputCharacterLoadOut.InputButtons[10].started += WeaponSelect;
 
-        inputButtons[0].started += WeaponSelect;
-        inputButtons[1].started += WeaponSelect;
-        inputButtons[2].started += WeaponSelect;
-        inputButtons[3].started += WeaponSelect;
-        inputButtons[4].started += WeaponSelect;
-        inputButtons[5].started += WeaponSelect;
-        inputButtons[6].started += WeaponSelect;
-        inputButtons[7].started += WeaponSelect;
-        inputButtons[8].started += WeaponSelect;
-        inputButtons[9].started += WeaponSelect;
-        inputButtons[10].started += WeaponSelect;
-
-        inputWheel.performed += WeaponSelect;
+        inputCharacterLoadOut.InputWheel.performed += WeaponSelect;
 
         characterInteract.OnCarry += WeaponHolster;
 
         PickUpWeapon.OnWeaponEquip += WeaponSwitch;
-
-        Pause.OnPauseResume -= OnEnable;
-        Pause.OnPauseResume += OnDisable;
     }
 
     private void OnDisable()
     {
-        inputPlayer.Disable();
-        inputHolster.Disable();
-        inputButtons[0].Disable();
-        inputButtons[1].Disable();
-        inputButtons[2].Disable();
-        inputButtons[3].Disable();
-        inputButtons[4].Disable();
-        inputButtons[5].Disable();
-        inputButtons[6].Disable();
-        inputButtons[7].Disable();
-        inputButtons[8].Disable();
-        inputButtons[9].Disable();
-        inputButtons[10].Disable();
-        inputWheel.Disable();
+        inputCharacterLoadOut.InputHolster.started -= WeaponHolster;
 
-        inputHolster.started -= WeaponHolster;
+        inputCharacterLoadOut.InputButtons[0].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[1].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[2].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[3].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[4].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[5].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[6].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[7].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[8].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[9].started -= WeaponSelect;
+        inputCharacterLoadOut.InputButtons[10].started -= WeaponSelect;
 
-        inputButtons[0].started -= WeaponSelect;
-        inputButtons[1].started -= WeaponSelect;
-        inputButtons[2].started -= WeaponSelect;
-        inputButtons[3].started -= WeaponSelect;
-        inputButtons[4].started -= WeaponSelect;
-        inputButtons[5].started -= WeaponSelect;
-        inputButtons[6].started -= WeaponSelect;
-        inputButtons[7].started -= WeaponSelect;
-        inputButtons[8].started -= WeaponSelect;
-        inputButtons[9].started -= WeaponSelect;
-        inputButtons[10].started -= WeaponSelect;
-
-        inputWheel.performed -= WeaponSelect;
+        inputCharacterLoadOut.InputWheel.performed -= WeaponSelect;
 
         characterInteract.OnCarry -= WeaponHolster;
 
         PickUpWeapon.OnWeaponEquip -= WeaponSwitch;
-
-        Pause.OnPauseResume += OnEnable;
-        Pause.OnPauseResume -= OnDisable;
     }
 
     private void LoadOutSetup()
@@ -192,7 +135,7 @@ public class CharacterLoadOut : MonoBehaviour
 
             weapons[weaponSelected].gameObject.SetActive(false);
 
-            if (inputWheel.ReadValue<float>() == 0) WeaponSelectButton();
+            if (inputCharacterLoadOut.InputWheel.ReadValue<float>() == 0) WeaponSelectButton();
             else WeaponSelectWheel();
 
             weapons[weaponSelected].gameObject.SetActive(true);
@@ -219,18 +162,18 @@ public class CharacterLoadOut : MonoBehaviour
     {
         for (int i = 0; i < loadOutSize; i++)
         {
-            if (inputButtons[i].ReadValue<float>() == 1 && weapons[i] != null) weaponSelected = i;
+            if (inputCharacterLoadOut.InputButtons[i].ReadValue<float>() == 1 && weapons[i] != null) weaponSelected = i;
         }
     }
 
     private void WeaponSelectWheel()
     {
-        if (inputWheel.ReadValue<float>() > 0)
+        if (inputCharacterLoadOut.InputWheel.ReadValue<float>() > 0)
         {
             do weaponSelected = weaponSelected == 0 ? weapons.Length - 1 : weaponSelected - 1;
             while (weapons[weaponSelected] == null);
         }
-        else if (inputWheel.ReadValue<float>() < 0)
+        else if (inputCharacterLoadOut.InputWheel.ReadValue<float>() < 0)
         {
             do weaponSelected = weaponSelected == weapons.Length - 1 ? 0 : weaponSelected + 1;
             while (weapons[weaponSelected] == null);

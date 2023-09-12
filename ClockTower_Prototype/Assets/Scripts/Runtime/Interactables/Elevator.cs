@@ -21,9 +21,9 @@ public class Elevator : Interactive
 
     private enum ElevatorType { Vertical, Horizontal };
 
-    private void Start()
+    protected override void Awake()
     {
-        elevatorTransform = gameObject.transform;
+        base.Awake();
         Setup();
     }
 
@@ -50,6 +50,7 @@ public class Elevator : Interactive
     private void OnTriggerEnter(Collider other)
     {
         objectsNumber++;
+
         Array.Resize(ref objects, objectsNumber);
 
         objects[objects.Length - 1] = other.transform;
@@ -78,14 +79,15 @@ public class Elevator : Interactive
         }
 
         objectsNumber--;
+
         Array.Resize(ref objects, objectsNumber);
     }
 
     public override void Setup()
     {
-        base.Setup();
-
         Vector3 levelIncrement;
+
+        elevatorTransform = gameObject.transform;
 
         if (elevatorType == ElevatorType.Vertical) levelIncrement = new Vector3(0, distance, 0);
         else levelIncrement = elevatorTransform.TransformDirection(new Vector3(distance, 0, 0));
@@ -93,9 +95,9 @@ public class Elevator : Interactive
         if (elevatorTransform.GetComponent<Collider>().isTrigger == true) automatic = true;
 
         position1 = elevatorTransform.position;
-
-        position1 = elevatorTransform.position;
         position2 = position1 + levelIncrement;
+
+        base.Setup();
     }
 
     public override void Interact()

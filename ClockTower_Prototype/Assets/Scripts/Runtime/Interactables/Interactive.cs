@@ -27,6 +27,8 @@ public abstract class Interactive : MonoBehaviour
         set { timeToMove = value; }
     }
 
+    protected virtual void Awake() => Setup();
+
     public virtual void Setup()
     {
         if (gameObject.transform.parent != null && gameObject.transform.parent.GetComponentInChildren<Switch>() != null) switchEngaged = true;

@@ -6,9 +6,6 @@ public abstract class Weapon : MonoBehaviour
     [Header("Weapon Object and Component References")]
     [SerializeField] private Transform weaponTransform;
 
-    [Header("Character Object and Component References")]
-    [SerializeField] private CharacterShoot characterShoot;
-
     [Header("Weapon Base Attributes")]
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private Fire fire;
@@ -31,7 +28,6 @@ public abstract class Weapon : MonoBehaviour
         Weapon[] weapon;
 
         weaponTransform = gameObject.transform;
-        characterShoot = weaponTransform.GetComponentInParent<CharacterShoot>();
 
         WeaponData.FireNext = 0;
         WeaponData.Heat = 0;
@@ -41,9 +37,9 @@ public abstract class Weapon : MonoBehaviour
         for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) fire = (Fire)i;
     }
 
-    protected virtual void OnEnable() => characterShoot.OnShoot[Convert.ToInt16(fire)] += Shoot;
+    protected virtual void OnEnable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] += Shoot;
 
-    protected virtual void OnDisable() => characterShoot.OnShoot[Convert.ToInt16(fire)] -= Shoot;
+    protected virtual void OnDisable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] -= Shoot;
 
     protected virtual void Shoot()
     {

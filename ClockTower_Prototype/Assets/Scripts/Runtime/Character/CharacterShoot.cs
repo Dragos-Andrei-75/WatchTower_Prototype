@@ -7,7 +7,6 @@ public class CharacterShoot : MonoBehaviour
 {
     [Header("Character Object and Component References")]
     [SerializeField] private Transform loadOutTransform;
-    [SerializeField] private CharacterLook characterLook;
     [SerializeField] private CharacterInteract characterInteract;
     [SerializeField] private CharacterLoadOut characterLoadOut;
 
@@ -21,75 +20,47 @@ public class CharacterShoot : MonoBehaviour
     [SerializeField] private float swayYMultiplier = 2.5f;
     [SerializeField] private float swaySmooth = 0.0f;
 
-    [Header("Input Player")]
-    [SerializeField] private InputPlayer inputPlayer;
-    [SerializeField] private InputAction inputClickLeft;
-    [SerializeField] private InputAction inputClickRight;
+    [Header("Input Shoot")]
+    [SerializeField] private InputCharacterLook inputCharacterLook;
+    [SerializeField] private InputCharacterShoot inputCharacterShoot;
     [SerializeField] private bool[] click;
 
     public delegate void ActionShoot();
-    public ActionShoot[] OnShoot;
-
-    public InputAction InputClickLeft
-    {
-        get { return inputClickLeft; }
-    }
-
-    public InputAction InputClickRight
-    {
-        get { return inputClickRight; }
-    }
+    public static ActionShoot[] OnShoot;
 
     private void Awake()
     {
         loadOutTransform = gameObject.transform.GetChild(1).GetComponent<Transform>();
 
-        characterLook = gameObject.transform.GetComponent<CharacterLook>();
         characterInteract = gameObject.transform.root.GetComponent<CharacterInteract>();
         characterLoadOut = gameObject.transform.GetChild(1).GetComponent<CharacterLoadOut>();
+
+        inputCharacterLook = InputCharacterLook.Instance;
+        inputCharacterShoot = InputCharacterShoot.Instance;
 
         click = new bool[2];
 
         OnShoot = new ActionShoot[2];
-
-        inputPlayer = new InputPlayer();
-
-        inputClickLeft = inputPlayer.Character.ClickLeft;
-        inputClickRight = inputPlayer.Character.ClickRight;
     }
 
     private void OnEnable()
     {
-        inputPlayer.Enable();
-        inputClickLeft.Enable();
-        inputClickRight.Enable();
-
-        inputClickLeft.started += ShootWeapon;
-        inputClickRight.started += ShootWeapon;
-
-        Pause.OnPauseResume -= OnEnable;
-        Pause.OnPauseResume += OnDisable;
+        inputCharacterShoot.InputShootPrimary.started += ShootWeapon;
+        inputCharacterShoot.InputShootSecondary.started += ShootWeapon;
     }
 
     private void OnDisable()
     {
-        inputPlayer.Disable();
-        inputClickLeft.Disable();
-        inputClickRight.Disable();
-
-        inputClickLeft.started -= ShootWeapon;
-        inputClickRight.started -= ShootWeapon;
-
-        Pause.OnPauseResume += OnEnable;
-        Pause.OnPauseResume -= OnDisable;
+        inputCharacterShoot.InputShootPrimary.started -= ShootWeapon;
+        inputCharacterShoot.InputShootSecondary.started -= ShootWeapon;
     }
 
     private void Update() => WeaponSway();
 
     private void WeaponSway()
     {
-        swayX = Mathf.Clamp(characterLook.InputLook.ReadValue<Vector2>().x, -1, 1);
-        swayY = Mathf.Clamp(characterLook.InputLook.ReadValue<Vector2>().y, -1, 1);
+        swayX = Mathf.Clamp(inputCharacterLook.InputLook.ReadValue<Vector2>().x, -1, 1);
+        swayY = Mathf.Clamp(inputCharacterLook.InputLook.ReadValue<Vector2>().y, -1, 1);
 
         swaySmooth = swayX != 0 || swayY != 0 ? 1.25f : 5.0f;
 
@@ -114,10 +85,10 @@ public class CharacterShoot : MonoBehaviour
 
     private IEnumerator ShootInput()
     {
-        while (inputClickLeft.ReadValue<float>() != 0 || inputClickRight.ReadValue<float>() != 0)
+        while (inputCharacterShoot.InputShootPrimary.ReadValue<float>() != 0 || inputCharacterShoot.InputShootSecondary.ReadValue<float>() != 0)
         {
-            click[0] = Convert.ToBoolean(inputClickLeft.ReadValue<float>());
-            click[1] = Convert.ToBoolean(inputClickRight.ReadValue<float>());
+            click[0] = Convert.ToBoolean(inputCharacterShoot.InputShootPrimary.ReadValue<float>());
+            click[1] = Convert.ToBoolean(inputCharacterShoot.InputShootSecondary.ReadValue<float>());
 
             yield return null;
         }

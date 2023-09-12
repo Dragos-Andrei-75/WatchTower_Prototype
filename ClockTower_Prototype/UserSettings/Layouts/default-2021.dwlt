@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 11614
+  controlID: 51674
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 11615
+  controlID: 51609
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 11616
+  controlID: 51610
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -352,23 +352,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1101
-      height: 543
-    m_Scale: {x: 0.50277776, y: 0.50277776}
-    m_Translation: {x: 550.5, y: 271.5}
+      width: 1920
+      height: 947
+    m_Scale: {x: 0.8768518, y: 0.87685186}
+    m_Translation: {x: 960, y: 473.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1094.9172
+      x: -1094.8258
       y: -540
-      width: 2189.8345
+      width: 2189.6516
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.50277776
-  m_LastWindowPixelSize: {x: 1101, y: 564}
+  m_defaultScale: 0.87685186
+  m_LastWindowPixelSize: {x: 1920, y: 968}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -408,7 +408,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4efaffff42fbffff
+      m_ExpandedIDs: 38fbffff42fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+    m_Value: {x: -0.7071068, y: 0, z: -0, w: -0.7071068}
   m_Size:
     m_Target: 853.08044
     speed: 2
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_MinSize: {x: 600, y: 300}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: InputPlayer (Input Actions)
+    m_Text: InputCharacter (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Pos:
@@ -802,8 +802,8 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_ActionMapsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b2a16161
-    m_LastClickedID: 1633788338
+    m_SelectedIDs: 1b878f94
+    m_LastClickedID: -1802533093
     m_ExpandedIDs: 00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -824,9 +824,9 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3f4a4d9e
-    m_LastClickedID: -1639101889
-    m_ExpandedIDs: 6587e385935d12953f4a4d9e89ce62a7a09ad5bed5f0b4c2eb76a0cf1d4381d71037f8dd015b8ef2ec00b5f54fa144fe61eb7b042ddde005560ca51308e51f242c2f9e33fd243034f1d6a937f1a40d387a1ba35e0f1084670457166b1bfe1870
+    m_SelectedIDs: b0467b90
+    m_LastClickedID: -1870969168
+    m_ExpandedIDs: 4c7ebd85b0467b90935d1295a1c36b9789ce62a7dfaa15b45b6f9ab9d5f0b4c2eb76a0cf7f24b5d31d4381d793c326db197933ec4e3f20ef015b8ef2ec00b5f5c71eb9f54fa144fe61eb7b042ddde005fd243034f1d6a937f1a40d3887c48b3f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -852,120 +852,105 @@ MonoBehaviour:
     m_AssetObjectForEditing: {fileID: 0}
     m_ImportedAssetObject: {fileID: -944628639613478452, guid: 93be5e5843946c549b21befea808974c, type: 3}
     m_AssetGUID: 93be5e5843946c549b21befea808974c
-    m_ImportedAssetJson: "{\n    \"name\": \"InputPlayer\",\n    \"maps\": [\n       
-      {\n            \"name\": \"Character\",\n            \"id\": \"e5a461a5-d4cf-4335-8430-c1ef5c243128\",\n           
+    m_ImportedAssetJson: "{\n    \"name\": \"InputCharacter\",\n    \"maps\": [\n       
+      {\n            \"name\": \"Move\",\n            \"id\": \"0bd405f4-b631-4ca5-8647-10935873ee40\",\n           
       \"actions\": [\n                {\n                    \"name\": \"Move\",\n                   
-      \"type\": \"Value\",\n                    \"id\": \"2e92cc97-d1c0-4e8c-86f1-aef4eea6fd0a\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"d48a2120-ff2c-4d85-9301-51582f992551\",\n                   
       \"expectedControlType\": \"Vector2\",\n                    \"processors\":
       \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
       true\n                },\n                {\n                    \"name\":
       \"Walk\",\n                    \"type\": \"Button\",\n                    \"id\":
-      \"5635ba52-e43c-4d54-899c-9598e8d270e4\",\n                    \"expectedControlType\":
+      \"d7b5e453-e0bb-40e0-baa9-5ee4c16e2da8\",\n                    \"expectedControlType\":
       \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       },\n                {\n                    \"name\": \"Jump\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"d511427b-1a94-4757-bb45-08e3319aadf4\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"81a31023-d939-4ee7-873b-0e73848b7950\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       },\n                {\n                    \"name\": \"Crouch\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"b0fbac7a-feda-4127-8882-da6038e7fe4c\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"038b4ad0-12cf-480a-8465-8417e419b08f\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"SwimOut\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"21cf9ae8-0a77-4b91-b1aa-ef4e35c4a954\",\n                   
+      },\n                {\n                    \"name\": \"Swim\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"d7b83ea9-95d3-4574-a47c-3eba017de79c\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       },\n                {\n                    \"name\": \"Dash\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"b0bdbbac-a403-4b0a-9a84-202d19b409e5\",\n                   
-      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
-      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"Use\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"95417363-7352-4cb9-b7a7-dbe9263df68e\",\n                   
-      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
-      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"Look\",\n                   
-      \"type\": \"Value\",\n                    \"id\": \"5be596de-1518-4ed4-957c-91be57a8b6c0\",\n                   
-      \"expectedControlType\": \"Vector2\",\n                    \"processors\":
-      \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
-      true\n                },\n                {\n                    \"name\":
-      \"ClickLeft\",\n                    \"type\": \"Button\",\n                   
-      \"id\": \"bdca1ce9-b73c-47f5-b005-4e586d4b6e86\",\n                    \"expectedControlType\":
-      \"Button\",\n                    \"processors\": \"\",\n                   
-      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"ClickRight\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"809f165b-81a5-4025-8ed5-6734264e78e7\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"ab00da57-6faa-47a8-bc57-5b8086fc4a99\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       }\n            ],\n            \"bindings\": [\n                {\n                   
-      \"name\": \"Direction\",\n                    \"id\": \"c671be8e-f41f-4f99-bdb4-fef256e5b525\",\n                   
-      \"path\": \"2DVector\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"\",\n                    \"id\": \"da36c9fd-8f38-4e16-a6ca-dd13de1f8232\",\n                   
+      \"path\": \"<Keyboard>/shift\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": true,\n                   
+      \"action\": \"Walk\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"up\",\n                    \"id\": \"35339b10-c67c-4085-9540-c8f8e20b6e7d\",\n                   
-      \"path\": \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"down\",\n                    \"id\": \"0e7fc357-75ee-43a3-b3a4-6525c0e54160\",\n                   
-      \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"left\",\n                    \"id\": \"e851ab02-f1a5-4715-8248-01925f49918d\",\n                   
-      \"path\": \"<Keyboard>/a\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"right\",\n                    \"id\": \"91f51716-c87b-4bae-94f7-7df6dec19cf0\",\n                   
-      \"path\": \"<Keyboard>/d\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"8392485c-b63a-4fed-807d-2d176f518886\",\n                   
-      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Use\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"c2cbdc2c-65c9-4fcb-a30f-a23b1226ed61\",\n                   
+      \"name\": \"\",\n                    \"id\": \"7114314b-bfc0-4c96-877f-60decf7482e8\",\n                   
       \"path\": \"<Keyboard>/space\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Jump\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"6112f424-7461-4b22-a1b1-c7b2d1bd4683\",\n                   
-      \"path\": \"<Mouse>/leftButton\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"ClickLeft\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"e1b46d13-1ebd-425c-8c07-80f8901b08e9\",\n                   
-      \"path\": \"<Mouse>/rightButton\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"ClickRight\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"b47b6b4f-5dcd-45e9-a8ab-a8dc36b19380\",\n                   
+      \"name\": \"\",\n                    \"id\": \"eb51dd30-09a5-4273-acb5-b92de7e2f5df\",\n                   
       \"path\": \"<Keyboard>/c\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Crouch\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"06c55348-4abf-492c-a9c3-0a36bd7647b4\",\n                   
-      \"path\": \"<Keyboard>/ctrl\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"\",\n                    \"id\": \"70174d91-1cdd-4e1f-aab5-114acb2110ec\",\n                   
+      \"path\": \"<Keyboard>/space\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Swim\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"8e67e9fa-8103-4539-9727-e14cd5720ba0\",\n                   
+      \"path\": \"<Keyboard>/leftCtrl\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Dash\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"705ab64e-213d-4f44-9d4e-e27b3c4ed143\",\n                   
-      \"path\": \"<Keyboard>/space\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"Direction\",\n                    \"id\": \"840c5d97-b627-4cd5-8186-81c57d13e588\",\n                   
+      \"path\": \"2DVector\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"SwimOut\",\n                    \"isComposite\": false,\n                   
+      \"action\": \"Move\",\n                    \"isComposite\": true,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"c2b87054-87db-4d48-8be7-c297d44fb275\",\n                   
-      \"path\": \"<Keyboard>/leftShift\",\n                    \"interactions\":
-      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
-      \"\",\n                    \"action\": \"Walk\",\n                    \"isComposite\":
-      false,\n                    \"isPartOfComposite\": false\n                },\n               
-      {\n                    \"name\": \"\",\n                    \"id\": \"2208d8a1-e4e3-4087-96ad-1d0fcf8e0409\",\n                   
+      \"name\": \"up\",\n                    \"id\": \"3dcb3da2-f228-4b96-a5d4-622b6ab11727\",\n                   
+      \"path\": \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"down\",\n                    \"id\": \"69667276-4b96-4006-871c-7d66ded8c0a8\",\n                   
+      \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"left\",\n                    \"id\": \"e3c93ba4-9a59-4e17-8dc9-730c41478c55\",\n                   
+      \"path\": \"<Keyboard>/a\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"right\",\n                    \"id\": \"25f6c289-cfbd-4945-bb8d-c74b4a2e8511\",\n                   
+      \"path\": \"<Keyboard>/d\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Move\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                }\n            ]\n        },\n       
+      {\n            \"name\": \"Look\",\n            \"id\": \"3e3a0d62-0894-43cf-b6a3-128e337cd4f6\",\n           
+      \"actions\": [\n                {\n                    \"name\": \"Look\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"c33d604f-67c5-47f2-8406-4f63afc2eb70\",\n                   
+      \"expectedControlType\": \"Vector2\",\n                    \"processors\":
+      \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
+      true\n                }\n            ],\n            \"bindings\": [\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"c27cc7b7-a7be-49ce-9cc0-14bc06ad323f\",\n                   
       \"path\": \"<Mouse>/delta\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Look\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
+      {\n            \"name\": \"Interact\",\n            \"id\": \"1ecfb941-a082-41f5-a2b3-66d8674c7f50\",\n           
+      \"actions\": [\n                {\n                    \"name\": \"Use\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"7fb77f84-da5a-41a7-b7d5-4119321fcb9e\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      }\n            ],\n            \"bindings\": [\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"ebef8889-b892-4e28-81b2-47943d9be06b\",\n                   
+      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Use\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
       {\n            \"name\": \"LoadOut\",\n            \"id\": \"1de1da3c-68a0-4b88-964b-dceb1a9b9e72\",\n           
       \"actions\": [\n                {\n                    \"name\": \"Holster\",\n                   
@@ -1085,6 +1070,26 @@ MonoBehaviour:
       \"path\": \"<Mouse>/scroll/y\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Wheel\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
+      {\n            \"name\": \"Shoot\",\n            \"id\": \"5d4d8321-a98d-42ed-aa55-aa282a8bf47b\",\n           
+      \"actions\": [\n                {\n                    \"name\": \"ShootPrimary\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"5e2a1cf2-8952-4c1d-b693-99b791c2259a\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"ShootSecondary\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"f6082962-de9b-4254-9b08-46352cc03a6e\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      }\n            ],\n            \"bindings\": [\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"478c1f1b-0ea3-4dfb-9b5f-abe4bdb4f656\",\n                   
+      \"path\": \"<Mouse>/leftButton\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"ShootPrimary\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"065bb1a9-6f68-4751-b7c3-bedde4edc648\",\n                   
+      \"path\": \"<Mouse>/rightButton\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"ShootSecondary\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
       ],\n    \"controlSchemes\": []\n}"
     m_IsDirty: 0
@@ -1095,11 +1100,11 @@ MonoBehaviour:
     m_ControlSchemes: []
     m_SearchText: 
   m_DirtyTitle:
-    m_Text: (*) InputPlayer (Input Actions)
+    m_Text: (*) InputCharacter (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
   m_Title:
-    m_Text: InputPlayer (Input Actions)
+    m_Text: InputCharacter (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
 --- !u!114 &16
@@ -1265,9 +1270,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de5c0000
-    m_LastClickedID: 23774
-    m_ExpandedIDs: 00000000de5c000000ca9a3bffffff7f
+    m_SelectedIDs: 285c0000
+    m_LastClickedID: 23592
+    m_ExpandedIDs: 00000000285c00002e5c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1295,7 +1300,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000de5c000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000285c00002e5c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1412,28 +1417,28 @@ MonoBehaviour:
   m_Recording: 0
   m_ActiveNativePlatformSupportModuleName: 
   m_AllModules:
-  - rid: 599475831853547520
-  - rid: 599475831853547521
-  - rid: 599475831853547522
-  - rid: 599475831853547523
-  - rid: 599475831853547524
-  - rid: 599475831853547525
-  - rid: 599475831853547526
-  - rid: 599475831853547527
-  - rid: 599475831853547528
-  - rid: 599475831853547529
-  - rid: 599475831853547530
-  - rid: 599475831853547531
-  - rid: 599475831853547532
-  - rid: 599475831853547533
-  - rid: 599475831853547534
-  - rid: 599475831853547535
+  - rid: 599475993282871296
+  - rid: 599475993282871297
+  - rid: 599475993282871298
+  - rid: 599475993282871299
+  - rid: 599475993282871300
+  - rid: 599475993282871301
+  - rid: 599475993282871302
+  - rid: 599475993282871303
+  - rid: 599475993282871304
+  - rid: 599475993282871305
+  - rid: 599475993282871306
+  - rid: 599475993282871307
+  - rid: 599475993282871308
+  - rid: 599475993282871309
+  - rid: 599475993282871310
+  - rid: 599475993282871311
   m_CallstackRecordMode: 1
   m_ClearOnPlay: 0
   references:
     version: 2
     RefIds:
-    - rid: 599475831853547520
+    - rid: 599475993282871296
       type: {class: CPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.CPUProfilerModule, UnityEditor.CoreModule,
@@ -1771,7 +1776,7 @@ MonoBehaviour:
           <threadId>k__BackingField: 0
           <threadIndex>k__BackingField: -1
           m_GroupName: 
-    - rid: 599475831853547521
+    - rid: 599475993282871297
       type: {class: GPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.GPUProfilerModule, UnityEditor.CoreModule,
@@ -2109,13 +2114,13 @@ MonoBehaviour:
           <threadId>k__BackingField: 0
           <threadIndex>k__BackingField: -1
           m_GroupName: 
-    - rid: 599475831853547522
+    - rid: 599475993282871298
       type: {class: RenderingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.RenderingProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547523
+    - rid: 599475993282871299
       type: {class: MemoryProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.MemoryProfilerModule, UnityEditor.CoreModule,
@@ -2145,7 +2150,7 @@ MonoBehaviour:
           oldMinSizes: 
           oldMaxSizes: 
           oldSplitSize: 0
-    - rid: 599475831853547524
+    - rid: 599475993282871300
       type: {class: AudioProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.AudioProfilerModule, UnityEditor.CoreModule,
@@ -2154,31 +2159,31 @@ MonoBehaviour:
         m_ShowInactiveDSPChains: 0
         m_HighlightAudibleDSPChains: 1
         m_DSPGraphZoomFactor: 1
-    - rid: 599475831853547525
+    - rid: 599475993282871301
       type: {class: VideoProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.VideoProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547526
+    - rid: 599475993282871302
       type: {class: PhysicsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.PhysicsProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547527
+    - rid: 599475993282871303
       type: {class: Physics2DProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.Physics2DProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547528
+    - rid: 599475993282871304
       type: {class: NetworkingMessagesProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.NetworkingMessagesProfilerModule,
           UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547529
+    - rid: 599475993282871305
       type: {class: NetworkingOperationsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.NetworkingOperationsProfilerModule,
@@ -2225,45 +2230,45 @@ MonoBehaviour:
         - ObjectHide
         - CRC
         - ClientAuthority
-    - rid: 599475831853547530
+    - rid: 599475993282871306
       type: {class: UIProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.UIProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547531
+    - rid: 599475993282871307
       type: {class: UIDetailsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.UIDetailsProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547532
+    - rid: 599475993282871308
       type: {class: GlobalIlluminationProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.GlobalIlluminationProfilerModule,
           UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547533
+    - rid: 599475993282871309
       type: {class: VirtualTexturingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.VirtualTexturingProfilerModule,
           UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
         m_VTProfilerView:
-          rid: 599475831853547536
-    - rid: 599475831853547534
+          rid: 599475993282871312
+    - rid: 599475993282871310
       type: {class: FileIOProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.FileIOProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547535
+    - rid: 599475993282871311
       type: {class: AssetLoadingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
       data:
         m_Identifier: UnityEditorInternal.Profiling.AssetLoadingProfilerModule, UnityEditor.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         m_PaneScroll: {x: 0, y: 0}
-    - rid: 599475831853547536
+    - rid: 599475993282871312
       type: {class: VirtualTexturingProfilerView, ns: UnityEditor, asm: UnityEditor.CoreModule}
       data:
         m_SortAscending: 0

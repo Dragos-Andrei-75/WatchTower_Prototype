@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 7058382734457036876}
   - component: {fileID: 7058382734457036883}
   - component: {fileID: 7058382734457036882}
+  - component: {fileID: 3185979590726863638}
   m_Layer: 0
-  m_Name: HingedDoor
+  m_Name: HingedDoorVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,6 +280,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803381071347730
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &7058382734457036883
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -329,6 +331,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058382734457036880}
   m_Mesh: {fileID: 0}
+--- !u!41 &3185979590726863638
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058382734457036880}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 5, z: 0.5}
 --- !u!1 &7058382734690041959
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b10fc218d8c8184095c45bbce3c89ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occlusionPortal: {fileID: 0}
   timeToMove: 1.25
   timePassed: 0
   switchEngaged: 0
@@ -413,7 +426,7 @@ MonoBehaviour:
   doorTransform: {fileID: 7058382734690041953}
   doorController: {fileID: 6215450405581338332}
   doorType: 0
-  pair: 1
+  engaged: 0
   rotationClose: {x: -0, y: 1, z: -0, w: 0}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}
@@ -495,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b10fc218d8c8184095c45bbce3c89ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occlusionPortal: {fileID: 0}
   timeToMove: 1.25
   timePassed: 0
   switchEngaged: 0
@@ -503,7 +517,7 @@ MonoBehaviour:
   doorTransform: {fileID: 7935779915263034749}
   doorController: {fileID: 6215450405581338332}
   doorType: 0
-  pair: 1
+  engaged: 0
   rotationClose: {x: -0, y: -0, z: -0, w: 1}
   rotationOpen: {x: 0, y: 0, z: 0, w: 0}
   rotationBegin: {x: 0, y: 0, z: 0, w: 0}
@@ -522,8 +536,9 @@ GameObject:
   - component: {fileID: 7935779916808873296}
   - component: {fileID: 7935779916808873295}
   - component: {fileID: 7935779916808873294}
+  - component: {fileID: 1517493952290419425}
   m_Layer: 0
-  m_Name: HingedDoor
+  m_Name: HingedDoorVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,6 +803,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803381071347730
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &7935779916808873295
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -838,6 +854,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7935779916808873292}
   m_Mesh: {fileID: 0}
+--- !u!41 &1517493952290419425
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935779916808873292}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3, y: 5, z: 0.5}
 --- !u!1 &8701389778276255442
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,4 +911,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
-  engaged: 0

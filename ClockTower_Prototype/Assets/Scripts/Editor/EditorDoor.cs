@@ -39,6 +39,7 @@ public class EditorDoor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Original Door Inspector", EditorStyles.boldLabel);
+
         DrawDefaultInspector();
     }
 }

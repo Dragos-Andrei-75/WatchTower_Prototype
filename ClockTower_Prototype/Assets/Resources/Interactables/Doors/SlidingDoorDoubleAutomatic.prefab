@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5478443341346695853}
   - component: {fileID: 5478443341346695858}
   - component: {fileID: 5478443341346695859}
+  - component: {fileID: 4822596171037791350}
   - component: {fileID: 5478443341346695856}
   - component: {fileID: 5478443341346695852}
   - component: {fileID: 5478443341346695862}
@@ -282,6 +283,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803359369494530
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &5478443341346695859
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -324,6 +326,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &4822596171037791350
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478443341346695860}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8, y: 10, z: 0.5}
 --- !u!33 &5478443341346695856
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -373,6 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f3ca6e9d3e2a543be0281cbe07c3cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occlusionPortal: {fileID: 0}
   timeToMove: 2.5
   timePassed: 0
   switchEngaged: 0
@@ -381,7 +394,7 @@ MonoBehaviour:
   doorTransform: {fileID: 5478443341346695857}
   doorController: {fileID: 0}
   doorType: 1
-  pair: 0
+  engaged: 0
   openDirection: 3
   positionClose: {x: -4, y: 5, z: -37.5}
   positionOpen: {x: -7.75, y: 5, z: -37.5}
@@ -470,6 +483,7 @@ GameObject:
   - component: {fileID: 9114008979772597108}
   - component: {fileID: 9114008979772597111}
   - component: {fileID: 9114008979772597110}
+  - component: {fileID: 6165573657815389004}
   - component: {fileID: 9114008979772597105}
   - component: {fileID: 9114008979772597104}
   - component: {fileID: 9114008979772597002}
@@ -740,6 +754,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803359369494530
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &9114008979772597110
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -782,6 +797,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!41 &6165573657815389004
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114008979772597107}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8, y: 10, z: 0.5}
 --- !u!33 &9114008979772597105
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -831,6 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f3ca6e9d3e2a543be0281cbe07c3cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occlusionPortal: {fileID: 0}
   timeToMove: 2.5
   timePassed: 0
   switchEngaged: 0
@@ -839,7 +865,7 @@ MonoBehaviour:
   doorTransform: {fileID: 9114008979772597109}
   doorController: {fileID: 0}
   doorType: 1
-  pair: 0
+  engaged: 0
   openDirection: 2
   positionClose: {x: 4, y: 5, z: -37.5}
   positionOpen: {x: 7.75, y: 5, z: -37.5}

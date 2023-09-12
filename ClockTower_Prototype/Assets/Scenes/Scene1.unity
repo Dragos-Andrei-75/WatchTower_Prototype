@@ -20128,7 +20128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadOutTransform: {fileID: 0}
-  characterLook: {fileID: 0}
   characterInteract: {fileID: 0}
   characterLoadOut: {fileID: 0}
   weaponSwayTarget: {x: 0, y: 0, z: 0, w: 0}
@@ -20139,24 +20138,8 @@ MonoBehaviour:
   swayXMultiplier: 5
   swayYMultiplier: 2.5
   swaySmooth: 0
-  inputClickLeft:
-    m_Name: Input Click Left
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4d101f01-0673-459f-815b-7a3883e2dab1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputClickRight:
-    m_Name: Input Click Right
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1617c5dd-1a8e-449e-9385-9b71a7af2e34
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  inputCharacterLook: {fileID: 0}
+  inputCharacterShoot: {fileID: 0}
   click: 
 --- !u!114 &963194231
 MonoBehaviour:
@@ -20172,23 +20155,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterTransform: {fileID: 0}
   characterCameraTransform: {fileID: 0}
-  characterMovement: {fileID: 0}
+  characterMove: {fileID: 0}
   lookSensitivityX: 0.05
   lookSensitivityY: 0.05
-  lookXReference: 0
-  lookXMin: -135
   lookXMax: 135
-  lookYMin: -90
+  lookXMin: -135
   lookYMax: 90
-  inputLook:
-    m_Name: Input Look
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 5e08e252-a9c9-4916-9ad3-a9aafa6a3fa5
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  lookYMin: -90
+  inputCharacterLook: {fileID: 0}
   mouseX: 0
   mouseY: 0
 --- !u!43 &966635037
@@ -30428,25 +30402,7 @@ MonoBehaviour:
   weaponSelected: 0
   loadOutSize: 11
   holster: 0
-  inputHolster:
-    m_Name: Input Holster
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8f055915-3a31-46a4-b2d3-b1d5c19277d5
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWheel:
-    m_Name: Input Wheel
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 510b97b6-3ed3-497e-8811-489a54605033
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputButtons: []
+  inputCharacterLoadOut: {fileID: 0}
 --- !u!1 &1518133299
 GameObject:
   m_ObjectHideFlags: 0
@@ -45303,9 +45259,7 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterBodyTransform: {fileID: 0}
   characterCamera: {fileID: 0}
-  characterMovement: {fileID: 0}
   characterLoadOut: {fileID: 0}
-  characterShoot: {fileID: 0}
   objectHeldTransform: {fileID: 0}
   objectHeldRigidBody: {fileID: 0}
   objectHeldInteractable: {fileID: 0}
@@ -45321,15 +45275,8 @@ MonoBehaviour:
   holdDistance: 2.5
   holdSpeed: 100
   forceThrow: 25
-  inputUse:
-    m_Name: Input Use
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d408b13e-5e18-4a1f-9506-ef19c9e6ce91
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  inputCharacterInteract: {fileID: 0}
+  inputCharacterShoot: {fileID: 0}
 --- !u!114 &2135729781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45346,20 +45293,19 @@ MonoBehaviour:
   characterCameraTransform: {fileID: 0}
   characterBodyTransform: {fileID: 0}
   characterController: {fileID: 0}
-  characterLook: {fileID: 0}
   ladderTransform: {fileID: 0}
   gravity: -25
   friction: 10
-  sphereTransform: {fileID: 0}
+  checkSphereTransform: {fileID: 0}
   layerCharacter:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   layerSurface:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   layerInteractable:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   cameraStand: {x: 0, y: 0, z: 0}
   cameraCrouch: {x: 0, y: 0, z: 0}
   cameraTarget: {x: 0, y: 0, z: 0}
@@ -45383,7 +45329,6 @@ MonoBehaviour:
   checkDash: 0
   checkCharge: 0
   checkGrapple: 0
-  move: {x: 0, y: 0, z: 0}
   characterStationary: {x: 0, y: 0, z: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
   mass: 7.5
@@ -45404,11 +45349,18 @@ MonoBehaviour:
   jumpHeight: 1.25
   reactionTimeAir: 0.5
   reactionTimeJump: 0.25
+  reactionTimeCrouch: 0.375
   heightStand: 1.85
   heightCrouch: 1
   clearance: 0.85
-  headTilt: 0
-  headTiltAngle: 12.5
+  headTurnMaxVault: 90
+  headTurnMinVault: -90
+  headTurnMaxSlide: 125
+  headTurnMinSlide: -125
+  headTurnMaxGrapple: 90
+  headTurnMinGrapple: -90
+  headTiltWallRun: 0
+  headTiltAngleWallRun: 12.5
   timeCrouch: 0.125
   timeWallRun: 0
   timeTilt: 0.125
@@ -45419,60 +45371,8 @@ MonoBehaviour:
   jumpCount: 0
   dashCountMax: 3
   dashCount: 0
-  inputMove:
-    m_Name: Input Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a41e6c09-eeca-438f-abfe-efa6db5766ed
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputWalk:
-    m_Name: Input Walk
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7ec2dca6-70cc-4ee8-ab29-bd512657e3e0
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputJump:
-    m_Name: Input Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d758295c-fcef-4ee8-8618-80040a94ccb1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputCrouch:
-    m_Name: Input Crouch
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: fbf454e3-f94a-4ba0-89bc-9930dd5bb1c4
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputSwim:
-    m_Name: Input Swim
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8fc28f09-0e32-4cf0-a875-e379084965a1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  inputDash:
-    m_Name: Input Dash
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d5742d19-e8bf-4f1a-95ab-3d98d2e9fcdd
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
+  inputCharacterMove: {fileID: 0}
+  move: {x: 0, y: 0, z: 0}
   inputX: 0
   inputZ: 0
   swimX: 0
@@ -45763,10 +45663,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 826667616}
-    - target: {fileID: 4371401896821581932, guid: 47486d21159708f49836e498eee55c6c, type: 3}
-      propertyPath: m_VersionIndex
-      value: 4010
-      objectReference: {fileID: 0}
     - target: {fileID: 5596454851786175076, guid: 47486d21159708f49836e498eee55c6c, type: 3}
       propertyPath: m_Name
       value: PickUpGrappleGun
@@ -46045,10 +45941,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1601823789}
-    - target: {fileID: 5914866293655735201, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
-      propertyPath: m_VersionIndex
-      value: 3387
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bef8216fb347f894a8b6b1b3f7cfb193, type: 3}
 --- !u!1001 &1307314850745736152
@@ -46209,10 +46101,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1332965614}
-    - target: {fileID: 134634849385718402, guid: 1219984b884f6ee4fbb31fada2a2add9, type: 3}
-      propertyPath: m_VersionIndex
-      value: 4560
-      objectReference: {fileID: 0}
     - target: {fileID: 1420079848667290418, guid: 1219984b884f6ee4fbb31fada2a2add9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -47507,10 +47395,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 276027383}
-    - target: {fileID: 5867667851227007900, guid: 1878eb242dceb0749be9cd01bd04dda3, type: 3}
-      propertyPath: m_VersionIndex
-      value: 4085
-      objectReference: {fileID: 0}
     - target: {fileID: 5867667851227007901, guid: 1878eb242dceb0749be9cd01bd04dda3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -47727,6 +47611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlidingDoorSwitch
       objectReference: {fileID: 0}
+    - target: {fileID: 8099431815629884946, guid: 96a1631322d631c4cbd285f2003d9d34, type: 3}
+      propertyPath: m_Open
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96a1631322d631c4cbd285f2003d9d34, type: 3}
 --- !u!4 &6865317985606927192 stripped
@@ -47753,10 +47641,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1611004536}
-    - target: {fileID: 8559275513363161110, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
-      propertyPath: m_VersionIndex
-      value: 2810
-      objectReference: {fileID: 0}
     - target: {fileID: 8559275513363161111, guid: cf2ca72e431f72145b7dea8532c17f04, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -48005,10 +47889,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1362845074}
-    - target: {fileID: 56183591568288108, guid: 166170aa04a20af4f833e3977a718379, type: 3}
-      propertyPath: m_VersionIndex
-      value: 4421
-      objectReference: {fileID: 0}
     - target: {fileID: 2761394485343932813, guid: 166170aa04a20af4f833e3977a718379, type: 3}
       propertyPath: m_Mesh
       value: 

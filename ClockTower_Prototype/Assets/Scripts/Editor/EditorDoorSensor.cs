@@ -15,8 +15,10 @@ public class EditorDoorSensor : Editor
         if (GUILayout.Button("Sensor Setup") == true) doorSensor.SensorSetUp();
 
         EditorGUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Add Door") == true) if (doorSensor.Doors.Length < 2) doorSensor.AddDoor();
         if (GUILayout.Button("Remove Door") == true) if (doorSensor.Doors.Length > 1) doorSensor.RemoveDoor();
+
         EditorGUILayout.EndHorizontal();
 
         doorSensor.OpenType = (DoorSensor.OpenTypes)EditorGUILayout.EnumPopup("Open Types", doorSensor.OpenType);
@@ -27,6 +29,7 @@ public class EditorDoorSensor : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Original Sensor Inspector", EditorStyles.boldLabel);
+
         DrawDefaultInspector();
     }
 }

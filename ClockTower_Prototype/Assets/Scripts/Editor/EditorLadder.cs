@@ -21,8 +21,10 @@ public class EditorLadder : Editor
         EditorGUIUtility.labelWidth = 100;
 
         EditorGUILayout.BeginHorizontal();
+
         ladder.LadderHeight = EditorGUILayout.FloatField("Ladder Height: ", ladder.LadderHeight, GUILayout.MaxWidth(250));
         ladder.RungOffset = EditorGUILayout.FloatField("Rung Offset: ", ladder.RungOffset, GUILayout.MaxWidth(250));
+
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
@@ -34,6 +36,7 @@ public class EditorLadder : Editor
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Original Ladder Inspector", EditorStyles.boldLabel);
+
         DrawDefaultInspector();
     }
 }

@@ -13,7 +13,7 @@ public class GrappleGun : WeaponHitScan
 
     [Header("Character Object and Component References")]
     [SerializeField] private Transform characterBodyTransform;
-    [SerializeField] private CharacterMovement characterMovement;
+    [SerializeField] private CharacterMove characterMovement;
 
     [Header("Grapple Gun Attributes")]
     [SerializeField] private Transform hookHitTransform;
@@ -24,6 +24,7 @@ public class GrappleGun : WeaponHitScan
     [SerializeField] private float timePassedMove = 0.0f;
     [SerializeField] private float timeToRotate = 1.0f;
     [SerializeField] private float timePassedRotate = 0.0f;
+    [SerializeField] private float detachDistance = 5.0f;
     [SerializeField] private float ropeLength;
 
     [Header("Character Attributes")]
@@ -49,7 +50,7 @@ public class GrappleGun : WeaponHitScan
         lineRenderer = hookOriginTransform.GetComponent<LineRenderer>();
 
         characterBodyTransform = grappleGunTransform.root.GetChild(1).GetComponent<Transform>();
-        characterMovement = grappleGunTransform.root.GetComponent<CharacterMovement>();
+        characterMovement = grappleGunTransform.root.GetComponent<CharacterMove>();
 
         hookIgnore = LayerMask.GetMask("Player");
     }
@@ -99,7 +100,7 @@ public class GrappleGun : WeaponHitScan
 
                     while (hookHit.transform != null)
                     {
-                        if (Vector3.Distance(CharacterCameraTransform.position, hookHitTransform.position) > 5)
+                        if (Vector3.Distance(CharacterCameraTransform.position, hookHitTransform.position) > detachDistance)
                         {
                             hookTransform.position = hookHitTransform.position;
 
@@ -109,7 +110,7 @@ public class GrappleGun : WeaponHitScan
 
                             if (Vector3.Dot(characterBodyTransform.forward, grappleDirectionHorizontal) > 0) break;
 
-                            if (characterBodyTransform.position.y + 5 < hookHitTransform.position.y) grappleDirection -= characterBodyTransform.up;
+                            if (characterBodyTransform.position.y + detachDistance < hookHitTransform.position.y) grappleDirection -= characterBodyTransform.up;
 
                             if (Vector3.Angle(characterBodyTransform.right, -grappleDirectionHorizontal) > 90) grappleDirection += characterBodyTransform.right;
                             else if (Vector3.Angle(characterBodyTransform.right, -grappleDirectionHorizontal) < 90) grappleDirection -= characterBodyTransform.right;
@@ -123,7 +124,7 @@ public class GrappleGun : WeaponHitScan
                             hookHit.rigidbody.angularDrag = angularDrag;
                             hookHit.rigidbody.drag = drag;
 
-                            if (Vector3.Distance(hookHitTransform.position, CharacterCameraTransform.position) < 5)
+                            if (Vector3.Distance(hookHitTransform.position, CharacterCameraTransform.position) < detachDistance)
                             {
                                 if (OnGrappleInteractable != null) OnGrappleInteractable(hookHit.transform);
                             }
@@ -136,13 +137,11 @@ public class GrappleGun : WeaponHitScan
                 }
                 else
                 {
-                    characterMovement.CharacterVelocity = Vector3.zero;
-
                     characterMovement.CheckGrapple = true;
 
-                    while (Vector3.Distance(hookHitTransform.position, hookOriginTransform.position) > 5)
+                    while (Vector3.Distance(hookHitTransform.position, hookOriginTransform.position) > detachDistance && ropeLength <= WeaponDataHitScan.Range)
                     {
-                        ropeLength = Vector3.Distance(hookOriginTransform.position, hookHit.point);
+                        ropeLength = Vector3.Distance(hookOriginTransform.position, hookHitTransform.position);
                         grappleSpeed = Mathf.Lerp(grappleSpeedMax, grappleSpeedMin, ropeLength / WeaponDataHitScan.Range);
                         grappleDirection = (hookHitTransform.position - characterBodyTransform.position).normalized;
 

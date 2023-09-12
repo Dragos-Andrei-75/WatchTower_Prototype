@@ -22,12 +22,14 @@ public abstract class Door : Interactive
         get { return doorType; }
     }
 
-    private void Start() => Setup();
+    protected override void Awake()
+    {
+        base.Awake();
+        Setup();
+    }
 
     public override void Setup()
     {
-        base.Setup();
-
         doorTransform = gameObject.transform;
 
         if (doorTransform.parent != null)
@@ -38,6 +40,8 @@ public abstract class Door : Interactive
             if (doorTransform.GetComponentInParent<DoorSensor>() != null) automatic = true;
             else automatic = false;
         }
+
+        base.Setup();
     }
 
     public override void Interact()
