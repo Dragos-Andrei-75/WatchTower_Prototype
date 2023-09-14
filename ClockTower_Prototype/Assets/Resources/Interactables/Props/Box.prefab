@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8527705532182022502}
   - component: {fileID: 159619282219174261}
   - component: {fileID: 171179612279161632}
+  - component: {fileID: -5804240829450121564}
   - component: {fileID: 8402289902121443425}
   - component: {fileID: 1195718164474618661}
   - component: {fileID: 9166458302275450157}
@@ -334,6 +335,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7927308258535646027}
   m_Mesh: {fileID: 0}
+--- !u!41 &-5804240829450121564
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927308258535646027}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!65 &8402289902121443425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -382,6 +393,7 @@ MonoBehaviour:
   healthManager: {fileID: 0}
   materialOpaque: {fileID: 0}
   materialTransparent: {fileID: 0}
+  velocityBeforeCollision: {x: 0, y: 0, z: 0}
   velocityTresholdLower: 5
   velocityTresholdUpper: 25
   collisionDamageMax: 5

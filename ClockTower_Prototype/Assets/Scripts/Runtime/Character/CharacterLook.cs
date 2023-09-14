@@ -35,14 +35,14 @@ public class CharacterLook : MonoBehaviour
     {
         inputCharacterLook.InputLook.performed += Look;
 
-        characterMove.OnActionClamp += LookClamp;
+        characterMove.OnActionTurn += LookClamp;
     }
 
     private void OnDisable()
     {
         inputCharacterLook.InputLook.performed -= Look;
 
-        characterMove.OnActionClamp -= LookClamp;
+        characterMove.OnActionTurn -= LookClamp;
     }
 
     private void Look(InputAction.CallbackContext contextLook)
@@ -56,17 +56,17 @@ public class CharacterLook : MonoBehaviour
         characterTransform.rotation = Quaternion.Euler(characterTransform.localEulerAngles.x, mouseX, characterTransform.localEulerAngles.z);
     }
 
-    private void LookClamp(float lookMin, float lookMax)
+    private void LookClamp()
     {
-        lookXMax = mouseX + lookMax;
-        lookXMin = mouseX + lookMin;
+        lookXMax = mouseX + 90;
+        lookXMin = mouseX - 90;
 
-        StartCoroutine(LookClamp());
+        StartCoroutine(LookClampHorizontal());
     }
 
-    private IEnumerator LookClamp()
+    private IEnumerator LookClampHorizontal()
     {
-        while (characterMove.CharacterVelocity == characterMove.CharacterStationary)
+        while (characterMove.CheckTurn == true)
         {
             mouseX = Mathf.Clamp(mouseX, lookXMin, lookXMax);
 

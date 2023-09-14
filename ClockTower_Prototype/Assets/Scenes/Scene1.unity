@@ -45328,6 +45328,7 @@ MonoBehaviour:
   checkSwim: 0
   checkDash: 0
   checkCharge: 0
+  checkTurn: 0
   checkGrapple: 0
   characterStationary: {x: 0, y: 0, z: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
@@ -45343,30 +45344,25 @@ MonoBehaviour:
   speedSwim: 12.5
   speedSink: 5
   speedDash: 50
+  speedTurn: 100
   acceleration: 12.5
   gaitRate: 2.5
   airControl: 0.75
   jumpHeight: 1.25
-  reactionTimeAir: 0.5
-  reactionTimeJump: 0.25
-  reactionTimeCrouch: 0.375
   heightStand: 1.85
   heightCrouch: 1
   clearance: 0.85
-  headTurnMaxVault: 90
-  headTurnMinVault: -90
-  headTurnMaxSlide: 125
-  headTurnMinSlide: -125
-  headTurnMaxGrapple: 90
-  headTurnMinGrapple: -90
-  headTiltWallRun: 0
-  headTiltAngleWallRun: 12.5
+  reactionTimeAir: 0.5
+  reactionTimeJump: 0.25
+  reactionTimeCrouch: 0.375
   timeCrouch: 0.125
   timeWallRun: 0
   timeTilt: 0.125
   timeDash: 0.25
   timeChargeDash: 1.25
   forcePush: 1
+  headTilt: 0
+  headTiltAngle: 12.5
   jumpCountMax: 2
   jumpCount: 0
   dashCountMax: 3

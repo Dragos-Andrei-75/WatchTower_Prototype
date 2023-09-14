@@ -46,6 +46,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private bool checkSwim = false;
     [SerializeField] private bool checkDash = false;
     [SerializeField] private bool checkCharge = false;
+    [SerializeField] private bool checkTurn = false;
     [SerializeField] private bool checkGrapple = false;
 
     [Header("Character Attributes")]
@@ -63,30 +64,25 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private float speedSwim = 12.5f;
     [SerializeField] private float speedSink = 5.0f;
     [SerializeField] private float speedDash = 50.0f;
+    [SerializeField] private float speedTurn = 100.0f;
     [SerializeField] private float acceleration = 12.5f;
     [SerializeField] private float gaitRate = 2.5f;
     [SerializeField] private float airControl = 0.75f;
     [SerializeField] private float jumpHeight = 1.25f;
-    [SerializeField] private float reactionTimeAir = 0.5f;
-    [SerializeField] private float reactionTimeJump = 0.25f;
-    [SerializeField] private float reactionTimeCrouch = 0.375f;
     [SerializeField] private float heightStand = 1.85f;
     [SerializeField] private float heightCrouch = 1.0f;
     [SerializeField] private float clearance = 0.85f;
-    [SerializeField] private float headTurnMaxVault = 90.0f;
-    [SerializeField] private float headTurnMinVault = -90.0f;
-    [SerializeField] private float headTurnMaxSlide = 125.0f;
-    [SerializeField] private float headTurnMinSlide = -125.0f;
-    [SerializeField] private float headTurnMaxGrapple = 90.0f;
-    [SerializeField] private float headTurnMinGrapple = -90.0f;
-    [SerializeField] private float headTiltWallRun = 0.0f;
-    [SerializeField] private float headTiltAngleWallRun = 12.5f;
+    [SerializeField] private float reactionTimeAir = 0.5f;
+    [SerializeField] private float reactionTimeJump = 0.25f;
+    [SerializeField] private float reactionTimeCrouch = 0.375f;
     [SerializeField] private float timeCrouch = 0.125f;
     [SerializeField] private float timeWallRun = 0.0f;
     [SerializeField] private float timeTilt = 0.125f;
     [SerializeField] private float timeDash = 0.25f;
     [SerializeField] private float timeChargeDash = 1.25f;
     [SerializeField] private float forcePush = 1.0f;
+    [SerializeField] private float headTilt = 0.0f;
+    [SerializeField] private float headTiltAngle = 12.5f;
     [SerializeField] private int jumpCountMax = 2;
     [SerializeField] private int jumpCount = 0;
     [SerializeField] private int dashCountMax = 3;
@@ -114,8 +110,8 @@ public class CharacterMove : MonoBehaviour
     private Coroutine coroutineWallRun;
     private Coroutine coroutineDash;
 
-    public delegate void ActionClamp(float min, float max);
-    public event ActionClamp OnActionClamp;
+    public delegate void ActionTurn();
+    public event ActionTurn OnActionTurn;
 
     public CharacterController Controller
     {
@@ -134,6 +130,11 @@ public class CharacterMove : MonoBehaviour
         set { characterStationary = value; }
     }
 
+    public bool CheckTurn
+    {
+        get { return checkTurn; }
+    }
+
     public bool CheckGrapple
     {
         get
@@ -146,10 +147,10 @@ public class CharacterMove : MonoBehaviour
 
             if (checkGrapple == true)
             {
-                if (OnActionClamp != null) OnActionClamp(headTurnMinGrapple, headTurnMaxGrapple);
-
                 if (checkMove == false) StartCoroutine(Move());
                 if (checkClimb == true) StartCoroutine(ClimbExit());
+
+                StartCoroutine(TurnBody(characterBodyTransform.forward));
             }
         }
     }
@@ -315,12 +316,12 @@ public class CharacterMove : MonoBehaviour
                         if (checkWallLeft == true && hitLeft.transform == wallHit.transform)
                         {
                             wallHitLeft = true;
-                            coroutineWallRun = StartCoroutine(WallRun(-headTiltAngleWallRun, 1));
+                            coroutineWallRun = StartCoroutine(WallRun(-headTiltAngle, 1));
                         }
                         else if (checkWallRight == true && hitRight.transform == wallHit.transform)
                         {
                             wallHitRight = true;
-                            coroutineWallRun = StartCoroutine(WallRun(headTiltAngleWallRun, -1));
+                            coroutineWallRun = StartCoroutine(WallRun(headTiltAngle, -1));
                         }
                     }
 
@@ -506,7 +507,7 @@ public class CharacterMove : MonoBehaviour
             inputZ = inputCharacterMove.InputMove.ReadValue<Vector2>().y;
 
             move = new Vector3(inputX, 0, inputZ);
-            move = characterTransform.TransformDirection(move);
+            move = characterBodyTransform.TransformDirection(move);
             move.Normalize();
 
             yield return null;
@@ -660,7 +661,7 @@ public class CharacterMove : MonoBehaviour
 
         if (crouch == true)
         {
-            if (characterTransform.InverseTransformDirection(characterVelocity).z > speedWalk) StartCoroutine(Slide());
+            if (characterBodyTransform.InverseTransformDirection(characterController.velocity).z > speedWalk) StartCoroutine(Slide());
 
             cameraTarget = cameraCrouch;
             centerTarget = centerCrouch;
@@ -741,7 +742,7 @@ public class CharacterMove : MonoBehaviour
 
                         checkVault = true;
 
-                        if (OnActionClamp != null) OnActionClamp(headTurnMinVault, headTurnMaxVault);
+                        StartCoroutine(TurnBody(-rayHit2.normal));
 
                         while (checkSphereTransform.position.y < climbPoint.position.y)
                         {
@@ -787,9 +788,9 @@ public class CharacterMove : MonoBehaviour
 
         checkSlide = true;
 
-        if (OnActionClamp != null) OnActionClamp(headTurnMinSlide, headTurnMaxSlide);
+        StartCoroutine(TurnBody(slideMove));
 
-        while (Mathf.Abs(characterBodyTransform.TransformDirection(characterController.velocity).z) > 2.5f && crouch == true)
+        while (characterBodyTransform.InverseTransformDirection(characterController.velocity).z > 2.5f && crouch == true)
         {
             slideDirection = characterBodyTransform.position - positionPrevious;
             slideDirection.Normalize();
@@ -835,6 +836,8 @@ public class CharacterMove : MonoBehaviour
         checkJump = false;
         checkWallRun = true;
 
+        StartCoroutine(TurnBody(wallRunDirection));
+
         while (inputX != inputCancel && checkSurface == false && checkJump == false && checkWall == true && timeWallRun > 0)
         {
             checkWall = Physics.Raycast(characterBodyTransform.position, -wallHit.normal, characterController.radius * 2, ~layerInteractable, QueryTriggerInteraction.Ignore);
@@ -843,18 +846,18 @@ public class CharacterMove : MonoBehaviour
             {
                 if (timePassed < timeTilt)
                 {
-                    headTiltWallRun = Mathf.LerpAngle(0, headTiltTarget, timePassed / timeTilt);
+                    headTilt = Mathf.LerpAngle(0, headTiltTarget, timePassed / timeTilt);
                     timePassed += Time.deltaTime;
                 }
             }
             else
             {
-                if (timeWallRun > 0) headTiltWallRun = Mathf.LerpAngle(0, headTiltTarget, timeWallRun);
+                if (timeWallRun > 0) headTilt = Mathf.LerpAngle(0, headTiltTarget, timeWallRun);
             }
 
             timeWallRun -= Time.deltaTime;
 
-            characterCameraTransform.localRotation = Quaternion.Euler(characterCameraTransform.localEulerAngles.x, characterCameraTransform.localEulerAngles.y, headTiltWallRun);
+            characterCameraTransform.localRotation = Quaternion.Euler(characterCameraTransform.localEulerAngles.x, characterCameraTransform.localEulerAngles.y, headTilt);
 
             characterVelocity = wallRunDirection * speedMove;
 
@@ -879,8 +882,8 @@ public class CharacterMove : MonoBehaviour
 
         while (timePassed < timeTilt)
         {
-            headTiltWallRun = Mathf.LerpAngle(headTiltStart, 0, timePassed / timeTilt);
-            characterCameraTransform.localRotation = Quaternion.Euler(characterCameraTransform.localEulerAngles.x, characterCameraTransform.localEulerAngles.y, headTiltWallRun);
+            headTilt = Mathf.LerpAngle(headTiltStart, 0, timePassed / timeTilt);
+            characterCameraTransform.localRotation = Quaternion.Euler(characterCameraTransform.localEulerAngles.x, characterCameraTransform.localEulerAngles.y, headTilt);
 
             timePassed += Time.deltaTime;
 
@@ -905,7 +908,7 @@ public class CharacterMove : MonoBehaviour
         Vector3 climbHorizontal;
         float dot;
 
-        directionUp = Vector3.Dot(ladderTransform.up, characterBodyTransform.up) > 0 ? ladderTransform.up : -ladderTransform.up;
+        directionUp = Vector3.Dot(characterBodyTransform.up, ladderTransform.up) > 0 ? ladderTransform.up : -ladderTransform.up;
 
         checkClimb = true;
 
@@ -963,7 +966,7 @@ public class CharacterMove : MonoBehaviour
         }
         else if (characterOnLadder.x < ladderLimitLeft || characterOnLadder.x > ladderLimitRight)
         {
-            dot = Vector3.Dot(ladderTransform.forward, characterTransform.forward);
+            dot = Vector3.Dot(ladderTransform.forward, characterBodyTransform.forward);
             direction = dot > 0 ? ladderTransform.right : -ladderTransform.right;
 
             characterVelocity = direction * inputX * speedAir;
@@ -1041,7 +1044,7 @@ public class CharacterMove : MonoBehaviour
 
             checkDash = false;
 
-            characterVelocity = (characterTransform.right * momentum.x + characterTransform.forward * momentum.z) * speedMove;
+            characterVelocity = (characterBodyTransform.right * momentum.x + characterBodyTransform.forward * momentum.z) * speedMove;
         }
 
         yield break;
@@ -1056,6 +1059,34 @@ public class CharacterMove : MonoBehaviour
         }
 
         checkCharge = false;
+
+        yield break;
+    }
+
+    private IEnumerator TurnBody(Vector3 direction)
+    {
+        Quaternion rotationTo = Quaternion.LookRotation(direction, characterBodyTransform.up);
+        Quaternion rotationFrom = characterBodyTransform.rotation;
+
+        checkTurn = true;
+
+        if (OnActionTurn != null) OnActionTurn();
+
+        while (characterController.velocity.normalized != direction) yield return null;
+
+        while (characterController.velocity.normalized == direction)
+        {
+            characterBodyTransform.rotation = Quaternion.RotateTowards(rotationFrom, rotationTo, speedTurn * Time.deltaTime);
+            yield return null;
+        }
+
+        while (characterBodyTransform.localRotation != characterCameraTransform.localRotation)
+        {
+            characterBodyTransform.localRotation = Quaternion.RotateTowards(rotationFrom, characterCameraTransform.rotation, speedTurn * Time.deltaTime);
+            yield return null;
+        }
+
+        checkTurn = false;
 
         yield break;
     }
