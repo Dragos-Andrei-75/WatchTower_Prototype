@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 5f2631657a9664843b70fd4de4a3a8ad, type: 2}
   fire: 0
   weaponDataProjectile: {fileID: 11400000, guid: bca00890150ad8b4baf0dd38c205c064, type: 2}
@@ -760,7 +759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 3290faa0095a0234eb631a4504bd5a81, type: 2}
   fire: 0
   weaponDataProjectile: {fileID: 11400000, guid: 9af755662286e6a4981105372dc7a4c1, type: 2}
@@ -781,10 +779,10 @@ MonoBehaviour:
   fire: 0
   weaponAttributes: 000001000200
   valuesMax:
-  - 1
+  - 0.75
   - 0.1
   - 10
   valuesMin:
-  - 0.5
+  - 0.375
   - 0.05
   - 5

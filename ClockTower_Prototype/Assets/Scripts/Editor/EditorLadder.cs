@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Ladder))]
+[CustomEditor(typeof(Ladder), true)]
 public class EditorLadder : Editor
 {
     public override void OnInspectorGUI()
     {
-        EditorGUI.BeginChangeCheck();
-
         Ladder ladder = (Ladder)target;
+
+        EditorGUI.BeginChangeCheck();
 
         EditorGUILayout.LabelField("Ladder Options", EditorStyles.boldLabel);
 
@@ -31,7 +31,11 @@ public class EditorLadder : Editor
 
         if (GUILayout.Button("Reset") == true) ladder.LadderReset();
 
-        if (EditorGUI.EndChangeCheck() == true) ladder.LadderCreate();
+        if (EditorGUI.EndChangeCheck() == true)
+        {
+            ladder.LadderCreate();
+            EditorUtility.SetDirty(ladder);
+        }
 
         EditorGUILayout.Space();
 

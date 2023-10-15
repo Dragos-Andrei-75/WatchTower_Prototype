@@ -7,7 +7,7 @@ public class WeaponHitScan : Weapon
 
     [Header("HitScan Weapon Attributes")]
     [SerializeField] private WeaponDataHitScan weaponDataHitScan;
-    [SerializeField] LayerMask layerDefault;
+    [SerializeField] LayerMask layerPlayer;
 
     protected Transform CharacterCameraTransform
     {
@@ -25,7 +25,7 @@ public class WeaponHitScan : Weapon
         base.Awake();
 
         characterCameraTransform = WeaponTransform.root.GetChild(0).GetComponent<Transform>();
-        layerDefault = LayerMask.GetMask("Default");
+        layerPlayer = LayerMask.GetMask("Player");
     }
 
     protected override void Shoot()
@@ -41,7 +41,7 @@ public class WeaponHitScan : Weapon
 
         for (int i = 0; i < WeaponData.Amount; i++)
         {
-            shot = Physics.Raycast(CharacterCameraTransform.position, WeaponData.Directions[i], out hit, weaponDataHitScan.Range, ~layerDefault, QueryTriggerInteraction.Ignore);
+            shot = Physics.Raycast(CharacterCameraTransform.position, WeaponData.Directions[i], out hit, weaponDataHitScan.Range, ~layerPlayer, QueryTriggerInteraction.Ignore);
 
             if (shot == true)
             {
@@ -53,8 +53,6 @@ public class WeaponHitScan : Weapon
                     float damage = Mathf.Lerp(WeaponData.DamageMax, WeaponData.DamageMin, distance / WeaponDataHitScan.Range);
 
                     managerHealth.TakeDamage(damage);
-
-                    if (WeaponData.OnWeaponHit != null) StartCoroutine(WeaponData.OnWeaponHit(managerHealth));
                 }
 
                 if (hit.rigidbody != null)

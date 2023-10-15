@@ -11,9 +11,8 @@ public class WeaponExplosive : WeaponProjectile
         ShootExplosive();
     }
 
-    protected void ShootExplosive()
+    private void ShootExplosive()
     {
-        base.ShootProjectile();
-        for (int i = 0; i < WeaponDataProjectile.Projectiles.Length; i++) WeaponDataProjectile.Projectiles[i].GetComponent<Explosive>().Radius = weaponDataExplosive.Radius;
+        //for (int i = 0; i < WeaponData.Amount; i++) WeaponDataProjectile.Projectiles[i].GetComponent<Explosive>().Radius = weaponDataExplosive.Radius;
     }
 }

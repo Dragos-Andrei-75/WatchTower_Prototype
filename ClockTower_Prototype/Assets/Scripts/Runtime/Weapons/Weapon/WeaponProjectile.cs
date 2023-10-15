@@ -4,37 +4,24 @@ public class WeaponProjectile : Weapon
 {
     [Header("Projectile Weapon Attributes")]
     [SerializeField] private WeaponDataProjectile weaponDataProjectile;
-
-    protected WeaponDataProjectile WeaponDataProjectile
-    {
-        get { return weaponDataProjectile; }
-        set { weaponDataProjectile = value; }
-    }
+    [SerializeField] private Projectile projectile;
 
     protected override void Awake()
     {
         base.Awake();
+        SetupProjectile();
+    }
+
+    private void SetupProjectile()
+    {
+        projectile = weaponDataProjectile.ProjectileObject.GetComponent<Projectile>();
+
+        projectile.ProjectileData = new DataProjectile(weaponDataProjectile.ProjectileObject, weaponDataProjectile.ProjectileObject.transform,
+                                                       WeaponData.DamageMax, WeaponData.DamageMin, WeaponData.ForceMax, WeaponData.ForceMin,
+                                                       weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
 
         weaponDataProjectile.ProjectilePosition = WeaponTransform.GetChild(0);
-
-        SetProjectilesSize();
     }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        WeaponData.OnAmountSet += SetProjectilesSize;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-
-        WeaponData.OnAmountSet -= SetProjectilesSize;
-    }
-
-    private void SetProjectilesSize() => weaponDataProjectile.Projectiles = new GameObject[WeaponData.Amount];
 
     protected override void Shoot()
     {
@@ -42,20 +29,12 @@ public class WeaponProjectile : Weapon
         ShootProjectile();
     }
 
-    protected virtual void ShootProjectile()
+    private void ShootProjectile()
     {
         for (int i = 0; i < WeaponData.Amount; i++)
         {
-            DataProjectile projectileData = new DataProjectile(WeaponData.OnWeaponHit, weaponDataProjectile.ProjectileObject, WeaponData.Directions[i],
-                                                               WeaponData.DamageMax, WeaponData.DamageMin, WeaponData.ForceMax, WeaponData.ForceMin,
-                                                               weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
-
-            weaponDataProjectile.Projectiles[i] = Instantiate(projectileData.projectileObject, projectileData.projectileObject.transform.position, projectileData.projectileObject.transform.rotation);
-
-            weaponDataProjectile.Projectiles[i].GetComponent<Projectile>().ProjectileData = projectileData;
-
-            weaponDataProjectile.Projectiles[i].transform.position = weaponDataProjectile.ProjectilePosition.position;
-            weaponDataProjectile.Projectiles[i].transform.rotation = weaponDataProjectile.ProjectilePosition.rotation;
+            projectile.Direction = WeaponData.Directions[i];
+            Instantiate(weaponDataProjectile.ProjectileObject, weaponDataProjectile.ProjectilePosition.position, weaponDataProjectile.ProjectilePosition.rotation);
         }
     }
 }

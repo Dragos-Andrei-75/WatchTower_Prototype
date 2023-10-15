@@ -28,7 +28,7 @@ public class PickUpWeapon : MonoBehaviour
     public delegate void WeaponEquip(int weaponIndex);
     public static event WeaponEquip OnWeaponEquip;
 
-    private void Start()
+    private void Awake()
     {
         pickUp = gameObject;
         pickUpTransform = pickUp.transform;
@@ -55,7 +55,6 @@ public class PickUpWeapon : MonoBehaviour
             pickUpCollider.enabled = false;
             pickUpMesh.enabled = false;
 
-            StopCoroutine(Move());
             StartCoroutine(Equip());
 
             if (canRespawn == true) StartCoroutine(Respawn());
@@ -83,7 +82,7 @@ public class PickUpWeapon : MonoBehaviour
             weapon.transform.localPosition = position;
             loadOut.Weapons[index] = weapon.transform;
 
-            if (loadOut.Holster == false && OnWeaponEquip != null) OnWeaponEquip(index);
+            if (OnWeaponEquip != null) OnWeaponEquip(index);
         }
         else
         {

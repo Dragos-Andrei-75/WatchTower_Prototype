@@ -23,12 +23,12 @@ MonoBehaviour:
   damageMin: 2.5
   forceMax: 3.75
   forceMin: 1.25
-  fireRate: 0
+  fireRate: 0.5
   fireNext: 0
-  spread: 0
+  spread: 0.05
   heatMax: 7.5
   heat: 0
   heatLevels: []
   ammunitionCapacity: 75
   ammunition: 75
-  amount: 9
+  amount: 1

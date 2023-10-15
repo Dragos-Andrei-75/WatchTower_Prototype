@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613302429073532030}
-  m_LocalRotation: {x: 0.03721743, y: 0.22937547, z: -0.009085987, w: 0.97258383}
+  m_LocalRotation: {x: 0.04830392, y: 0.026645638, z: -0.0012890527, w: 0.9984764}
   m_LocalPosition: {x: 1.6322842, y: 1.3646998, z: -33.247192}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
@@ -107,7 +107,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613302429073532030}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -129,14 +129,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 0}
   projectileTransform: {fileID: 0}
+  projectileRigidbody: {fileID: 0}
   projectileLayer:
     serializedVersion: 2
     m_Bits: 4096
-  direction: {x: 0, y: 0, z: 0}
   lifeSpan: 0
   hit: 0
-  hitRigidbody: {fileID: 0}
   layerInteractable:
     serializedVersion: 2
     m_Bits: 1024
   hitPosition: {x: 0, y: 0, z: 0}
+  radius: 0

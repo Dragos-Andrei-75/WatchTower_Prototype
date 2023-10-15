@@ -8,10 +8,6 @@ public class ModDamageOverTime : WeaponMod
     [SerializeField] private float time;
     [SerializeField] private float tick;
 
-    private void OnEnable() => WeaponData.OnWeaponHit += DamageOverTime;
-
-    private void OnDisable() => WeaponData.OnWeaponHit -= DamageOverTime;
-
     private IEnumerator DamageOverTime(ManagerHealth managerHealth)
     {
         float timePassed = 0;

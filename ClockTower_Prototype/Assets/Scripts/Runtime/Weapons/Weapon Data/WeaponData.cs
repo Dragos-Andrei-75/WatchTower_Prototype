@@ -1,13 +1,9 @@
 using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "Weapon/Weapon Data", fileName = "WeaponData")]
 public class WeaponData : ScriptableObject
 {
-    [Header("Weapon Information")]
-    [Tooltip("The name of this weapon."), SerializeField]                                                                                         private string weaponName;
-
-    [Header("Weapon Attributes")]
+    [Header("Weapon Data")]
     [Tooltip("The direction of a projectile fired from this weapon."), SerializeField]                                                            private Vector3[] directions;
     [Tooltip("The maximum amount of damage dealt by a projectile fired from this weapon."), SerializeField]                                       private float damageMax;
     [Tooltip("The minimum amount of damage dealt by a projectile fired from this weapon."), SerializeField]                                       private float damageMin;
@@ -18,24 +14,12 @@ public class WeaponData : ScriptableObject
     [Tooltip("The spread of the projectiles fired from this weapon."), SerializeField]                                                            private float spread;
     [Tooltip("The amount of time during which projectiles that have been continually fired from this weapon loose accuracy."), SerializeField]    private float heatMax;
     [Tooltip("The amount of time during which projectiles have been continually fired from this weapon."), SerializeField]                        private float heat;
-    [Tooltip("The levels at which various attributes of the projectiles fired from this weapon can change."), SerializeField]                     private float[] heatLevels;
     [Tooltip("The maximum amount of ammunition this weapon can hold."), SerializeField]                                                           private int ammunitionCapacity;
     [Tooltip("The amount of ammunition this weapon has."), SerializeField]                                                                        private int ammunition;
     [Tooltip("The amount of projectiles fired simultaneously by this weapon."), SerializeField]                                                   private int amount;
 
     public delegate void WeaponShoot();
     public WeaponShoot OnWeaponShoot;
-
-    public delegate IEnumerator WeaponHit(ManagerHealth managerHealth);
-    public WeaponHit OnWeaponHit;
-
-    public delegate void AmountSet();
-    public event AmountSet OnAmountSet;
-
-    public string WeaponName
-    {
-        get { return weaponName; }
-    }
 
     public Vector3[] Directions
     {
@@ -93,11 +77,6 @@ public class WeaponData : ScriptableObject
         set { heat = value; }
     }
 
-    public float[] HeatLevels
-    {
-        get { return heatLevels; }
-    }
-
     public int AmmunitionCapacity
     {
         get { return ammunitionCapacity; }
@@ -120,10 +99,7 @@ public class WeaponData : ScriptableObject
             if (value != amount)
             {
                 amount = value;
-
                 directions = new Vector3[amount];
-
-                if (OnAmountSet != null) OnAmountSet();
             }
         }
     }

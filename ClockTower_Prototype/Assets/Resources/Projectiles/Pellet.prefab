@@ -107,7 +107,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6884002406987904228}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -129,14 +129,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 0}
   projectileTransform: {fileID: 0}
+  projectileRigidbody: {fileID: 0}
   projectileLayer:
     serializedVersion: 2
     m_Bits: 4096
-  direction: {x: 0, y: 0, z: 0}
   lifeSpan: 0
   hit: 0
-  hitRigidbody: {fileID: 0}
   layerInteractable:
     serializedVersion: 2
     m_Bits: 1024
   hitPosition: {x: 0, y: 0, z: 0}
+  hitTransform: {fileID: 0}

@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
     [Header("Weapon Object and Component References")]
     [SerializeField] private Transform weaponTransform;
 
-    [Header("Weapon Base Attributes")]
+    [Header("Weapon Attributes")]
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private Fire fire;
 
@@ -55,6 +55,8 @@ public abstract class Weapon : MonoBehaviour
             WeaponData.Directions[i].x += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
             WeaponData.Directions[i].y += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
             WeaponData.Directions[i].z += UnityEngine.Random.Range(-WeaponData.Spread, WeaponData.Spread);
+
+            WeaponData.Directions[i].Normalize();
         }
     }
 }
