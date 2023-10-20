@@ -6,19 +6,24 @@ public class WeaponProjectile : Weapon
     [SerializeField] private WeaponDataProjectile weaponDataProjectile;
     [SerializeField] private Projectile projectile;
 
+    protected WeaponDataProjectile WeaponDataProjectile
+    {
+        get { return weaponDataProjectile; }
+        set { weaponDataProjectile = value; }
+    }
+
     protected override void Awake()
     {
         base.Awake();
         SetupProjectile();
     }
 
-    private void SetupProjectile()
+    protected virtual void SetupProjectile()
     {
         projectile = weaponDataProjectile.ProjectileObject.GetComponent<Projectile>();
-
-        projectile.ProjectileData = new DataProjectile(weaponDataProjectile.ProjectileObject, weaponDataProjectile.ProjectileObject.transform,
-                                                       WeaponData.DamageMax, WeaponData.DamageMin, WeaponData.ForceMax, WeaponData.ForceMin,
-                                                       weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
+        
+        projectile.ProjectileData = new DataProjectile(weaponDataProjectile.ProjectileObject.transform, WeaponData.DamageMax, WeaponData.DamageMin,
+                                                       WeaponData.ForceMax, WeaponData.ForceMin, weaponDataProjectile.Speed, weaponDataProjectile.LifeSpan);
 
         weaponDataProjectile.ProjectilePosition = WeaponTransform.GetChild(0);
     }

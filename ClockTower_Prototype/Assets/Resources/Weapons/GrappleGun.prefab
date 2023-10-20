@@ -46,12 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTransform: {fileID: 0}
-  characterShoot: {fileID: 0}
   weaponData: {fileID: 11400000, guid: f6308bbf4de74974a8d9925be0e27721, type: 2}
-  mode: 0
+  fire: 0
   characterCameraTransform: {fileID: 0}
   weaponDataHitScan: {fileID: 11400000, guid: a8a2fde393cbfd448822d10383174de3, type: 2}
-  layerDefault:
+  layerPlayer:
     serializedVersion: 2
     m_Bits: 0
   grappleGunTransform: {fileID: 0}
@@ -59,7 +58,7 @@ MonoBehaviour:
   hookTransform: {fileID: 0}
   lineRenderer: {fileID: 0}
   characterBodyTransform: {fileID: 0}
-  characterMovement: {fileID: 0}
+  characterMove: {fileID: 0}
   hookHitTransform: {fileID: 0}
   hookIgnore:
     serializedVersion: 2
@@ -70,10 +69,10 @@ MonoBehaviour:
   timePassedMove: 0
   timeToRotate: 1
   timePassedRotate: 0
+  detachDistance: 5
   ropeLength: 0
   grappleDirection: {x: 0, y: 0, z: 0}
-  grappleSpeedMax: 85
-  grappleSpeedMin: 15
+  grappleSpeedInteractable: 100
   grappleSpeed: 0
   grappled: 0
 --- !u!1 &6676033104534661913
@@ -768,7 +767,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3917
+  m_VersionIndex: 3926
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -800,6 +799,7 @@ MonoBehaviour:
     RefIds:
     - rid: 4907803346122309634
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &4205541739751647589
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -48,6 +48,9 @@ public class Interactable : MonoBehaviour
     public delegate void InteractableDestroy(Collider collider);
     public event InteractableDestroy OnInteractableDestroy;
 
+    public delegate void InteractableHeldDestroy();
+    public event InteractableHeldDestroy OnInteractableHeldDestroy;
+
     public bool Contact
     {
         get { return contact; }
@@ -110,6 +113,7 @@ public class Interactable : MonoBehaviour
     private void OnDestroy()
     {
         if (OnInteractableDestroy != null) OnInteractableDestroy(interactableCollider);
+        if (OnInteractableHeldDestroy != null) OnInteractableHeldDestroy();
     }
 
     private void CollisionAdd(string hitName, Vector3 hitNormal, Collider hitCollider)

@@ -3,7 +3,6 @@ using System.Collections;
 
 public struct DataProjectile
 {
-    public GameObject projectileObject;
     public Transform projectileTransform;
     public float damageMax;
     public float damageMin;
@@ -12,9 +11,8 @@ public struct DataProjectile
     public float speed;
     public float lifeSpan;
 
-    public DataProjectile(GameObject projectileObject, Transform projectileTransform, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float lifeSpan)
+    public DataProjectile(Transform projectileTransform, float damageMax, float damageMin, float forceMax, float forceMin, float speed, float lifeSpan)
     {
-        this.projectileObject = projectileObject;
         this.projectileTransform = projectileTransform;
         this.damageMax = damageMax;
         this.damageMin = damageMin;
@@ -114,7 +112,7 @@ public abstract class Projectile : MonoBehaviour
 
         if (OnContact != null) OnContact();
 
-        Destroy(projectileData.projectileObject);
+        Destroy(gameObject);
 
         yield break;
     }

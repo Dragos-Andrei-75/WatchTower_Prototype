@@ -47,7 +47,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private bool checkDash = false;
     [SerializeField] private bool checkCharge = false;
     [SerializeField] private bool checkTurnClamp = false;
-    [SerializeField] private bool checkGrapple = false;
+    [SerializeField] private bool checkMoved = false;
 
     [Header("Character Attributes")]
     [SerializeField] private Vector3 characterStationary;
@@ -72,14 +72,14 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private float heightStand = 1.85f;
     [SerializeField] private float heightCrouch = 1.0f;
     [SerializeField] private float clearance = 0.85f;
-    [SerializeField] private float reactionTimeAir = 0.5f;
-    [SerializeField] private float reactionTimeJump = 0.25f;
-    [SerializeField] private float reactionTimeCrouch = 0.375f;
     [SerializeField] private float timeCrouch = 0.125f;
     [SerializeField] private float timeWallRun = 0.0f;
     [SerializeField] private float timeTilt = 0.125f;
     [SerializeField] private float timeDash = 0.25f;
-    [SerializeField] private float timeChargeDash = 1.25f;
+    [SerializeField] private float timeCharge = 1.25f;
+    [SerializeField] private float reactionTimeAir = 0.5f;
+    [SerializeField] private float reactionTimeJump = 0.25f;
+    [SerializeField] private float reactionTimeCrouch = 0.375f;
     [SerializeField] private float forcePush = 1.0f;
     [SerializeField] private float headTilt = 0.0f;
     [SerializeField] private float headTiltAngle = 12.5f;
@@ -135,21 +135,17 @@ public class CharacterMove : MonoBehaviour
         get { return checkTurnClamp; }
     }
 
-    public bool CheckGrapple
+    public bool CheckMoved
     {
         get
         {
-            return checkGrapple;
+            return checkMoved;
         }
         set
         {
-            checkGrapple = value;
+            checkMoved = value;
 
-            if (checkGrapple == true)
-            {
-                if (checkMove == false) StartCoroutine(Move());
-                if (checkClimb == true) StartCoroutine(ClimbExit());
-            }
+            if (checkMoved == true) StartCoroutine(Move());
         }
     }
 
@@ -339,7 +335,7 @@ public class CharacterMove : MonoBehaviour
 
         if (checkSurface == false)
         {
-            if (checkVault == false && checkWallRun == false && checkClimb == false && checkSwim == false && checkDash == false && checkGrapple == false)
+            if (checkVault == false && checkWallRun == false && checkClimb == false && checkSwim == false && checkDash == false && checkMoved == false)
             {
                 characterVelocity.y += gravity * Time.deltaTime;
             }
@@ -434,7 +430,7 @@ public class CharacterMove : MonoBehaviour
         }
         else
         {
-            if (checkVault == true || checkClimb == true || checkSwim == true || checkDash == true || checkGrapple == true) return;
+            if (checkVault == true || checkClimb == true || checkSwim == true || checkDash == true || checkMoved == true) return;
 
             if (checkJump == true)
             {
@@ -522,7 +518,7 @@ public class CharacterMove : MonoBehaviour
 
         checkMove = true;
 
-        while (move != Vector3.zero || characterVelocity != characterStationary || characterController.isGrounded == false)
+        while (move != Vector3.zero || characterVelocity != characterStationary || characterController.isGrounded == false || checkMoved == true)
         {
             if (checkSlip == false && checkVault == false && checkSlide == false && checkWallRun == false && checkClimb == false && checkSwim == false && checkDash == false)
             {
@@ -1053,7 +1049,7 @@ public class CharacterMove : MonoBehaviour
 
         while (dashCount < dashCountMax)
         {
-            yield return new WaitForSeconds(timeChargeDash);
+            yield return new WaitForSeconds(timeCharge);
             dashCount++;
         }
 

@@ -4,12 +4,10 @@ using System.Collections;
 public abstract class Mobile : Interactive
 {
     [Header("Mobile Object and Component References")]
-    [SerializeField] private Transform interactiveTransform;
-    [SerializeField] private Rigidbody interactiveRigidbody;
-    [SerializeField] private OcclusionPortal interactivePortal;
+    [SerializeField] private Transform mobileTransform;
+    [SerializeField] private Rigidbody mobileRigidbody;
 
     [Header("Mobile Attributes")]
-    [SerializeField] private MotionTypes motionType;
     [SerializeField] private float timeToMove = 1.0f;
     [SerializeField] private float timePassed = 0.0f;
     [SerializeField] private bool interruptible = false;
@@ -19,32 +17,19 @@ public abstract class Mobile : Interactive
 
     protected Coroutine coroutineActive;
 
-    public enum MotionTypes : ushort { Linear, Rotary };
-
-    protected Transform InteractiveTransform
+    protected Transform MobileTransform
     {
-        get { return interactiveTransform; }
+        get { return mobileTransform; }
     }
 
-    protected Rigidbody InteractiveRigidbody
+    protected Rigidbody MobileRigidbody
     {
-        get { return interactiveRigidbody; }
-    }
-
-    protected OcclusionPortal InteractivePortal
-    {
-        get { return interactivePortal; }
+        get { return mobileRigidbody; }
     }
 
     public Coroutine CoroutineActive
     {
         get { return coroutineActive; }
-    }
-
-    public MotionTypes MotionType
-    {
-        get { return motionType; }
-        set { motionType = value; }
     }
 
     public float TimeToMove
@@ -79,17 +64,16 @@ public abstract class Mobile : Interactive
 
     public override void Setup()
     {
-        interactiveTransform = gameObject.transform;
-        interactiveRigidbody = interactiveTransform.GetComponent<Rigidbody>();
-        interactivePortal = interactiveTransform.GetComponent<OcclusionPortal>();
+        mobileTransform = gameObject.transform;
+        mobileRigidbody = mobileTransform.GetComponent<Rigidbody>();
 
-        if (interactiveTransform.parent != null)
+        if (mobileTransform.parent != null)
         {
-            if (interactiveTransform.parent.GetComponent<Controller>() != null) linked = true;
-            else if (interactiveTransform.parent.GetComponentInChildren<Switch>() != null) controlled = true;
+            if (mobileTransform.parent.GetComponentInChildren<Switch>() != null) controlled = true;
+            else if (MobileTransform.parent.GetComponent<Controller>() != null) linked = true;
         }
 
-        if (interactiveTransform.GetComponentInParent<Sensor>() != null || interactiveTransform.GetComponent<Sensor>() != null)
+        if (mobileTransform.GetComponentInParent<Sensor>() != null || mobileTransform.GetComponent<Sensor>() != null)
         {
             automatic = true;
             interruptible = true;
@@ -118,37 +102,8 @@ public abstract class Mobile : Interactive
         }
     }
 
-    protected void InteractiveMove(IEnumerator coroutine)
+    protected void MoveMobile(IEnumerator coroutine)
     {
         if (coroutineActive == null) coroutineActive = StartCoroutine(coroutine);
-    }
-
-    public void MechanismAdd()
-    {
-        if (interactiveTransform.parent == null || (interactiveTransform.parent != null && interactiveTransform.parent.GetComponent<Mechanism>() == null))
-        {
-            GameObject resource;
-            GameObject mechanism;
-
-            resource = Resources.Load<GameObject>("Interactives/Controllers/Mechanism");
-
-            mechanism = Instantiate(resource, interactiveTransform.position, interactiveTransform.rotation);
-            mechanism.GetComponent<Mechanism>().MobileGet();
-            mechanism.name = gameObject.name + resource.name;
-
-            interactiveTransform.SetParent(mechanism.transform);
-        }
-    }
-
-    public void MechanismRemove()
-    {
-        if (interactiveTransform.parent != null && interactiveTransform.parent.GetComponent<Mechanism>() != null)
-        {
-            GameObject mechanism = InteractiveTransform.parent.gameObject;
-
-            interactiveTransform.SetParent(null);
-
-            DestroyImmediate(mechanism);
-        }
     }
 }

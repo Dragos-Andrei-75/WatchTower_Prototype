@@ -3,7 +3,7 @@ using UnityEngine;
 public class SensorTransporter : Sensor
 {
     [Header("Other Object and Component References")]
-    [SerializeField] private Linear linear;
+    [SerializeField] private DoorSliding linear;
 
     [Header("Elevator Sensor Attributes")]
     [SerializeField] private float reduction = 1.0f;
@@ -17,13 +17,14 @@ public class SensorTransporter : Sensor
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+        other.transform.SetParent(gameObject.transform);
         if (linear.Automatic == true || linear.CoroutineActive != null) linear.Interact();
     }
 
     protected override void OnTriggerExit(Collider other)
     {
-        other.transform.SetParent(null);
         base.OnTriggerExit(other);
+        other.transform.SetParent(null);
     }
 
     public override void SetupSensor()
@@ -34,7 +35,7 @@ public class SensorTransporter : Sensor
         float sensorSizeX;
         float sensorSizeZ;
 
-        linear = sensorTransform.GetComponent<Linear>();
+        linear = sensorTransform.GetComponent<DoorSliding>();
 
         elevatorCollider = ColliderFind(false);
 

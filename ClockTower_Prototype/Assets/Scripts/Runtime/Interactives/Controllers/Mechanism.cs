@@ -6,9 +6,9 @@ public class Mechanism : MonoBehaviour
     [SerializeField] private Transform mechanismTransform;
 
     [Header("Child Object and Component References")]
-    [SerializeField] private GameObject[] mobileGameObjects;
-    [SerializeField] private BoxCollider[] mobileColliders;
-    [SerializeField] private Mobile[] mobileScripts;
+    [SerializeField] private GameObject[] doors;
+    [SerializeField] private BoxCollider[] doorColliders;
+    [SerializeField] private Door[] doorScripts;
 
     [Header("Mechanism Attributes")]
     [SerializeField] private Arrangements arrangement = Arrangements.Horizontal;
@@ -36,7 +36,7 @@ public class Mechanism : MonoBehaviour
 
     public void SetupMechanism()
     {
-        if (mobileGameObjects.Length != mechanismTransform.GetComponentsInChildren<Mobile>().Length || rearranged == true)
+        if (doors.Length != mechanismTransform.GetComponentsInChildren<Door>().Length || rearranged == true)
         {
             MobileGet();
             MobilePosition();
@@ -58,10 +58,10 @@ public class Mechanism : MonoBehaviour
         float offset;
         bool hit;
 
-        if (mobileGameObjects.Length == 1 || arrangement == Arrangements.Horizontal) offset = mobileColliders[0].size.y / 2;
-        else offset = mobileColliders[0].size.y;
+        if (doors.Length == 1 || arrangement == Arrangements.Horizontal) offset = doorColliders[0].size.y / 2;
+        else offset = doorColliders[0].size.y;
 
-        direction = -mobileGameObjects[mobileGameObjects.Length - 1].transform.up;
+        direction = -doors[doors.Length - 1].transform.up;
         layerSurface = LayerMask.GetMask("Surface");
 
         hit = Physics.Raycast(mechanismTransform.position, direction, out rayCastHit, Mathf.Infinity, layerSurface, QueryTriggerInteraction.Ignore);
@@ -93,39 +93,39 @@ public class Mechanism : MonoBehaviour
 
     public void MobileAdd()
     {
-        if (mobileGameObjects.Length < 2)
+        if (doors.Length < 2)
         {
             GameObject mobile;
 
-            mobile = Instantiate(mobileGameObjects[0], mechanismTransform);
-            mobile.name = mobileGameObjects[0].name;
+            mobile = Instantiate(doors[0], mechanismTransform);
+            mobile.name = doors[0].name;
         }
     }
 
     public void MobileRemove()
     {
-        if (mobileGameObjects.Length > 1) DestroyImmediate(mobileGameObjects[mobileGameObjects.Length - 1]);
+        if (doors.Length > 1) DestroyImmediate(doors[doors.Length - 1]);
     }
 
     public void MobileGet()
     {
-        mobileScripts = mechanismTransform.GetComponentsInChildren<Mobile>();
+        doorScripts = mechanismTransform.GetComponentsInChildren<Door>();
 
-        mobileColliders = new BoxCollider[mobileScripts.Length];
-        mobileGameObjects = new GameObject[mobileColliders.Length];
+        doorColliders = new BoxCollider[doorScripts.Length];
+        doors = new GameObject[doorColliders.Length];
 
-        for (int i = 0; i < mobileScripts.Length; i++)
+        for (int i = 0; i < doorScripts.Length; i++)
         {
-            mobileGameObjects[i] = mobileScripts[i].gameObject;
-            mobileColliders[i] = mobileGameObjects[i].GetComponent<BoxCollider>();
+            doors[i] = doorScripts[i].gameObject;
+            doorColliders[i] = doors[i].GetComponent<BoxCollider>();
         }
     }
 
     public void MobilePosition()
     {
-        if (mobileGameObjects.Length == 1)
+        if (doors.Length == 1)
         {
-            mobileGameObjects[0].transform.localPosition = Vector3.zero;
+            doors[0].transform.localPosition = Vector3.zero;
         }
         else
         {
@@ -134,22 +134,22 @@ public class Mechanism : MonoBehaviour
 
             if (arrangement == Arrangements.Horizontal)
             {
-                positionMobile = new Vector3(-mobileColliders[0].size.x / 2, 0, 0);
-                increment = new Vector3(mobileColliders[0].size.x, 0, 0);
+                positionMobile = new Vector3(-doorColliders[0].size.x / 2, 0, 0);
+                increment = new Vector3(doorColliders[0].size.x, 0, 0);
             }
             else
             {
-                positionMobile = new Vector3(0, -mobileColliders[0].size.y / 2, 0);
-                increment = new Vector3(0, mobileColliders[0].size.y, 0);
+                positionMobile = new Vector3(0, -doorColliders[0].size.y / 2, 0);
+                increment = new Vector3(0, doorColliders[0].size.y, 0);
             }
 
-            mobileGameObjects[0].transform.localPosition = positionMobile;
-            mobileGameObjects[1].transform.localPosition = positionMobile + increment;
+            doors[0].transform.localPosition = positionMobile;
+            doors[1].transform.localPosition = positionMobile + increment;
 
-            if (mobileScripts[1].MotionType == Mobile.MotionTypes.Rotary)
+            if (doorScripts[1].DoorType == Door.DoorTypes.Rotary)
             {
-                mobileGameObjects[1].transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                mobileGameObjects[1].transform.localPosition -= increment;
+                doors[1].transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                doors[1].transform.localPosition -= increment;
             }
         }
     }
@@ -158,11 +158,11 @@ public class Mechanism : MonoBehaviour
     {
         if (addedSwitch == true || addedSensor == true) return;
 
-        if (gameObject.GetComponent<Controller>() == null && mobileGameObjects.Length == 2)
+        if (gameObject.GetComponent<Controller>() == null && doors.Length == 2)
         {
             gameObject.AddComponent<Controller>();
 
-            for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Linked = true;
+            for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Linked = true;
 
             addedLink = true;
         }
@@ -170,11 +170,11 @@ public class Mechanism : MonoBehaviour
 
     public void Unlink()
     {
-        if ((gameObject.GetComponent<Controller>() != null && mobileGameObjects.Length == 2) || mobileGameObjects.Length == 1)
+        if ((gameObject.GetComponent<Controller>() != null && doors.Length == 2) || doors.Length == 1)
         {
             DestroyImmediate(gameObject.GetComponent<Controller>());
 
-            for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Linked = false;
+            for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Linked = false;
 
             addedLink = false;
         }
@@ -195,7 +195,7 @@ public class Mechanism : MonoBehaviour
 
             if (gameObject.GetComponentsInChildren<Switch>().Length == 1)
             {
-                for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Controlled = true;
+                for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Controlled = true;
 
                 addedSwitch = true;
             }
@@ -214,7 +214,7 @@ public class Mechanism : MonoBehaviour
 
             if (switches.Length == 1)
             {
-                for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Controlled = false;
+                for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Controlled = false;
 
                 addedSwitch = false;
             }
@@ -227,15 +227,15 @@ public class Mechanism : MonoBehaviour
         {
             Switch[] switches = mechanismTransform.GetComponentsInChildren<Switch>();
             Vector3 positionSwitch;
-            float mobileSizeX = mobileColliders[0].size.x;
-            float mobileSizeY = mobileColliders[0].size.y;
-            float mobileSizeZ = mobileColliders[0].size.z;
+            float mobileSizeX = doorColliders[0].size.x;
+            float mobileSizeY = doorColliders[0].size.y;
+            float mobileSizeZ = doorColliders[0].size.z;
             float switchSizeZ = switches[0].transform.GetComponent<BoxCollider>().size.z;
             float offset = 1.25f;
 
             positionSwitch = new Vector3(-(mobileSizeX / 2 + offset), -mobileSizeY / 2 + offset, mobileSizeZ / 2 + switchSizeZ / 2);
 
-            switches[0].transform.localPosition = mobileGameObjects[0].transform.localPosition + positionSwitch;
+            switches[0].transform.localPosition = doors[0].transform.localPosition + positionSwitch;
 
             if (switches.Length > 1)
             {
@@ -257,7 +257,7 @@ public class Mechanism : MonoBehaviour
 
             SensorPosition(gameObject.AddComponent<SensorMobile>());
 
-            for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Automatic = true;
+            for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Automatic = true;
 
             addedSensor = true;
         }
@@ -270,7 +270,7 @@ public class Mechanism : MonoBehaviour
             DestroyImmediate(gameObject.GetComponent<SensorMobile>());
             DestroyImmediate(gameObject.GetComponent<BoxCollider>());
 
-            for (int i = 0; i < mobileScripts.Length; i++) mobileScripts[i].Automatic = false;
+            for (int i = 0; i < doorScripts.Length; i++) doorScripts[i].Automatic = false;
 
             addedSensor = false;
         }

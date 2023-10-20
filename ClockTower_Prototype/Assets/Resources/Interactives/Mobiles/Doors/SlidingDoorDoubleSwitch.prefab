@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 2654924443847877277}
   - component: {fileID: 2654924443847877276}
   - component: {fileID: 2654924443847877350}
-  - component: {fileID: 7951445652531234530}
+  - component: {fileID: 4523750570390797428}
   m_Layer: 7
   m_Name: SlidingDoor
   m_TagString: Untagged
@@ -539,7 +539,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7951445652531234530
+--- !u!114 &4523750570390797428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -548,25 +548,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2654924443847877279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d6c4a360fcb3443a9100d3700781f9, type: 3}
+  m_Script: {fileID: 11500000, guid: d2be772c907680f46bcbc58505b288d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveTransform: {fileID: 2654924443847877273}
-  interactiveRigidbody: {fileID: 0}
-  interactivePortal: {fileID: 0}
-  motionType: 0
-  timeToMove: 2.5
+  mobileTransform: {fileID: 0}
+  mobileRigidbody: {fileID: 0}
+  timeToMove: 1
   timePassed: 0
   interruptible: 0
   linked: 0
   controlled: 0
   automatic: 0
-  direction: 2
+  interactivePortal: {fileID: 0}
+  doorType: 0
+  direction: 1
+  positionCurrent: {x: 0, y: 0, z: 0}
   positionTarget: {x: 0, y: 0, z: 0}
-  positionStart: {x: 0, y: 0, z: 0}
-  position1: {x: 0, y: 5, z: -37.5}
-  position2: {x: 0, y: -4.75, z: -37.5}
-  distance: 9.75
+  position1: {x: 0, y: 0, z: 0}
+  position2: {x: 0, y: 0, z: 0}
+  distance: 10
 --- !u!1 &2681849912437418226
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 7527177359464346002}
   - component: {fileID: 7527177359464346001}
   - component: {fileID: 7527177359464346000}
-  - component: {fileID: 7527177359464346007}
+  - component: {fileID: 9212663048264485774}
   m_Layer: 7
   m_Name: SlidingDoor (1)
   m_TagString: Untagged
@@ -1265,7 +1265,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7527177359464346007
+--- !u!114 &9212663048264485774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1274,22 +1274,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7527177359464346005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d6c4a360fcb3443a9100d3700781f9, type: 3}
+  m_Script: {fileID: 11500000, guid: d2be772c907680f46bcbc58505b288d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveTransform: {fileID: 7527177359464346006}
-  interactiveRigidbody: {fileID: 0}
-  interactivePortal: {fileID: 0}
-  motionType: 0
-  timeToMove: 2.5
+  mobileTransform: {fileID: 0}
+  mobileRigidbody: {fileID: 0}
+  timeToMove: 1
   timePassed: 0
   interruptible: 0
   linked: 0
   controlled: 0
   automatic: 0
-  direction: 3
+  interactivePortal: {fileID: 0}
+  doorType: 0
+  direction: 1
+  positionCurrent: {x: 0, y: 0, z: 0}
   positionTarget: {x: 0, y: 0, z: 0}
-  positionStart: {x: 0, y: 0, z: 0}
-  position1: {x: 0, y: 5, z: -37.5}
-  position2: {x: 0, y: -4.75, z: -37.5}
-  distance: 9.75
+  position1: {x: 0, y: 0, z: 0}
+  position2: {x: 0, y: 0, z: 0}
+  distance: 10

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ae4912408c45b4484057cd0bffa8f9, type: 3}
   m_Name: Cannon
   m_EditorClassIdentifier: 
-  weaponName: Cannon
   directions:
   - {x: 0, y: 0, z: 0}
   damageMax: 10
@@ -22,9 +21,8 @@ MonoBehaviour:
   fireRate: 1
   fireNext: 0
   spread: 0
-  heatMax: 0.1
+  heatMax: 1
   heat: 0
-  heatLevels: []
   ammunitionCapacity: 50
   ammunition: 50
   amount: 1

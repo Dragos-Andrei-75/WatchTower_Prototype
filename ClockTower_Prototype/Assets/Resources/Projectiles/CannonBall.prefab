@@ -127,12 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e6baa17eb6e684a93cd71c348cbd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileObject: {fileID: 0}
-  projectileTransform: {fileID: 0}
-  projectileRigidbody: {fileID: 0}
   projectileLayer:
     serializedVersion: 2
     m_Bits: 4096
+  direction: {x: 0, y: 0, z: 0}
   lifeSpan: 0
   hit: 0
   layerInteractable:

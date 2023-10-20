@@ -4,15 +4,13 @@ public class WeaponExplosive : WeaponProjectile
 {
     [Header("Explosive Weapon Attributes")]
     [SerializeField] private WeaponDataExplosive weaponDataExplosive;
+    [SerializeField] private Explosive explosive;
 
-    protected override void Shoot()
+    protected override void SetupProjectile()
     {
-        base.Shoot();
-        ShootExplosive();
-    }
+        base.SetupProjectile();
 
-    private void ShootExplosive()
-    {
-        //for (int i = 0; i < WeaponData.Amount; i++) WeaponDataProjectile.Projectiles[i].GetComponent<Explosive>().Radius = weaponDataExplosive.Radius;
+        explosive = WeaponDataProjectile.ProjectileObject.GetComponent<Explosive>();
+        explosive.Radius = weaponDataExplosive.Radius;
     }
 }

@@ -37,9 +37,9 @@ public abstract class Weapon : MonoBehaviour
         for (int i = 0; i < weapon.Length; i++) if (weapon[i] == this) fire = (Fire)i;
     }
 
-    protected virtual void OnEnable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] += Shoot;
+    private void OnEnable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] += Shoot;
 
-    protected virtual void OnDisable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] -= Shoot;
+    private void OnDisable() => CharacterShoot.OnShoot[Convert.ToInt16(fire)] -= Shoot;
 
     protected virtual void Shoot()
     {

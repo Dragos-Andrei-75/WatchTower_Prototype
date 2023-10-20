@@ -5,7 +5,7 @@ public class WeaponDataProjectile : ScriptableObject
 {
     [Header("Projectile Data")]
     [Tooltip("The prefab of the projectile fired from this weapon."), SerializeField]                    private GameObject projectileObject;
-    [Tooltip("The position where a projectile fired from this weapon is instantiated."), SerializeField] private Transform projectilePosition;
+    [Tooltip("The transform of the prjectile fired from this weapon."), SerializeField]                  private Transform projectileTransform;
     [Tooltip("The life span of a projectile fired from this weapon."), SerializeField]                   private float lifeSpan;
     [Tooltip("The speed with which a projectile fired from this weapon moves."), SerializeField]         private float speed;
 
@@ -16,8 +16,8 @@ public class WeaponDataProjectile : ScriptableObject
 
     public Transform ProjectilePosition
     {
-        get { return projectilePosition; }
-        set { projectilePosition = value; }
+        get { return projectileTransform; }
+        set { projectileTransform = value; }
     }
 
     public float LifeSpan

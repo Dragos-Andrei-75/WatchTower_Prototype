@@ -1,30 +1,87 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
-public class Transporter : Linear
+public class Transporter : Mobile
 {
     [Header("Transporter Attributes")]
-    [SerializeField] private bool reactive = false;
+    [SerializeField] private Transform[] points;
+    [SerializeField] private Transform pointCurrent;
+    [SerializeField] private Transform pointTarget;
+    [SerializeField] private int pointIndex = 0;
+    [SerializeField] private int increment = 1;
 
-    private void OnCollisionEnter(Collision collision)
+    public override void Setup()
     {
-        if (reactive == true)
-        {
-            if (coroutineActive != null)
-            {
-                Vector3 direction = PositionTarget - InteractiveTransform.position;
-                Vector3 interactiveToObject = collision.transform.position - InteractiveTransform.position;
-                Vector3 objectSize = collision.transform.GetComponent<MeshRenderer>().bounds.size;
-                float objectSizeMax = Mathf.Max(Mathf.Max(objectSize.x, objectSize.y), objectSize.z);
+        base.Setup();
 
-                if (Vector3.Dot(direction, interactiveToObject) > 0 && Vector3.Distance(InteractiveTransform.position, PositionTarget) <= objectSizeMax) Interact();
+        if (MobileTransform.parent.childCount == 1)
+        {
+            pointIndex = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                PointAdd();
+                points[i] = MobileTransform.parent.GetChild(i + 1);
             }
         }
+        else
+        {
+            points = MobileTransform.parent.GetComponentsInChildren<Transform>();
 
-        if (collision.contacts[0].point.y > InteractiveTransform.position.y) collision.transform.SetParent(InteractiveTransform);
+            for (int i = 0; i < points.Length - 2; i++)
+            {
+                points[i + 1] = points[i + 2];
+                points[i] = points[i + 1];
+            }
+
+            Array.Resize(ref points, points.Length - 2);
+        }
+
+        pointCurrent = points[pointIndex];
+
+        MobileTransform.position = pointCurrent.position;
     }
 
-    private void OnCollisionExit(Collision collision)
+    public override void Interact()
     {
-        if (collision.transform.parent == InteractiveTransform) collision.transform.SetParent(null);
+        base.Interact();
+        MoveMobile(MoveTransporter());
     }
+
+    private IEnumerator MoveTransporter()
+    {
+        pointIndex += increment;
+
+        pointTarget = points[pointIndex];
+
+        while (MobileTransform.position != pointTarget.position)
+        {
+            MobileRigidbody.MovePosition(Vector3.Lerp(pointCurrent.position, pointTarget.position, TimePassed / TimeToMove));
+            TimePassed += Time.fixedDeltaTime;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        if (pointIndex == 0 || pointIndex == points.Length - 1) increment = -increment;
+
+        MobileTransform.position = pointTarget.position;
+
+        pointCurrent = pointTarget;
+
+        yield break;
+    }
+
+    public void PointAdd()
+    {
+        GameObject pointNew = new GameObject("Position (" + MobileTransform.parent.childCount + ")");
+        Transform pointTransform = MobileTransform.parent.childCount == 1 ? MobileTransform : points[points.Length - 1];
+
+        pointNew.transform.position = pointTransform.position;
+        pointNew.transform.rotation = pointTransform.rotation;
+
+        pointNew.transform.SetParent(MobileTransform.parent);
+    }
+
+    public void PointRemove() => DestroyImmediate(points[points.Length - 1].gameObject);
 }
