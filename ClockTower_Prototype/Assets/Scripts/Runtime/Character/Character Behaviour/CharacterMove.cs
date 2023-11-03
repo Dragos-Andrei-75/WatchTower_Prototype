@@ -478,6 +478,12 @@ public class CharacterMove : MonoBehaviour
         else StartCoroutine(Crouch());
     }
 
+    private void OtherVelocity(Vector3 position, ref Vector3 positionPrevious, ref Vector3 otherVelocity)
+    {
+        otherVelocity = (position - positionPrevious) / Time.deltaTime;
+        positionPrevious = position;
+    }
+
     private void CheckClearance(InputAction.CallbackContext contextCheckClearance) { CheckClearance(); }
 
     private void InputMove(InputAction.CallbackContext contextInputMove) { StartCoroutine(InputMove()); }
@@ -719,9 +725,10 @@ public class CharacterMove : MonoBehaviour
                     if (Vector3.Distance(rayHit1.point, rayHit2.point) < rayLength)
                     {
                         Transform climbPoint;
-                        Vector3 climbPointPrevious;
+                        Vector3 climbPointPositionPrevious;
                         Vector3 climbDirection;
-                        float climbVelocity;
+                        Vector3 climbVelocity;
+                        Vector3 climbObjectVelocity;
 
                         climbPoint = new GameObject("Climb Point").transform;
 
@@ -730,18 +737,18 @@ public class CharacterMove : MonoBehaviour
                         climbPoint.position = rayHit1.point;
                         climbPoint.SetParent(rayHit1.transform);
 
-                        climbPointPrevious = rayHit1.point;
+                        climbPointPositionPrevious = rayHit1.point;
 
-                        characterVelocity.x = 0;
-                        characterVelocity.z = 0;
+                        climbVelocity = new Vector3(0, speedVault, 0);
+                        climbObjectVelocity = Vector3.zero;
 
                         checkVault = true;
 
                         while (checkSphereTransform.position.y < climbPoint.position.y)
                         {
-                            climbVelocity = climbPointPrevious.magnitude - climbPoint.position.magnitude;
-                            characterVelocity.y = climbVelocity + speedVault;
-                            climbPointPrevious = climbPoint.position;
+                            OtherVelocity(climbPoint.position, ref climbPointPositionPrevious, ref climbObjectVelocity);
+
+                            characterVelocity = climbVelocity + climbObjectVelocity;
 
                             yield return null;
                         }
@@ -819,7 +826,7 @@ public class CharacterMove : MonoBehaviour
     {
         if ((Mathf.Round(Vector3.Dot(characterBodyTransform.forward, characterVelocity.normalized)) < 0 || characterVelocity.y < -mass) && checkWallRun == false) yield break;
 
-        Vector3 wallHitVelocity;
+        Vector3 wallHitVelocity = Vector3.zero;
         Vector3 wallHitPositionPrevious = wallHit.transform.position;
         Vector3 wallRunDirection = Vector3.Cross(Vector3.up, wallHit.normal).normalized;
         float timePassed = 0;
@@ -853,8 +860,7 @@ public class CharacterMove : MonoBehaviour
 
             characterCameraTransform.localRotation = Quaternion.Euler(characterCameraTransform.localEulerAngles.x, characterCameraTransform.localEulerAngles.y, headTilt);
 
-            wallHitVelocity = (wallHit.transform.position - wallHitPositionPrevious) / Time.deltaTime;
-            wallHitPositionPrevious = wallHit.transform.position;
+            OtherVelocity(wallHit.transform.position, ref wallHitPositionPrevious, ref wallHitVelocity);
 
             characterVelocity = (wallRunDirection * speedMove) + wallHitVelocity;
 

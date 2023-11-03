@@ -33,16 +33,6 @@ public class Ladder : MonoBehaviour
         set { rungOffset = Mathf.Clamp(value, rungOffsetMin, rungOffsetMax); }
     }
 
-    public float RungOffsetMin
-    {
-        get { return rungOffsetMin; }
-    }
-
-    public float RungOffsetMax
-    {
-        get { return rungOffsetMax; }
-    }
-
     public void LadderSetUp()
     {
         ladderTransform = gameObject.transform;
@@ -51,12 +41,16 @@ public class Ladder : MonoBehaviour
         sideRailLeft = ladderTransform.GetChild(0).gameObject;
         sideRailRight = ladderTransform.GetChild(1).gameObject;
         rung = ladderTransform.GetChild(2).gameObject;
+
+        rungs = new GameObject[ladderTransform.childCount - 2];
+
+        for (int i = 0; i < rungs.Length; i++) rungs[i] = ladderTransform.GetChild(i + 2).gameObject;
+
+        gameObject.isStatic = sideRailLeft.isStatic = sideRailRight.isStatic = rung.isStatic = true;
     }
 
     public void LadderCreate()
     {
-        gameObject.isStatic = sideRailLeft.isStatic = sideRailRight.isStatic = rung.isStatic = true;
-
         if (rungs.Length == 0)
         {
             rungs = new GameObject[1];
@@ -121,6 +115,7 @@ public class Ladder : MonoBehaviour
         {
             rungs[i].transform.localPosition = position;
             rungs[i].isStatic = true;
+
             position += increment;
         }
     }
